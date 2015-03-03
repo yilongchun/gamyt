@@ -45,8 +45,7 @@
                             <exclude reference="sNw-iX-PNp"/>
                         </mask>
                     </variation>
-                    <variation key="heightClass=regular-widthClass=compact" ambiguous="YES">
-                        <rect key="frame" x="158" y="96" width="84" height="114"/>
+                    <variation key="heightClass=regular-widthClass=compact">
                         <mask key="constraints">
                             <include reference="sNw-iX-PNp"/>
                         </mask>
@@ -57,7 +56,7 @@
             <constraints>
                 <constraint firstItem="rCS-LK-8Fe" firstAttribute="top" relation="greaterThanOrEqual" secondItem="sys-va-DbP" secondAttribute="bottom" constant="30" id="0bS-8V-bFD"/>
                 <constraint firstItem="9gr-fR-SkZ" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="2kr-Oc-hLe"/>
-                <constraint firstItem="sys-va-DbP" firstAttribute="top" relation="greaterThanOrEqual" secondItem="iN0-l3-epB" secondAttribute="top" constant="20" id="AjM-QV-Fv5"/>
+                <constraint firstItem="sys-va-DbP" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" constant="20" id="AjM-QV-Fv5"/>
                 <constraint firstAttribute="centerX" secondItem="sys-va-DbP" secondAttribute="centerX" id="F0y-Yb-TWX"/>
                 <constraint firstItem="rCS-LK-8Fe" firstAttribute="height" secondItem="9gr-fR-SkZ" secondAttribute="height" multiplier="0.4" id="IP2-Ex-Led"/>
                 <constraint firstAttribute="centerX" secondItem="rCS-LK-8Fe" secondAttribute="centerX" id="RBG-Ji-3WW"/>
