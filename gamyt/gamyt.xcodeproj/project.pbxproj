@@ -24,6 +24,7 @@
 		E4F02F301AA5FA3100426A88 /* UIView+Hierarchy.m in Sources */ = {isa = PBXBuildFile; fileRef = E4F02F241AA5FA3100426A88 /* UIView+Hierarchy.m */; };
 		E4F02F311AA5FA3100426A88 /* UIView+IQKeyboardToolbar.m in Sources */ = {isa = PBXBuildFile; fileRef = E4F02F261AA5FA3100426A88 /* UIView+IQKeyboardToolbar.m */; };
 		E4F02F321AA5FA3100426A88 /* UIWindow+Hierarchy.m in Sources */ = {isa = PBXBuildFile; fileRef = E4F02F281AA5FA3100426A88 /* UIWindow+Hierarchy.m */; };
+		E4F02F351AA60B7200426A88 /* FindPasswordViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E4F02F341AA60B7200426A88 /* FindPasswordViewController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -72,6 +73,8 @@
 		E4F02F261AA5FA3100426A88 /* UIView+IQKeyboardToolbar.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+IQKeyboardToolbar.m"; sourceTree = "<group>"; };
 		E4F02F271AA5FA3100426A88 /* UIWindow+Hierarchy.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIWindow+Hierarchy.h"; sourceTree = "<group>"; };
 		E4F02F281AA5FA3100426A88 /* UIWindow+Hierarchy.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIWindow+Hierarchy.m"; sourceTree = "<group>"; };
+		E4F02F331AA60B7200426A88 /* FindPasswordViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FindPasswordViewController.h; sourceTree = "<group>"; };
+		E4F02F341AA60B7200426A88 /* FindPasswordViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FindPasswordViewController.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -122,6 +125,8 @@
 				E4F02EFB1AA5C5ED00426A88 /* LaunchScreen.xib */,
 				E4F02F121AA5FA3100426A88 /* IQKeyBoardManager */,
 				E4F02EEC1AA5C5ED00426A88 /* Supporting Files */,
+				E4F02F331AA60B7200426A88 /* FindPasswordViewController.h */,
+				E4F02F341AA60B7200426A88 /* FindPasswordViewController.m */,
 			);
 			path = gamyt;
 			sourceTree = "<group>";
@@ -286,6 +291,7 @@
 				E4F02F2F1AA5FA3100426A88 /* NSArray+Sort.m in Sources */,
 				E4F02F311AA5FA3100426A88 /* UIView+IQKeyboardToolbar.m in Sources */,
 				E4F02F2A1AA5FA3100426A88 /* IQKeyboardManager.m in Sources */,
+				E4F02F351AA60B7200426A88 /* FindPasswordViewController.m in Sources */,
 				E4F02F2D1AA5FA3100426A88 /* IQTitleBarButtonItem.m in Sources */,
 				E4F02F2C1AA5FA3100426A88 /* IQTextView.m in Sources */,
 				E4F02F301AA5FA3100426A88 /* UIView+Hierarchy.m in Sources */,

@@ -37,6 +37,16 @@
     
     [self.account setTintColor:[UIColor whiteColor]];
     [self.password setTintColor:[UIColor whiteColor]];
+    
+    UIBarButtonItem *backItem = [[UIBarButtonItem alloc] init];
+    self.navigationItem.backBarButtonItem = backItem;
+    backItem.title = @"返回";
+    
+    if ([[[UIDevice currentDevice] systemVersion] floatValue] >= 7.0) {
+        self.navigationController.navigationBar.tintColor = [UIColor whiteColor];
+    }
+    [self.navigationController.navigationBar setTitleTextAttributes:[NSDictionary dictionaryWithObjectsAndKeys:[UIColor whiteColor], UITextAttributeTextColor, nil]];
+    
 //    [[UITextField appearance] setTintColor:[UIColor whiteColor]];
 }
 
@@ -50,6 +60,12 @@
 - (void)textFieldDidEndEditing:(UITextField *)textField{
     [textField setBackgroundColor:[UIColor colorWithRed:36/255.0 green:102/255.0 blue:171/255.0 alpha:1.0]];
     NSLog(@"textFieldDidEndEditing");
+}
+
+- (void)viewWillAppear:(BOOL)animated
+{
+    [self.navigationController setNavigationBarHidden:YES animated:animated];
+    [super viewWillAppear:animated];
 }
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];

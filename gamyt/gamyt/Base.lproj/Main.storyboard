@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6250" systemVersion="13E28" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="vXZ-lx-hvc">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6250" systemVersion="13E28" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="ZfB-8W-SDF">
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6244"/>
@@ -7,10 +7,10 @@
         <capability name="Constraints with non-1.0 multipliers" minToolsVersion="5.1"/>
     </dependencies>
     <scenes>
-        <!--View Controller-->
+        <!--登录-->
         <scene sceneID="ufC-wZ-h7g">
             <objects>
-                <viewController id="vXZ-lx-hvc" customClass="ViewController" sceneMemberID="viewController">
+                <viewController title="登录" id="vXZ-lx-hvc" customClass="ViewController" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="jyV-Pf-zRb"/>
                         <viewControllerLayoutGuide type="bottom" id="2fi-mo-0CV"/>
@@ -129,6 +129,16 @@
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="splash_home_bottom_font" translatesAutoresizingMaskIntoConstraints="NO" id="tX5-T7-3YY">
                                 <rect key="frame" x="0.0" y="0.0" width="240" height="128"/>
                             </imageView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="iQG-KN-efl">
+                                <rect key="frame" x="-23" y="-15" width="46" height="30"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <state key="normal" title="忘记密码">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <segue destination="w5a-eg-bcz" kind="show" id="Jof-ky-AL5"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                         <constraints>
@@ -138,7 +148,13 @@
                             <constraint firstAttribute="centerX" secondItem="tX5-T7-3YY" secondAttribute="centerX" id="Alj-1C-tqt"/>
                             <constraint firstItem="lCy-nT-LgG" firstAttribute="leading" secondItem="kh9-bI-dsS" secondAttribute="leading" id="HGe-Kn-Ky7"/>
                             <constraint firstAttribute="centerX" secondItem="NQz-og-Yhk" secondAttribute="centerX" id="Hns-qJ-ODf"/>
+                            <constraint firstItem="iQG-KN-efl" firstAttribute="top" secondItem="kAX-Cb-KN0" secondAttribute="bottom" constant="8" id="Lpo-1B-wpG">
+                                <variation key="heightClass=regular-widthClass=compact" constant="4"/>
+                            </constraint>
                             <constraint firstAttribute="centerY" secondItem="ek6-nB-ixF" secondAttribute="centerY" id="MfD-Yt-8jq"/>
+                            <constraint firstAttribute="trailing" secondItem="iQG-KN-efl" secondAttribute="trailing" constant="20" id="SSt-L7-2wh">
+                                <variation key="heightClass=regular-widthClass=compact" constant="25"/>
+                            </constraint>
                             <constraint firstItem="kAX-Cb-KN0" firstAttribute="leading" secondItem="kh9-bI-dsS" secondAttribute="leading" constant="48" id="ZOC-Pe-DEB">
                                 <variation key="heightClass=regular-widthClass=compact" constant="20"/>
                             </constraint>
@@ -173,6 +189,7 @@
                                 <exclude reference="kAX-Cb-KN0"/>
                                 <exclude reference="SLR-hW-uw8"/>
                                 <exclude reference="tX5-T7-3YY"/>
+                                <exclude reference="iQG-KN-efl"/>
                             </mask>
                             <mask key="constraints">
                                 <exclude reference="65O-Ew-cl2"/>
@@ -190,6 +207,8 @@
                                 <exclude reference="2AQ-pH-h1i"/>
                                 <exclude reference="oVN-Zc-S3z"/>
                                 <exclude reference="zvt-Tm-vLb"/>
+                                <exclude reference="Lpo-1B-wpG"/>
+                                <exclude reference="SSt-L7-2wh"/>
                                 <exclude reference="Alj-1C-tqt"/>
                                 <exclude reference="3Ru-tJ-Ypq"/>
                                 <exclude reference="pUG-iR-jIW"/>
@@ -203,6 +222,7 @@
                                 <include reference="kAX-Cb-KN0"/>
                                 <include reference="SLR-hW-uw8"/>
                                 <include reference="tX5-T7-3YY"/>
+                                <include reference="iQG-KN-efl"/>
                             </mask>
                             <mask key="constraints">
                                 <include reference="65O-Ew-cl2"/>
@@ -220,12 +240,15 @@
                                 <include reference="2AQ-pH-h1i"/>
                                 <include reference="oVN-Zc-S3z"/>
                                 <include reference="zvt-Tm-vLb"/>
+                                <include reference="Lpo-1B-wpG"/>
+                                <include reference="SSt-L7-2wh"/>
                                 <include reference="Alj-1C-tqt"/>
                                 <include reference="3Ru-tJ-Ypq"/>
                                 <include reference="pUG-iR-jIW"/>
                             </mask>
                         </variation>
                     </view>
+                    <navigationItem key="navigationItem" id="4BX-ee-vFr"/>
                     <connections>
                         <outlet property="account" destination="ek6-nB-ixF" id="ltt-mL-kL9"/>
                         <outlet property="password" destination="kAX-Cb-KN0" id="g7l-Gu-gyb"/>
@@ -233,6 +256,41 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="x5A-6p-PRh" sceneMemberID="firstResponder"/>
             </objects>
+        </scene>
+        <!--找回密码-->
+        <scene sceneID="6ES-oc-enD">
+            <objects>
+                <viewController title="找回密码" id="w5a-eg-bcz" customClass="FindPasswordViewController" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="j2g-I4-97J"/>
+                        <viewControllerLayoutGuide type="bottom" id="SvN-ef-EIN"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="yrJ-a3-R2q">
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                    <navigationItem key="navigationItem" title="找回密码" id="cD7-oA-ihB"/>
+                    <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" prompted="NO"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="reI-s1-FrW" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="900" y="138"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="rIj-pi-8Cr">
+            <objects>
+                <navigationController navigationBarHidden="YES" id="ZfB-8W-SDF" sceneMemberID="viewController">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="Spa-gr-kdk">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <connections>
+                        <segue destination="vXZ-lx-hvc" kind="relationship" relationship="rootViewController" id="vKy-dT-ZHn"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="GKV-nQ-taB" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-690" y="140.25"/>
         </scene>
     </scenes>
     <resources>
