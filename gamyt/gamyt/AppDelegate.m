@@ -20,7 +20,7 @@
     // Override point for customization after application launch.
     
     if ([[[UIDevice currentDevice] systemVersion] floatValue] >= 7.0) {
-        [[UINavigationBar appearance] setBarTintColor:[UIColor colorWithRed:52/255.0 green:142/255.0 blue:224/255.0 alpha:1]];
+        [[UINavigationBar appearance] setBarTintColor:[UIColor colorWithRed:36/255.0 green:102/255.0 blue:171/255.0 alpha:1]];
     }
     
     return YES;
