@@ -55,16 +55,6 @@
     
 }
 
--(void)login{
-//    AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
-//    NSDictionary *parameters = @{@"foo": @"bar"};
-//    [manager POST:@"http://example.com/resources.json" parameters:parameters success:^(AFHTTPRequestOperation *operation, id responseObject) {
-//        NSLog(@"JSON: %@", responseObject);
-//    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-//        NSLog(@"Error: %@", error);
-//    }];
-}
-
 - (void)textFieldDidBeginEditing:(UITextField *)textField{
     [textField setBackgroundColor:[UIColor colorWithRed:26/255.0 green:73/255.0 blue:130/255.0 alpha:1.0]];
 }
@@ -84,6 +74,7 @@
 }
 
 - (IBAction)login:(id)sender {
+    
     
     
 //    AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
