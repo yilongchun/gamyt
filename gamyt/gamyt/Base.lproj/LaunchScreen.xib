@@ -78,14 +78,14 @@
                     <exclude reference="2kr-Oc-hLe"/>
                     <exclude reference="Tq5-ux-2hR"/>
                     <exclude reference="U7t-gI-U7M"/>
-                    <exclude reference="AjM-QV-Fv5"/>
-                    <exclude reference="F0y-Yb-TWX"/>
+                    <exclude reference="bl9-Dc-OhJ"/>
+                    <exclude reference="gyb-gg-R0T"/>
                     <exclude reference="0bS-8V-bFD"/>
                     <exclude reference="IP2-Ex-Led"/>
                     <exclude reference="RBG-Ji-3WW"/>
                     <exclude reference="WKh-ov-9HF"/>
-                    <exclude reference="bl9-Dc-OhJ"/>
-                    <exclude reference="gyb-gg-R0T"/>
+                    <exclude reference="AjM-QV-Fv5"/>
+                    <exclude reference="F0y-Yb-TWX"/>
                 </mask>
             </variation>
             <variation key="heightClass=regular-widthClass=compact">
@@ -99,14 +99,14 @@
                     <include reference="2kr-Oc-hLe"/>
                     <include reference="Tq5-ux-2hR"/>
                     <include reference="U7t-gI-U7M"/>
-                    <include reference="AjM-QV-Fv5"/>
-                    <include reference="F0y-Yb-TWX"/>
+                    <include reference="bl9-Dc-OhJ"/>
+                    <include reference="gyb-gg-R0T"/>
                     <include reference="0bS-8V-bFD"/>
                     <include reference="IP2-Ex-Led"/>
                     <include reference="RBG-Ji-3WW"/>
                     <include reference="WKh-ov-9HF"/>
-                    <include reference="bl9-Dc-OhJ"/>
-                    <include reference="gyb-gg-R0T"/>
+                    <include reference="AjM-QV-Fv5"/>
+                    <include reference="F0y-Yb-TWX"/>
                 </mask>
             </variation>
             <point key="canvasLocation" x="548" y="455"/>
