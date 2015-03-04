@@ -8,6 +8,7 @@
 
 #import "ViewController.h"
 
+
 @interface ViewController ()
 
 @end
@@ -35,8 +36,10 @@
     [self.account setValue:[UIColor whiteColor] forKeyPath:@"_placeholderLabel.textColor"];
     [self.password setValue:[UIColor whiteColor] forKeyPath:@"_placeholderLabel.textColor"];
     
-    [self.account setTintColor:[UIColor whiteColor]];
-    [self.password setTintColor:[UIColor whiteColor]];
+    if (floor(NSFoundationVersionNumber) > NSFoundationVersionNumber_iOS_6_1){
+        [self.account setTintColor:[UIColor whiteColor]];
+        [self.password setTintColor:[UIColor whiteColor]];
+    }
     
     UIBarButtonItem *backItem = [[UIBarButtonItem alloc] init];
     self.navigationItem.backBarButtonItem = backItem;
@@ -48,18 +51,26 @@
     [self.navigationController.navigationBar setTitleTextAttributes:[NSDictionary dictionaryWithObjectsAndKeys:[UIColor whiteColor], UITextAttributeTextColor, nil]];
     
 //    [[UITextField appearance] setTintColor:[UIColor whiteColor]];
+    
+    
+}
+
+-(void)login{
+//    AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
+//    NSDictionary *parameters = @{@"foo": @"bar"};
+//    [manager POST:@"http://example.com/resources.json" parameters:parameters success:^(AFHTTPRequestOperation *operation, id responseObject) {
+//        NSLog(@"JSON: %@", responseObject);
+//    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+//        NSLog(@"Error: %@", error);
+//    }];
 }
 
 - (void)textFieldDidBeginEditing:(UITextField *)textField{
-    
     [textField setBackgroundColor:[UIColor colorWithRed:26/255.0 green:73/255.0 blue:130/255.0 alpha:1.0]];
-    
-    NSLog(@"textFieldDidBeginEditing");
 }
 
 - (void)textFieldDidEndEditing:(UITextField *)textField{
     [textField setBackgroundColor:[UIColor colorWithRed:36/255.0 green:102/255.0 blue:171/255.0 alpha:1.0]];
-    NSLog(@"textFieldDidEndEditing");
 }
 
 - (void)viewWillAppear:(BOOL)animated
@@ -72,4 +83,44 @@
     // Dispose of any resources that can be recreated.
 }
 
+- (IBAction)login:(id)sender {
+    
+    
+//    AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
+//    NSDictionary *parameters = @{@"deviceid": @"A000004886292F", @"devicetype" : @"3" ,@"pwd" : @"111111" , @"username" : @"18972590038"};
+//    manager.requestSerializer = [AFJSONRequestSerializer serializer];
+//    manager.responseSerializer = [AFJSONResponseSerializer serializer];
+//    
+////    [manager.requestSerializer setValue:@"application/json" forHTTPHeaderField:@"Accept"];
+//    [manager.requestSerializer setValue:@"application/json; charset=utf-8" forHTTPHeaderField:@"Content-Type"];
+//    
+//    
+//    NSLog(@"%@",[self DataTOjsonString:parameters]);
+//    NSString *p = [self DataTOjsonString:parameters];
+//    [manager POST:@"http://ycly.minyitong.cn/yc/mobile/user/login" parameters:parameters success:^(AFHTTPRequestOperation *operation, id responseObject) {
+//        NSLog(@"JSON: %@", responseObject);
+//    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+//        NSLog(@"Error: %@", error);
+//    }];
+    
+    
+    
+//    UIViewController *next = [[self storyboard] instantiateViewControllerWithIdentifier:@"MainViewController"];
+//    [self.navigationController pushViewController:next animated:YES];
+}
+
+-(NSString*)DataTOjsonString:(id)object
+{
+    NSString *jsonString = nil;
+    NSError *error;
+    NSData *jsonData = [NSJSONSerialization dataWithJSONObject:object
+                                                       options:NSJSONWritingPrettyPrinted // Pass 0 if you don't care about the readability of the generated string
+                                                         error:&error];
+    if (! jsonData) {
+        NSLog(@"Got an error: %@", error);
+    } else {
+        jsonString = [[NSString alloc] initWithData:jsonData encoding:NSUTF8StringEncoding];
+    }
+    return jsonString;
+}
 @end

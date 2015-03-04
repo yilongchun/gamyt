@@ -125,6 +125,9 @@
                                         <include reference="dEX-4Y-UzY"/>
                                     </mask>
                                 </variation>
+                                <connections>
+                                    <action selector="login:" destination="vXZ-lx-hvc" eventType="touchUpInside" id="4Sv-kN-HcA"/>
+                                </connections>
                             </button>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="splash_home_bottom_font" translatesAutoresizingMaskIntoConstraints="NO" id="tX5-T7-3YY">
                                 <rect key="frame" x="0.0" y="0.0" width="240" height="128"/>
@@ -257,6 +260,45 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="x5A-6p-PRh" sceneMemberID="firstResponder"/>
             </objects>
         </scene>
+        <!--首页-->
+        <scene sceneID="1FQ-If-VOi">
+            <objects>
+                <viewController storyboardIdentifier="MainViewController" title="首页" id="GWb-MZ-7cD" customClass="MainViewController" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="Y6l-EL-RDD"/>
+                        <viewControllerLayoutGuide type="bottom" id="b8j-bv-5Xf"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="mQ1-VM-HST">
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="xNl-ho-NLc">
+                                <rect key="frame" x="-61" y="-14" width="123" height="29"/>
+                                <segments>
+                                    <segment title="First"/>
+                                    <segment title="Second"/>
+                                </segments>
+                                <variation key="heightClass=regular-widthClass=compact" fixedFrame="YES">
+                                    <rect key="frame" x="95" y="147" width="123" height="29"/>
+                                </variation>
+                            </segmentedControl>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <variation key="default">
+                            <mask key="subviews">
+                                <exclude reference="xNl-ho-NLc"/>
+                            </mask>
+                        </variation>
+                        <variation key="heightClass=regular-widthClass=compact">
+                            <mask key="subviews">
+                                <include reference="xNl-ho-NLc"/>
+                            </mask>
+                        </variation>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="3HG-Rq-9yS" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1014" y="489"/>
+        </scene>
         <!--找回密码-->
         <scene sceneID="6ES-oc-enD">
             <objects>
@@ -274,7 +316,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="reI-s1-FrW" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="900" y="138"/>
+            <point key="canvasLocation" x="1014" y="-192"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="rIj-pi-8Cr">

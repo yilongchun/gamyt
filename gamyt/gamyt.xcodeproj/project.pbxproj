@@ -25,6 +25,7 @@
 		E4F02F311AA5FA3100426A88 /* UIView+IQKeyboardToolbar.m in Sources */ = {isa = PBXBuildFile; fileRef = E4F02F261AA5FA3100426A88 /* UIView+IQKeyboardToolbar.m */; };
 		E4F02F321AA5FA3100426A88 /* UIWindow+Hierarchy.m in Sources */ = {isa = PBXBuildFile; fileRef = E4F02F281AA5FA3100426A88 /* UIWindow+Hierarchy.m */; };
 		E4F02F351AA60B7200426A88 /* FindPasswordViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E4F02F341AA60B7200426A88 /* FindPasswordViewController.m */; };
+		E4F02F5E1AA61C3500426A88 /* MainViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E4F02F5D1AA61C3500426A88 /* MainViewController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -38,6 +39,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		E4C71F3B1AA704360035228F /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		E4F02EE91AA5C5ED00426A88 /* gamyt.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = gamyt.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		E4F02EED1AA5C5ED00426A88 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		E4F02EEE1AA5C5ED00426A88 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
@@ -75,6 +77,12 @@
 		E4F02F281AA5FA3100426A88 /* UIWindow+Hierarchy.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIWindow+Hierarchy.m"; sourceTree = "<group>"; };
 		E4F02F331AA60B7200426A88 /* FindPasswordViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FindPasswordViewController.h; sourceTree = "<group>"; };
 		E4F02F341AA60B7200426A88 /* FindPasswordViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FindPasswordViewController.m; sourceTree = "<group>"; };
+		E4F02F531AA618F700426A88 /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
+		E4F02F551AA6190000426A88 /* MobileCoreServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MobileCoreServices.framework; path = System/Library/Frameworks/MobileCoreServices.framework; sourceTree = SDKROOT; };
+		E4F02F571AA6190700426A88 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
+		E4F02F5C1AA61C3500426A88 /* MainViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MainViewController.h; sourceTree = "<group>"; };
+		E4F02F5D1AA61C3500426A88 /* MainViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MainViewController.m; sourceTree = "<group>"; };
+		E4F02F5F1AA621F700426A88 /* gamyt.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = gamyt.pch; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -99,6 +107,7 @@
 			isa = PBXGroup;
 			children = (
 				E4F02EEB1AA5C5ED00426A88 /* gamyt */,
+				E4F02F591AA6196B00426A88 /* Frameworks */,
 				E4F02F051AA5C5ED00426A88 /* gamytTests */,
 				E4F02EEA1AA5C5ED00426A88 /* Products */,
 			);
@@ -123,6 +132,7 @@
 				E4F02EF61AA5C5ED00426A88 /* Main.storyboard */,
 				E4F02EF91AA5C5ED00426A88 /* Images.xcassets */,
 				E4F02EFB1AA5C5ED00426A88 /* LaunchScreen.xib */,
+				E4F02F5B1AA61C2700426A88 /* view */,
 				E4F02F121AA5FA3100426A88 /* IQKeyBoardManager */,
 				E4F02EEC1AA5C5ED00426A88 /* Supporting Files */,
 				E4F02F331AA60B7200426A88 /* FindPasswordViewController.h */,
@@ -136,6 +146,7 @@
 			children = (
 				E4F02EED1AA5C5ED00426A88 /* Info.plist */,
 				E4F02EEE1AA5C5ED00426A88 /* main.m */,
+				E4F02F5F1AA621F700426A88 /* gamyt.pch */,
 			);
 			name = "Supporting Files";
 			sourceTree = "<group>";
@@ -184,6 +195,27 @@
 				E4F02F281AA5FA3100426A88 /* UIWindow+Hierarchy.m */,
 			);
 			path = IQKeyBoardManager;
+			sourceTree = "<group>";
+		};
+		E4F02F591AA6196B00426A88 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				E4C71F3B1AA704360035228F /* Foundation.framework */,
+				E4F02F571AA6190700426A88 /* SystemConfiguration.framework */,
+				E4F02F551AA6190000426A88 /* MobileCoreServices.framework */,
+				E4F02F531AA618F700426A88 /* Security.framework */,
+			);
+			name = Frameworks;
+			path = gamytTests;
+			sourceTree = "<group>";
+		};
+		E4F02F5B1AA61C2700426A88 /* view */ = {
+			isa = PBXGroup;
+			children = (
+				E4F02F5C1AA61C3500426A88 /* MainViewController.h */,
+				E4F02F5D1AA61C3500426A88 /* MainViewController.m */,
+			);
+			path = view;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -294,6 +326,7 @@
 				E4F02F351AA60B7200426A88 /* FindPasswordViewController.m in Sources */,
 				E4F02F2D1AA5FA3100426A88 /* IQTitleBarButtonItem.m in Sources */,
 				E4F02F2C1AA5FA3100426A88 /* IQTextView.m in Sources */,
+				E4F02F5E1AA61C3500426A88 /* MainViewController.m in Sources */,
 				E4F02F301AA5FA3100426A88 /* UIView+Hierarchy.m in Sources */,
 				E4F02F2E1AA5FA3100426A88 /* IQToolbar.m in Sources */,
 				E4F02EF51AA5C5ED00426A88 /* ViewController.m in Sources */,
@@ -424,6 +457,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
+				GCC_PREFIX_HEADER = gamyt/gamyt.pch;
 				INFOPLIST_FILE = gamyt/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
@@ -437,6 +471,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
+				GCC_PREFIX_HEADER = gamyt/gamyt.pch;
 				INFOPLIST_FILE = gamyt/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
@@ -497,6 +532,7 @@
 				E4F02F0E1AA5C5ED00426A88 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		E4F02F0F1AA5C5ED00426A88 /* Build configuration list for PBXNativeTarget "gamytTests" */ = {
 			isa = XCConfigurationList;
@@ -505,6 +541,7 @@
 				E4F02F111AA5C5ED00426A88 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
