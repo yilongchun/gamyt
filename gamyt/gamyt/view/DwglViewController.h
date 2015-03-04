@@ -1,5 +1,5 @@
 //
-//  MyNotict.h
+//  DwglViewController.h
 //  gamyt
 //
 //  Created by yons on 15-3-4.
@@ -9,6 +9,6 @@
 #import <UIKit/UIKit.h>
 #import "SlideNavigationController.h"
 
-@interface MyNotice : UIViewController<SlideNavigationControllerDelegate>
+@interface DwglViewController : UIViewController<SlideNavigationControllerDelegate>
 
 @end

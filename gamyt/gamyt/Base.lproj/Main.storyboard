@@ -258,6 +258,8 @@
                         <segue destination="ych-Lx-xSH" kind="show" identifier="toview1" id="dcI-59-MQv"/>
                         <segue destination="GWb-MZ-7cD" kind="show" identifier="toview2" id="d8A-ZT-IzF"/>
                         <segue destination="TO7-Y6-3FC" kind="show" identifier="toview3" id="477-IW-PHK"/>
+                        <segue destination="OK1-qA-Llf" kind="show" identifier="toview4" id="k5C-bv-47H"/>
+                        <segue destination="r0z-ay-jQI" kind="show" identifier="toview5" id="a2d-oC-1V1"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="x5A-6p-PRh" sceneMemberID="firstResponder"/>
@@ -267,7 +269,7 @@
         <!--我的公告-->
         <scene sceneID="8df-FV-lOy">
             <objects>
-                <viewController storyboardIdentifier="MyNotice" id="TO7-Y6-3FC" customClass="MyNotice" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="MyNoticeViewController" id="TO7-Y6-3FC" customClass="MyNoticeViewController" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="GQx-jm-dmz"/>
                         <viewControllerLayoutGuide type="bottom" id="6v8-wE-cLt"/>
@@ -281,6 +283,42 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="eZD-kn-eg2" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="2040" y="676.5"/>
+        </scene>
+        <!--个人设置-->
+        <scene sceneID="UTt-LT-wHo">
+            <objects>
+                <viewController storyboardIdentifier="SettingViewController" id="r0z-ay-jQI" customClass="SettingViewController" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="J67-Mw-Ng9"/>
+                        <viewControllerLayoutGuide type="bottom" id="LSz-C1-2fj"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="bq4-oX-CMA">
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                    <navigationItem key="navigationItem" title="个人设置" id="0dd-Oi-4hB"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="1j5-7f-mIU" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2038.5" y="1978.5"/>
+        </scene>
+        <!--单位管理-->
+        <scene sceneID="tiT-lc-i4f">
+            <objects>
+                <viewController storyboardIdentifier="DwglViewController" id="OK1-qA-Llf" customClass="DwglViewController" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="LbU-QX-zii"/>
+                        <viewControllerLayoutGuide type="bottom" id="4cY-Oc-Bp8"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="Gpt-ZC-T6E">
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                    <navigationItem key="navigationItem" title="单位管理" id="goC-qd-e1F"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="SE7-yd-8Ly" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2038.5" y="1311.75"/>
         </scene>
         <!--下级上报-->
         <scene sceneID="1FQ-If-VOi">

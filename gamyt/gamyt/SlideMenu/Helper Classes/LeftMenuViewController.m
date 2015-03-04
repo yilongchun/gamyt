@@ -130,9 +130,14 @@
 			break;
 			
 		case 2:
-			vc = [mainStoryboard instantiateViewControllerWithIdentifier: @"MyNotice"];
+			vc = [mainStoryboard instantiateViewControllerWithIdentifier: @"MyNoticeViewController"];
 			break;
-			
+        case 3:
+            vc = [mainStoryboard instantiateViewControllerWithIdentifier: @"DwglViewController"];
+            break;
+        case 4:
+            vc = [mainStoryboard instantiateViewControllerWithIdentifier: @"SettingViewController"];
+            break;
 //		case 3:
 //			[self.tableView deselectRowAtIndexPath:[self.tableView indexPathForSelectedRow] animated:YES];
 //			[[SlideNavigationController sharedInstance] popToRootViewControllerAnimated:YES];

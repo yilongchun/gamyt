@@ -6,9 +6,9 @@
 //  Copyright (c) 2015年 hmzl. All rights reserved.
 //
 
-#import "MyNotice.h"
+#import "MyNoticeViewController.h"
 
-@implementation MyNotice
+@implementation MyNoticeViewController
 
 
 #pragma mark - SlideNavigationController Methods -

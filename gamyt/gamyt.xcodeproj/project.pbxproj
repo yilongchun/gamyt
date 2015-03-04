@@ -32,7 +32,9 @@
 		E430A2211AA7443600CFBFC6 /* menu-button@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = E430A2121AA7443600CFBFC6 /* menu-button@2x.png */; };
 		E430A2221AA7443600CFBFC6 /* SlideNavigationController.m in Sources */ = {isa = PBXBuildFile; fileRef = E430A2141AA7443600CFBFC6 /* SlideNavigationController.m */; };
 		E430A2291AA755C600CFBFC6 /* leftMenu.jpg in Resources */ = {isa = PBXBuildFile; fileRef = E430A2281AA755C600CFBFC6 /* leftMenu.jpg */; };
-		E4DAB94A1AA76EB600C58A8E /* MyNotice.m in Sources */ = {isa = PBXBuildFile; fileRef = E4DAB9491AA76EB600C58A8E /* MyNotice.m */; };
+		E4DAB94A1AA76EB600C58A8E /* MyNoticeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E4DAB9491AA76EB600C58A8E /* MyNoticeViewController.m */; };
+		E4DAB94D1AA772FF00C58A8E /* DwglViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E4DAB94C1AA772FF00C58A8E /* DwglViewController.m */; };
+		E4DAB9501AA7742F00C58A8E /* SettingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E4DAB94F1AA7742F00C58A8E /* SettingViewController.m */; };
 		E4F02EEF1AA5C5ED00426A88 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = E4F02EEE1AA5C5ED00426A88 /* main.m */; };
 		E4F02EF21AA5C5ED00426A88 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = E4F02EF11AA5C5ED00426A88 /* AppDelegate.m */; };
 		E4F02EF51AA5C5ED00426A88 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E4F02EF41AA5C5ED00426A88 /* ViewController.m */; };
@@ -108,8 +110,12 @@
 		E430A2131AA7443600CFBFC6 /* SlideNavigationController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SlideNavigationController.h; sourceTree = "<group>"; };
 		E430A2141AA7443600CFBFC6 /* SlideNavigationController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SlideNavigationController.m; sourceTree = "<group>"; };
 		E430A2281AA755C600CFBFC6 /* leftMenu.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = leftMenu.jpg; sourceTree = "<group>"; };
-		E4DAB9481AA76EB600C58A8E /* MyNotice.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyNotice.h; sourceTree = "<group>"; };
-		E4DAB9491AA76EB600C58A8E /* MyNotice.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyNotice.m; sourceTree = "<group>"; };
+		E4DAB9481AA76EB600C58A8E /* MyNoticeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyNoticeViewController.h; sourceTree = "<group>"; };
+		E4DAB9491AA76EB600C58A8E /* MyNoticeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyNoticeViewController.m; sourceTree = "<group>"; };
+		E4DAB94B1AA772FF00C58A8E /* DwglViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DwglViewController.h; sourceTree = "<group>"; };
+		E4DAB94C1AA772FF00C58A8E /* DwglViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DwglViewController.m; sourceTree = "<group>"; };
+		E4DAB94E1AA7742F00C58A8E /* SettingViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SettingViewController.h; sourceTree = "<group>"; };
+		E4DAB94F1AA7742F00C58A8E /* SettingViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SettingViewController.m; sourceTree = "<group>"; };
 		E4F02EE91AA5C5ED00426A88 /* gamyt.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = gamyt.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		E4F02EED1AA5C5ED00426A88 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		E4F02EEE1AA5C5ED00426A88 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
@@ -380,8 +386,12 @@
 			children = (
 				E4F02F5C1AA61C3500426A88 /* MainViewController.h */,
 				E4F02F5D1AA61C3500426A88 /* MainViewController.m */,
-				E4DAB9481AA76EB600C58A8E /* MyNotice.h */,
-				E4DAB9491AA76EB600C58A8E /* MyNotice.m */,
+				E4DAB9481AA76EB600C58A8E /* MyNoticeViewController.h */,
+				E4DAB9491AA76EB600C58A8E /* MyNoticeViewController.m */,
+				E4DAB94B1AA772FF00C58A8E /* DwglViewController.h */,
+				E4DAB94C1AA772FF00C58A8E /* DwglViewController.m */,
+				E4DAB94E1AA7742F00C58A8E /* SettingViewController.h */,
+				E4DAB94F1AA7742F00C58A8E /* SettingViewController.m */,
 			);
 			path = view;
 			sourceTree = "<group>";
@@ -493,7 +503,7 @@
 			files = (
 				E430A21B1AA7443600CFBFC6 /* SlideNavigationContorllerAnimatorFade.m in Sources */,
 				E4F02F2F1AA5FA3100426A88 /* NSArray+Sort.m in Sources */,
-				E4DAB94A1AA76EB600C58A8E /* MyNotice.m in Sources */,
+				E4DAB94A1AA76EB600C58A8E /* MyNoticeViewController.m in Sources */,
 				E4F02F311AA5FA3100426A88 /* UIView+IQKeyboardToolbar.m in Sources */,
 				E4F02F2A1AA5FA3100426A88 /* IQKeyboardManager.m in Sources */,
 				E4F02F351AA60B7200426A88 /* FindPasswordViewController.m in Sources */,
@@ -515,12 +525,14 @@
 				E4F02F2B1AA5FA3100426A88 /* IQSegmentedNextPrevious.m in Sources */,
 				E430A1D81AA711A100CFBFC6 /* AFHTTPRequestOperation.m in Sources */,
 				E4F02EEF1AA5C5ED00426A88 /* main.m in Sources */,
+				E4DAB9501AA7742F00C58A8E /* SettingViewController.m in Sources */,
 				E430A21D1AA7443600CFBFC6 /* SlideNavigationContorllerAnimatorScaleAndFade.m in Sources */,
 				E430A2221AA7443600CFBFC6 /* SlideNavigationController.m in Sources */,
 				E430A1DA1AA711A100CFBFC6 /* AFHTTPSessionManager.m in Sources */,
 				E430A2171AA7443600CFBFC6 /* LeftMenuViewController.m in Sources */,
 				E4F02F321AA5FA3100426A88 /* UIWindow+Hierarchy.m in Sources */,
 				E430A21E1AA7443600CFBFC6 /* SlideNavigationContorllerAnimatorSlide.m in Sources */,
+				E4DAB94D1AA772FF00C58A8E /* DwglViewController.m in Sources */,
 				E430A1E01AA711A100CFBFC6 /* AFURLSessionManager.m in Sources */,
 				E430A1EA1AA7126700CFBFC6 /* MobileLoginParam.m in Sources */,
 				E430A2161AA7443600CFBFC6 /* HomeViewController.m in Sources */,
