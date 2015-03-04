@@ -8,6 +8,31 @@
 
 /* Begin PBXBuildFile section */
 		E430A1A01AA70C3500CFBFC6 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = E4F02EFB1AA5C5ED00426A88 /* LaunchScreen.xib */; };
+		E430A1D81AA711A100CFBFC6 /* AFHTTPRequestOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = E430A1C61AA711A100CFBFC6 /* AFHTTPRequestOperation.m */; };
+		E430A1D91AA711A100CFBFC6 /* AFHTTPRequestOperationManager.m in Sources */ = {isa = PBXBuildFile; fileRef = E430A1C81AA711A100CFBFC6 /* AFHTTPRequestOperationManager.m */; };
+		E430A1DA1AA711A100CFBFC6 /* AFHTTPSessionManager.m in Sources */ = {isa = PBXBuildFile; fileRef = E430A1CA1AA711A100CFBFC6 /* AFHTTPSessionManager.m */; };
+		E430A1DB1AA711A100CFBFC6 /* AFNetworkReachabilityManager.m in Sources */ = {isa = PBXBuildFile; fileRef = E430A1CD1AA711A100CFBFC6 /* AFNetworkReachabilityManager.m */; };
+		E430A1DC1AA711A100CFBFC6 /* AFSecurityPolicy.m in Sources */ = {isa = PBXBuildFile; fileRef = E430A1CF1AA711A100CFBFC6 /* AFSecurityPolicy.m */; };
+		E430A1DD1AA711A100CFBFC6 /* AFURLConnectionOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = E430A1D11AA711A100CFBFC6 /* AFURLConnectionOperation.m */; };
+		E430A1DE1AA711A100CFBFC6 /* AFURLRequestSerialization.m in Sources */ = {isa = PBXBuildFile; fileRef = E430A1D31AA711A100CFBFC6 /* AFURLRequestSerialization.m */; };
+		E430A1DF1AA711A100CFBFC6 /* AFURLResponseSerialization.m in Sources */ = {isa = PBXBuildFile; fileRef = E430A1D51AA711A100CFBFC6 /* AFURLResponseSerialization.m */; };
+		E430A1E01AA711A100CFBFC6 /* AFURLSessionManager.m in Sources */ = {isa = PBXBuildFile; fileRef = E430A1D71AA711A100CFBFC6 /* AFURLSessionManager.m */; };
+		E430A1E21AA711C200CFBFC6 /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E430A1E11AA711C200CFBFC6 /* Security.framework */; };
+		E430A1E41AA711C700CFBFC6 /* MobileCoreServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E430A1E31AA711C700CFBFC6 /* MobileCoreServices.framework */; };
+		E430A1E61AA711D000CFBFC6 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E430A1E51AA711D000CFBFC6 /* SystemConfiguration.framework */; };
+		E430A1EA1AA7126700CFBFC6 /* MobileLoginParam.m in Sources */ = {isa = PBXBuildFile; fileRef = E430A1E91AA7126700CFBFC6 /* MobileLoginParam.m */; };
+		E430A2161AA7443600CFBFC6 /* HomeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E430A1FA1AA7443600CFBFC6 /* HomeViewController.m */; };
+		E430A2171AA7443600CFBFC6 /* LeftMenuViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E430A1FC1AA7443600CFBFC6 /* LeftMenuViewController.m */; };
+		E430A21B1AA7443600CFBFC6 /* SlideNavigationContorllerAnimatorFade.m in Sources */ = {isa = PBXBuildFile; fileRef = E430A2071AA7443600CFBFC6 /* SlideNavigationContorllerAnimatorFade.m */; };
+		E430A21C1AA7443600CFBFC6 /* SlideNavigationContorllerAnimatorScale.m in Sources */ = {isa = PBXBuildFile; fileRef = E430A2091AA7443600CFBFC6 /* SlideNavigationContorllerAnimatorScale.m */; };
+		E430A21D1AA7443600CFBFC6 /* SlideNavigationContorllerAnimatorScaleAndFade.m in Sources */ = {isa = PBXBuildFile; fileRef = E430A20B1AA7443600CFBFC6 /* SlideNavigationContorllerAnimatorScaleAndFade.m */; };
+		E430A21E1AA7443600CFBFC6 /* SlideNavigationContorllerAnimatorSlide.m in Sources */ = {isa = PBXBuildFile; fileRef = E430A20D1AA7443600CFBFC6 /* SlideNavigationContorllerAnimatorSlide.m */; };
+		E430A21F1AA7443600CFBFC6 /* SlideNavigationContorllerAnimatorSlideAndFade.m in Sources */ = {isa = PBXBuildFile; fileRef = E430A20F1AA7443600CFBFC6 /* SlideNavigationContorllerAnimatorSlideAndFade.m */; };
+		E430A2201AA7443600CFBFC6 /* menu-button.png in Resources */ = {isa = PBXBuildFile; fileRef = E430A2111AA7443600CFBFC6 /* menu-button.png */; };
+		E430A2211AA7443600CFBFC6 /* menu-button@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = E430A2121AA7443600CFBFC6 /* menu-button@2x.png */; };
+		E430A2221AA7443600CFBFC6 /* SlideNavigationController.m in Sources */ = {isa = PBXBuildFile; fileRef = E430A2141AA7443600CFBFC6 /* SlideNavigationController.m */; };
+		E430A2291AA755C600CFBFC6 /* leftMenu.jpg in Resources */ = {isa = PBXBuildFile; fileRef = E430A2281AA755C600CFBFC6 /* leftMenu.jpg */; };
+		E4DAB94A1AA76EB600C58A8E /* MyNotice.m in Sources */ = {isa = PBXBuildFile; fileRef = E4DAB9491AA76EB600C58A8E /* MyNotice.m */; };
 		E4F02EEF1AA5C5ED00426A88 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = E4F02EEE1AA5C5ED00426A88 /* main.m */; };
 		E4F02EF21AA5C5ED00426A88 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = E4F02EF11AA5C5ED00426A88 /* AppDelegate.m */; };
 		E4F02EF51AA5C5ED00426A88 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E4F02EF41AA5C5ED00426A88 /* ViewController.m */; };
@@ -39,6 +64,52 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		E430A1C51AA711A100CFBFC6 /* AFHTTPRequestOperation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFHTTPRequestOperation.h; sourceTree = "<group>"; };
+		E430A1C61AA711A100CFBFC6 /* AFHTTPRequestOperation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AFHTTPRequestOperation.m; sourceTree = "<group>"; };
+		E430A1C71AA711A100CFBFC6 /* AFHTTPRequestOperationManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFHTTPRequestOperationManager.h; sourceTree = "<group>"; };
+		E430A1C81AA711A100CFBFC6 /* AFHTTPRequestOperationManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AFHTTPRequestOperationManager.m; sourceTree = "<group>"; };
+		E430A1C91AA711A100CFBFC6 /* AFHTTPSessionManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFHTTPSessionManager.h; sourceTree = "<group>"; };
+		E430A1CA1AA711A100CFBFC6 /* AFHTTPSessionManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AFHTTPSessionManager.m; sourceTree = "<group>"; };
+		E430A1CB1AA711A100CFBFC6 /* AFNetworking.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFNetworking.h; sourceTree = "<group>"; };
+		E430A1CC1AA711A100CFBFC6 /* AFNetworkReachabilityManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFNetworkReachabilityManager.h; sourceTree = "<group>"; };
+		E430A1CD1AA711A100CFBFC6 /* AFNetworkReachabilityManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AFNetworkReachabilityManager.m; sourceTree = "<group>"; };
+		E430A1CE1AA711A100CFBFC6 /* AFSecurityPolicy.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFSecurityPolicy.h; sourceTree = "<group>"; };
+		E430A1CF1AA711A100CFBFC6 /* AFSecurityPolicy.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AFSecurityPolicy.m; sourceTree = "<group>"; };
+		E430A1D01AA711A100CFBFC6 /* AFURLConnectionOperation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFURLConnectionOperation.h; sourceTree = "<group>"; };
+		E430A1D11AA711A100CFBFC6 /* AFURLConnectionOperation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AFURLConnectionOperation.m; sourceTree = "<group>"; };
+		E430A1D21AA711A100CFBFC6 /* AFURLRequestSerialization.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFURLRequestSerialization.h; sourceTree = "<group>"; };
+		E430A1D31AA711A100CFBFC6 /* AFURLRequestSerialization.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AFURLRequestSerialization.m; sourceTree = "<group>"; };
+		E430A1D41AA711A100CFBFC6 /* AFURLResponseSerialization.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFURLResponseSerialization.h; sourceTree = "<group>"; };
+		E430A1D51AA711A100CFBFC6 /* AFURLResponseSerialization.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AFURLResponseSerialization.m; sourceTree = "<group>"; };
+		E430A1D61AA711A100CFBFC6 /* AFURLSessionManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFURLSessionManager.h; sourceTree = "<group>"; };
+		E430A1D71AA711A100CFBFC6 /* AFURLSessionManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AFURLSessionManager.m; sourceTree = "<group>"; };
+		E430A1E11AA711C200CFBFC6 /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
+		E430A1E31AA711C700CFBFC6 /* MobileCoreServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MobileCoreServices.framework; path = System/Library/Frameworks/MobileCoreServices.framework; sourceTree = SDKROOT; };
+		E430A1E51AA711D000CFBFC6 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
+		E430A1E81AA7126700CFBFC6 /* MobileLoginParam.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MobileLoginParam.h; path = model/MobileLoginParam.h; sourceTree = "<group>"; };
+		E430A1E91AA7126700CFBFC6 /* MobileLoginParam.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MobileLoginParam.m; path = model/MobileLoginParam.m; sourceTree = "<group>"; };
+		E430A1F91AA7443600CFBFC6 /* HomeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HomeViewController.h; sourceTree = "<group>"; };
+		E430A1FA1AA7443600CFBFC6 /* HomeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HomeViewController.m; sourceTree = "<group>"; };
+		E430A1FB1AA7443600CFBFC6 /* LeftMenuViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LeftMenuViewController.h; sourceTree = "<group>"; };
+		E430A1FC1AA7443600CFBFC6 /* LeftMenuViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LeftMenuViewController.m; sourceTree = "<group>"; };
+		E430A2051AA7443600CFBFC6 /* SlideNavigationContorllerAnimator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SlideNavigationContorllerAnimator.h; sourceTree = "<group>"; };
+		E430A2061AA7443600CFBFC6 /* SlideNavigationContorllerAnimatorFade.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SlideNavigationContorllerAnimatorFade.h; sourceTree = "<group>"; };
+		E430A2071AA7443600CFBFC6 /* SlideNavigationContorllerAnimatorFade.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SlideNavigationContorllerAnimatorFade.m; sourceTree = "<group>"; };
+		E430A2081AA7443600CFBFC6 /* SlideNavigationContorllerAnimatorScale.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SlideNavigationContorllerAnimatorScale.h; sourceTree = "<group>"; };
+		E430A2091AA7443600CFBFC6 /* SlideNavigationContorllerAnimatorScale.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SlideNavigationContorllerAnimatorScale.m; sourceTree = "<group>"; };
+		E430A20A1AA7443600CFBFC6 /* SlideNavigationContorllerAnimatorScaleAndFade.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SlideNavigationContorllerAnimatorScaleAndFade.h; sourceTree = "<group>"; };
+		E430A20B1AA7443600CFBFC6 /* SlideNavigationContorllerAnimatorScaleAndFade.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SlideNavigationContorllerAnimatorScaleAndFade.m; sourceTree = "<group>"; };
+		E430A20C1AA7443600CFBFC6 /* SlideNavigationContorllerAnimatorSlide.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SlideNavigationContorllerAnimatorSlide.h; sourceTree = "<group>"; };
+		E430A20D1AA7443600CFBFC6 /* SlideNavigationContorllerAnimatorSlide.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SlideNavigationContorllerAnimatorSlide.m; sourceTree = "<group>"; };
+		E430A20E1AA7443600CFBFC6 /* SlideNavigationContorllerAnimatorSlideAndFade.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SlideNavigationContorllerAnimatorSlideAndFade.h; sourceTree = "<group>"; };
+		E430A20F1AA7443600CFBFC6 /* SlideNavigationContorllerAnimatorSlideAndFade.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SlideNavigationContorllerAnimatorSlideAndFade.m; sourceTree = "<group>"; };
+		E430A2111AA7443600CFBFC6 /* menu-button.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "menu-button.png"; sourceTree = "<group>"; };
+		E430A2121AA7443600CFBFC6 /* menu-button@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "menu-button@2x.png"; sourceTree = "<group>"; };
+		E430A2131AA7443600CFBFC6 /* SlideNavigationController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SlideNavigationController.h; sourceTree = "<group>"; };
+		E430A2141AA7443600CFBFC6 /* SlideNavigationController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SlideNavigationController.m; sourceTree = "<group>"; };
+		E430A2281AA755C600CFBFC6 /* leftMenu.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = leftMenu.jpg; sourceTree = "<group>"; };
+		E4DAB9481AA76EB600C58A8E /* MyNotice.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyNotice.h; sourceTree = "<group>"; };
+		E4DAB9491AA76EB600C58A8E /* MyNotice.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyNotice.m; sourceTree = "<group>"; };
 		E4F02EE91AA5C5ED00426A88 /* gamyt.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = gamyt.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		E4F02EED1AA5C5ED00426A88 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		E4F02EEE1AA5C5ED00426A88 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
@@ -86,6 +157,9 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E430A1E61AA711D000CFBFC6 /* SystemConfiguration.framework in Frameworks */,
+				E430A1E41AA711C700CFBFC6 /* MobileCoreServices.framework in Frameworks */,
+				E430A1E21AA711C200CFBFC6 /* Security.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -99,6 +173,100 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		E430A1C41AA711A100CFBFC6 /* AFNetworking */ = {
+			isa = PBXGroup;
+			children = (
+				E430A1C51AA711A100CFBFC6 /* AFHTTPRequestOperation.h */,
+				E430A1C61AA711A100CFBFC6 /* AFHTTPRequestOperation.m */,
+				E430A1C71AA711A100CFBFC6 /* AFHTTPRequestOperationManager.h */,
+				E430A1C81AA711A100CFBFC6 /* AFHTTPRequestOperationManager.m */,
+				E430A1C91AA711A100CFBFC6 /* AFHTTPSessionManager.h */,
+				E430A1CA1AA711A100CFBFC6 /* AFHTTPSessionManager.m */,
+				E430A1CB1AA711A100CFBFC6 /* AFNetworking.h */,
+				E430A1CC1AA711A100CFBFC6 /* AFNetworkReachabilityManager.h */,
+				E430A1CD1AA711A100CFBFC6 /* AFNetworkReachabilityManager.m */,
+				E430A1CE1AA711A100CFBFC6 /* AFSecurityPolicy.h */,
+				E430A1CF1AA711A100CFBFC6 /* AFSecurityPolicy.m */,
+				E430A1D01AA711A100CFBFC6 /* AFURLConnectionOperation.h */,
+				E430A1D11AA711A100CFBFC6 /* AFURLConnectionOperation.m */,
+				E430A1D21AA711A100CFBFC6 /* AFURLRequestSerialization.h */,
+				E430A1D31AA711A100CFBFC6 /* AFURLRequestSerialization.m */,
+				E430A1D41AA711A100CFBFC6 /* AFURLResponseSerialization.h */,
+				E430A1D51AA711A100CFBFC6 /* AFURLResponseSerialization.m */,
+				E430A1D61AA711A100CFBFC6 /* AFURLSessionManager.h */,
+				E430A1D71AA711A100CFBFC6 /* AFURLSessionManager.m */,
+			);
+			path = AFNetworking;
+			sourceTree = "<group>";
+		};
+		E430A1E71AA7122400CFBFC6 /* model */ = {
+			isa = PBXGroup;
+			children = (
+				E430A1E81AA7126700CFBFC6 /* MobileLoginParam.h */,
+				E430A1E91AA7126700CFBFC6 /* MobileLoginParam.m */,
+			);
+			name = model;
+			sourceTree = "<group>";
+		};
+		E430A1F51AA7443600CFBFC6 /* SlideMenu */ = {
+			isa = PBXGroup;
+			children = (
+				E430A1F61AA7443600CFBFC6 /* Helper Classes */,
+				E430A2031AA7443600CFBFC6 /* Source */,
+			);
+			path = SlideMenu;
+			sourceTree = "<group>";
+		};
+		E430A1F61AA7443600CFBFC6 /* Helper Classes */ = {
+			isa = PBXGroup;
+			children = (
+				E430A1F91AA7443600CFBFC6 /* HomeViewController.h */,
+				E430A1FA1AA7443600CFBFC6 /* HomeViewController.m */,
+				E430A1FB1AA7443600CFBFC6 /* LeftMenuViewController.h */,
+				E430A1FC1AA7443600CFBFC6 /* LeftMenuViewController.m */,
+			);
+			path = "Helper Classes";
+			sourceTree = "<group>";
+		};
+		E430A2031AA7443600CFBFC6 /* Source */ = {
+			isa = PBXGroup;
+			children = (
+				E430A2041AA7443600CFBFC6 /* Animations */,
+				E430A2101AA7443600CFBFC6 /* Assets */,
+				E430A2131AA7443600CFBFC6 /* SlideNavigationController.h */,
+				E430A2141AA7443600CFBFC6 /* SlideNavigationController.m */,
+			);
+			path = Source;
+			sourceTree = "<group>";
+		};
+		E430A2041AA7443600CFBFC6 /* Animations */ = {
+			isa = PBXGroup;
+			children = (
+				E430A2051AA7443600CFBFC6 /* SlideNavigationContorllerAnimator.h */,
+				E430A2061AA7443600CFBFC6 /* SlideNavigationContorllerAnimatorFade.h */,
+				E430A2071AA7443600CFBFC6 /* SlideNavigationContorllerAnimatorFade.m */,
+				E430A2081AA7443600CFBFC6 /* SlideNavigationContorllerAnimatorScale.h */,
+				E430A2091AA7443600CFBFC6 /* SlideNavigationContorllerAnimatorScale.m */,
+				E430A20A1AA7443600CFBFC6 /* SlideNavigationContorllerAnimatorScaleAndFade.h */,
+				E430A20B1AA7443600CFBFC6 /* SlideNavigationContorllerAnimatorScaleAndFade.m */,
+				E430A20C1AA7443600CFBFC6 /* SlideNavigationContorllerAnimatorSlide.h */,
+				E430A20D1AA7443600CFBFC6 /* SlideNavigationContorllerAnimatorSlide.m */,
+				E430A20E1AA7443600CFBFC6 /* SlideNavigationContorllerAnimatorSlideAndFade.h */,
+				E430A20F1AA7443600CFBFC6 /* SlideNavigationContorllerAnimatorSlideAndFade.m */,
+			);
+			path = Animations;
+			sourceTree = "<group>";
+		};
+		E430A2101AA7443600CFBFC6 /* Assets */ = {
+			isa = PBXGroup;
+			children = (
+				E430A2281AA755C600CFBFC6 /* leftMenu.jpg */,
+				E430A2111AA7443600CFBFC6 /* menu-button.png */,
+				E430A2121AA7443600CFBFC6 /* menu-button@2x.png */,
+			);
+			path = Assets;
+			sourceTree = "<group>";
+		};
 		E4F02EE01AA5C5ED00426A88 = {
 			isa = PBXGroup;
 			children = (
@@ -128,7 +296,10 @@
 				E4F02EF61AA5C5ED00426A88 /* Main.storyboard */,
 				E4F02EF91AA5C5ED00426A88 /* Images.xcassets */,
 				E4F02EFB1AA5C5ED00426A88 /* LaunchScreen.xib */,
+				E430A1F51AA7443600CFBFC6 /* SlideMenu */,
+				E430A1C41AA711A100CFBFC6 /* AFNetworking */,
 				E4F02F5B1AA61C2700426A88 /* view */,
+				E430A1E71AA7122400CFBFC6 /* model */,
 				E4F02F121AA5FA3100426A88 /* IQKeyBoardManager */,
 				E4F02EEC1AA5C5ED00426A88 /* Supporting Files */,
 				E4F02F331AA60B7200426A88 /* FindPasswordViewController.h */,
@@ -196,6 +367,9 @@
 		E4F02F591AA6196B00426A88 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				E430A1E51AA711D000CFBFC6 /* SystemConfiguration.framework */,
+				E430A1E31AA711C700CFBFC6 /* MobileCoreServices.framework */,
+				E430A1E11AA711C200CFBFC6 /* Security.framework */,
 			);
 			name = Frameworks;
 			path = gamytTests;
@@ -206,6 +380,8 @@
 			children = (
 				E4F02F5C1AA61C3500426A88 /* MainViewController.h */,
 				E4F02F5D1AA61C3500426A88 /* MainViewController.m */,
+				E4DAB9481AA76EB600C58A8E /* MyNotice.h */,
+				E4DAB9491AA76EB600C58A8E /* MyNotice.m */,
 			);
 			path = view;
 			sourceTree = "<group>";
@@ -292,9 +468,12 @@
 			buildActionMask = 2147483647;
 			files = (
 				E430A1A01AA70C3500CFBFC6 /* LaunchScreen.xib in Resources */,
+				E430A2201AA7443600CFBFC6 /* menu-button.png in Resources */,
 				E4F02EF81AA5C5ED00426A88 /* Main.storyboard in Resources */,
 				E4F02F291AA5FA3100426A88 /* IQKeyboardManager.bundle in Resources */,
 				E4F02EFA1AA5C5ED00426A88 /* Images.xcassets in Resources */,
+				E430A2291AA755C600CFBFC6 /* leftMenu.jpg in Resources */,
+				E430A2211AA7443600CFBFC6 /* menu-button@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -312,20 +491,39 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E430A21B1AA7443600CFBFC6 /* SlideNavigationContorllerAnimatorFade.m in Sources */,
 				E4F02F2F1AA5FA3100426A88 /* NSArray+Sort.m in Sources */,
+				E4DAB94A1AA76EB600C58A8E /* MyNotice.m in Sources */,
 				E4F02F311AA5FA3100426A88 /* UIView+IQKeyboardToolbar.m in Sources */,
 				E4F02F2A1AA5FA3100426A88 /* IQKeyboardManager.m in Sources */,
 				E4F02F351AA60B7200426A88 /* FindPasswordViewController.m in Sources */,
+				E430A1DF1AA711A100CFBFC6 /* AFURLResponseSerialization.m in Sources */,
+				E430A1DD1AA711A100CFBFC6 /* AFURLConnectionOperation.m in Sources */,
 				E4F02F2D1AA5FA3100426A88 /* IQTitleBarButtonItem.m in Sources */,
 				E4F02F2C1AA5FA3100426A88 /* IQTextView.m in Sources */,
+				E430A1D91AA711A100CFBFC6 /* AFHTTPRequestOperationManager.m in Sources */,
+				E430A21C1AA7443600CFBFC6 /* SlideNavigationContorllerAnimatorScale.m in Sources */,
 				E4F02F5E1AA61C3500426A88 /* MainViewController.m in Sources */,
+				E430A21F1AA7443600CFBFC6 /* SlideNavigationContorllerAnimatorSlideAndFade.m in Sources */,
+				E430A1DC1AA711A100CFBFC6 /* AFSecurityPolicy.m in Sources */,
 				E4F02F301AA5FA3100426A88 /* UIView+Hierarchy.m in Sources */,
 				E4F02F2E1AA5FA3100426A88 /* IQToolbar.m in Sources */,
+				E430A1DE1AA711A100CFBFC6 /* AFURLRequestSerialization.m in Sources */,
+				E430A1DB1AA711A100CFBFC6 /* AFNetworkReachabilityManager.m in Sources */,
 				E4F02EF51AA5C5ED00426A88 /* ViewController.m in Sources */,
 				E4F02EF21AA5C5ED00426A88 /* AppDelegate.m in Sources */,
 				E4F02F2B1AA5FA3100426A88 /* IQSegmentedNextPrevious.m in Sources */,
+				E430A1D81AA711A100CFBFC6 /* AFHTTPRequestOperation.m in Sources */,
 				E4F02EEF1AA5C5ED00426A88 /* main.m in Sources */,
+				E430A21D1AA7443600CFBFC6 /* SlideNavigationContorllerAnimatorScaleAndFade.m in Sources */,
+				E430A2221AA7443600CFBFC6 /* SlideNavigationController.m in Sources */,
+				E430A1DA1AA711A100CFBFC6 /* AFHTTPSessionManager.m in Sources */,
+				E430A2171AA7443600CFBFC6 /* LeftMenuViewController.m in Sources */,
 				E4F02F321AA5FA3100426A88 /* UIWindow+Hierarchy.m in Sources */,
+				E430A21E1AA7443600CFBFC6 /* SlideNavigationContorllerAnimatorSlide.m in Sources */,
+				E430A1E01AA711A100CFBFC6 /* AFURLSessionManager.m in Sources */,
+				E430A1EA1AA7126700CFBFC6 /* MobileLoginParam.m in Sources */,
+				E430A2161AA7443600CFBFC6 /* HomeViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -451,7 +649,7 @@
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				GCC_PREFIX_HEADER = gamyt/gamyt.pch;
 				INFOPLIST_FILE = gamyt/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
@@ -465,7 +663,7 @@
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				GCC_PREFIX_HEADER = gamyt/gamyt.pch;
 				INFOPLIST_FILE = gamyt/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};

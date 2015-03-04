@@ -7,7 +7,8 @@
 //
 
 #import "ViewController.h"
-
+#import "MobileLoginParam.h"
+#import "HomeViewController.h"
 
 @interface ViewController ()
 
@@ -48,7 +49,7 @@
     if ([[[UIDevice currentDevice] systemVersion] floatValue] >= 7.0) {
         self.navigationController.navigationBar.tintColor = [UIColor whiteColor];
     }
-    [self.navigationController.navigationBar setTitleTextAttributes:[NSDictionary dictionaryWithObjectsAndKeys:[UIColor whiteColor], UITextAttributeTextColor, nil]];
+    [self.navigationController.navigationBar setTitleTextAttributes:[NSDictionary dictionaryWithObjectsAndKeys:[UIColor whiteColor], NSForegroundColorAttributeName, nil]];
     
 //    [[UITextField appearance] setTintColor:[UIColor whiteColor]];
     
@@ -73,22 +74,87 @@
     // Dispose of any resources that can be recreated.
 }
 
+
+- (NSData *)toJSONData:(id)theData{
+    
+    NSError *error = nil;
+    NSData *jsonData = [NSJSONSerialization dataWithJSONObject:theData
+                                                       options:NSJSONWritingPrettyPrinted
+                                                         error:&error];
+    
+    if ([jsonData length] > 0 && error == nil){
+        return jsonData;
+    }else{
+        return nil;
+    }
+}
+
 - (IBAction)login:(id)sender {
     
     
     
-//    AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
-//    NSDictionary *parameters = @{@"deviceid": @"A000004886292F", @"devicetype" : @"3" ,@"pwd" : @"111111" , @"username" : @"18972590038"};
+    AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
+    NSMutableDictionary *parameters = [NSMutableDictionary dictionary];
+    [parameters setValue:@"A000004886292F" forKey:@"deviceid"];
+    [parameters setValue:@"3" forKey:@"devicetype"];
+    [parameters setValue:@"111111" forKey:@"pwd"];
+    [parameters setValue:@"18972590038" forKey:@"username"];
+    
+    
+    
+    NSData *data = [NSJSONSerialization dataWithJSONObject:parameters options:NSJSONWritingPrettyPrinted error:nil];
+    
+//    NSData *data = [self toJSONData:parameters];
+    
+    
+    
+    NSString *jsonString = [[NSString alloc] initWithData:data
+                                                 encoding:NSUTF8StringEncoding];
+    NSLog(@"%@",jsonString);
+    
+    
+    
+//    MBJSONModel *m = [[MBJSONModel alloc] init];
+//    [m setValuesForKeysWithDictionary:parameters];
+//    NSData * params = [m JSONDataRepresentation];
+
+    
+//    NSString *s = @"{'deviceid':'A000004886292F','devicetype':3,'pwd':'111111','username':'18972590038'}";
+  
 //    manager.requestSerializer = [AFJSONRequestSerializer serializer];
 //    manager.responseSerializer = [AFJSONResponseSerializer serializer];
+    
+    manager.responseSerializer.acceptableContentTypes = [[manager.responseSerializer.acceptableContentTypes setByAddingObject: @"text/plain"] setByAddingObject:@"text/html"];
+    
+    
+//    MobileLoginParam *param = [[MobileLoginParam alloc] init];
+//    param.deviceid = @"A000004886292F";
+//    param.devicetype = 3;
+//    param.pwd = @"111111";
+//    param.username = @"18972590038";
 //    
-////    [manager.requestSerializer setValue:@"application/json" forHTTPHeaderField:@"Accept"];
-//    [manager.requestSerializer setValue:@"application/json; charset=utf-8" forHTTPHeaderField:@"Content-Type"];
 //    
-//    
+//    NSData *other;
+//    other=[NSKeyedArchiver archivedDataWithRootObject:param];
+    
+   
+//    NSData *jsonData = [NSJSONSerialization dataWithJSONObject:parameters options:NSJSONWritingPrettyPrinted error:nil];
+//    NSString *jsonString = [[NSString alloc] initWithData:jsonData encoding:NSUTF8StringEncoding];
+//    NSLog(@"%@",jsonString);
+    
+//    [manager.requestSerializer setValue:@"application/json" forHTTPHeaderField:@"Accept"];
+    [manager.requestSerializer setValue:@"application/json; charset=utf-8" forHTTPHeaderField:@"Content-Type"];
+    
+    
 //    NSLog(@"%@",[self DataTOjsonString:parameters]);
 //    NSString *p = [self DataTOjsonString:parameters];
-//    [manager POST:@"http://ycly.minyitong.cn/yc/mobile/user/login" parameters:parameters success:^(AFHTTPRequestOperation *operation, id responseObject) {
+//    [manager POST:@"http://ycly.minyitong.cn/yc/mobile/user/login" parameters:jsonString success:^(AFHTTPRequestOperation *operation, id responseObject) {
+//        NSLog(@"JSON: %@", responseObject);
+//    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+//        NSLog(@"Error: %@", error);
+//    }];
+    
+//    [manager POST:@"http://115.29.103.36/sma/purchase/purchasedetailallList.do" parameters:@{@"schoolId":@"8671eb9e-c834-41dd-8e37-62c1ac730c65",@"purchaseDate":@"2015-01-22",@"purchaseType":@"2621be22-c1d8-4630-8738-0f441692d011"} success:^(AFHTTPRequestOperation *operation, id responseObject) {
 //        NSLog(@"JSON: %@", responseObject);
 //    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
 //        NSLog(@"Error: %@", error);
@@ -98,20 +164,16 @@
     
 //    UIViewController *next = [[self storyboard] instantiateViewControllerWithIdentifier:@"MainViewController"];
 //    [self.navigationController pushViewController:next animated:YES];
+    
+    [self goToHome];
 }
 
--(NSString*)DataTOjsonString:(id)object
-{
-    NSString *jsonString = nil;
-    NSError *error;
-    NSData *jsonData = [NSJSONSerialization dataWithJSONObject:object
-                                                       options:NSJSONWritingPrettyPrinted // Pass 0 if you don't care about the readability of the generated string
-                                                         error:&error];
-    if (! jsonData) {
-        NSLog(@"Got an error: %@", error);
-    } else {
-        jsonString = [[NSString alloc] initWithData:jsonData encoding:NSUTF8StringEncoding];
-    }
-    return jsonString;
+-(void)goToHome{
+    
+    
+    HomeViewController *home = [[self storyboard]
+                               instantiateViewControllerWithIdentifier: @"HomeViewController"];
+    [self.navigationController pushViewController:home animated:YES];
 }
+
 @end
