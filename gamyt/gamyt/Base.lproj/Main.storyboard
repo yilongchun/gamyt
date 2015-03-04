@@ -337,10 +337,10 @@
             </objects>
             <point key="canvasLocation" x="-690" y="140.25"/>
         </scene>
-        <!--Left Menu View Controller-->
+        <!--左侧菜单-->
         <scene sceneID="pvM-8O-xJr">
             <objects>
-                <viewController storyboardIdentifier="LeftMenuViewController" id="GHm-vf-5EA" customClass="LeftMenuViewController" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="LeftMenuViewController" title="左侧菜单" id="GHm-vf-5EA" customClass="LeftMenuViewController" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="tvJ-HC-19K"/>
                         <viewControllerLayoutGuide type="bottom" id="v7y-3D-ZtE"/>
