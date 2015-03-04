@@ -280,7 +280,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="eZD-kn-eg2" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="562.5" y="1114.5"/>
+            <point key="canvasLocation" x="2040" y="676.5"/>
         </scene>
         <!--下级上报-->
         <scene sceneID="1FQ-If-VOi">
@@ -299,7 +299,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="3HG-Rq-9yS" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1584" y="1151.25"/>
+            <point key="canvasLocation" x="2040" y="38.25"/>
         </scene>
         <!--找回密码-->
         <scene sceneID="6ES-oc-enD">
@@ -319,7 +319,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="reI-s1-FrW" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1584" y="-213"/>
+            <point key="canvasLocation" x="1050" y="-609"/>
         </scene>
         <!--Slide Navigation Controller-->
         <scene sceneID="rIj-pi-8Cr">
@@ -415,7 +415,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="S5T-RE-5Ky" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-690" y="845.25"/>
+            <point key="canvasLocation" x="-174" y="-568.5"/>
         </scene>
         <!--我的上报-->
         <scene sceneID="sO1-hf-Usj">
@@ -434,7 +434,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="2im-Ec-w7a" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1584" y="456.75"/>
+            <point key="canvasLocation" x="2040" y="-609"/>
         </scene>
     </scenes>
     <resources>
