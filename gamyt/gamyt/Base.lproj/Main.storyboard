@@ -259,7 +259,8 @@
                         <segue destination="GWb-MZ-7cD" kind="show" identifier="toview2" id="d8A-ZT-IzF"/>
                         <segue destination="TO7-Y6-3FC" kind="show" identifier="toview3" id="477-IW-PHK"/>
                         <segue destination="OK1-qA-Llf" kind="show" identifier="toview4" id="k5C-bv-47H"/>
-                        <segue destination="r0z-ay-jQI" kind="show" identifier="toview5" id="a2d-oC-1V1"/>
+                        <segue destination="r0z-ay-jQI" kind="show" identifier="toview6" id="a2d-oC-1V1"/>
+                        <segue destination="IU5-W0-Rho" kind="show" identifier="toview5" id="JpC-6D-5cl"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="x5A-6p-PRh" sceneMemberID="firstResponder"/>
@@ -285,6 +286,24 @@
             </objects>
             <point key="canvasLocation" x="2040" y="676.5"/>
         </scene>
+        <!--审阅信息-->
+        <scene sceneID="JpM-5a-By7">
+            <objects>
+                <viewController storyboardIdentifier="CheckInfoViewController" id="IU5-W0-Rho" customClass="CheckInfoViewController" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="qmF-GA-g0h"/>
+                        <viewControllerLayoutGuide type="bottom" id="ZKs-aj-Qsa"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="mRT-nw-CrP">
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                    <navigationItem key="navigationItem" title="审阅信息" id="nPy-Ev-i3V"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="DJ7-rT-gor" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2038.5" y="1971"/>
+        </scene>
         <!--个人设置-->
         <scene sceneID="UTt-LT-wHo">
             <objects>
@@ -302,7 +321,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="1j5-7f-mIU" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2038.5" y="1978.5"/>
+            <point key="canvasLocation" x="2040" y="2617.5"/>
         </scene>
         <!--单位管理-->
         <scene sceneID="tiT-lc-i4f">

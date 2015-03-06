@@ -8,6 +8,9 @@
 
 /* Begin PBXBuildFile section */
 		E412B3C91AA9C95A0015B7C1 /* NSString+HXAddtions.m in Sources */ = {isa = PBXBuildFile; fileRef = E412B3C81AA9C95A0015B7C1 /* NSString+HXAddtions.m */; };
+		E412B40E1AA9F44C0015B7C1 /* Utils.m in Sources */ = {isa = PBXBuildFile; fileRef = E412B40D1AA9F44C0015B7C1 /* Utils.m */; };
+		E412B4111AA9F5910015B7C1 /* CheckInfoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E412B4101AA9F5910015B7C1 /* CheckInfoViewController.m */; };
+		E412B4151AA9F88C0015B7C1 /* UserRole.m in Sources */ = {isa = PBXBuildFile; fileRef = E412B4141AA9F88C0015B7C1 /* UserRole.m */; };
 		E430A1A01AA70C3500CFBFC6 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = E4F02EFB1AA5C5ED00426A88 /* LaunchScreen.xib */; };
 		E430A1E21AA711C200CFBFC6 /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E430A1E11AA711C200CFBFC6 /* Security.framework */; };
 		E430A1E41AA711C700CFBFC6 /* MobileCoreServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E430A1E31AA711C700CFBFC6 /* MobileCoreServices.framework */; };
@@ -70,6 +73,12 @@
 /* Begin PBXFileReference section */
 		E412B3C71AA9C95A0015B7C1 /* NSString+HXAddtions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+HXAddtions.h"; sourceTree = "<group>"; };
 		E412B3C81AA9C95A0015B7C1 /* NSString+HXAddtions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+HXAddtions.m"; sourceTree = "<group>"; };
+		E412B40C1AA9F44C0015B7C1 /* Utils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Utils.h; sourceTree = "<group>"; };
+		E412B40D1AA9F44C0015B7C1 /* Utils.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Utils.m; sourceTree = "<group>"; };
+		E412B40F1AA9F5910015B7C1 /* CheckInfoViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CheckInfoViewController.h; sourceTree = "<group>"; };
+		E412B4101AA9F5910015B7C1 /* CheckInfoViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CheckInfoViewController.m; sourceTree = "<group>"; };
+		E412B4131AA9F88C0015B7C1 /* UserRole.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; lineEnding = 0; name = UserRole.h; path = commons/UserRole.h; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objcpp; };
+		E412B4141AA9F88C0015B7C1 /* UserRole.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; name = UserRole.m; path = commons/UserRole.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
 		E430A1E11AA711C200CFBFC6 /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
 		E430A1E31AA711C700CFBFC6 /* MobileCoreServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MobileCoreServices.framework; path = System/Library/Frameworks/MobileCoreServices.framework; sourceTree = SDKROOT; };
 		E430A1E51AA711D000CFBFC6 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
@@ -184,6 +193,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		E412B4121AA9F8740015B7C1 /* commons */ = {
+			isa = PBXGroup;
+			children = (
+				E412B4131AA9F88C0015B7C1 /* UserRole.h */,
+				E412B4141AA9F88C0015B7C1 /* UserRole.m */,
+			);
+			name = commons;
+			sourceTree = "<group>";
+		};
 		E430A1F51AA7443600CFBFC6 /* SlideMenu */ = {
 			isa = PBXGroup;
 			children = (
@@ -304,11 +322,14 @@
 		E4F02EEB1AA5C5ED00426A88 /* gamyt */ = {
 			isa = PBXGroup;
 			children = (
+				E412B4121AA9F8740015B7C1 /* commons */,
 				E4EC77E81AA8A16F00414B8B /* HMSegmentedControl */,
 				E4F02EF01AA5C5ED00426A88 /* AppDelegate.h */,
 				E4F02EF11AA5C5ED00426A88 /* AppDelegate.m */,
 				E4F02EF31AA5C5ED00426A88 /* ViewController.h */,
 				E4F02EF41AA5C5ED00426A88 /* ViewController.m */,
+				E412B40C1AA9F44C0015B7C1 /* Utils.h */,
+				E412B40D1AA9F44C0015B7C1 /* Utils.m */,
 				E4F02EF61AA5C5ED00426A88 /* Main.storyboard */,
 				E4F02EF91AA5C5ED00426A88 /* Images.xcassets */,
 				E4F02EFB1AA5C5ED00426A88 /* LaunchScreen.xib */,
@@ -403,6 +424,8 @@
 				E4DAB9491AA76EB600C58A8E /* MyNoticeViewController.m */,
 				E4DAB94B1AA772FF00C58A8E /* DwglViewController.h */,
 				E4DAB94C1AA772FF00C58A8E /* DwglViewController.m */,
+				E412B40F1AA9F5910015B7C1 /* CheckInfoViewController.h */,
+				E412B4101AA9F5910015B7C1 /* CheckInfoViewController.m */,
 				E4DAB94E1AA7742F00C58A8E /* SettingViewController.h */,
 				E4DAB94F1AA7742F00C58A8E /* SettingViewController.m */,
 				E4EC780E1AA8AE4C00414B8B /* TestViewController.h */,
@@ -526,6 +549,7 @@
 				E4EC77BB1AA8582300414B8B /* UIResponder+Router.m in Sources */,
 				E4F02F2D1AA5FA3100426A88 /* IQTitleBarButtonItem.m in Sources */,
 				E4F02F2C1AA5FA3100426A88 /* IQTextView.m in Sources */,
+				E412B4151AA9F88C0015B7C1 /* UserRole.m in Sources */,
 				E430A21C1AA7443600CFBFC6 /* SlideNavigationContorllerAnimatorScale.m in Sources */,
 				E4F02F5E1AA61C3500426A88 /* MainViewController.m in Sources */,
 				E430A21F1AA7443600CFBFC6 /* SlideNavigationContorllerAnimatorSlideAndFade.m in Sources */,
@@ -534,6 +558,7 @@
 				E4F02F301AA5FA3100426A88 /* UIView+Hierarchy.m in Sources */,
 				E4F02F2E1AA5FA3100426A88 /* IQToolbar.m in Sources */,
 				E4F02EF51AA5C5ED00426A88 /* ViewController.m in Sources */,
+				E412B40E1AA9F44C0015B7C1 /* Utils.m in Sources */,
 				E4F02EF21AA5C5ED00426A88 /* AppDelegate.m in Sources */,
 				E4F02F2B1AA5FA3100426A88 /* IQSegmentedNextPrevious.m in Sources */,
 				E4EC77AA1AA855BF00414B8B /* MBProgressHUD.m in Sources */,
@@ -550,6 +575,7 @@
 				E430A21E1AA7443600CFBFC6 /* SlideNavigationContorllerAnimatorSlide.m in Sources */,
 				E4EC77BC1AA8582300414B8B /* UIViewController+DismissKeyboard.m in Sources */,
 				E4EC77A91AA855BF00414B8B /* MBProgressHUD+Add.m in Sources */,
+				E412B4111AA9F5910015B7C1 /* CheckInfoViewController.m in Sources */,
 				E4DAB94D1AA772FF00C58A8E /* DwglViewController.m in Sources */,
 				E4DAB9531AA7767300C58A8E /* HomeViewController.m in Sources */,
 			);

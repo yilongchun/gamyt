@@ -12,7 +12,7 @@
 @interface LeftMenuViewController : UIViewController <UITableViewDelegate, UITableViewDataSource>
 
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
-
+@property (nonatomic, strong) NSMutableArray *dataSource;
 @property (nonatomic, assign) BOOL slideOutAnimationEnabled;
 
 @end

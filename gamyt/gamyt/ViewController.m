@@ -76,6 +76,16 @@
     // Dispose of any resources that can be recreated.
 }
 
+-(NSString *) gen_uuid
+{
+    CFUUIDRef uuid_ref=CFUUIDCreate(nil);
+    CFStringRef uuid_string_ref=CFUUIDCreateString(nil, uuid_ref);
+    CFRelease(uuid_ref);
+    NSString *uuid=[NSString stringWithString:(__bridge NSString *)(uuid_string_ref)];
+    CFRelease(uuid_string_ref);
+    return uuid;
+}
+
 - (IBAction)login:(id)sender {
     
     if (self.account.text.length == 0) {
@@ -88,10 +98,9 @@
     }
     
     [self showHudInView:self.view hint:@"加载中"];
-    
     NSMutableDictionary *parameters = [NSMutableDictionary dictionary];
-    [parameters setValue:@"A000004886292F" forKey:@"deviceid"];
-    [parameters setValue:@"3" forKey:@"devicetype"];
+    [parameters setValue:[self gen_uuid] forKey:@"deviceid"];
+    [parameters setValue:@"4" forKey:@"devicetype"];
     [parameters setValue:self.password.text forKey:@"pwd"];
     [parameters setValue:self.account.text forKey:@"username"];
     
@@ -106,9 +115,12 @@
     
 }
 
-
-
 - (void)httpAsynchronousRequest:(NSString *)params{
+    
+    
+    
+    
+    
     NSURL *url = [NSURL URLWithString:@"http://192.168.1.111:8080/myt/mobile/user/login"];
     NSString *post=params;
     NSData *postData = [post dataUsingEncoding:NSUTF8StringEncoding allowLossyConversion:YES];
@@ -127,11 +139,15 @@
                                        [self showHintInCenter:@"连接失败"];
                                        NSLog(@"Httperror:%@%ld", error.localizedDescription,(long)error.code);
                                    }else{
-                                       NSInteger responseCode = [(NSHTTPURLResponse *)response statusCode];
-                                       NSString *responseString = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
+//                                       NSInteger responseCode = [(NSHTTPURLResponse *)response statusCode];
+//                                       NSString *responseString = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
+//                                       
+//                                       
+//                                       
+//                                       responseString = [responseString stringByReplacingOccurrencesOfString:@"<null>" withString:@""];
                                        
                                        NSError *error;
-                                       NSDictionary *resultDict = [NSJSONSerialization JSONObjectWithData:[responseString dataUsingEncoding:NSUTF8StringEncoding] options:kNilOptions error:&error];
+                                       NSDictionary *resultDict = [NSJSONSerialization JSONObjectWithData:data options:kNilOptions error:&error];
                                        if (resultDict == nil) {
                                            NSLog(@"json parse failed \r\n");
                                        }else{
@@ -143,9 +159,16 @@
                                            [self showHintInCenter:@"用户名或密码错误"];
                                        }else if([code intValue] == 0){
                                            [self hideHud];
-                                           NSLog(@"HttpResponseCode:%ld", (long)responseCode);
-                                           NSLog(@"HttpResponseBody %@",responseString);
-                                           [self goToHome];
+                                           
+                                           NSDictionary *data = [resultDict objectForKey:@"data"];
+//                                           NSString *token = [data objectForKey:@"token"];
+                                           NSDictionary *users = [data objectForKey:@"users"];
+                                           NSNumber *type = [users objectForKey:@"type"];
+                                           
+                                           NSUserDefaults *userdefaults = [NSUserDefaults standardUserDefaults];
+                                           [userdefaults setObject:type forKey:@"type"];
+                                           
+                                           [self goToHome:type];
                                        }
                                    }
                                });
@@ -153,10 +176,74 @@
 }
 
 
--(void)goToHome{
-    UIViewController *home = [[self storyboard]
-                               instantiateViewControllerWithIdentifier: @"MainViewController"];
-    [self.navigationController pushViewController:home animated:YES];
+-(void)goToHome:(NSNumber *)type{
+    
+    NSMutableArray *menus = [NSMutableArray array];
+    
+    NSMutableDictionary *menu1 = [NSMutableDictionary dictionary];
+    [menu1 setValue:@"menu_item_myreport_icon" forKey:@"imagename"];
+    [menu1 setValue:@"我的上报" forKey:@"menuname"];
+    [menu1 setValue:@"MainViewController" forKey:@"vcname"];
+    
+    NSMutableDictionary *menu2 = [NSMutableDictionary dictionary];
+    [menu2 setValue:@"menu_item_formyreport_icon1" forKey:@"imagename"];
+    [menu2 setValue:@"下级上报" forKey:@"menuname"];
+    [menu2 setValue:@"HomeViewController" forKey:@"vcname"];
+    
+    NSMutableDictionary *menu3 = [NSMutableDictionary dictionary];
+    [menu3 setValue:@"menu_item_notice_icon" forKey:@"imagename"];
+    [menu3 setValue:@"我的公告" forKey:@"menuname"];
+    [menu3 setValue:@"MyNoticeViewController" forKey:@"vcname"];
+    
+    NSMutableDictionary *menu4 = [NSMutableDictionary dictionary];
+    [menu4 setValue:@"menu_item_unitmanage_icon" forKey:@"imagename"];
+    [menu4 setValue:@"单位管理" forKey:@"menuname"];
+    [menu4 setValue:@"DwglViewController" forKey:@"vcname"];
+    
+    NSMutableDictionary *menu5 = [NSMutableDictionary dictionary];
+    [menu5 setValue:@"menu_item_review_icon" forKey:@"imagename"];
+    [menu5 setValue:@"审阅信息" forKey:@"menuname"];
+    [menu5 setValue:@"CheckInfoViewController" forKey:@"vcname"];
+    
+    NSMutableDictionary *menu6 = [NSMutableDictionary dictionary];
+    [menu6 setValue:@"menu_item_setting_icon" forKey:@"imagename"];
+    [menu6 setValue:@"个人设置" forKey:@"menuname"];
+    [menu6 setValue:@"SettingViewController" forKey:@"vcname"];
+    
+    
+    
+    switch ([type integerValue]) {
+        case 2:
+        case 21:
+        case 22:
+        case 23:
+            //5个菜单
+            [menus addObjectsFromArray:@[menu1,menu2,menu3,menu4,menu6]];
+            break;
+        case 3:
+            //4个菜单
+            [menus addObjectsFromArray:@[menu2,menu3,menu4,menu6]];
+            break;
+        case 0:
+            [menus addObjectsFromArray:@[menu1,menu3,menu6]];
+            break;
+        case 1:
+            [menus addObjectsFromArray:@[menu5,menu3,menu6]];
+            break;
+        default:
+            break;
+    }
+    
+    NSUserDefaults *userdefaults = [NSUserDefaults standardUserDefaults];
+    [userdefaults setObject:menus forKey:@"menus"];
+    
+    NSDictionary *firstmenu = [menus objectAtIndex:0];
+    NSString *vcname = [firstmenu objectForKey:@"vcname"];
+    
+    UIViewController *firstvc = [[self storyboard]
+                               instantiateViewControllerWithIdentifier:vcname];
+    [self.navigationController pushViewController:firstvc animated:YES];
+    [self.navigationController setNavigationBarHidden:NO];
 }
 
 @end

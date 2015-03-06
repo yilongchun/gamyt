@@ -20,14 +20,12 @@
 - (id)initWithCoder:(NSCoder *)aDecoder
 {
 	self.slideOutAnimationEnabled = NO;
-	
 	return [super initWithCoder:aDecoder];
 }
 
 - (void)viewDidLoad
 {
 	[super viewDidLoad];
-	
 //	self.tableView.separatorColor = [UIColor lightGrayColor];
     self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
 	
@@ -35,14 +33,17 @@
 	self.tableView.backgroundView = imageView;
     
     [SlideNavigationController sharedInstance].selectIndex = 0;
-    NSLog(@"leftmenu init");
+    NSUserDefaults *userdefaults = [NSUserDefaults standardUserDefaults];
+    NSArray *menus = [userdefaults objectForKey:@"menus"];
+    self.dataSource = [NSMutableArray arrayWithArray:menus];
+        
 }
 
 #pragma mark - UITableView Delegate & Datasrouce -
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-	return 5;
+	return [self.dataSource count];
 }
 
 - (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section
@@ -66,44 +67,18 @@
 	UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"leftMenuCell"];
     [cell.textLabel setTextColor:[UIColor whiteColor]];
     [cell.textLabel setFont:[UIFont systemFontOfSize:17]];
-    
-    
-//    cell.selectionStyle = UITableViewCellSelectionStyleNone;
     cell.selectedBackgroundView = [[UIView alloc] initWithFrame:cell.frame];
     cell.selectedBackgroundView.backgroundColor = [UIColor colorWithRed:50/255.0 green:60/255.0 blue:90/255.0 alpha:1];
-	switch (indexPath.row)
-	{
-		case 0:
-            cell.imageView.image = [UIImage imageNamed:@"menu_item_myreport_icon"];
-			cell.textLabel.text = @"我的上报";
-			break;
-		case 1:
-            cell.imageView.image = [UIImage imageNamed:@"menu_item_formyreport_icon1"];
-			cell.textLabel.text = @"下级上报";
-			break;
-		case 2:
-            cell.imageView.image = [UIImage imageNamed:@"menu_item_notice_icon"];
-			cell.textLabel.text = @"我的公告";
-			break;
-        case 3:
-            cell.imageView.image = [UIImage imageNamed:@"menu_item_unitmanage_icon"];
-            cell.textLabel.text = @"单位管理";
-            break;
-        case 4:
-            cell.imageView.image = [UIImage imageNamed:@"menu_item_setting_icon"];
-            cell.textLabel.text = @"个人设置";
-            break;
-//		case 5:
-//			cell.textLabel.text = @"退出";
-//			break;
-	}
+    NSDictionary *info = [self.dataSource objectAtIndex:indexPath.row];
+    NSString *imagename = [info objectForKey:@"imagename"];
+    NSString *menuname = [info objectForKey:@"menuname"];
+    cell.imageView.image = [UIImage imageNamed:imagename];
+    cell.textLabel.text = menuname;
     if ([SlideNavigationController sharedInstance].selectIndex == indexPath.row) {
         cell.backgroundColor = [UIColor colorWithRed:50/255.0 green:60/255.0 blue:90/255.0 alpha:1];
     }else{
         cell.backgroundColor = [UIColor clearColor];
     }
-	
-	
 	return cell;
 }
 
@@ -113,41 +88,12 @@
     
     UITableViewCell *cell = [tableView cellForRowAtIndexPath:lastIndexPaht];
     cell.backgroundColor = [UIColor clearColor];
-    
-    
     [SlideNavigationController sharedInstance].selectIndex = indexPath.row;
-    
 	UIStoryboard *mainStoryboard = [self storyboard];
-	
 	UIViewController *vc ;
-    
-	switch (indexPath.row)
-	{
-		case 0:
-			vc = [mainStoryboard instantiateViewControllerWithIdentifier: @"MainViewController"];
-			break;
-		case 1:
-            vc = [mainStoryboard instantiateViewControllerWithIdentifier: @"HomeViewController"];
-			break;
-		case 2:
-			vc = [mainStoryboard instantiateViewControllerWithIdentifier: @"MyNoticeViewController"];
-			break;
-        case 3:
-            vc = [mainStoryboard instantiateViewControllerWithIdentifier: @"DwglViewController"];
-            break;
-        case 4:
-            vc = [mainStoryboard instantiateViewControllerWithIdentifier: @"SettingViewController"];
-            break;
-//		case 3:
-//			[self.tableView deselectRowAtIndexPath:[self.tableView indexPathForSelectedRow] animated:YES];
-//			[[SlideNavigationController sharedInstance] popToRootViewControllerAnimated:YES];
-//			return;
-//			break;
-        default:
-            vc = [mainStoryboard instantiateViewControllerWithIdentifier: @"MainViewController"];
-            break;
-	}
-	
+    NSDictionary *info = [self.dataSource objectAtIndex:indexPath.row];
+    NSString *vcname = [info objectForKey:@"vcname"];
+    vc = [mainStoryboard instantiateViewControllerWithIdentifier: vcname];
 	[[SlideNavigationController sharedInstance] popToRootAndSwitchToViewController:vc
 															 withSlideOutAnimation:self.slideOutAnimationEnabled
 																	 andCompletion:nil];
