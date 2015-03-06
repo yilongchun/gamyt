@@ -1,0 +1,21 @@
+//
+//  MyBase64Function.h
+//  ReportTable
+//
+//  Created by xdrao on 14-3-20.
+//  Copyright (c) 2014年 xdrao. All rights reserved.
+//
+
+#import <Foundation/Foundation.h>
+
+@interface MyBase64Function : NSObject
+
+#pragma mark--加签
++(NSString *)sealMessage:(NSString *)oriMessage;
+#pragma mark--解签
++(NSString *)unsealMessage:(NSString *)resMessage;
+
++ (NSString *)encryptWithText:(NSString *)sText;
++ (NSString *)decryptWithText:(NSString *)sText;
+
+@end

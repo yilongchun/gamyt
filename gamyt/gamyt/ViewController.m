@@ -7,8 +7,9 @@
 //
 
 #import "ViewController.h"
-#import "MobileLoginParam.h"
 #import "HomeViewController.h"
+
+
 
 @interface ViewController ()
 
@@ -53,7 +54,8 @@
     
 //    [[UITextField appearance] setTintColor:[UIColor whiteColor]];
     
-    
+    self.account.text = @"18972590038";
+    self.password.text = @"111111";
 }
 
 - (void)textFieldDidBeginEditing:(UITextField *)textField{
@@ -74,105 +76,86 @@
     // Dispose of any resources that can be recreated.
 }
 
-
-- (NSData *)toJSONData:(id)theData{
-    
-    NSError *error = nil;
-    NSData *jsonData = [NSJSONSerialization dataWithJSONObject:theData
-                                                       options:NSJSONWritingPrettyPrinted
-                                                         error:&error];
-    
-    if ([jsonData length] > 0 && error == nil){
-        return jsonData;
-    }else{
-        return nil;
-    }
-}
-
 - (IBAction)login:(id)sender {
     
+    if (self.account.text.length == 0) {
+        [self showHintInCenter:@"请输入账号"];
+        return;
+    }
+    if (self.password.text.length == 0) {
+        [self showHintInCenter:@"请输入密码"];
+        return;
+    }
     
+    [self showHudInView:self.view hint:@"加载中"];
     
-    AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
     NSMutableDictionary *parameters = [NSMutableDictionary dictionary];
     [parameters setValue:@"A000004886292F" forKey:@"deviceid"];
     [parameters setValue:@"3" forKey:@"devicetype"];
-    [parameters setValue:@"111111" forKey:@"pwd"];
-    [parameters setValue:@"18972590038" forKey:@"username"];
+    [parameters setValue:self.password.text forKey:@"pwd"];
+    [parameters setValue:self.account.text forKey:@"username"];
     
-    
-    
-    NSData *data = [NSJSONSerialization dataWithJSONObject:parameters options:NSJSONWritingPrettyPrinted error:nil];
-    
-//    NSData *data = [self toJSONData:parameters];
-    
-    
-    
-    NSString *jsonString = [[NSString alloc] initWithData:data
-                                                 encoding:NSUTF8StringEncoding];
-    NSLog(@"%@",jsonString);
-    
-    
-    
-//    MBJSONModel *m = [[MBJSONModel alloc] init];
-//    [m setValuesForKeysWithDictionary:parameters];
-//    NSData * params = [m JSONDataRepresentation];
-
-    
-//    NSString *s = @"{'deviceid':'A000004886292F','devicetype':3,'pwd':'111111','username':'18972590038'}";
-  
-//    manager.requestSerializer = [AFJSONRequestSerializer serializer];
-//    manager.responseSerializer = [AFJSONResponseSerializer serializer];
-    
-    manager.responseSerializer.acceptableContentTypes = [[manager.responseSerializer.acceptableContentTypes setByAddingObject: @"text/plain"] setByAddingObject:@"text/html"];
-    
-    
-//    MobileLoginParam *param = [[MobileLoginParam alloc] init];
-//    param.deviceid = @"A000004886292F";
-//    param.devicetype = 3;
-//    param.pwd = @"111111";
-//    param.username = @"18972590038";
-//    
-//    
-//    NSData *other;
-//    other=[NSKeyedArchiver archivedDataWithRootObject:param];
-    
-   
-//    NSData *jsonData = [NSJSONSerialization dataWithJSONObject:parameters options:NSJSONWritingPrettyPrinted error:nil];
-//    NSString *jsonString = [[NSString alloc] initWithData:jsonData encoding:NSUTF8StringEncoding];
-//    NSLog(@"%@",jsonString);
-    
-//    [manager.requestSerializer setValue:@"application/json" forHTTPHeaderField:@"Accept"];
-    [manager.requestSerializer setValue:@"application/json; charset=utf-8" forHTTPHeaderField:@"Content-Type"];
-    
-    
-//    NSLog(@"%@",[self DataTOjsonString:parameters]);
-//    NSString *p = [self DataTOjsonString:parameters];
-//    [manager POST:@"http://ycly.minyitong.cn/yc/mobile/user/login" parameters:jsonString success:^(AFHTTPRequestOperation *operation, id responseObject) {
-//        NSLog(@"JSON: %@", responseObject);
-//    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-//        NSLog(@"Error: %@", error);
-//    }];
-    
-//    [manager POST:@"http://115.29.103.36/sma/purchase/purchasedetailallList.do" parameters:@{@"schoolId":@"8671eb9e-c834-41dd-8e37-62c1ac730c65",@"purchaseDate":@"2015-01-22",@"purchaseType":@"2621be22-c1d8-4630-8738-0f441692d011"} success:^(AFHTTPRequestOperation *operation, id responseObject) {
-//        NSLog(@"JSON: %@", responseObject);
-//    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-//        NSLog(@"Error: %@", error);
-//    }];
-    
-    
+    [self httpAsynchronousRequest:[NSString jsonStringWithDictionary:parameters]];
     
 //    UIViewController *next = [[self storyboard] instantiateViewControllerWithIdentifier:@"MainViewController"];
 //    [self.navigationController pushViewController:next animated:YES];
+//    [self showHint:@"aaa"];
     
-    [self goToHome];
+//    [self showHudInView:self.view hint:@"加载中"];
+//    [self goToHome];
+    
 }
 
+
+
+- (void)httpAsynchronousRequest:(NSString *)params{
+    NSURL *url = [NSURL URLWithString:@"http://192.168.1.111:8080/myt/mobile/user/login"];
+    NSString *post=params;
+    NSData *postData = [post dataUsingEncoding:NSUTF8StringEncoding allowLossyConversion:YES];
+    NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:url];
+    [request setHTTPMethod:@"POST"];
+    [request setHTTPBody:postData];
+    [request setTimeoutInterval:10.0];
+    [request setValue:@"application/json; charset=utf-8" forHTTPHeaderField:@"content-type"];
+    NSOperationQueue *queue = [[NSOperationQueue alloc]init];
+    [NSURLConnection sendAsynchronousRequest:request
+                                       queue:queue
+                           completionHandler:^(NSURLResponse *response, NSData *data, NSError *error){
+                               dispatch_async(dispatch_get_main_queue(), ^{
+                                   if (error) {
+                                       [self hideHud];
+                                       [self showHintInCenter:@"连接失败"];
+                                       NSLog(@"Httperror:%@%ld", error.localizedDescription,(long)error.code);
+                                   }else{
+                                       NSInteger responseCode = [(NSHTTPURLResponse *)response statusCode];
+                                       NSString *responseString = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
+                                       
+                                       NSError *error;
+                                       NSDictionary *resultDict = [NSJSONSerialization JSONObjectWithData:[responseString dataUsingEncoding:NSUTF8StringEncoding] options:kNilOptions error:&error];
+                                       if (resultDict == nil) {
+                                           NSLog(@"json parse failed \r\n");
+                                       }else{
+                                           NSLog(@"%@",resultDict);
+                                       }
+                                       NSNumber *code = [resultDict objectForKey:@"code"];
+                                       if ([code intValue] == 1) {
+                                           [self hideHud];
+                                           [self showHintInCenter:@"用户名或密码错误"];
+                                       }else if([code intValue] == 0){
+                                           [self hideHud];
+                                           NSLog(@"HttpResponseCode:%ld", (long)responseCode);
+                                           NSLog(@"HttpResponseBody %@",responseString);
+                                           [self goToHome];
+                                       }
+                                   }
+                               });
+                           }];
+}
+
+
 -(void)goToHome{
-    
-    
-    HomeViewController *home = [[self storyboard]
-                               instantiateViewControllerWithIdentifier: @"HomeViewController"];
+    UIViewController *home = [[self storyboard]
+                               instantiateViewControllerWithIdentifier: @"MainViewController"];
     [self.navigationController pushViewController:home animated:YES];
 }
 

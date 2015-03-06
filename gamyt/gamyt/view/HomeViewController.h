@@ -8,6 +8,7 @@
 
 #import <UIKit/UIKit.h>
 #import "SlideNavigationController.h"
+#import "HMSegmentedControl.h"
 
 @interface HomeViewController : UIViewController <SlideNavigationControllerDelegate>
 

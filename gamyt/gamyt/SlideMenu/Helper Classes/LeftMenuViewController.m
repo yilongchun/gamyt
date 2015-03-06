@@ -35,6 +35,7 @@
 	self.tableView.backgroundView = imageView;
     
     [SlideNavigationController sharedInstance].selectIndex = 0;
+    NSLog(@"leftmenu init");
 }
 
 #pragma mark - UITableView Delegate & Datasrouce -
@@ -64,7 +65,8 @@
 {
 	UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"leftMenuCell"];
     [cell.textLabel setTextColor:[UIColor whiteColor]];
-    [cell.textLabel setFont:[UIFont boldSystemFontOfSize:18]];
+    [cell.textLabel setFont:[UIFont systemFontOfSize:17]];
+    
     
 //    cell.selectionStyle = UITableViewCellSelectionStyleNone;
     cell.selectedBackgroundView = [[UIView alloc] initWithFrame:cell.frame];
@@ -122,13 +124,11 @@
 	switch (indexPath.row)
 	{
 		case 0:
-			vc = [mainStoryboard instantiateViewControllerWithIdentifier: @"HomeViewController"];
-			break;
-			
-		case 1:
 			vc = [mainStoryboard instantiateViewControllerWithIdentifier: @"MainViewController"];
 			break;
-			
+		case 1:
+            vc = [mainStoryboard instantiateViewControllerWithIdentifier: @"HomeViewController"];
+			break;
 		case 2:
 			vc = [mainStoryboard instantiateViewControllerWithIdentifier: @"MyNoticeViewController"];
 			break;

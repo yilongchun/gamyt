@@ -1,0 +1,123 @@
+//
+//  CommonFun.h
+//  ReportTable
+//
+//  Created by xdrao on 14-3-17.
+//  Copyright (c) 2014年 xdrao. All rights reserved.
+//
+
+#define NUMBERS @"0123456789"
+#define kAlpha1 @"abcdefghijklmnopqrstuvwxyz"
+#define kAlpha @"ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz"
+#define kAlphaNum  @"ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789"
+#define kAlphaNumUnderline  @"ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789_"
+#define kAlphaNumComma  @"ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789,"
+#import <Foundation/Foundation.h>
+
+@interface MyCommonFun : NSObject
+#pragma mark--去首位空格
++(NSString *)deleteBlankFormTextField:(UITextField *)tempTextField;
+
+#pragma mark获得系统时间yyyy-MM-dd
++(NSString *)getCurrentTime;
+#pragma mark获得系统时间yyyyMMdd
++(NSString *)getCurrentTime2;
+#pragma mark--
+#pragma mark--获得系统时间yyyy-MM-dd HH:mm:ss
++(NSString *)getCurrentTime3;
+#pragma mark--加阴影
++(void)addShadowOpacity:(float)opacity forView:(UIView *)addView;
+
+#pragma mark--把字典和数组转换成json字符串
++(NSString *)stringTOjson:(id)temps;
+
+#pragma mark--view截图
++(UIImage *)ScreenshotsImage:(UIView *)tempView;
+
+#pragma mark--随机返回颜色
++(UIColor*)randomColor;
+
+#pragma mark--导航栏的frame
++(CGRect)kNavgationBarFrame;
+#pragma mark--箱运 导航栏的frame
++(CGRect)kMapNavgationBarFrameByWidth:(float)w;
+
+
+#pragma mark-- 计算前一个月的时间
++(NSString *)returnLastMouth:(NSString *)timeString;
+
+
+
+
+#pragma mark--
+#pragma mark--判断服务器返回数据是否为null
++(id)dictionary:(NSMutableDictionary *)tempDic objectForKey:(NSString *)tempKey;
+#pragma mark --根据标题内容的多少确定Size
++(CGSize)calculateSizeW:(CGFloat)w andH:(CGFloat)h andFont:(UIFont*)f ByTitle:(NSString *)title;
+
+
+
+#pragma mark  手机合法验证
++(BOOL) isValidateMobile:(NSString *)mobile;
+#pragma mark  邮箱合法验证
++(BOOL)isValidateEmail:(NSString *)email;
+
+#pragma mark--要有 数字
++(BOOL)onlyNumber:(NSString *)tempString;
+#pragma mark--要有 字母
++(BOOL)onlyAlpha:(NSString *)tempString;
+#pragma mark--只能为 字母和数字
++(BOOL)onlyAlphaNumber:(NSString *)tempString;
+#pragma mark--只能为 字母、数字和下划线
++(BOOL)onlyAlphaNumberUnderline:(NSString *)tempString;
+#pragma mark--只能为 字母、数字 逗号
++(BOOL)onlyAlphaNumberComma:(NSString *)tempString;
+
+
+#pragma mark--#pragma mark--后台返回字段 处理
++(void)dealwithServerCallBackInfoData:(id)infoData;
+//#pragma mark--后台返回字段 处理
+//+(NSString *)dealwithServerCallBackInfo:(NSString *)info;
+
+#pragma mark--
+#pragma mark--请求码表
++(void)requestAll_MB:(MyConnection *)connection showView:(UIView *)tempView tagrt:(id)tagrt;
+
+#pragma mark--
+#pragma mark--MOL船公司更改堆场功能查询堆场列表接口
++(void)requestMOL_depot_MBWithShowView:(UIView *)tempView andDictionary:(NSMutableDictionary *)depotDic;
+
+#pragma mark--截取时间的年月日（"2014-04-23 11:16:28"）
++(NSString *)returnFirstTime:(NSString *)timeString;
+
+
+#pragma mark--弹出提示框
+#pragma mark--渐变 显示 渐变 消失
++(void)showPromptView:(NSString *)title;
+
+#pragma mark--
+#pragma mark--计算一个月多少天
+#pragma mark--如果year =0 默认就是今年，如果有值就是计算year那一年的month天数
++(NSInteger)calculateTotalDaysWithMonth:(NSInteger)month;
+
+
+#pragma mark--
+#pragma mark--计算一个月多少天
+#pragma mark--如果year =0 默认就是今年，如果有值就是计算year那一年的month天数
++(NSInteger)calculateTotalDaysWithMonth:(NSInteger)month andYear:(NSInteger)year;
+#pragma mark--计算 当前时间+addDays 的时间
+#pragma mark--（例：addDays= -1，标识前一天的日期）
++(NSString *)calculateTimeWithCurrentAddDays:(NSInteger)addDays;
+
+
+
+#pragma mark--格式：yyyy-MM-dd
+#pragma mark--计算前一天的时间（相对系统时间）
++(NSString *)calculateLastDayTime;
+#pragma mark--格式：yyyyMMdd
+#pragma mark--计算前一天的时间（相对系统时间）
++(NSString *)calculateLastDayTime2;
+
+#pragma mark --行业资讯 返回给服务器新闻id
++(void)retunServerNewsIDArray:(NSMutableArray *)tempArray andType:(NSString *)mainType;
+@end

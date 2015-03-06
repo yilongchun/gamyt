@@ -1,0 +1,198 @@
+//
+//  MyBase64Function.m
+//  ReportTable
+//
+//  Created by xdrao on 14-3-20.
+//  Copyright (c) 2014年 xdrao. All rights reserved.
+//
+
+#import "MyBase64Function.h"
+#import "GTMBase64.h"
+//引入IOS自带密码库
+#import <CommonCrypto/CommonCryptor.h>
+
+@implementation MyBase64Function
+/*========================GTMBase64===============================*/
+#pragma mark--
+#pragma mark--加签
++(NSString *)sealMessage:(NSString *)oriMessage{
+    NSData *data = [oriMessage dataUsingEncoding:(NSStringEncoding)NSUTF8StringEncoding];
+    NSString *encodedString = [GTMBase64 stringByEncodingData:data];
+    return [[NSString alloc] initWithFormat:@"{\"hashcode\":\"%d\",\"message\":\"%@\"}",[self computeHashCode:encodedString],encodedString];
+}
+#pragma mark--
+#pragma mark--解签
++(NSString *)unsealMessage:(NSString *)resMessage{
+    NSData *resData = [resMessage dataUsingEncoding:NSUTF8StringEncoding];
+    NSDictionary *response = [NSJSONSerialization JSONObjectWithData:resData options:NSJSONReadingMutableContainers error:nil];
+    NSString *message = [response valueForKey:@"message"];
+    NSData *msgData = [GTMBase64 decodeString:message];
+    NSString *decodedString = [[NSString alloc] initWithData:msgData encoding:NSUTF8StringEncoding];
+    return decodedString;
+    
+}
+/**
+ 按照Java中String类的hashCode的计算方法来计算一个字符串的HashCode
+ s[0]*31^(n-1) + s[1]*31^(n-2) + ... + s[n-1]
+ */
++ (int)computeHashCode:(NSString *)inputString {
+    int result = 0;
+    
+    int len = [inputString length];
+    for(int i=0;i<len;i++){
+        result = result + [inputString characterAtIndex:i] * [self myPow:31 y:len-1-i];
+    }
+    return result;
+}
+/**
+ 整型数的乘方函数
+ */
++ (long)myPow:(long)x y:(long)y {
+    long result = 1;
+    for(long i=1;i<=y;i++)
+        result = result * x;
+    return result;
+}
++ (NSString *)encryptWithText:(NSString *)sText
+{
+    return [self crypt:sText operation:kCCEncrypt key:@"MOBILEAP"];
+}
+
++ (NSString *)decryptWithText:(NSString *)sText
+{
+    return [self crypt:sText operation:kCCDecrypt key:@"MOBILEAP"];
+}
+/**
+ DES加密和解密函数
+ */
++ (NSString *)crypt:(NSString *)sourceString operation:(CCOperation)encryptOperation key:(NSString *)key
+{
+    const void *vplainText;
+    size_t plainTextBufferSize;
+    CCCryptorStatus ccStatus;
+    uint8_t *bufferPtr = NULL;
+    size_t bufferPtrSize = 0;
+    size_t movedBytes = 0;
+    
+    if (encryptOperation == kCCDecrypt)
+    {
+        NSData *decryptData = [self fromHexString:sourceString];//[GTMBase64 decodeData:[sText dataUsingEncoding:NSUTF8StringEncoding]];
+        plainTextBufferSize = [decryptData length];
+        vplainText = (const void *)[decryptData bytes];
+        //NSLog(@"待解密的原始数据：%@", decryptData);
+        //NSLog(@"数据长度：%ld", plainTextBufferSize);
+        bufferPtrSize = plainTextBufferSize;
+    }
+    else
+    {
+        NSData* encryptData = [sourceString dataUsingEncoding:NSUTF8StringEncoding];
+        plainTextBufferSize = [encryptData length];
+        vplainText = (const void *)[encryptData bytes];
+        bufferPtrSize = (plainTextBufferSize + kCCBlockSizeDES);
+    }
+    
+    bufferPtr = malloc( bufferPtrSize * sizeof(uint8_t));
+    memset((void *)bufferPtr, 0x0, bufferPtrSize);
+    
+    const void *vkey = (const void *) [key UTF8String];
+    //size_t keyLength = [key lengthOfBytesUsingEncoding:NSUTF8StringEncoding];
+    const void *vinitVec = (const void *) [key UTF8String];
+    
+    ccStatus = CCCrypt(encryptOperation,
+                       kCCAlgorithmDES,
+                       kCCOptionPKCS7Padding,
+                       vkey,
+                       kCCKeySizeDES,
+                       vinitVec,
+                       vplainText,
+                       plainTextBufferSize,
+                       (void *)bufferPtr,
+                       bufferPtrSize,
+                       &movedBytes);
+    //NSLog(@"加解密操作结果：%d", ccStatus);
+    if (ccStatus == kCCBufferTooSmall) {
+        NSLog(@"缓冲区太小");
+    }
+    if (ccStatus == kCCAlignmentError) {
+        NSLog(@"kCCAlignmentError");
+    }
+    if (ccStatus == kCCDecodeError) {
+        NSLog(@"kCCDecodeError");
+    }
+    NSString *result = nil;
+    
+    if (encryptOperation == kCCDecrypt)
+    {
+        //NSLog(@"解密数据长度：%ld",movedBytes);
+        result = [[NSString alloc] initWithData:[NSData dataWithBytes:(const void *)bufferPtr length:(NSUInteger)movedBytes] encoding:NSUTF8StringEncoding];
+    }
+    else
+    {
+        //NSLog(@"加密数据长度：%d",(NSUInteger)movedBytes);
+        NSData *data = [NSData dataWithBytes:(const void *)bufferPtr length:(NSUInteger)movedBytes];
+        //NSLog(@"加密后未进行16进制编码：%@", data);
+        result = [self toHexString:data];//[GTMBase64 stringByEncodingData:data];
+    }
+    
+    return result;
+}
+/**
+ 将二进制数据转换为十六进制的字符串
+ */
++(NSString *)toHexString:(NSData *)data{
+    Byte *bytes = (Byte *)[data bytes];
+    NSString *hexStr=@"";
+    for(int i=0;i<[data length];i++)
+    {
+        NSString *newHexStr = [NSString stringWithFormat:@"%x",bytes[i]&0xff]; ///16进制数
+        if([newHexStr length]==1)
+            hexStr = [NSString stringWithFormat:@"%@0%@",hexStr,newHexStr];
+        else
+            hexStr = [NSString stringWithFormat:@"%@%@",hexStr,newHexStr];
+    }
+    //NSLog(@"bytes 的16进制数为:%@",hexStr);
+    return hexStr;
+}
+
+/**
+ 从十六进制的字符串转换为二进制数据
+ */
++(NSData *)fromHexString:(NSString *)hexString{
+    int j=0;
+    NSInteger buffLength = [hexString length] / 2;
+    Byte bytes[buffLength];
+    for(int i=0;i<[hexString length];i++)
+    {
+        int int_ch;  /// 两位16进制数转化后的10进制数
+        
+        unichar hex_char1 = [hexString characterAtIndex:i]; ////两位16进制数中的第一位(高位*16)
+        int int_ch1;
+        if(hex_char1 >= '0' && hex_char1 <='9')
+            int_ch1 = (hex_char1-48)*16;   //// 0 的Ascll - 48
+        else if(hex_char1 >= 'A' && hex_char1 <='F')
+            int_ch1 = (hex_char1-55)*16; //// A 的Ascll - 65
+        else
+            int_ch1 = (hex_char1-87)*16; //// a 的Ascll - 97
+        i++;
+        
+        int int_ch2 = 0;
+        if(i<[hexString length]){
+            unichar hex_char2 = [hexString characterAtIndex:i]; ///两位16进制数中的第二位(低位)
+            if(hex_char2 >= '0' && hex_char2 <='9')
+                int_ch2 = (hex_char2-48); //// 0 的Ascll - 48
+            else if(hex_char2 >= 'A' && hex_char2 <='F')
+                int_ch2 = hex_char2-55; //// A 的Ascll - 65
+            else
+                int_ch2 = hex_char2-87; //// a 的Ascll - 97
+        }
+        int_ch = int_ch1+int_ch2;
+        //NSLog(@"int_ch=%d, int_ch1=%d, int_ch2=%d",int_ch,int_ch1,int_ch2);
+        bytes[j] = int_ch;  ///将转化后的数放入Byte数组里
+        j++;
+    }
+    NSData *newData = [[NSData alloc] initWithBytes:bytes length:buffLength];
+    //NSLog(@"newData=%@",newData);
+    return newData;
+    
+}
+@end

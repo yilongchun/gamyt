@@ -1,0 +1,15 @@
+//
+//  ParseXML.h
+//  cexamine
+//
+//  Created by clxu on 14-6-3.
+//  Copyright (c) 2014年 倪明. All rights reserved.
+//
+
+#import <Foundation/Foundation.h>
+
+@interface ParseXMLBaseTBXML : NSObject{
+    NSMutableArray      *dataArray;
+}
++(id)xmlToArrays:(NSString*)string;
+@end

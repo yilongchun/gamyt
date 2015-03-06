@@ -1,0 +1,45 @@
+//
+//  SheetRowCell.h
+//  ReportTable
+//
+//  Created by xdrao on 14-3-12.
+//  Copyright (c) 2014年 xdrao. All rights reserved.
+//
+
+#import <UIKit/UIKit.h>
+
+@interface HUDCell: UIView
+{
+    UIImageView *bgImageView;
+    UIImageView *errorBgImageView;
+    UIImageView *errorImageView;
+    UILabel *titleLabel;
+    
+}
+@property(strong, nonatomic) UIActivityIndicatorView *activity;
+@property(strong, nonatomic) NSString *title;
+@property(strong, nonatomic) UIButton *errorButton;
+
+@end
+
+@protocol HUDDelegate;
+
+@interface MyHUD : UIView
+{
+    HUDCell *cell;
+    NSTimer *timer;
+    int isNumber;
+}
+
+@property(strong,nonatomic) NSString *showTitle;
+@property(assign, nonatomic) id<HUDDelegate>delegate;
+-(void)showInView:(UIView *)tempView;
+-(void)removeHud;
+
+@end
+
+
+@protocol HUDDelegate <NSObject>
+@optional
+-(void)clickErrorButton;
+@end

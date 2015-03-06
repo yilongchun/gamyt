@@ -1,0 +1,68 @@
+//
+//  SoapHelper.m
+//  WebServices
+//
+//  Created by xdrao on 14-5-27.
+//  Copyright (c) 2014年 xdrao. All rights reserved.
+//
+
+
+#import "SoapHelper.h"
+#import "UserInfo.h"
+#import "WebServicesConfigure.h"
+@implementation SoapHelper
++(NSString*)defaultSoapMesage{
+    NSString *soapBody=@"<?xml version=\"1.0\" encoding=\"utf-8\"?>\n"
+    "<soap:Envelope xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:soap=\"http://schemas.xmlsoap.org/soap/envelope/\">\n"
+    "<soap:Body>%@</soap:Body></soap:Envelope>";
+    return soapBody;
+}
+
++(NSString*)methodSoapMessage:(NSString*)methodName{
+    NSMutableString *soap=[NSMutableString stringWithFormat:@"<%@ xmlns=\"%@\">",methodName,defaultWebServiceNameSpace];
+    [soap appendString:@"%@"];
+    [soap appendFormat:@"</%@>",methodName];
+    return [NSString stringWithFormat:[self defaultSoapMesage],soap];
+}
+
++(NSString*)nameSpaceSoapMessage:(NSString*)space methodName:(NSString*)methodName{
+    NSMutableString *soap=[NSMutableString stringWithFormat:@"<%@ xmlns=\"%@\">",methodName,space];
+    [soap appendString:@"%@"];
+    [soap appendFormat:@"</%@>",methodName];
+    return [NSString stringWithFormat:[self defaultSoapMesage],soap];
+}
+
++(NSString*)arrayToDefaultSoapMessage:(NSMutableArray*)arr methodName:(NSString*)methodName{
+    if ([arr count]==0||arr==nil) {
+        return [NSString stringWithFormat:[self methodSoapMessage:methodName],@""];
+    }
+   NSDictionary*userNamedic= [NSDictionary dictionaryWithObjectsAndKeys:[UserInfo getUserName],@"username", nil];
+    NSDictionary*passworddic= [NSDictionary dictionaryWithObjectsAndKeys:[UserInfo getUserPassword],@"password", nil];
+    NSDictionary*userInfodic= [NSDictionary dictionaryWithObjectsAndKeys:[UserInfo getUserPassword],@"userInfo", nil];
+    [arr insertObject:userNamedic atIndex:0];
+    [arr insertObject:passworddic atIndex:1];
+    [arr insertObject:userInfodic atIndex:2];
+    NSMutableString *msg=[NSMutableString stringWithFormat:@""];
+    for (NSDictionary *item in arr) {
+        NSString *key=[[item allKeys] objectAtIndex:0];
+        [msg appendFormat:@"<%@>",key];
+        [msg appendString:[item objectForKey:key]];
+        [msg appendFormat:@"</%@>",key];
+    }
+    return [NSString stringWithFormat:[self methodSoapMessage:methodName],msg];
+}
+
++(NSString*)arrayToNameSpaceSoapMessage:(NSString*)space params:(NSArray*)arr methodName:(NSString*)methodName{
+    if ([arr count]==0||arr==nil) {
+        return [NSString stringWithFormat:[self nameSpaceSoapMessage:space methodName:methodName],@""];
+    }
+    NSMutableString *msg=[NSMutableString stringWithFormat:@""];
+    for (NSDictionary *item in arr) {
+        NSString *key=[[item allKeys] objectAtIndex:0];
+        [msg appendFormat:@"<%@>",key];
+        [msg appendString:[item objectForKey:key]];
+        [msg appendFormat:@"</%@>",key];
+    }
+    return [NSString stringWithFormat:[self nameSpaceSoapMessage:space methodName:methodName],msg];
+}
+@end

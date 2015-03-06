@@ -1,0 +1,25 @@
+//
+//  SoapHelper.h
+//  WebServices
+//
+//  Created by xdrao on 14-5-27.
+//  Copyright (c) 2014年 xdrao. All rights reserved.
+//
+
+
+#import <Foundation/Foundation.h>
+#import "WebServicesConfigure.h"
+
+@interface SoapHelper : NSObject
+//默认soap信息
++(NSString*)defaultSoapMesage;
+
+//生成soap信息
++(NSString*)methodSoapMessage:(NSString*)methodName;
++(NSString*)nameSpaceSoapMessage:(NSString*)space methodName:(NSString*)methodName;
+
+//有参数soap生成
++(NSString*)arrayToDefaultSoapMessage:(NSArray*)arr methodName:(NSString*)methodName;
++(NSString*)arrayToNameSpaceSoapMessage:(NSString*)space params:(NSArray*)arr methodName:(NSString*)methodName;
+@end
+

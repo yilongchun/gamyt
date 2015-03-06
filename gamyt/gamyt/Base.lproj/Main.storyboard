@@ -275,6 +275,7 @@
                         <viewControllerLayoutGuide type="bottom" id="6v8-wE-cLt"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="pvk-SG-Bmd">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
@@ -293,6 +294,7 @@
                         <viewControllerLayoutGuide type="bottom" id="LSz-C1-2fj"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="bq4-oX-CMA">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
@@ -311,6 +313,7 @@
                         <viewControllerLayoutGuide type="bottom" id="4cY-Oc-Bp8"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="Gpt-ZC-T6E">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
@@ -320,7 +323,7 @@
             </objects>
             <point key="canvasLocation" x="2038.5" y="1311.75"/>
         </scene>
-        <!--下级上报-->
+        <!--我的上报-->
         <scene sceneID="1FQ-If-VOi">
             <objects>
                 <viewController storyboardIdentifier="MainViewController" id="GWb-MZ-7cD" customClass="MainViewController" sceneMemberID="viewController">
@@ -333,11 +336,90 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
-                    <navigationItem key="navigationItem" title="下级上报" id="xyP-vt-iMP"/>
+                    <navigationItem key="navigationItem" title="我的上报" id="xyP-vt-iMP"/>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="3HG-Rq-9yS" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="2040" y="38.25"/>
+        </scene>
+        <!--Test View Controller-->
+        <scene sceneID="0Im-rB-8kS">
+            <objects>
+                <viewController storyboardIdentifier="TestViewController" id="P0v-Cd-3Wo" customClass="TestViewController" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="3Kp-wJ-anJ"/>
+                        <viewControllerLayoutGuide type="bottom" id="zI3-ec-60K"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="iDi-VT-ecP">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="Swa-iK-Zkx">
+                                <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <prototypes>
+                                    <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="testcell" textLabel="FQr-wv-WF7" style="IBUITableViewCellStyleDefault" id="3aE-rs-xOa">
+                                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="3aE-rs-xOa" id="ycc-ek-ghH">
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="Title" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="FQr-wv-WF7">
+                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                    <variation key="heightClass=regular-widthClass=compact">
+                                                        <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                                                    </variation>
+                                                </label>
+                                            </subviews>
+                                        </tableViewCellContentView>
+                                    </tableViewCell>
+                                </prototypes>
+                                <connections>
+                                    <outlet property="dataSource" destination="P0v-Cd-3Wo" id="ro9-nd-TE3"/>
+                                    <outlet property="delegate" destination="P0v-Cd-3Wo" id="M4D-fx-jBA"/>
+                                </connections>
+                            </tableView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstAttribute="trailing" secondItem="Swa-iK-Zkx" secondAttribute="trailing" id="Npp-3r-SEN"/>
+                            <constraint firstItem="Swa-iK-Zkx" firstAttribute="leading" secondItem="iDi-VT-ecP" secondAttribute="leading" id="ULo-0w-v2x"/>
+                            <constraint firstItem="Swa-iK-Zkx" firstAttribute="top" secondItem="iDi-VT-ecP" secondAttribute="top" id="lhD-y8-40h"/>
+                            <constraint firstItem="zI3-ec-60K" firstAttribute="top" secondItem="Swa-iK-Zkx" secondAttribute="bottom" id="nFC-Vq-FIn"/>
+                        </constraints>
+                        <variation key="default">
+                            <mask key="subviews">
+                                <exclude reference="Swa-iK-Zkx"/>
+                            </mask>
+                            <mask key="constraints">
+                                <exclude reference="nFC-Vq-FIn"/>
+                                <exclude reference="Npp-3r-SEN"/>
+                                <exclude reference="ULo-0w-v2x"/>
+                                <exclude reference="lhD-y8-40h"/>
+                            </mask>
+                        </variation>
+                        <variation key="heightClass=regular-widthClass=compact">
+                            <mask key="subviews">
+                                <include reference="Swa-iK-Zkx"/>
+                            </mask>
+                            <mask key="constraints">
+                                <include reference="nFC-Vq-FIn"/>
+                                <include reference="Npp-3r-SEN"/>
+                                <include reference="ULo-0w-v2x"/>
+                                <include reference="lhD-y8-40h"/>
+                            </mask>
+                        </variation>
+                    </view>
+                    <connections>
+                        <outlet property="tableView" destination="Swa-iK-Zkx" id="PeB-A8-67H"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="GxN-hX-oIu" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2733" y="38.25"/>
         </scene>
         <!--找回密码-->
         <scene sceneID="6ES-oc-enD">
@@ -359,10 +441,10 @@
             </objects>
             <point key="canvasLocation" x="1050" y="-609"/>
         </scene>
-        <!--Slide Navigation Controller-->
+        <!--导航-->
         <scene sceneID="rIj-pi-8Cr">
             <objects>
-                <navigationController id="ZfB-8W-SDF" customClass="SlideNavigationController" sceneMemberID="viewController">
+                <navigationController title="导航" id="ZfB-8W-SDF" customClass="SlideNavigationController" sceneMemberID="viewController">
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="Spa-gr-kdk">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
@@ -428,10 +510,10 @@
                                 <exclude reference="WEj-p7-1Fa"/>
                             </mask>
                             <mask key="constraints">
+                                <exclude reference="G06-38-CO4"/>
                                 <exclude reference="17L-36-9v0"/>
                                 <exclude reference="P10-GA-ibw"/>
                                 <exclude reference="pIk-oX-vTE"/>
-                                <exclude reference="G06-38-CO4"/>
                             </mask>
                         </variation>
                         <variation key="heightClass=regular-widthClass=compact">
@@ -439,10 +521,10 @@
                                 <include reference="WEj-p7-1Fa"/>
                             </mask>
                             <mask key="constraints">
+                                <include reference="G06-38-CO4"/>
                                 <include reference="17L-36-9v0"/>
                                 <include reference="P10-GA-ibw"/>
                                 <include reference="pIk-oX-vTE"/>
-                                <include reference="G06-38-CO4"/>
                             </mask>
                         </variation>
                     </view>
@@ -455,7 +537,7 @@
             </objects>
             <point key="canvasLocation" x="-174" y="-568.5"/>
         </scene>
-        <!--我的上报-->
+        <!--下级上报-->
         <scene sceneID="sO1-hf-Usj">
             <objects>
                 <viewController storyboardIdentifier="HomeViewController" id="ych-Lx-xSH" customClass="HomeViewController" sceneMemberID="viewController">
@@ -468,7 +550,7 @@
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                     </view>
-                    <navigationItem key="navigationItem" title="我的上报" id="wgr-bw-xnJ"/>
+                    <navigationItem key="navigationItem" title="下级上报" id="wgr-bw-xnJ"/>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="2im-Ec-w7a" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>

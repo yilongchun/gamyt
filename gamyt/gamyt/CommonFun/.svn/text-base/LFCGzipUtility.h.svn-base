@@ -1,0 +1,18 @@
+//
+//  LFCGzipUtility.h
+//  WebServices
+//
+//  Created by xdrao on 14-5-28.
+//  Copyright (c) 2014年 xdrao. All rights reserved.
+//
+
+#import <Foundation/Foundation.h>
+#import "zlib.h"
+@interface LFCGzipUtility : NSObject
+{
+    
+}
+
++(NSData*) gzipData:(NSData*)pUncompressedData;
++(NSData*) ungzipData:(NSData *)compressedData;
+@end

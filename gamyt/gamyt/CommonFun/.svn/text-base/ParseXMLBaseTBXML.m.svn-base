@@ -1,0 +1,91 @@
+//
+//  ParseXML.m
+//  cexamine
+//
+//  Created by clxu on 14-6-3.
+//  Copyright (c) 2014年 倪明. All rights reserved.
+//
+
+#import "ParseXMLBaseTBXML.h"
+#import "TBXML.h"
+
+@implementation ParseXMLBaseTBXML
++(NSString*)mapStatus:(NSString*)name value:(NSString*)value{
+    if ([@"STATUS" isEqualToString:name]) {
+
+    if ([@"01" isEqualToString:value]) {
+        return @"放行";
+    }else if([@"02" isEqualToString:value]){
+        return @"法检确认";
+    }else if([@"03" isEqualToString:value]){
+        return @"交单";
+    }else if([@"05" isEqualToString:value]){
+        return @"查验B";
+    }else if([@"06" isEqualToString:value]){
+        return @"退货";
+    }else if([@"07" isEqualToString:value]){
+        return @"销毁";
+    }else if([@"08" isEqualToString:value]){
+        return @"查验C";
+    }else if([@"09" isEqualToString:value]){
+        return @"待缴费";
+    }else if([@"10" isEqualToString:value]){
+        return @"查验A";
+    }else if([@"11" isEqualToString:value]){
+        return @"重新申报";
+    }else if([@"13" isEqualToString:value]){
+        return @"缴费核销";
+    }else if([@"#12" isEqualToString:value]){
+        return @"信息中";
+    }else if([@"99" isEqualToString:value]){
+        return @"箱放行";
+    }else if([@"100" isEqualToString:value]){
+        return @"保存未发送";
+    }else if([@"101" isEqualToString:value]){
+        return @"已发送";
+    }else if([@"102" isEqualToString:value]){
+        return @"待申报";
+    }else {
+        return value;
+    }
+    }else{
+        return value;
+    }
+}
+
++(id)xmlToArrays:(NSString*)string{
+    NSMutableArray *m_dict = [NSMutableArray array];
+    if ([@"" isEqualToString:string]) {
+        return m_dict;
+    }
+
+    TBXML *XML = [TBXML tbxmlWithXMLString:string];
+    TBXMLElement *root = XML.rootXMLElement;
+    
+    TBXMLElement *elementSet = [TBXML childElementNamed:@"Set" parentElement:root];
+    while (elementSet) {
+        TBXMLElement *elementField = [TBXML childElementNamed:@"Field" parentElement:elementSet];
+        NSMutableDictionary * mutableDictionary = [NSMutableDictionary dictionaryWithCapacity:2];
+        while (elementField) {
+            TBXMLElement *elementname = [TBXML childElementNamed:@"name" parentElement:elementField];
+            NSString* name=[TBXML textForElement:elementname];
+            NSLog(@"name=%@",name);
+            TBXMLElement *elementvalue = [TBXML childElementNamed:@"value" parentElement:elementField];
+            NSString* value=[TBXML textForElement:elementvalue];
+            NSLog(@"value=%@",value);
+            [mutableDictionary setObject:[self mapStatus:name value:value] forKey:name];
+            
+            elementField = [TBXML nextSiblingNamed:@"Field" searchFromElement:elementField];
+        }
+        [m_dict addObject:mutableDictionary];
+        elementSet = [TBXML nextSiblingNamed:@"Set" searchFromElement:elementSet];
+    }
+    
+    for (NSString *s in m_dict) {
+        NSLog(@"%@",s);
+    }
+    return m_dict;
+}
+
+
+@end

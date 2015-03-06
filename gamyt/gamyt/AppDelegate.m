@@ -36,6 +36,7 @@
                                                                  instantiateViewControllerWithIdentifier: @"LeftMenuViewController"];
     [SlideNavigationController sharedInstance].leftMenu = leftMenu;
     [SlideNavigationController sharedInstance].menuRevealAnimationDuration = .18;
+    [SlideNavigationController sharedInstance].enableSwipeGesture = NO;
     [SlideNavigationController sharedInstance].portraitSlideOffset = [UIScreen mainScreen].bounds.size.width-200;
     [[NSNotificationCenter defaultCenter] addObserverForName:SlideNavigationControllerDidClose object:nil queue:nil usingBlock:^(NSNotification *note) {
         NSString *menu = note.userInfo[@"menu"];

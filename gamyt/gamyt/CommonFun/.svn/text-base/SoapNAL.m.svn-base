@@ -1,0 +1,78 @@
+//
+//  SoapNAL.m
+//  WebServices
+//
+//  Created by xdrao on 14-5-27.
+//  Copyright (c) 2014年 xdrao. All rights reserved.
+//
+
+#import "SoapNAL.h"
+
+static SoapNAL *instance;
+
+@implementation SoapNAL
+
++(SoapNAL *)shareInstance{
+    if (instance==nil) {
+        instance=[[self alloc] init];
+    }
+    return instance;
+}
+
+-(void)parserSoapXML:(NSMutableData *)soapData
+     macthingElement:(NSString *)macthElement
+     withParserBlock:(SoapNALBlock)block{
+    
+    self.soapBlock = block;
+    xmlMacthElement = macthElement;
+    xmlParser = [[NSXMLParser alloc] initWithData:soapData];
+    xmlParser.delegate=self;
+    [xmlParser parse];
+}
+
+#pragma mark -
+#pragma mark XML Parser Delegate Methods
+
+// 开始解析一个元素名
+-(void)parser:(NSXMLParser *)parser didStartElement:(NSString *)elementName namespaceURI:(NSString *) namespaceURI qualifiedName:(NSString *)qName attributes:(NSDictionary *)attributeDict {
+    if ([elementName isEqualToString:xmlMacthElement]) {
+        if (!_soapResults) {
+            _soapResults = [[NSMutableString alloc] init];
+        }
+        elementFound = YES;
+    }
+}
+
+// 追加找到的元素值，一个元素值可能要分几次追加
+-(void)parser:(NSXMLParser *) parser foundCharacters:(NSString *)string {
+    if (elementFound) {
+        [_soapResults appendString: string];
+    }
+}
+
+// 结束解析这个元素名
+-(void)parser:(NSXMLParser *)parser didEndElement:(NSString *)elementName namespaceURI:(NSString *)namespaceURI qualifiedName:(NSString *)qName {
+    if ([elementName isEqualToString:xmlMacthElement]) {
+        self.soapBlock(_soapResults);
+        
+        elementFound = FALSE;
+        // 强制放弃解析
+        [xmlParser abortParsing];
+    }
+}
+
+// 解析结束后
+- (void)parserDidEndDocument:(NSXMLParser *)parser {
+    if (_soapResults) {
+        _soapResults = nil;
+    }
+}
+
+// 出错时，例如强制结束解析
+- (void) parser:(NSXMLParser *)parser parseErrorOccurred:(NSError *)parseError {
+    if (_soapResults) {
+        _soapResults = nil;
+    }
+}
+
+@end
