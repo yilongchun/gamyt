@@ -8,109 +8,107 @@
 
 #import <Foundation/Foundation.h>
 
+#define USERID @"uid"
+#define TOKEN @"tk"
 
+#define GENERAL 0 // 普通会员
+#define TASTER 1 // 审阅会员
 
+/**管理员*/
+#define MANAGER 2 // 管理员
 
+/** 超级管理员 */
+#define SMANAGER 3// 超级管理员
+
+/** 县级管理员 */
+#define COUNTY_MANAGER 21// 县级管理员
+
+/** 市级管理员 */
+#define CITY_MANAGER 22// 市级管理员
+
+/** 省级管理员 */
+#define SHENG_MANAGER 23// 省级管理员
+
+// /一个单位审阅员与管理员的人数上限
+#define TMX 10// 审阅人数上限
+#define MMX 1// 管理员人数上限
+
+// /用户是否锁定
+#define UNLOCK 0// 未锁
+#define LOCK 1// 已锁
+
+// /单位是否锁定
+#define NOTE_UNLOCK 0// 未锁
+#define NOTE_LOCK 1// 已锁
+
+#define REPORTTYPE_IN 0// 发送给我
+#define REPORTTYPE_TO 1// 我发送给别人
+
+// /上报信息处理状态
+#define OPTTYPE_ALL 111// 全部
+#define OPTTYPE_TREATED 100// 已处理
+#define OPTTYPE_UNTREATED -1// 未处理
+#define OPTTYPE_READ 0// 签阅
+#define OPTTYPE_SAVE 1// 归档
+#define OPTTYPE_ALLOT 2// 分发
+#define OPTTYPE_REPORT 3// 上报
+
+/**上报省级*/
+#define OPTTYPE_REPORT_SHENG 31
+
+/**上报市局*/
+#define OPTTYPE_REPORT_CITY  3
+
+/**上报县局*/
+#define OPTTYPE_REPORT_COUNTY 33
+
+#define OPTTYPE_TOREAD 4// 转审阅
+
+/**省级录用*/
+#define OPTTYPE_HIRE_SHENG 7//
+
+/**市级录用*/
+#define OPTTYPE_HIRE_CITY 5// 市级录用
+
+/**县级录用*/
+#define OPTTYPE_HIRE_COUNTY 6//
+
+// /群是否锁定
+#define GROUP_UNLOCK 0// 未锁
+#define GROUP_LOCK 1// 已锁
+// /群角色
+#define GROUP_MEMBER 1// 群成员
+#define GROUP_MANAGER 2// 群管理员
+
+// /添加群的审核状态
+#define AUDIT_WAIT 0// 等待审核
+#define AUDIT_PASS 1// 审核通过
+#define AUDIT_NOPASS 2// 审核不通过
+
+// /群消息的状态
+#define GROUPNEWS_DISPLAY 0// 群消息隐藏
+#define GROUPNEWS_SHOW 1// 群消息显示
+
+// 群人员的存在状态
+#define GROUPPEOPLE_NROMAL 0// 未封号
+#define GROUPPEOPLE_FROBIDEN 1// 已封号
+
+/** 超级管理员的节点id -1*/
+#define SMANAGER_NODE_ID -1
+
+// / 下级节点根结点的did
+#define DOWN_ROOT_NODE_ID -2
+
+// 积分类型
+/** 新增信息 */
+#define ADD_NEWS 1
+
+/** 县级录用信息 */
+#define COUNTY_HIRE_NEWS 2
+
+/** 市级录用信息 */
+#define CITY_HIRE_NEWS 3
 
 @interface UserRole : NSObject
-    // /用户身份
-//extern   const int GENERAL; // 普通会员
-// extern   const int TASTER; // 审阅会员
-//    
-//    /**管理员*/
-// extern   const int MANAGER; // 管理员
-//    
-//    /** 超级管理员 */
-// extern   const int SMANAGER; // 超级管理员
-//    
-//    /** 县级管理员 */
-//    extern const int COUNTY_MANAGER; // 县级管理员
-//    
-//    /** 市级管理员 */
-//    extern const int CITY_MANAGER; // 市级管理员
-//    
-//    /** 省级管理员 */
-//    extern const int SHENG_MANAGER; // 省级管理员
-//    
-//    // /一个单位审阅员与管理员的人数上限
-//    extern const int TMX; // 审阅人数上限
-//    extern const int MMX; // 管理员人数上限
-//    
-//    // /用户是否锁定
-//    extern const int UNLOCK; // 未锁
-//    extern const int LOCK; // 已锁
-//    
-//    // /单位是否锁定
-//    extern const int NOTE_UNLOCK; // 未锁
-//    extern const int NOTE_LOCK; // 已锁
-//    
-//    extern const int REPORTTYPE_IN; // 发送给我
-//    extern const int REPORTTYPE_TO; // 我发送给别人
-//    
-//    // /上报信息处理状态
-//    extern const int OPTTYPE_ALL; // 全部
-//    extern const int OPTTYPE_TREATED; // 已处理
-//    extern const int OPTTYPE_UNTREATED; // 未处理
-//    extern const int OPTTYPE_READ; // 签阅
-//    extern const int OPTTYPE_SAVE; // 归档
-//    extern const int OPTTYPE_ALLOT; // 分发
-//    extern const int OPTTYPE_REPORT; // 上报
-//    
-//    /**上报省级*/
-//    extern const int OPTTYPE_REPORT_SHENG ;
-//    
-//    /**上报市局*/
-//    extern const int OPTTYPE_REPORT_CITY ;
-//    
-//    /**上报县局*/
-//    extern const int OPTTYPE_REPORT_COUNTY;
-//    
-//    extern const int OPTTYPE_TOREAD;// 转审阅
-//    
-//    /**省级录用*/
-//    extern const int OPTTYPE_HIRE_SHENG;//
-//    
-//    /**市级录用*/
-//    extern const int OPTTYPE_HIRE_CITY;// 市级录用
-//    
-//    /**县级录用*/
-//    extern const int OPTTYPE_HIRE_COUNTY;//
-//    
-//    // /群是否锁定
-//    extern const int GROUP_UNLOCK; // 未锁
-//    extern const int GROUP_LOCK; // 已锁
-//    // /群角色
-//    extern const int GROUP_MEMBER;// 群成员
-//    extern const int GROUP_MANAGER;// 群管理员
-//    
-//    // /添加群的审核状态
-//    extern const int AUDIT_WAIT;// 等待审核
-//    extern const int AUDIT_PASS;// 审核通过
-//    extern const int AUDIT_NOPASS;// 审核不通过
-//    
-//    // /群消息的状态
-//    extern const int GROUPNEWS_DISPLAY;// 群消息隐藏
-//    extern const int GROUPNEWS_SHOW;// 群消息显示
-//    
-//    // 群人员的存在状态
-//    extern const int GROUPPEOPLE_NROMAL;// 未封号
-//    extern const int GROUPPEOPLE_FROBIDEN;// 已封号
-//    
-//    /** 超级管理员的节点id = -1*/
-//    extern const int SMANAGER_NODE_ID;
-//    
-//    // / 下级节点根结点的did
-//    extern const int DOWN_ROOT_NODE_ID;
-//    
-//    // 积分类型
-//    /** 新增信息 */
-//    extern const int ADD_NEWS;
-//    
-//    /** 县级录用信息 */
-//    extern const int COUNTY_HIRE_NEWS;
-//    
-//    /** 市级录用信息 */
-//    extern const int CITY_HIRE_NEWS;
-
 
 @end

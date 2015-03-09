@@ -12,8 +12,23 @@
 
 @implementation Utils
 
++ (NSNumber *)getUserId{
+    NSUserDefaults *ud = [NSUserDefaults standardUserDefaults];
+    NSNumber *userid = [ud objectForKey:@"userid"];
+    return userid;
+}
+
++ (NSString *)getToken{
+    NSUserDefaults *ud = [NSUserDefaults standardUserDefaults];
+    NSString *token = [ud objectForKey:@"token"];
+    return token;
+}
+
 + (NSString *)getHostname{
-    return @"http://192.168.1.111:8080/myt";
+    NSString *plistPath = [[NSBundle mainBundle] pathForResource:@"Info" ofType:@"plist"];
+    NSMutableDictionary *infolist = [[NSMutableDictionary alloc] initWithContentsOfFile:plistPath];
+    NSString *hostname = [infolist objectForKey:@"httpurl"];
+    return hostname;
 }
 
 //+ (NSString *)getImageHostname{

@@ -8,8 +8,9 @@
 
 #import <UIKit/UIKit.h>
 
-@interface TestViewController : UIViewController<UITableViewDelegate, UITableViewDataSource>
+@interface InfoViewController : UIViewController<UITableViewDelegate, UITableViewDataSource>
 
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
+@property (nonatomic, strong) NSMutableArray *dataSource;
 
 @end

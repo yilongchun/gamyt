@@ -35,10 +35,10 @@
     }
     
     UIViewController *test = [[self storyboard]
-                                instantiateViewControllerWithIdentifier: @"TestViewController"];
+                                instantiateViewControllerWithIdentifier: @"InfoViewController"];
     [test.view setFrame:CGRectMake(0, 50+yDelta+44, 320, self.view.frame.size.height-50-44-yDelta)];
     UIViewController *test2 = [[self storyboard]
-                              instantiateViewControllerWithIdentifier: @"TestViewController"];
+                              instantiateViewControllerWithIdentifier: @"InfoViewController"];
     [test2.view setFrame:CGRectMake(0, 50+yDelta+44, 320, self.view.frame.size.height-50-44-yDelta)];
     
     

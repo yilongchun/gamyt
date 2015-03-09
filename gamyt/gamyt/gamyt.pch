@@ -17,7 +17,6 @@
 
 #import "Utils.h"
 #import "UserRole.h"
-
 //#import <Foundation/Foundation.h>
 
 #import <SystemConfiguration/SystemConfiguration.h>
@@ -25,6 +24,9 @@
 
 #import "UIViewController+HUD.h"
 #import "NSString+HXAddtions.h"
+
+
+#define KNOTIFICATION_LOGINCHANGE @"loginStateChange"
 
 
 
@@ -37,7 +39,7 @@
 #endif
 
 //判断是否是IOS7 系统
-#define IOS7 [[[UIDevice currentDevice]systemVersion] floatValue] >= 7.0
+#define IOS7 [[[UIDevice currentDevice]systemVersion] floatValue] >7.0
 
 /************
  *

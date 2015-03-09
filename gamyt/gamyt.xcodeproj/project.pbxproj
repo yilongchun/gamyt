@@ -39,7 +39,8 @@
 		E4EC77BD1AA8582300414B8B /* UIViewController+HUD.m in Sources */ = {isa = PBXBuildFile; fileRef = E4EC77B71AA8582300414B8B /* UIViewController+HUD.m */; };
 		E4EC77EB1AA8A16F00414B8B /* HMSegmentedControl.m in Sources */ = {isa = PBXBuildFile; fileRef = E4EC77EA1AA8A16F00414B8B /* HMSegmentedControl.m */; };
 		E4EC77ED1AA8A33C00414B8B /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E4EC77EC1AA8A33C00414B8B /* QuartzCore.framework */; };
-		E4EC78101AA8AE4C00414B8B /* TestViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E4EC780F1AA8AE4C00414B8B /* TestViewController.m */; };
+		E4EC78101AA8AE4C00414B8B /* InfoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E4EC780F1AA8AE4C00414B8B /* InfoViewController.m */; };
+		E4ECC4921AADC16F00DADC94 /* InfoTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = E4ECC4911AADC16F00DADC94 /* InfoTableViewCell.m */; };
 		E4F02EEF1AA5C5ED00426A88 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = E4F02EEE1AA5C5ED00426A88 /* main.m */; };
 		E4F02EF21AA5C5ED00426A88 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = E4F02EF11AA5C5ED00426A88 /* AppDelegate.m */; };
 		E4F02EF51AA5C5ED00426A88 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E4F02EF41AA5C5ED00426A88 /* ViewController.m */; };
@@ -127,11 +128,13 @@
 		E4EC77E91AA8A16F00414B8B /* HMSegmentedControl.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HMSegmentedControl.h; sourceTree = "<group>"; };
 		E4EC77EA1AA8A16F00414B8B /* HMSegmentedControl.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HMSegmentedControl.m; sourceTree = "<group>"; };
 		E4EC77EC1AA8A33C00414B8B /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
-		E4EC780E1AA8AE4C00414B8B /* TestViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TestViewController.h; sourceTree = "<group>"; };
-		E4EC780F1AA8AE4C00414B8B /* TestViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TestViewController.m; sourceTree = "<group>"; };
+		E4EC780E1AA8AE4C00414B8B /* InfoViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = InfoViewController.h; sourceTree = "<group>"; };
+		E4EC780F1AA8AE4C00414B8B /* InfoViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = InfoViewController.m; sourceTree = "<group>"; };
+		E4ECC4901AADC16F00DADC94 /* InfoTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = InfoTableViewCell.h; sourceTree = "<group>"; };
+		E4ECC4911AADC16F00DADC94 /* InfoTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = InfoTableViewCell.m; sourceTree = "<group>"; };
 		E4F02EE91AA5C5ED00426A88 /* gamyt.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = gamyt.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		E4F02EED1AA5C5ED00426A88 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		E4F02EEE1AA5C5ED00426A88 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		E4F02EEE1AA5C5ED00426A88 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = main.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
 		E4F02EF01AA5C5ED00426A88 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		E4F02EF11AA5C5ED00426A88 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
 		E4F02EF31AA5C5ED00426A88 /* ViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
@@ -168,7 +171,7 @@
 		E4F02F341AA60B7200426A88 /* FindPasswordViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FindPasswordViewController.m; sourceTree = "<group>"; };
 		E4F02F5C1AA61C3500426A88 /* MainViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MainViewController.h; sourceTree = "<group>"; };
 		E4F02F5D1AA61C3500426A88 /* MainViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MainViewController.m; sourceTree = "<group>"; };
-		E4F02F5F1AA621F700426A88 /* gamyt.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = gamyt.pch; sourceTree = "<group>"; };
+		E4F02F5F1AA621F700426A88 /* gamyt.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; lineEnding = 0; path = gamyt.pch; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -428,8 +431,10 @@
 				E412B4101AA9F5910015B7C1 /* CheckInfoViewController.m */,
 				E4DAB94E1AA7742F00C58A8E /* SettingViewController.h */,
 				E4DAB94F1AA7742F00C58A8E /* SettingViewController.m */,
-				E4EC780E1AA8AE4C00414B8B /* TestViewController.h */,
-				E4EC780F1AA8AE4C00414B8B /* TestViewController.m */,
+				E4EC780E1AA8AE4C00414B8B /* InfoViewController.h */,
+				E4EC780F1AA8AE4C00414B8B /* InfoViewController.m */,
+				E4ECC4901AADC16F00DADC94 /* InfoTableViewCell.h */,
+				E4ECC4911AADC16F00DADC94 /* InfoTableViewCell.m */,
 			);
 			path = view;
 			sourceTree = "<group>";
@@ -562,12 +567,13 @@
 				E4F02EF21AA5C5ED00426A88 /* AppDelegate.m in Sources */,
 				E4F02F2B1AA5FA3100426A88 /* IQSegmentedNextPrevious.m in Sources */,
 				E4EC77AA1AA855BF00414B8B /* MBProgressHUD.m in Sources */,
-				E4EC78101AA8AE4C00414B8B /* TestViewController.m in Sources */,
+				E4EC78101AA8AE4C00414B8B /* InfoViewController.m in Sources */,
 				E4F02EEF1AA5C5ED00426A88 /* main.m in Sources */,
 				E4EC77B91AA8582300414B8B /* NSDateFormatter+Category.m in Sources */,
 				E4DAB9501AA7742F00C58A8E /* SettingViewController.m in Sources */,
 				E4EC77EB1AA8A16F00414B8B /* HMSegmentedControl.m in Sources */,
 				E430A21D1AA7443600CFBFC6 /* SlideNavigationContorllerAnimatorScaleAndFade.m in Sources */,
+				E4ECC4921AADC16F00DADC94 /* InfoTableViewCell.m in Sources */,
 				E430A2221AA7443600CFBFC6 /* SlideNavigationController.m in Sources */,
 				E4EC77B81AA8582300414B8B /* NSDate+Category.m in Sources */,
 				E430A2171AA7443600CFBFC6 /* LeftMenuViewController.m in Sources */,

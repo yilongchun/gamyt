@@ -12,6 +12,10 @@
 
 @interface Utils : NSObject
 
++ (NSNumber *)getUserId;
+
++ (NSString *)getToken;
+
 + (NSString *)getHostname;
 //
 //+ (NSString *)getImageHostname;

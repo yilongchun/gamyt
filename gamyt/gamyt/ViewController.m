@@ -21,6 +21,11 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view, typically from a nib.
     
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(loginStateChange:)
+                                                 name:KNOTIFICATION_LOGINCHANGE
+                                               object:nil];
+    
     UIView *leftview = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 30, 50)];
     UIImageView *usernameImg = [[UIImageView alloc] initWithFrame:CGRectMake(5, 15, 20, 20)];
     [usernameImg setImage:[UIImage imageNamed:@"login_username_icon.png"]];
@@ -86,6 +91,7 @@
     return uuid;
 }
 
+//登录
 - (IBAction)login:(id)sender {
     
     if (self.account.text.length == 0) {
@@ -105,23 +111,11 @@
     [parameters setValue:self.account.text forKey:@"username"];
     
     [self httpAsynchronousRequest:[NSString jsonStringWithDictionary:parameters]];
-    
-//    UIViewController *next = [[self storyboard] instantiateViewControllerWithIdentifier:@"MainViewController"];
-//    [self.navigationController pushViewController:next animated:YES];
-//    [self showHint:@"aaa"];
-    
-//    [self showHudInView:self.view hint:@"加载中"];
-//    [self goToHome];
-    
 }
 
 - (void)httpAsynchronousRequest:(NSString *)params{
-    
-    
-    
-    
-    
-    NSURL *url = [NSURL URLWithString:@"http://192.168.1.111:8080/myt/mobile/user/login"];
+    NSString *urlstring = [NSString stringWithFormat:@"%@%@",[Utils getHostname],@"/mobile/user/login"];
+    NSURL *url = [NSURL URLWithString:urlstring];
     NSString *post=params;
     NSData *postData = [post dataUsingEncoding:NSUTF8StringEncoding allowLossyConversion:YES];
     NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:url];
@@ -161,12 +155,15 @@
                                            [self hideHud];
                                            
                                            NSDictionary *data = [resultDict objectForKey:@"data"];
-//                                           NSString *token = [data objectForKey:@"token"];
+                                           NSString *token = [data objectForKey:@"token"];
                                            NSDictionary *users = [data objectForKey:@"users"];
+                                           NSNumber *userid = [users objectForKey:@"id"];
                                            NSNumber *type = [users objectForKey:@"type"];
                                            
                                            NSUserDefaults *userdefaults = [NSUserDefaults standardUserDefaults];
                                            [userdefaults setObject:type forKey:@"type"];
+                                           [userdefaults setValue:token forKey:@"token"];
+                                           [userdefaults setValue:userid forKey:@"userid"];
                                            
                                            [self goToHome:type];
                                        }
@@ -176,6 +173,7 @@
 }
 
 
+//进入第一个菜单，同时控制左侧菜单
 -(void)goToHome:(NSNumber *)type{
     
     NSMutableArray *menus = [NSMutableArray array];
@@ -210,24 +208,22 @@
     [menu6 setValue:@"个人设置" forKey:@"menuname"];
     [menu6 setValue:@"SettingViewController" forKey:@"vcname"];
     
-    
-    
     switch ([type integerValue]) {
-        case 2:
-        case 21:
-        case 22:
-        case 23:
-            //5个菜单
+        case MANAGER:
+        case COUNTY_MANAGER:
+        case CITY_MANAGER:
+        case SHENG_MANAGER:
+            //5个菜单 省 市 县 管理员
             [menus addObjectsFromArray:@[menu1,menu2,menu3,menu4,menu6]];
             break;
-        case 3:
-            //4个菜单
+        case SMANAGER:
+            //4个菜单 超级管理员
             [menus addObjectsFromArray:@[menu2,menu3,menu4,menu6]];
             break;
-        case 0:
+        case GENERAL://普通会员
             [menus addObjectsFromArray:@[menu1,menu3,menu6]];
             break;
-        case 1:
+        case TASTER://审阅会员
             [menus addObjectsFromArray:@[menu5,menu3,menu6]];
             break;
         default:
@@ -236,14 +232,23 @@
     
     NSUserDefaults *userdefaults = [NSUserDefaults standardUserDefaults];
     [userdefaults setObject:menus forKey:@"menus"];
-    
     NSDictionary *firstmenu = [menus objectAtIndex:0];
     NSString *vcname = [firstmenu objectForKey:@"vcname"];
-    
     UIViewController *firstvc = [[self storyboard]
                                instantiateViewControllerWithIdentifier:vcname];
     [self.navigationController pushViewController:firstvc animated:YES];
     [self.navigationController setNavigationBarHidden:NO];
+}
+
+-(void)loginStateChange:(NSNotification *)notification{
+    UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"用户状态出现错误,可能原因如下:" message:@"1.登录状态过期.\n2.账号用其他手机登陆." preferredStyle:UIAlertControllerStyleAlert];
+    [alert addAction:[UIAlertAction actionWithTitle:@"确定"
+                                              style:UIAlertActionStyleDestructive
+                                            handler:^(UIAlertAction *action) {
+                                                [[SlideNavigationController sharedInstance] popToRootViewControllerAnimated:YES];
+                                            }]];
+    [self presentViewController:alert animated:YES completion:nil];
+
 }
 
 @end
