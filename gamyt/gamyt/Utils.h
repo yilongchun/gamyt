@@ -17,10 +17,5 @@
 + (NSString *)getToken;
 
 + (NSString *)getHostname;
-//
-//+ (NSString *)getImageHostname;
-//
-//+ (NSString *)getVideoHostname;
-//
-//+ (BOOL) isBlankString:(NSString *)string;
+
 @end

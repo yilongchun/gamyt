@@ -32,11 +32,21 @@
 	UIImageView *imageView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"leftMenu.jpg"]];
 	self.tableView.backgroundView = imageView;
     
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(loadData)
+                                                 name:@"reloadLeftMenu"
+                                               object:nil];
+    
+    [self loadData];
+        
+}
+
+-(void)loadData{
     [SlideNavigationController sharedInstance].selectIndex = 0;
     NSUserDefaults *userdefaults = [NSUserDefaults standardUserDefaults];
     NSArray *menus = [userdefaults objectForKey:@"menus"];
     self.dataSource = [NSMutableArray arrayWithArray:menus];
-        
+    [self.tableView reloadData];
 }
 
 #pragma mark - UITableView Delegate & Datasrouce -

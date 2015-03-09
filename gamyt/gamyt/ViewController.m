@@ -238,6 +238,8 @@
                                instantiateViewControllerWithIdentifier:vcname];
     [self.navigationController pushViewController:firstvc animated:YES];
     [self.navigationController setNavigationBarHidden:NO];
+    
+    [[NSNotificationCenter defaultCenter] postNotificationName:@"reloadLeftMenu" object:nil];
 }
 
 -(void)loginStateChange:(NSNotification *)notification{
