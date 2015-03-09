@@ -7,19 +7,239 @@
 //
 
 #import "MainViewController.h"
+#import "MyReportTableViewCell.h"
 
-@interface MainViewController ()
-
-@end
-
-@implementation MainViewController
+@implementation MainViewController{
+    NSNumber *count;
+    NSNumber *totalpage;
+    NSNumber *page;
+}
 
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     
-    [self.navigationController setNavigationBarHidden:NO];
+    [self showHudInView:self.view hint:@"加载中"];
+    
+    _tableView.pullDelegate = self;
+    _tableView.canPullDown = YES;
+    _tableView.canPullUp = YES;
+    [self loadData];
 }
+
+-(void)loadData{
+    page = [NSNumber numberWithInt:0];
+    NSMutableDictionary *parameters = [NSMutableDictionary dictionary];
+    [parameters setObject:[NSString stringWithFormat:@"%d",PAGE_COUNT] forKey:@"count"];
+    [parameters setObject:[NSString stringWithFormat:@"%d",[page intValue]] forKey:@"page"];
+    NSString *urlstring = [NSString stringWithFormat:@"%@%@",[Utils getHostname],@"/mobile/report/getMyReport"];
+    NSURL *url = [NSURL URLWithString:urlstring];
+    NSString *post=[NSString jsonStringWithDictionary:parameters];
+    NSData *postData = [post dataUsingEncoding:NSUTF8StringEncoding allowLossyConversion:YES];
+    NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:url];
+    [request setHTTPMethod:@"POST"];
+    [request setHTTPBody:postData];
+    [request setTimeoutInterval:10.0];
+    [request setValue:@"application/json; charset=utf-8" forHTTPHeaderField:@"content-type"];
+    NSNumberFormatter* numberFormatter = [[NSNumberFormatter alloc] init];
+    [request setValue:[numberFormatter stringFromNumber:[Utils getUserId]] forHTTPHeaderField:USERID];
+    [request setValue:[Utils getToken] forHTTPHeaderField:TOKEN];
+    NSOperationQueue *queue = [[NSOperationQueue alloc]init];
+    [NSURLConnection sendAsynchronousRequest:request
+                                       queue:queue
+                           completionHandler:^(NSURLResponse *response, NSData *data, NSError *error){
+                               dispatch_async(dispatch_get_main_queue(), ^{
+                                   if (error) {
+                                       [self hideHud];
+                                       [self showHintInCenter:@"连接失败"];
+                                       NSLog(@"Httperror:%@%ld", error.localizedDescription,(long)error.code);
+                                   }else{
+                                       NSError *error;
+                                       NSDictionary *resultDict = [NSJSONSerialization JSONObjectWithData:data options:kNilOptions error:&error];
+                                       if (resultDict == nil) {
+                                           NSLog(@"json parse failed \r\n");
+                                       }else{
+                                           NSLog(@"%@",resultDict);
+                                       }
+                                       NSNumber *code = [resultDict objectForKey:@"code"];
+                                       if ([code intValue] == 1) {
+                                           [self hideHud];
+                                           [self showHintInCenter:@"加载失败"];
+                                       }else if([code intValue] == 4){
+                                           [self hideHud];
+                                           [[NSNotificationCenter defaultCenter] postNotificationName:KNOTIFICATION_LOGINCHANGE object:nil];
+                                       }else if([code intValue] == 0){
+                                           [self hideHud];
+                                           count = [resultDict objectForKey:@"count"];
+                                           NSArray *data = [resultDict objectForKey:@"data"];
+                                           self.dataSource = [NSMutableArray arrayWithArray:data];
+                                           [self.tableView reloadData];
+                                           [self.tableView stopLoadWithState:PullDownLoadState];
+                                       }
+                                   }
+                               });
+                           }];
+}
+
+-(void)loadMore{
+    NSMutableDictionary *parameters = [NSMutableDictionary dictionary];
+    [parameters setObject:[NSString stringWithFormat:@"%d",PAGE_COUNT] forKey:@"count"];
+    [parameters setObject:[NSString stringWithFormat:@"%d",[page intValue]] forKey:@"page"];
+    NSString *urlstring = [NSString stringWithFormat:@"%@%@",[Utils getHostname],@"/mobile/report/getMyReport"];
+    NSURL *url = [NSURL URLWithString:urlstring];
+    NSString *post=[NSString jsonStringWithDictionary:parameters];
+    NSData *postData = [post dataUsingEncoding:NSUTF8StringEncoding allowLossyConversion:YES];
+    NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:url];
+    [request setHTTPMethod:@"POST"];
+    [request setHTTPBody:postData];
+    [request setTimeoutInterval:10.0];
+    [request setValue:@"application/json; charset=utf-8" forHTTPHeaderField:@"content-type"];
+    NSNumberFormatter* numberFormatter = [[NSNumberFormatter alloc] init];
+    [request setValue:[numberFormatter stringFromNumber:[Utils getUserId]] forHTTPHeaderField:USERID];
+    [request setValue:[Utils getToken] forHTTPHeaderField:TOKEN];
+    NSOperationQueue *queue = [[NSOperationQueue alloc]init];
+    [NSURLConnection sendAsynchronousRequest:request
+                                       queue:queue
+                           completionHandler:^(NSURLResponse *response, NSData *data, NSError *error){
+                               dispatch_async(dispatch_get_main_queue(), ^{
+                                   if (error) {
+                                       [self hideHud];
+                                       [self showHintInCenter:@"连接失败"];
+                                       NSLog(@"Httperror:%@%ld", error.localizedDescription,(long)error.code);
+                                   }else{
+                                       NSError *error;
+                                       NSDictionary *resultDict = [NSJSONSerialization JSONObjectWithData:data options:kNilOptions error:&error];
+                                       if (resultDict == nil) {
+                                           NSLog(@"json parse failed \r\n");
+                                       }else{
+                                           NSLog(@"%@",resultDict);
+                                       }
+                                       NSNumber *code = [resultDict objectForKey:@"code"];
+                                       if ([code intValue] == 1) {
+                                           [self hideHud];
+                                           [self showHintInCenter:@"加载失败"];
+                                       }else if([code intValue] == 4){
+                                           [self hideHud];
+                                           [[NSNotificationCenter defaultCenter] postNotificationName:KNOTIFICATION_LOGINCHANGE object:nil];
+                                       }else if([code intValue] == 0){
+                                           [self hideHud];
+                                           count = [resultDict objectForKey:@"count"];
+                                           NSArray *data = [resultDict objectForKey:@"data"];
+                                           [self.dataSource addObjectsFromArray:data];
+                                           [self.tableView reloadData];
+                                           int pagemax = [page intValue] + PAGE_COUNT;
+                                           if (pagemax >= [count intValue]) {
+                                               self.tableView.canPullUp = NO;
+                                           }
+                                           [self.tableView stopLoadWithState:PullUpLoadState];
+                                           
+                                       }
+                                   }
+                               });
+                           }];
+}
+
+
+#pragma mark - UITableView Delegate & Datasrouce -
+
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
+{
+    return [self.dataSource count];
+}
+
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
+    return 64;
+}
+
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    MyReportTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"myreportcell"];
+    
+    //设置layer
+    CALayer *layer=[cell.background layer];
+    //是否设置边框以及是否可见
+    [layer setMasksToBounds:YES];
+    //设置边框线的宽
+    [layer setBorderWidth:1];
+    //设置边框线的颜色
+    [layer setBorderColor:[[UIColor colorWithRed:200/255.0 green:200/255.0 blue:200/255.0 alpha:1] CGColor]];
+    
+    
+    NSDictionary *info = [self.dataSource objectAtIndex:indexPath.row];
+    NSString *addtime = [info objectForKey:@"addtime"];
+    NSNumber *opttype = [info objectForKey:@"opttype"];
+    NSString *receivername =[info objectForKey:@"receivername"];
+    
+    
+    if ([opttype intValue] == -1) {
+        cell.opttypename.textColor = [UIColor colorWithRed:56/255.0 green:143/255.0 blue:219/255.0 alpha:1];
+    }else{
+        cell.opttypename.textColor = [UIColor colorWithRed:102/255.0 green:102/255.0 blue:102/255.0 alpha:1];
+    }
+    NSString *opttypename;
+    switch ([opttype intValue]) {
+        case -1:
+            opttypename = @"未处理";
+            break;
+        case 0:
+            opttypename = @"已签阅";
+            break;
+        case 1:
+            opttypename = @"已归档";
+            break;
+        case 2:
+            opttypename = @"已分发";
+            break;
+        case 3:
+            opttypename = @"已上报";
+            break;
+        case 4:
+            opttypename = @"转审阅";
+            break;
+        case 5:
+        case 6:
+            opttypename = @"已录用";
+            break;
+        default:
+            break;
+    }
+    
+    cell.sendname.text = receivername;
+    cell.addtime.text = addtime;
+    cell.opttypename.text = opttypename;
+    cell.selectionStyle = UITableViewCellSelectionStyleNone;
+    return cell;
+}
+
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
+    [tableView deselectRowAtIndexPath:indexPath animated:YES];
+}
+
+#pragma mark -
+#pragma mark UIScrollView PullDelegate
+
+- (void)scrollView:(UIScrollView*)scrollView loadWithState:(LoadState)state {
+    if (state == PullDownLoadState) {
+        [self performSelector:@selector(PullDownLoadEnd) withObject:nil afterDelay:1];
+    }
+    else {
+        [self performSelector:@selector(PullUpLoadEnd) withObject:nil afterDelay:1];
+    }
+}
+//下拉刷新
+- (void)PullDownLoadEnd {
+    [self loadData];
+    _tableView.canPullUp = YES;
+    NSLog(@"PullDownLoadEnd");
+}
+
+- (void)PullUpLoadEnd {
+    page = [NSNumber numberWithInt:[page intValue] + PAGE_COUNT];
+    
+    [self loadMore];
+    NSLog(@"PullUpLoadEnd");
+}
+
 
 #pragma mark - SlideNavigationController Methods -
 

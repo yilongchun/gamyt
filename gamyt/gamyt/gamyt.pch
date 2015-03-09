@@ -17,14 +17,10 @@
 
 #import "Utils.h"
 #import "UserRole.h"
-//#import <Foundation/Foundation.h>
-
 #import <SystemConfiguration/SystemConfiguration.h>
 #import <MobileCoreServices/MobileCoreServices.h>
-
 #import "UIViewController+HUD.h"
 #import "NSString+HXAddtions.h"
-
 
 #define KNOTIFICATION_LOGINCHANGE @"loginStateChange"
 

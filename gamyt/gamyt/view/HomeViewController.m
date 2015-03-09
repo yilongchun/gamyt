@@ -36,15 +36,15 @@
     
     UIViewController *test = [[self storyboard]
                                 instantiateViewControllerWithIdentifier: @"InfoViewController"];
-    [test.view setFrame:CGRectMake(0, 50+yDelta+44, 320, self.view.frame.size.height-50-44-yDelta)];
+    [test.view setFrame:CGRectMake(0, 50+yDelta+44, [UIScreen mainScreen].bounds.size.width, self.view.frame.size.height-50-44-yDelta)];
     UIViewController *test2 = [[self storyboard]
                               instantiateViewControllerWithIdentifier: @"InfoViewController"];
-    [test2.view setFrame:CGRectMake(0, 50+yDelta+44, 320, self.view.frame.size.height-50-44-yDelta)];
+    [test2.view setFrame:CGRectMake(0, 50+yDelta+44, [UIScreen mainScreen].bounds.size.width, self.view.frame.size.height-50-44-yDelta)];
     
     
     // Segmented control with more customization and indexChangeBlock
     self.segmentedControl3 = [[HMSegmentedControl alloc] initWithSectionTitles:@[@"全部", @"未处理", @"已归档", @"已上报", @"已录用"]];
-    [self.segmentedControl3 setFrame:CGRectMake(0, 44 + yDelta, 320, 50)];
+    [self.segmentedControl3 setFrame:CGRectMake(0, 44 + yDelta, [UIScreen mainScreen].bounds.size.width, 50)];
     
     __weak typeof(self) weakSelf = self;
     [self.segmentedControl3 setIndexChangeBlock:^(NSInteger index) {

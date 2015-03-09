@@ -41,6 +41,8 @@
 		E4EC77ED1AA8A33C00414B8B /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E4EC77EC1AA8A33C00414B8B /* QuartzCore.framework */; };
 		E4EC78101AA8AE4C00414B8B /* InfoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E4EC780F1AA8AE4C00414B8B /* InfoViewController.m */; };
 		E4ECC4921AADC16F00DADC94 /* InfoTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = E4ECC4911AADC16F00DADC94 /* InfoTableViewCell.m */; };
+		E4ECC4B71AADDC7100DADC94 /* UIScrollView+PullLoad.m in Sources */ = {isa = PBXBuildFile; fileRef = E4ECC4B61AADDC7100DADC94 /* UIScrollView+PullLoad.m */; };
+		E4ECC4BA1AADEBF500DADC94 /* MyReportTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = E4ECC4B91AADEBF500DADC94 /* MyReportTableViewCell.m */; };
 		E4F02EEF1AA5C5ED00426A88 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = E4F02EEE1AA5C5ED00426A88 /* main.m */; };
 		E4F02EF21AA5C5ED00426A88 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = E4F02EF11AA5C5ED00426A88 /* AppDelegate.m */; };
 		E4F02EF51AA5C5ED00426A88 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E4F02EF41AA5C5ED00426A88 /* ViewController.m */; };
@@ -132,6 +134,10 @@
 		E4EC780F1AA8AE4C00414B8B /* InfoViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = InfoViewController.m; sourceTree = "<group>"; };
 		E4ECC4901AADC16F00DADC94 /* InfoTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = InfoTableViewCell.h; sourceTree = "<group>"; };
 		E4ECC4911AADC16F00DADC94 /* InfoTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = InfoTableViewCell.m; sourceTree = "<group>"; };
+		E4ECC4B51AADDC7100DADC94 /* UIScrollView+PullLoad.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIScrollView+PullLoad.h"; sourceTree = "<group>"; };
+		E4ECC4B61AADDC7100DADC94 /* UIScrollView+PullLoad.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIScrollView+PullLoad.m"; sourceTree = "<group>"; };
+		E4ECC4B81AADEBF500DADC94 /* MyReportTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyReportTableViewCell.h; sourceTree = "<group>"; };
+		E4ECC4B91AADEBF500DADC94 /* MyReportTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyReportTableViewCell.m; sourceTree = "<group>"; };
 		E4F02EE91AA5C5ED00426A88 /* gamyt.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = gamyt.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		E4F02EED1AA5C5ED00426A88 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		E4F02EEE1AA5C5ED00426A88 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = main.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
@@ -276,6 +282,8 @@
 		E4EC77AB1AA8582300414B8B /* Category */ = {
 			isa = PBXGroup;
 			children = (
+				E4ECC4B51AADDC7100DADC94 /* UIScrollView+PullLoad.h */,
+				E4ECC4B61AADDC7100DADC94 /* UIScrollView+PullLoad.m */,
 				E4EC77AC1AA8582300414B8B /* NSDate+Category.h */,
 				E4EC77AD1AA8582300414B8B /* NSDate+Category.m */,
 				E4EC77AE1AA8582300414B8B /* NSDateFormatter+Category.h */,
@@ -325,7 +333,6 @@
 		E4F02EEB1AA5C5ED00426A88 /* gamyt */ = {
 			isa = PBXGroup;
 			children = (
-				E412B4121AA9F8740015B7C1 /* commons */,
 				E4EC77E81AA8A16F00414B8B /* HMSegmentedControl */,
 				E4F02EF01AA5C5ED00426A88 /* AppDelegate.h */,
 				E4F02EF11AA5C5ED00426A88 /* AppDelegate.m */,
@@ -336,10 +343,11 @@
 				E4F02EF61AA5C5ED00426A88 /* Main.storyboard */,
 				E4F02EF91AA5C5ED00426A88 /* Images.xcassets */,
 				E4F02EFB1AA5C5ED00426A88 /* LaunchScreen.xib */,
+				E4F02F5B1AA61C2700426A88 /* view */,
+				E412B4121AA9F8740015B7C1 /* commons */,
 				E430A1F51AA7443600CFBFC6 /* SlideMenu */,
 				E4EC77AB1AA8582300414B8B /* Category */,
 				E4EC77A41AA855BF00414B8B /* MBProgressHUD */,
-				E4F02F5B1AA61C2700426A88 /* view */,
 				E4F02F121AA5FA3100426A88 /* IQKeyBoardManager */,
 				E4F02EEC1AA5C5ED00426A88 /* Supporting Files */,
 				E4F02F331AA60B7200426A88 /* FindPasswordViewController.h */,
@@ -421,6 +429,8 @@
 			children = (
 				E4F02F5C1AA61C3500426A88 /* MainViewController.h */,
 				E4F02F5D1AA61C3500426A88 /* MainViewController.m */,
+				E4ECC4B81AADEBF500DADC94 /* MyReportTableViewCell.h */,
+				E4ECC4B91AADEBF500DADC94 /* MyReportTableViewCell.m */,
 				E4DAB9511AA7767300C58A8E /* HomeViewController.h */,
 				E4DAB9521AA7767300C58A8E /* HomeViewController.m */,
 				E4DAB9481AA76EB600C58A8E /* MyNoticeViewController.h */,
@@ -548,8 +558,10 @@
 				E4F02F2F1AA5FA3100426A88 /* NSArray+Sort.m in Sources */,
 				E412B3C91AA9C95A0015B7C1 /* NSString+HXAddtions.m in Sources */,
 				E4DAB94A1AA76EB600C58A8E /* MyNoticeViewController.m in Sources */,
+				E4ECC4B71AADDC7100DADC94 /* UIScrollView+PullLoad.m in Sources */,
 				E4F02F311AA5FA3100426A88 /* UIView+IQKeyboardToolbar.m in Sources */,
 				E4F02F2A1AA5FA3100426A88 /* IQKeyboardManager.m in Sources */,
+				E4ECC4BA1AADEBF500DADC94 /* MyReportTableViewCell.m in Sources */,
 				E4F02F351AA60B7200426A88 /* FindPasswordViewController.m in Sources */,
 				E4EC77BB1AA8582300414B8B /* UIResponder+Router.m in Sources */,
 				E4F02F2D1AA5FA3100426A88 /* IQTitleBarButtonItem.m in Sources */,

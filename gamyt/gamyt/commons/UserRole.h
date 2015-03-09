@@ -10,6 +10,7 @@
 
 #define USERID @"uid"
 #define TOKEN @"tk"
+#define PAGE_COUNT 10
 
 #define GENERAL 0 // 普通会员
 #define TASTER 1 // 审阅会员

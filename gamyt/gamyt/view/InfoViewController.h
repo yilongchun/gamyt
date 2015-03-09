@@ -7,8 +7,9 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "UIScrollView+PullLoad.h"
 
-@interface InfoViewController : UIViewController<UITableViewDelegate, UITableViewDataSource>
+@interface InfoViewController : UIViewController<UITableViewDelegate,UITableViewDataSource,PullDelegate>
 
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
 @property (nonatomic, strong) NSMutableArray *dataSource;
