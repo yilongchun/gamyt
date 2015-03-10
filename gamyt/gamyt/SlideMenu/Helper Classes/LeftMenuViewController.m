@@ -12,6 +12,8 @@
 #import "SlideNavigationContorllerAnimatorScale.h"
 #import "SlideNavigationContorllerAnimatorScaleAndFade.h"
 #import "SlideNavigationContorllerAnimatorSlideAndFade.h"
+#import "HomeViewController.h"
+#import "InfoViewController.h"
 
 @implementation LeftMenuViewController
 
@@ -104,9 +106,44 @@
     NSDictionary *info = [self.dataSource objectAtIndex:indexPath.row];
     NSString *vcname = [info objectForKey:@"vcname"];
     vc = [mainStoryboard instantiateViewControllerWithIdentifier: vcname];
-	[[SlideNavigationController sharedInstance] popToRootAndSwitchToViewController:vc
-															 withSlideOutAnimation:self.slideOutAnimationEnabled
-																	 andCompletion:nil];
+    
+    if ([vcname isEqualToString:@"HomeViewController"]) {
+        InfoViewController *info1 = [[self storyboard] instantiateViewControllerWithIdentifier: @"InfoViewController"];
+        info1.title = @"全部";
+        
+        InfoViewController *info2 = [[self storyboard] instantiateViewControllerWithIdentifier: @"InfoViewController"];
+        info2.title = @"未处理";
+        info2.opttype = @"-1";
+        
+        InfoViewController *info3 = [[self storyboard] instantiateViewControllerWithIdentifier: @"InfoViewController"];
+        info3.title = @"已归档";
+        info3.opttype = @"1";
+        
+        InfoViewController *info4 = [[self storyboard] instantiateViewControllerWithIdentifier: @"InfoViewController"];
+        info4.title = @"已上报";
+        info4.opttype = @"3";
+        
+        InfoViewController *info5 = [[self storyboard] instantiateViewControllerWithIdentifier: @"InfoViewController"];
+        info5.title = @"已录用";
+        info5.opttype = @"5";
+        
+        HomeViewController *vc2 = [[HomeViewController alloc] initWithViewControllers:@[info1,info2,info3,info4,info5]];
+        vc2.title = @"下级上报";
+        vc2.indicatorInsets = UIEdgeInsetsMake(0, 0, 8, 0);
+        vc2.indicator.backgroundColor = [UIColor colorWithRed:72/255.0 green:147/255.0 blue:219/255.0 alpha:1];
+        [[SlideNavigationController sharedInstance] popToRootAndSwitchToViewController:vc2
+                                                                 withSlideOutAnimation:self.slideOutAnimationEnabled
+                                                                         andCompletion:nil];
+    }else{
+        [[SlideNavigationController sharedInstance] popToRootAndSwitchToViewController:vc
+                                                                 withSlideOutAnimation:self.slideOutAnimationEnabled
+                                                                         andCompletion:nil];
+    }
+    
+    
+    
+    
+	
 }
 
 @end

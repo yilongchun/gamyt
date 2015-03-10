@@ -13,13 +13,15 @@
     NSNumber *count;
     NSNumber *totalpage;
     NSNumber *page;
+    
+    NSString *tempTitle;
 }
 
 - (void)viewDidLoad
 {
     [super viewDidLoad];
     [self showHudInView:self.view hint:@"加载中"];
-    
+    tempTitle = self.title;
     _tableView.pullDelegate = self;
     _tableView.canPullDown = YES;
     _tableView.canPullUp = YES;
@@ -29,6 +31,9 @@
 -(void)loadData{
     page = [NSNumber numberWithInt:0];
     NSMutableDictionary *parameters = [NSMutableDictionary dictionary];
+    if (self.opttype) {
+        [parameters setObject:self.opttype forKey:@"opttype"];
+    }
     [parameters setObject:[NSString stringWithFormat:@"%d",PAGE_COUNT] forKey:@"count"];
     [parameters setObject:[NSString stringWithFormat:@"%d",[page intValue]] forKey:@"page"];
     NSString *urlstring = [NSString stringWithFormat:@"%@%@",[Utils getHostname],@"/mobile/report/getForMyReport"];
@@ -58,7 +63,7 @@
                                        if (resultDict == nil) {
                                            NSLog(@"json parse failed \r\n");
                                        }else{
-                                           NSLog(@"%@",resultDict);
+//                                           NSLog(@"%@",resultDict);
                                        }
                                        NSNumber *code = [resultDict objectForKey:@"code"];
                                        if ([code intValue] == 1) {
@@ -74,6 +79,8 @@
                                            self.dataSource = [NSMutableArray arrayWithArray:data];
                                            [self.tableView reloadData];
                                            [self.tableView stopLoadWithState:PullDownLoadState];
+                                           self.title = [NSString stringWithFormat:@"%@\n(%d)",tempTitle,[count intValue]];
+                                           [[NSNotificationCenter defaultCenter] postNotificationName:@"reloadSegmentBar" object:nil];
                                        }
                                    }
                                });
@@ -82,6 +89,9 @@
 
 -(void)loadMore{
     NSMutableDictionary *parameters = [NSMutableDictionary dictionary];
+    if (self.opttype) {
+        [parameters setObject:self.opttype forKey:@"opttype"];
+    }
     [parameters setObject:[NSString stringWithFormat:@"%d",PAGE_COUNT] forKey:@"count"];
     [parameters setObject:[NSString stringWithFormat:@"%d",[page intValue]] forKey:@"page"];
     NSString *urlstring = [NSString stringWithFormat:@"%@%@",[Utils getHostname],@"/mobile/report/getForMyReport"];
@@ -175,10 +185,6 @@
 #pragma clang diagnostic pop
 
     }
-    
-    NSLog(@"%@ %f",content,textSize.height + 70 < 90 ? 90 : textSize.height + 70);
-    
-    
     return textSize.height + 70 < 90 ? 90 : textSize.height + 70;
 }
 
@@ -287,10 +293,10 @@
 
 - (void)scrollView:(UIScrollView*)scrollView loadWithState:(LoadState)state {
     if (state == PullDownLoadState) {
-        [self performSelector:@selector(PullDownLoadEnd) withObject:nil afterDelay:1];
+        [self performSelector:@selector(PullDownLoadEnd) withObject:nil afterDelay:0.1];
     }
     else {
-        [self performSelector:@selector(PullUpLoadEnd) withObject:nil afterDelay:1];
+        [self performSelector:@selector(PullUpLoadEnd) withObject:nil afterDelay:0.1];
     }
 }
 //下拉刷新
