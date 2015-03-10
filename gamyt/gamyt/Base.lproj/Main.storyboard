@@ -358,10 +358,10 @@
                                 <exclude reference="Ekz-AJ-aPE"/>
                             </mask>
                             <mask key="constraints">
+                                <exclude reference="3g6-hf-tqF"/>
                                 <exclude reference="Eg8-4V-Kbd"/>
                                 <exclude reference="TY9-Mi-Taw"/>
                                 <exclude reference="xuS-oY-3S5"/>
-                                <exclude reference="3g6-hf-tqF"/>
                             </mask>
                         </variation>
                         <variation key="heightClass=regular-widthClass=compact">
@@ -369,10 +369,10 @@
                                 <include reference="Ekz-AJ-aPE"/>
                             </mask>
                             <mask key="constraints">
+                                <include reference="3g6-hf-tqF"/>
                                 <include reference="Eg8-4V-Kbd"/>
                                 <include reference="TY9-Mi-Taw"/>
                                 <include reference="xuS-oY-3S5"/>
-                                <include reference="3g6-hf-tqF"/>
                             </mask>
                         </variation>
                     </view>
@@ -407,7 +407,7 @@
         <!--我的上报-->
         <scene sceneID="1FQ-If-VOi">
             <objects>
-                <viewController storyboardIdentifier="MainViewController" id="GWb-MZ-7cD" customClass="MainViewController" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="MyReportViewController" id="GWb-MZ-7cD" customClass="MyReportViewController" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="Y6l-EL-RDD"/>
                         <viewControllerLayoutGuide type="bottom" id="b8j-bv-5Xf"/>
@@ -472,7 +472,7 @@
                                                 <constraint firstItem="cfb-5k-vl9" firstAttribute="width" secondItem="dLm-V3-4FU" secondAttribute="width" multiplier="4:3" id="hBg-1D-rrM"/>
                                                 <constraint firstItem="tkc-DO-4bG" firstAttribute="top" secondItem="p9M-oh-aYw" secondAttribute="top" constant="14" id="nLp-HV-Ia1"/>
                                                 <constraint firstAttribute="bottom" secondItem="cfb-5k-vl9" secondAttribute="bottom" constant="5" id="nUw-66-YqV">
-                                                    <variation key="heightClass=regular-widthClass=compact" constant="0.0"/>
+                                                    <variation key="heightClass=regular-widthClass=compact" constant="1"/>
                                                 </constraint>
                                                 <constraint firstItem="pNZ-Gy-3Y1" firstAttribute="top" secondItem="p9M-oh-aYw" secondAttribute="top" constant="14" id="rOq-TL-OIw"/>
                                                 <constraint firstItem="cfb-5k-vl9" firstAttribute="top" secondItem="p9M-oh-aYw" secondAttribute="top" constant="5" id="sGg-Zx-hAl">
@@ -674,7 +674,7 @@
                                                     <variation key="heightClass=regular-widthClass=compact" constant="6"/>
                                                 </constraint>
                                                 <constraint firstAttribute="bottom" secondItem="QhG-kB-qsu" secondAttribute="bottom" constant="5" id="xYk-Hr-h6k">
-                                                    <variation key="heightClass=regular-widthClass=compact" constant="0.0"/>
+                                                    <variation key="heightClass=regular-widthClass=compact" constant="1"/>
                                                 </constraint>
                                             </constraints>
                                             <variation key="default">

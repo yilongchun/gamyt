@@ -181,7 +181,7 @@
     NSMutableDictionary *menu1 = [NSMutableDictionary dictionary];
     [menu1 setValue:@"menu_item_myreport_icon" forKey:@"imagename"];
     [menu1 setValue:@"我的上报" forKey:@"menuname"];
-    [menu1 setValue:@"MainViewController" forKey:@"vcname"];
+    [menu1 setValue:@"MyReportViewController" forKey:@"vcname"];
     
     NSMutableDictionary *menu2 = [NSMutableDictionary dictionary];
     [menu2 setValue:@"menu_item_formyreport_icon1" forKey:@"imagename"];

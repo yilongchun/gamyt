@@ -60,7 +60,7 @@
 		E4F02F311AA5FA3100426A88 /* UIView+IQKeyboardToolbar.m in Sources */ = {isa = PBXBuildFile; fileRef = E4F02F261AA5FA3100426A88 /* UIView+IQKeyboardToolbar.m */; };
 		E4F02F321AA5FA3100426A88 /* UIWindow+Hierarchy.m in Sources */ = {isa = PBXBuildFile; fileRef = E4F02F281AA5FA3100426A88 /* UIWindow+Hierarchy.m */; };
 		E4F02F351AA60B7200426A88 /* FindPasswordViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E4F02F341AA60B7200426A88 /* FindPasswordViewController.m */; };
-		E4F02F5E1AA61C3500426A88 /* MainViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E4F02F5D1AA61C3500426A88 /* MainViewController.m */; };
+		E4F02F5E1AA61C3500426A88 /* MyReportViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E4F02F5D1AA61C3500426A88 /* MyReportViewController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -175,8 +175,8 @@
 		E4F02F281AA5FA3100426A88 /* UIWindow+Hierarchy.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIWindow+Hierarchy.m"; sourceTree = "<group>"; };
 		E4F02F331AA60B7200426A88 /* FindPasswordViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FindPasswordViewController.h; sourceTree = "<group>"; };
 		E4F02F341AA60B7200426A88 /* FindPasswordViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FindPasswordViewController.m; sourceTree = "<group>"; };
-		E4F02F5C1AA61C3500426A88 /* MainViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MainViewController.h; sourceTree = "<group>"; };
-		E4F02F5D1AA61C3500426A88 /* MainViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MainViewController.m; sourceTree = "<group>"; };
+		E4F02F5C1AA61C3500426A88 /* MyReportViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyReportViewController.h; sourceTree = "<group>"; };
+		E4F02F5D1AA61C3500426A88 /* MyReportViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyReportViewController.m; sourceTree = "<group>"; };
 		E4F02F5F1AA621F700426A88 /* gamyt.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; lineEnding = 0; path = gamyt.pch; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
 /* End PBXFileReference section */
 
@@ -427,8 +427,8 @@
 		E4F02F5B1AA61C2700426A88 /* view */ = {
 			isa = PBXGroup;
 			children = (
-				E4F02F5C1AA61C3500426A88 /* MainViewController.h */,
-				E4F02F5D1AA61C3500426A88 /* MainViewController.m */,
+				E4F02F5C1AA61C3500426A88 /* MyReportViewController.h */,
+				E4F02F5D1AA61C3500426A88 /* MyReportViewController.m */,
 				E4ECC4B81AADEBF500DADC94 /* MyReportTableViewCell.h */,
 				E4ECC4B91AADEBF500DADC94 /* MyReportTableViewCell.m */,
 				E4DAB9511AA7767300C58A8E /* HomeViewController.h */,
@@ -568,7 +568,7 @@
 				E4F02F2C1AA5FA3100426A88 /* IQTextView.m in Sources */,
 				E412B4151AA9F88C0015B7C1 /* UserRole.m in Sources */,
 				E430A21C1AA7443600CFBFC6 /* SlideNavigationContorllerAnimatorScale.m in Sources */,
-				E4F02F5E1AA61C3500426A88 /* MainViewController.m in Sources */,
+				E4F02F5E1AA61C3500426A88 /* MyReportViewController.m in Sources */,
 				E430A21F1AA7443600CFBFC6 /* SlideNavigationContorllerAnimatorSlideAndFade.m in Sources */,
 				E4EC77BA1AA8582300414B8B /* NSString+Valid.m in Sources */,
 				E4EC77BD1AA8582300414B8B /* UIViewController+HUD.m in Sources */,

@@ -171,10 +171,14 @@
 #pragma clang diagnostic ignored "-Wdeprecated-declarations"
         textSize = [content sizeWithFont:font
                            constrainedToSize:CGSizeMake(contentWidth-28, MAXFLOAT)
-                               lineBreakMode:NSLineBreakByCharWrapping];
+                               lineBreakMode:NSLineBreakByWordWrapping];
 #pragma clang diagnostic pop
 
     }
+    
+    NSLog(@"%@ %f",content,textSize.height + 70 < 90 ? 90 : textSize.height + 70);
+    
+    
     return textSize.height + 70 < 90 ? 90 : textSize.height + 70;
 }
 
@@ -240,9 +244,37 @@
     cell.content.text = content;
     
     cell.content.numberOfLines = 0;
-    cell.content.lineBreakMode = NSLineBreakByCharWrapping;
+    cell.content.lineBreakMode = NSLineBreakByWordWrapping;
     [cell.content sizeToFit];
     cell.selectionStyle = UITableViewCellSelectionStyleNone;
+    
+    
+    
+    
+    // 列寬
+    CGFloat contentWidth = [UIScreen mainScreen].bounds.size.width;
+    UIFont *font = [UIFont systemFontOfSize:16];
+    CGSize textSize;
+    if ([NSString instancesRespondToSelector:@selector(boundingRectWithSize:options:attributes:context:)]) {
+        NSMutableParagraphStyle *paragraphStyle = [[NSMutableParagraphStyle alloc]init];
+        paragraphStyle.lineBreakMode = NSLineBreakByWordWrapping;
+        NSDictionary *attributes = @{NSFontAttributeName:font, NSParagraphStyleAttributeName:paragraphStyle.copy};
+        NSStringDrawingOptions options = NSStringDrawingUsesLineFragmentOrigin;
+        textSize = [content boundingRectWithSize:CGSizeMake(contentWidth-28, MAXFLOAT)
+                                         options:options
+                                      attributes:attributes
+                                         context:nil].size;
+    } else {
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Wdeprecated-declarations"
+        textSize = [content sizeWithFont:font
+                       constrainedToSize:CGSizeMake(contentWidth-28, MAXFLOAT)
+                           lineBreakMode:NSLineBreakByWordWrapping];
+#pragma clang diagnostic pop
+        
+    }
+    [cell.content setFrame:CGRectMake(cell.content.frame.origin.x, cell.content.frame.origin.y, textSize.width, textSize.height)];
+    
     return cell;
 }
 

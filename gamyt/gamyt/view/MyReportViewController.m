@@ -6,10 +6,10 @@
 //  Copyright (c) 2015年 hmzl. All rights reserved.
 //
 
-#import "MainViewController.h"
+#import "MyReportViewController.h"
 #import "MyReportTableViewCell.h"
 
-@implementation MainViewController{
+@implementation MyReportViewController{
     NSNumber *count;
     NSNumber *totalpage;
     NSNumber *page;
@@ -18,6 +18,10 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
+    
+    if (floor(NSFoundationVersionNumber) > NSFoundationVersionNumber_iOS_6_1){
+        self.automaticallyAdjustsScrollViewInsets = NO;
+    }
     
     [self showHudInView:self.view hint:@"加载中"];
     
