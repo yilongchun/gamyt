@@ -22,6 +22,7 @@
 #import "UIViewController+HUD.h"
 #import "NSString+HXAddtions.h"
 #import "NSDictionary+Category.h"
+#import "UIImageView+AFNetworking.h"
 
 #define KNOTIFICATION_LOGINCHANGE @"loginStateChange"
 
