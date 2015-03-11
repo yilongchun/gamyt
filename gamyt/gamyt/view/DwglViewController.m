@@ -10,6 +10,12 @@
 
 @implementation DwglViewController
 
+- (void)viewDidLoad{
+    [super viewDidLoad];
+    
+}
+
+
 #pragma mark - SlideNavigationController Methods -
 
 - (BOOL)slideNavigationControllerShouldDisplayLeftMenu

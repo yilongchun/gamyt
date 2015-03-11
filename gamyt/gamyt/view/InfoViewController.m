@@ -8,6 +8,7 @@
 
 #import "InfoViewController.h"
 #import "InfoTableViewCell.h"
+#import "InfoDetailViewController.h"
 
 @implementation InfoViewController{
     NSNumber *count;
@@ -60,6 +61,7 @@
                                    }else{
                                        NSError *error;
                                        NSDictionary *resultDict = [NSJSONSerialization JSONObjectWithData:data options:kNilOptions error:&error];
+                                       resultDict = [NSDictionary cleanNullForDic:resultDict];
                                        if (resultDict == nil) {
                                            NSLog(@"json parse failed \r\n");
                                        }else{
@@ -76,13 +78,20 @@
                                            [self hideHud];
                                            count = [resultDict objectForKey:@"count"];
                                            NSArray *data = [resultDict objectForKey:@"data"];
-                                           self.dataSource = [NSMutableArray arrayWithArray:data];
+                                           if (data != nil && ![data isKindOfClass:[NSString class]]) {
+                                               self.dataSource = [NSMutableArray arrayWithArray:data];
+                                           }
                                            [self.tableView reloadData];
-                                           [self.tableView stopLoadWithState:PullDownLoadState];
+                                           int pagemax = [page intValue] + PAGE_COUNT;
+                                           if (pagemax >= [count intValue]) {
+                                               self.tableView.canPullUp = NO;
+                                           }
                                            self.title = [NSString stringWithFormat:@"%@\n(%d)",tempTitle,[count intValue]];
                                            [[NSNotificationCenter defaultCenter] postNotificationName:@"reloadSegmentBar" object:nil];
                                        }
                                    }
+                                   
+                                   [self.tableView stopLoadWithState:PullDownLoadState];
                                });
                            }];
 }
@@ -118,6 +127,7 @@
                                    }else{
                                        NSError *error;
                                        NSDictionary *resultDict = [NSJSONSerialization JSONObjectWithData:data options:kNilOptions error:&error];
+                                       resultDict = [NSDictionary cleanNullForDic:resultDict];
                                        if (resultDict == nil) {
                                            NSLog(@"json parse failed \r\n");
                                        }else{
@@ -134,16 +144,17 @@
                                            [self hideHud];
                                            count = [resultDict objectForKey:@"count"];
                                            NSArray *data = [resultDict objectForKey:@"data"];
-                                           [self.dataSource addObjectsFromArray:data];
+                                           if (data != nil && ![data isKindOfClass:[NSString class]]) {
+                                               [self.dataSource addObjectsFromArray:data];
+                                            }
                                            [self.tableView reloadData];
                                            int pagemax = [page intValue] + PAGE_COUNT;
                                            if (pagemax >= [count intValue]) {
                                                self.tableView.canPullUp = NO;
                                            }
-                                           [self.tableView stopLoadWithState:PullUpLoadState];
-                                           
                                        }
                                    }
+                                   [self.tableView stopLoadWithState:PullUpLoadState];
                                });
                            }];
 }
@@ -203,11 +214,11 @@
     
     
     NSDictionary *info = [self.dataSource objectAtIndex:indexPath.row];
+    info = [NSDictionary cleanNullForDic:info];
     NSString *sendname = [info objectForKey:@"sendname"];
     NSString *addtime = [info objectForKey:@"addtime"];
     NSNumber *opttype = [info objectForKey:@"opttype"];
     NSString *content = [info objectForKey:@"content"];
-    
     
     if ([opttype intValue] == -1) {
         cell.opttypename.textColor = [UIColor colorWithRed:56/255.0 green:143/255.0 blue:219/255.0 alpha:1];
@@ -215,38 +226,11 @@
         cell.opttypename.textColor = [UIColor colorWithRed:102/255.0 green:102/255.0 blue:102/255.0 alpha:1];
     }
     
-    NSString *opttypename;
-    switch ([opttype intValue]) {
-        case -1:
-            opttypename = @"未处理";
-            break;
-        case 0:
-            opttypename = @"已签阅";
-            
-            break;
-        case 1:
-            opttypename = @"已归档";
-            break;
-        case 2:
-            opttypename = @"已分发";
-            break;
-        case 3:
-            opttypename = @"已上报";
-            break;
-        case 4:
-            opttypename = @"转审阅";
-            break;
-        case 5:
-        case 6:
-            opttypename = @"已录用";
-            break;
-        default:
-            break;
-    }
+    
     
     cell.sendname.text = sendname;
     cell.addtime.text = addtime;
-    cell.opttypename.text = opttypename;
+    cell.opttypename.text = [Utils getOptTypeName:opttype];
     cell.content.text = content;
     
     cell.content.numberOfLines = 0;
@@ -286,6 +270,13 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
+    NSDictionary *info = [self.dataSource objectAtIndex:indexPath.row];
+    info = [NSDictionary cleanNullForDic:info];
+    
+    InfoDetailViewController *infoDetail = [[self storyboard] instantiateViewControllerWithIdentifier:@"InfoDetailViewController"];
+    infoDetail.info = info;
+    [self.navigationController pushViewController:infoDetail animated:YES];
+    
 }
 
 #pragma mark -

@@ -10,6 +10,11 @@
 
 @implementation MyNoticeViewController
 
+- (void)viewDidLoad{
+    [super viewDidLoad];
+    
+}
+
 
 #pragma mark - SlideNavigationController Methods -
 

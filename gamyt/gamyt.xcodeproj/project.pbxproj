@@ -43,6 +43,8 @@
 		E4ECC4B71AADDC7100DADC94 /* UIScrollView+PullLoad.m in Sources */ = {isa = PBXBuildFile; fileRef = E4ECC4B61AADDC7100DADC94 /* UIScrollView+PullLoad.m */; };
 		E4ECC4BA1AADEBF500DADC94 /* MyReportTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = E4ECC4B91AADEBF500DADC94 /* MyReportTableViewCell.m */; };
 		E4EEB8041AAF3720009CEFA1 /* JYSlideSegmentController.m in Sources */ = {isa = PBXBuildFile; fileRef = E4EEB8031AAF3720009CEFA1 /* JYSlideSegmentController.m */; };
+		E4EEB8071AAF5E96009CEFA1 /* InfoDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E4EEB8061AAF5E95009CEFA1 /* InfoDetailViewController.m */; };
+		E4EEB80A1AAF613A009CEFA1 /* NSDictionary+Category.m in Sources */ = {isa = PBXBuildFile; fileRef = E4EEB8091AAF613A009CEFA1 /* NSDictionary+Category.m */; };
 		E4F02EEF1AA5C5ED00426A88 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = E4F02EEE1AA5C5ED00426A88 /* main.m */; };
 		E4F02EF21AA5C5ED00426A88 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = E4F02EF11AA5C5ED00426A88 /* AppDelegate.m */; };
 		E4F02EF51AA5C5ED00426A88 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E4F02EF41AA5C5ED00426A88 /* ViewController.m */; };
@@ -138,6 +140,10 @@
 		E4ECC4B91AADEBF500DADC94 /* MyReportTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyReportTableViewCell.m; sourceTree = "<group>"; };
 		E4EEB8021AAF3720009CEFA1 /* JYSlideSegmentController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JYSlideSegmentController.h; sourceTree = "<group>"; };
 		E4EEB8031AAF3720009CEFA1 /* JYSlideSegmentController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JYSlideSegmentController.m; sourceTree = "<group>"; };
+		E4EEB8051AAF5E95009CEFA1 /* InfoDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = InfoDetailViewController.h; sourceTree = "<group>"; };
+		E4EEB8061AAF5E95009CEFA1 /* InfoDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = InfoDetailViewController.m; sourceTree = "<group>"; };
+		E4EEB8081AAF613A009CEFA1 /* NSDictionary+Category.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSDictionary+Category.h"; sourceTree = "<group>"; };
+		E4EEB8091AAF613A009CEFA1 /* NSDictionary+Category.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSDictionary+Category.m"; sourceTree = "<group>"; };
 		E4F02EE91AA5C5ED00426A88 /* gamyt.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = gamyt.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		E4F02EED1AA5C5ED00426A88 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		E4F02EEE1AA5C5ED00426A88 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = main.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
@@ -298,6 +304,8 @@
 				E4EC77B71AA8582300414B8B /* UIViewController+HUD.m */,
 				E412B3C71AA9C95A0015B7C1 /* NSString+HXAddtions.h */,
 				E412B3C81AA9C95A0015B7C1 /* NSString+HXAddtions.m */,
+				E4EEB8081AAF613A009CEFA1 /* NSDictionary+Category.h */,
+				E4EEB8091AAF613A009CEFA1 /* NSDictionary+Category.m */,
 			);
 			path = Category;
 			sourceTree = "<group>";
@@ -425,6 +433,12 @@
 				E4ECC4B91AADEBF500DADC94 /* MyReportTableViewCell.m */,
 				E4DAB9511AA7767300C58A8E /* HomeViewController.h */,
 				E4DAB9521AA7767300C58A8E /* HomeViewController.m */,
+				E4EC780E1AA8AE4C00414B8B /* InfoViewController.h */,
+				E4EC780F1AA8AE4C00414B8B /* InfoViewController.m */,
+				E4ECC4901AADC16F00DADC94 /* InfoTableViewCell.h */,
+				E4ECC4911AADC16F00DADC94 /* InfoTableViewCell.m */,
+				E4EEB8051AAF5E95009CEFA1 /* InfoDetailViewController.h */,
+				E4EEB8061AAF5E95009CEFA1 /* InfoDetailViewController.m */,
 				E4DAB9481AA76EB600C58A8E /* MyNoticeViewController.h */,
 				E4DAB9491AA76EB600C58A8E /* MyNoticeViewController.m */,
 				E4DAB94B1AA772FF00C58A8E /* DwglViewController.h */,
@@ -433,10 +447,6 @@
 				E412B4101AA9F5910015B7C1 /* CheckInfoViewController.m */,
 				E4DAB94E1AA7742F00C58A8E /* SettingViewController.h */,
 				E4DAB94F1AA7742F00C58A8E /* SettingViewController.m */,
-				E4EC780E1AA8AE4C00414B8B /* InfoViewController.h */,
-				E4EC780F1AA8AE4C00414B8B /* InfoViewController.m */,
-				E4ECC4901AADC16F00DADC94 /* InfoTableViewCell.h */,
-				E4ECC4911AADC16F00DADC94 /* InfoTableViewCell.m */,
 			);
 			path = view;
 			sourceTree = "<group>";
@@ -549,6 +559,7 @@
 				E430A21B1AA7443600CFBFC6 /* SlideNavigationContorllerAnimatorFade.m in Sources */,
 				E4F02F2F1AA5FA3100426A88 /* NSArray+Sort.m in Sources */,
 				E412B3C91AA9C95A0015B7C1 /* NSString+HXAddtions.m in Sources */,
+				E4EEB8071AAF5E96009CEFA1 /* InfoDetailViewController.m in Sources */,
 				E4DAB94A1AA76EB600C58A8E /* MyNoticeViewController.m in Sources */,
 				E4ECC4B71AADDC7100DADC94 /* UIScrollView+PullLoad.m in Sources */,
 				E4F02F311AA5FA3100426A88 /* UIView+IQKeyboardToolbar.m in Sources */,
@@ -583,6 +594,7 @@
 				E430A2171AA7443600CFBFC6 /* LeftMenuViewController.m in Sources */,
 				E4F02F321AA5FA3100426A88 /* UIWindow+Hierarchy.m in Sources */,
 				E430A21E1AA7443600CFBFC6 /* SlideNavigationContorllerAnimatorSlide.m in Sources */,
+				E4EEB80A1AAF613A009CEFA1 /* NSDictionary+Category.m in Sources */,
 				E4EC77BC1AA8582300414B8B /* UIViewController+DismissKeyboard.m in Sources */,
 				E4EC77A91AA855BF00414B8B /* MBProgressHUD+Add.m in Sources */,
 				E412B4111AA9F5910015B7C1 /* CheckInfoViewController.m in Sources */,

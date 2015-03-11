@@ -107,7 +107,7 @@
     NSString *vcname = [info objectForKey:@"vcname"];
     vc = [mainStoryboard instantiateViewControllerWithIdentifier: vcname];
     
-    if ([vcname isEqualToString:@"HomeViewController"]) {
+    if ([vcname isEqualToString:@"HomeViewController"]) {//下级上报
         InfoViewController *info1 = [[self storyboard] instantiateViewControllerWithIdentifier: @"InfoViewController"];
         info1.title = @"全部";
         
@@ -127,7 +127,28 @@
         info5.title = @"已录用";
         info5.opttype = @"5";
         
-        HomeViewController *vc2 = [[HomeViewController alloc] initWithViewControllers:@[info1,info2,info3,info4,info5]];
+        NSMutableArray *vcs = [NSMutableArray array];
+        NSUserDefaults *userdefaults = [NSUserDefaults standardUserDefaults];
+        NSNumber *type = [userdefaults objectForKey:@"type"];
+        switch ([type integerValue]) {
+            case MANAGER://管理员(全部.未处理,已归档,已上报)
+                [vcs addObjectsFromArray:@[info1,info2,info3,info4]];
+                break;
+            case COUNTY_MANAGER://省管理员
+            case CITY_MANAGER://市管理员
+            case SHENG_MANAGER://县管理员
+                //(全部,未处理,已归档,已上报,已录用)
+                [vcs addObjectsFromArray:@[info1,info2,info3,info4,info5]];
+                break;
+            case SMANAGER:
+                //超级管理员(全部,未处理,已归档)
+                [vcs addObjectsFromArray:@[info1,info2,info3]];
+                break;
+            default:
+                break;
+        }
+        
+        HomeViewController *vc2 = [[HomeViewController alloc] initWithViewControllers:vcs];
         vc2.title = @"下级上报";
         vc2.indicatorInsets = UIEdgeInsetsMake(0, 0, 8, 0);
         vc2.indicator.backgroundColor = [UIColor colorWithRed:72/255.0 green:147/255.0 blue:219/255.0 alpha:1];

@@ -10,6 +10,12 @@
 
 @implementation CheckInfoViewController
 
+- (void)viewDidLoad{
+    [super viewDidLoad];
+    
+}
+
+
 #pragma mark - SlideNavigationController Methods -
 
 - (BOOL)slideNavigationControllerShouldDisplayLeftMenu

@@ -8,7 +8,7 @@
 
 #import "ViewController.h"
 #import "HomeViewController.h"
-
+#import "InfoViewController.h"
 
 
 @interface ViewController ()
@@ -59,7 +59,14 @@
     
 //    [[UITextField appearance] setTintColor:[UIColor whiteColor]];
     
-    self.account.text = @"18972590038";
+    
+//    self.account.text = @"18972590049";//超级管理员:18972590049 111111
+//    self.account.text = @"15171873787";//省级管理员:15171873787 111111
+//    self.account.text = @"18972590038";//市级管理员:18972590038 111111
+//    self.account.text = @"18972592846";//县级管理员:18972592846 111111
+    self.account.text = @"18972593062";//管理员:18972593062 111111
+//    self.account.text = @"18972593057";//审阅员:18972593057 111111
+//    self.account.text = @"15671055205";//会员:15671055205 111111
     self.password.text = @"111111";
 }
 
@@ -234,11 +241,62 @@
     [userdefaults setObject:menus forKey:@"menus"];
     NSDictionary *firstmenu = [menus objectAtIndex:0];
     NSString *vcname = [firstmenu objectForKey:@"vcname"];
-    UIViewController *firstvc = [[self storyboard]
-                               instantiateViewControllerWithIdentifier:vcname];
-    [self.navigationController pushViewController:firstvc animated:YES];
-    [self.navigationController setNavigationBarHidden:NO];
     
+    if ([vcname isEqualToString:@"HomeViewController"]) {//下级上报
+        InfoViewController *info1 = [[self storyboard] instantiateViewControllerWithIdentifier: @"InfoViewController"];
+        info1.title = @"全部";
+        
+        InfoViewController *info2 = [[self storyboard] instantiateViewControllerWithIdentifier: @"InfoViewController"];
+        info2.title = @"未处理";
+        info2.opttype = @"-1";
+        
+        InfoViewController *info3 = [[self storyboard] instantiateViewControllerWithIdentifier: @"InfoViewController"];
+        info3.title = @"已归档";
+        info3.opttype = @"1";
+        
+        InfoViewController *info4 = [[self storyboard] instantiateViewControllerWithIdentifier: @"InfoViewController"];
+        info4.title = @"已上报";
+        info4.opttype = @"3";
+        
+        InfoViewController *info5 = [[self storyboard] instantiateViewControllerWithIdentifier: @"InfoViewController"];
+        info5.title = @"已录用";
+        info5.opttype = @"5";
+        
+        NSMutableArray *vcs = [NSMutableArray array];
+        NSUserDefaults *userdefaults = [NSUserDefaults standardUserDefaults];
+        NSNumber *type = [userdefaults objectForKey:@"type"];
+        switch ([type integerValue]) {
+            case MANAGER://管理员(全部.未处理,已归档,已上报)
+                [vcs addObjectsFromArray:@[info1,info2,info3,info4]];
+                break;
+            case COUNTY_MANAGER://省管理员
+            case CITY_MANAGER://市管理员
+            case SHENG_MANAGER://县管理员
+                //(全部,未处理,已归档,已上报,已录用)
+                [vcs addObjectsFromArray:@[info1,info2,info3,info4,info5]];
+                break;
+            case SMANAGER:
+                //超级管理员(全部,未处理,已归档)
+                [vcs addObjectsFromArray:@[info1,info2,info3]];
+                break;
+            default:
+                break;
+        }
+        
+        HomeViewController *vc2 = [[HomeViewController alloc] initWithViewControllers:vcs];
+        vc2.title = @"下级上报";
+        vc2.indicatorInsets = UIEdgeInsetsMake(0, 0, 8, 0);
+        vc2.indicator.backgroundColor = [UIColor colorWithRed:72/255.0 green:147/255.0 blue:219/255.0 alpha:1];
+        
+        [self.navigationController pushViewController:vc2 animated:YES];
+    }else{
+        UIViewController *firstvc = [[self storyboard]
+                                     instantiateViewControllerWithIdentifier:vcname];
+        [self.navigationController pushViewController:firstvc animated:YES];
+    }
+    
+    
+    [self.navigationController setNavigationBarHidden:NO];
     [[NSNotificationCenter defaultCenter] postNotificationName:@"reloadLeftMenu" object:nil];
 }
 

@@ -21,6 +21,7 @@
 #import <MobileCoreServices/MobileCoreServices.h>
 #import "UIViewController+HUD.h"
 #import "NSString+HXAddtions.h"
+#import "NSDictionary+Category.h"
 
 #define KNOTIFICATION_LOGINCHANGE @"loginStateChange"
 
