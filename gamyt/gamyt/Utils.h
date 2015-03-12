@@ -18,8 +18,6 @@
 
 + (NSString *)getHostname;
 
-+ (NSString *)getImagePath;
-
 + (NSString *)getOptTypeName:(NSNumber *)opttype;
 
 @end

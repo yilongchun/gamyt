@@ -29,13 +29,6 @@
     return hostname;
 }
 
-+ (NSString *)getImagePath{
-    NSString *plistPath = [[NSBundle mainBundle] pathForResource:@"Info" ofType:@"plist"];
-    NSMutableDictionary *infolist = [[NSMutableDictionary alloc] initWithContentsOfFile:plistPath];
-    NSString *imagePath = [infolist objectForKey:@"imagePath"];
-    return imagePath;
-}
-
 + (NSString *)getOptTypeName:(NSNumber *)opttype{
     NSString *opttypename;
     switch ([opttype intValue]) {

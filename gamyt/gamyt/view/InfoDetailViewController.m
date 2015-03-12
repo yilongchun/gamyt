@@ -17,6 +17,10 @@
         self.automaticallyAdjustsScrollViewInsets = NO;
     }
     
+    
+    UIBarButtonItem *rightitem = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"toread_record_icon_normal"] style:UIBarButtonItemStylePlain target:self action:nil];
+    self.navigationItem.rightBarButtonItem = rightitem;
+    
     self.sendpic.layer.masksToBounds = YES;
     self.sendpic.layer.cornerRadius = 40;
    
@@ -27,6 +31,8 @@
     NSString *content = [self.info objectForKey:@"content"];//内容
     content = [NSString stringWithFormat:@"%@%@%@",content,content,content];
     NSString *addtime = [self.info objectForKey:@"addtime"];//时间
+    
+    
     
 
     self.sepline.backgroundColor = [UIColor colorWithRed:200/255.0 green:200/255.0 blue:200/255.0 alpha:1];
@@ -41,7 +47,7 @@
     }
     self.opttypename.text = [Utils getOptTypeName:opttype];
     
-    NSString *imagePath = [NSString stringWithFormat:@"%@%@%@",[Utils getHostname],[Utils getImagePath],sendpic];
+    NSString *imagePath = [NSString stringWithFormat:@"%@%@%@",[Utils getHostname],IMAGE_PATH,sendpic];
     [self.sendpic setImageWithURL:[NSURL URLWithString:imagePath] placeholderImage:[UIImage imageNamed:@"defalut_photo"]];
     self.content.text = content;
     self.content.numberOfLines = 0;
@@ -107,18 +113,79 @@
     self.btn4.layer.masksToBounds = YES;
     self.btn4.layer.cornerRadius = 5.0;
     
-//    [self.btn1 setImageEdgeInsets:UIEdgeInsetsMake(0, -imgArrow.size.width, 0, imgArrow.size.width)];
-//    [self.btn1 setTitleEdgeInsets:UIEdgeInsetsMake(0, self.btn1.titleLabel.bounds.size.width, 0, -self.btn1.titleLabel.bounds.size.width)];
+    NSString *path = [self.info objectForKey:@"path"];//照片路径
+    if (path.length == 0) {
+        [self.img1 removeFromSuperview];
+        [self.img2 removeFromSuperview];
+        [self.img3 removeFromSuperview];
+        [self.img4 removeFromSuperview];
+    }else{
+        NSArray *imgArr =[path componentsSeparatedByString:NSLocalizedString(@",", nil)];
+        for (int i = 0; i < imgArr.count; i++) {
+            NSString *img = [imgArr objectAtIndex:i];
+            NSString *imagePath = [NSString stringWithFormat:@"%@%@%@",[Utils getHostname],REPORT_PATH,img];
+            switch (i) {
+                case 0:
+                    [self.img1 setImageWithURL:[NSURL URLWithString:imagePath] placeholderImage:[UIImage imageNamed:@"defalut_pic"]];
+                    break;
+                case 1:
+                    [self.img2 setImageWithURL:[NSURL URLWithString:imagePath] placeholderImage:[UIImage imageNamed:@"defalut_pic"]];
+                    break;
+                case 2:
+                    [self.img3 setImageWithURL:[NSURL URLWithString:imagePath] placeholderImage:[UIImage imageNamed:@"defalut_pic"]];
+                    break;
+                case 3:
+                    [self.img4 setImageWithURL:[NSURL URLWithString:imagePath] placeholderImage:[UIImage imageNamed:@"defalut_pic"]];
+                    break;
+                default:
+                    break;
+            }
+        }
+    }
     
+    if ([[[UIDevice currentDevice] systemVersion] floatValue] < 8.0) {
+        [self setLayout];
+    }
     
+}
 
-    
-    
-    
-    
-    
-    
-    
+-(void)setLayout{
+    NSString *path = [self.info objectForKey:@"path"];//照片路径
+    if (path.length == 0) {
+        self.contentTopLayout.constant = 8;
+    }else{
+        CGFloat width = [UIScreen mainScreen].bounds.size.width/4 - 10;
+        self.contentTopLayout.constant = width + 16;
+//        NSArray *imgArr =[path componentsSeparatedByString:NSLocalizedString(@",", nil)];
+//        for (int i = 0; i < imgArr.count; i++) {
+//            NSString *img = [imgArr objectAtIndex:i];
+//            NSString *imagePath = [NSString stringWithFormat:@"%@%@%@",[Utils getHostname],REPORT_PATH,img];
+//            UIImageView *image = [[UIImageView alloc]init];
+//            image.translatesAutoresizingMaskIntoConstraints = NO;
+//            [image setImageWithURL:[NSURL URLWithString:imagePath] placeholderImage:[UIImage imageNamed:@"defalut_pic"]];
+//            [self.img1 setImageWithURL:[NSURL URLWithString:imagePath] placeholderImage:[UIImage imageNamed:@"defalut_pic"]];
+//            [self.view addSubview:image];
+//            NSLayoutConstraint *imageWidth = [NSLayoutConstraint constraintWithItem:image attribute:NSLayoutAttributeWidth relatedBy:NSLayoutRelationEqual toItem:nil attribute:NSLayoutAttributeNotAnAttribute multiplier:1.0 constant:width];
+//            NSLayoutConstraint *imageHeight = [NSLayoutConstraint constraintWithItem:image attribute:NSLayoutAttributeHeight relatedBy:NSLayoutRelationEqual toItem:nil attribute:NSLayoutAttributeNotAnAttribute multiplier:1.0 constant:width];
+//            [image addConstraints:@[imageWidth,imageHeight]];
+//            [self.view addConstraint:[NSLayoutConstraint
+//                                      constraintWithItem:image
+//                                      attribute:NSLayoutAttributeLeading
+//                                      relatedBy:NSLayoutRelationEqual
+//                                      toItem:self.view
+//                                      attribute:NSLayoutAttributeLeading
+//                                      multiplier:1
+//                                      constant:10 + ((width + 5) * i)]];
+//            [self.view addConstraint:[NSLayoutConstraint
+//                                      constraintWithItem:image
+//                                      attribute:NSLayoutAttributeTop
+//                                      relatedBy:NSLayoutRelationEqual
+//                                      toItem:self.sepline
+//                                      attribute:NSLayoutAttributeBottom
+//                                      multiplier:1
+//                                      constant:8]];
+//        }
+    }
 }
 
 -(void)viewDidAppear:(BOOL)animated{
@@ -126,8 +193,11 @@
     [self.myscrollview setContentSize:CGSizeMake(self.myscrollview.frame.size.width, self.sepline2.frame.origin.y + 60)];
 }
 
--(void)viewDidLayoutSubviews
-{
+-(void)viewDidLayoutSubviews{
+    [super viewDidLayoutSubviews];
+    if ([[[UIDevice currentDevice] systemVersion] floatValue] >= 8.0) {
+        [self setLayout];
+    }
     [self.myscrollview setContentSize:CGSizeMake(self.myscrollview.frame.size.width, self.sepline2.frame.origin.y + 60)];
 }
 

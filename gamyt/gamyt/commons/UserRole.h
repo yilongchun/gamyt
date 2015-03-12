@@ -12,6 +12,10 @@
 #define TOKEN @"tk"
 #define PAGE_COUNT 10
 
+#define IMAGE_PATH @"/files/users/"
+#define REPORT_PATH @"/files/report"
+#define NOTICE_PATH @"/files/notice/"
+
 #define GENERAL 0 // 普通会员
 #define TASTER 1 // 审阅会员
 

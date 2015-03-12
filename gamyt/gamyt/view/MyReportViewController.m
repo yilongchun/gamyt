@@ -23,12 +23,29 @@
         self.automaticallyAdjustsScrollViewInsets = NO;
     }
     
+    UIBarButtonItem *rightitem = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"add_report_normal"] style:UIBarButtonItemStylePlain target:self action:@selector(toAdd)];
+    self.navigationItem.rightBarButtonItem = rightitem;
+    
     [self showHudInView:self.view hint:@"加载中"];
     
     _tableView.pullDelegate = self;
     _tableView.canPullDown = YES;
     _tableView.canPullUp = YES;
     [self loadData];
+}
+
+-(void)toAdd{
+//    UIViewController *vc = [[self storyboard]
+//                                 instantiateViewControllerWithIdentifier:@"AddReportViewController"];
+//    [self.navigationController pushViewController:vc animated:YES];
+    
+    [self performSegueWithIdentifier:@"toAddReport" sender:self];
+    
+                            
+    
+//    [self presentViewController:vc animated:YES completion:^{
+//        
+//    }];
 }
 
 -(void)loadData{
