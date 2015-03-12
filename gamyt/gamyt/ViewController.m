@@ -301,14 +301,24 @@
 }
 
 -(void)loginStateChange:(NSNotification *)notification{
-    UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"用户状态出现错误,可能原因如下:" message:@"1.登录状态过期.\n2.账号用其他手机登陆." preferredStyle:UIAlertControllerStyleAlert];
-    [alert addAction:[UIAlertAction actionWithTitle:@"确定"
-                                              style:UIAlertActionStyleDestructive
-                                            handler:^(UIAlertAction *action) {
-                                                [[SlideNavigationController sharedInstance] popToRootViewControllerAnimated:YES];
-                                            }]];
-    [self presentViewController:alert animated:YES completion:nil];
+    if (floor(NSFoundationVersionNumber) > NSFoundationVersionNumber_iOS_7_1){
+        UIViewController *s = [notification object];
+        UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"用户状态出现错误,可能原因如下:" message:@"1.登录状态过期.\n2.账号用其他手机登陆." preferredStyle:UIAlertControllerStyleAlert];
+        [alert addAction:[UIAlertAction actionWithTitle:@"确定"
+                                                  style:UIAlertActionStyleDestructive
+                                                handler:^(UIAlertAction *action) {
+                                                    [[SlideNavigationController sharedInstance] popToRootViewControllerAnimated:YES];
+                                                }]];
+        [s presentViewController:alert animated:YES completion:nil];
+    }else{
+        
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"用户状态出现错误,可能原因如下:" message:@"1.登录状态过期.\n2.账号用其他手机登陆." delegate:self cancelButtonTitle:nil otherButtonTitles:@"确定", nil];
+        [alert show];
+    }
+}
 
+- (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex{
+    [[SlideNavigationController sharedInstance] popToRootViewControllerAnimated:YES];
 }
 
 @end

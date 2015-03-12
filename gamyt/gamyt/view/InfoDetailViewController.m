@@ -69,19 +69,66 @@
         
     }
     [self.content setFrame:CGRectMake(self.content.frame.origin.x, self.content.frame.origin.y, textSize.width, textSize.height)];
+
     
-    [self.myscrollview setContentSize:CGSizeMake(self.myscrollview.frame.size.width, self.sepline2.frame.origin.y + 1100)];
+    UIImage *img1 = [[UIImage imageNamed:@"base_blue_btn_normal.9"] stretchableImageWithLeftCapWidth:10 topCapHeight:10];
+    
+    [self.btn1 setBackgroundImage:img1 forState:UIControlStateNormal];
+    [self.btn2 setBackgroundImage:img1 forState:UIControlStateNormal];
+    [self.btn3 setBackgroundImage:img1 forState:UIControlStateNormal];
+    [self.btn4 setBackgroundImage:img1 forState:UIControlStateNormal];
+    
+    UIImage *img2 = [[UIImage imageNamed:@"base_blue_btn_pressed.9"] stretchableImageWithLeftCapWidth:10 topCapHeight:10];
+    [self.btn1 setBackgroundImage:img2 forState:UIControlStateHighlighted];
+    [self.btn2 setBackgroundImage:img2 forState:UIControlStateHighlighted];
+    [self.btn3 setBackgroundImage:img2 forState:UIControlStateHighlighted];
+    [self.btn4 setBackgroundImage:img2 forState:UIControlStateHighlighted];
+    
+    UIImage *imgArrow = [UIImage imageNamed:@"detail_adopt_icon"];
+    [self.btn1 setImage:imgArrow forState:UIControlStateNormal];
+    
+    UIImage *imgArrow2 = [UIImage imageNamed:@"detail_toreport_icon"];
+    [self.btn2 setImage:imgArrow2 forState:UIControlStateNormal];
+    
+    UIImage *imgArrow3 = [UIImage imageNamed:@"detail_save_icon"];
+    [self.btn3 setImage:imgArrow3 forState:UIControlStateNormal];
+    
+    UIImage *imgArrow4 = [UIImage imageNamed:@"detail_toread_icon"];
+    [self.btn4 setImage:imgArrow4 forState:UIControlStateNormal];
+    
+    
+    
+    self.btn1.layer.masksToBounds = YES;
+    self.btn1.layer.cornerRadius = 5.0;
+    self.btn2.layer.masksToBounds = YES;
+    self.btn2.layer.cornerRadius = 5.0;
+    self.btn3.layer.masksToBounds = YES;
+    self.btn3.layer.cornerRadius = 5.0;
+    self.btn4.layer.masksToBounds = YES;
+    self.btn4.layer.cornerRadius = 5.0;
+    
+//    [self.btn1 setImageEdgeInsets:UIEdgeInsetsMake(0, -imgArrow.size.width, 0, imgArrow.size.width)];
+//    [self.btn1 setTitleEdgeInsets:UIEdgeInsetsMake(0, self.btn1.titleLabel.bounds.size.width, 0, -self.btn1.titleLabel.bounds.size.width)];
+    
+    
+
+    
+    
+    
+    
+    
+    
     
 }
 
 -(void)viewDidAppear:(BOOL)animated{
     [super viewDidAppear:animated];
-    [self.myscrollview setContentSize:CGSizeMake(self.myscrollview.frame.size.width, self.sepline2.frame.origin.y + 11)];
+    [self.myscrollview setContentSize:CGSizeMake(self.myscrollview.frame.size.width, self.sepline2.frame.origin.y + 60)];
 }
 
 -(void)viewDidLayoutSubviews
 {
-    [self.myscrollview setContentSize:CGSizeMake(self.myscrollview.frame.size.width, self.sepline2.frame.origin.y + 11)];
+    [self.myscrollview setContentSize:CGSizeMake(self.myscrollview.frame.size.width, self.sepline2.frame.origin.y + 60)];
 }
 
 

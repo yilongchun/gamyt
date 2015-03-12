@@ -15,4 +15,6 @@
 @property (weak, nonatomic) IBOutlet UILabel *addtime;
 @property (weak, nonatomic) IBOutlet UILabel *opttypename;
 @property (weak, nonatomic) IBOutlet UILabel *content;
+@property (weak, nonatomic) IBOutlet UIImageView *haveimg;
+
 @end

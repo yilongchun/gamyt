@@ -73,7 +73,7 @@
                                            [self showHintInCenter:@"加载失败"];
                                        }else if([code intValue] == 4){
                                            [self hideHud];
-                                           [[NSNotificationCenter defaultCenter] postNotificationName:KNOTIFICATION_LOGINCHANGE object:nil];
+                                           [[NSNotificationCenter defaultCenter] postNotificationName:KNOTIFICATION_LOGINCHANGE object:self];
                                        }else if([code intValue] == 0){
                                            [self hideHud];
                                            count = [resultDict objectForKey:@"count"];
@@ -139,7 +139,7 @@
                                            [self showHintInCenter:@"加载失败"];
                                        }else if([code intValue] == 4){
                                            [self hideHud];
-                                           [[NSNotificationCenter defaultCenter] postNotificationName:KNOTIFICATION_LOGINCHANGE object:nil];
+                                           [[NSNotificationCenter defaultCenter] postNotificationName:KNOTIFICATION_LOGINCHANGE object:self];
                                        }else if([code intValue] == 0){
                                            [self hideHud];
                                            count = [resultDict objectForKey:@"count"];
@@ -225,7 +225,12 @@
     }else{
         cell.opttypename.textColor = [UIColor colorWithRed:102/255.0 green:102/255.0 blue:102/255.0 alpha:1];
     }
-    
+    NSString *path = [info objectForKey:@"path"];
+    if (path.length == 0) {
+        [cell.haveimg setHidden:YES];
+    }else{
+        [cell.haveimg setHidden:NO];
+    }
     
     
     cell.sendname.text = sendname;
@@ -236,7 +241,7 @@
     cell.content.numberOfLines = 0;
     cell.content.lineBreakMode = NSLineBreakByWordWrapping;
     [cell.content sizeToFit];
-    cell.selectionStyle = UITableViewCellSelectionStyleNone;
+//    cell.selectionStyle = UITableViewCellSelectionStyleNone;
     
     
     
@@ -264,6 +269,10 @@
         
     }
     [cell.content setFrame:CGRectMake(cell.content.frame.origin.x, cell.content.frame.origin.y, textSize.width, textSize.height)];
+    
+    UIView *view_bg = [[UIView alloc]initWithFrame:cell.content.frame];
+    view_bg.backgroundColor = [UIColor clearColor];
+    cell.selectedBackgroundView = view_bg;
     
     return cell;
 }

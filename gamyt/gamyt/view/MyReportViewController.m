@@ -73,7 +73,7 @@
                                            [self showHintInCenter:@"加载失败"];
                                        }else if([code intValue] == 4){
                                            [self hideHud];
-                                           [[NSNotificationCenter defaultCenter] postNotificationName:KNOTIFICATION_LOGINCHANGE object:nil];
+                                           [[NSNotificationCenter defaultCenter] postNotificationName:KNOTIFICATION_LOGINCHANGE object:self];
                                        }else if([code intValue] == 0){
                                            [self hideHud];
                                            count = [resultDict objectForKey:@"count"];
@@ -133,7 +133,7 @@
                                            [self showHintInCenter:@"加载失败"];
                                        }else if([code intValue] == 4){
                                            [self hideHud];
-                                           [[NSNotificationCenter defaultCenter] postNotificationName:KNOTIFICATION_LOGINCHANGE object:nil];
+                                           [[NSNotificationCenter defaultCenter] postNotificationName:KNOTIFICATION_LOGINCHANGE object:self];
                                        }else if([code intValue] == 0){
                                            [self hideHud];
                                            count = [resultDict objectForKey:@"count"];
@@ -186,7 +186,12 @@
     NSString *addtime = [info objectForKey:@"addtime"];
     NSNumber *opttype = [info objectForKey:@"opttype"];
     NSString *receivername =[info objectForKey:@"receivername"];
-    
+    NSString *path = [info objectForKey:@"path"];
+    if (path.length == 0) {
+        [cell.haveimg setHidden:YES];
+    }else{
+        [cell.haveimg setHidden:NO];
+    }
     
     if ([opttype intValue] == -1) {
         cell.opttypename.textColor = [UIColor colorWithRed:56/255.0 green:143/255.0 blue:219/255.0 alpha:1];
