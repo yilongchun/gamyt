@@ -11,5 +11,6 @@
 @interface InfoDetailStatusViewController : UIViewController
 
 @property (weak, nonatomic) IBOutlet UIScrollView *myscrollview;
+@property (nonatomic, strong) NSNumber *newsid;
 
 @end

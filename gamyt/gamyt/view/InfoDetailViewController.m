@@ -31,7 +31,7 @@
     NSNumber *opttype = [self.info objectForKey:@"opttype"];//类型
     NSString *sendpic = [self.info objectForKey:@"sendpic"];//照片
     NSString *content = [self.info objectForKey:@"content"];//内容
-    content = [NSString stringWithFormat:@"%@%@%@",content,content,content];
+//    content = [NSString stringWithFormat:@"%@%@%@",content,content,content];
     NSString *addtime = [self.info objectForKey:@"addtime"];//时间
     
     
@@ -406,6 +406,10 @@
 
 -(void)toInfoDetailStatus{
     InfoDetailStatusViewController *vc = [[self storyboard] instantiateViewControllerWithIdentifier:@"InfoDetailStatusViewController"];
+    
+    NSNumber *newsid = [self.info objectForKey:@"newsid"];
+    vc.newsid = newsid;
+    
     [self.navigationController pushViewController:vc animated:YES];
 }
 

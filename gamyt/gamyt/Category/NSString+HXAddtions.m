@@ -15,6 +15,10 @@
             [[string stringByReplacingOccurrencesOfString:@"\n" withString:@"\\n"] stringByReplacingOccurrencesOfString:@"\""withString:@"\\\""]
             ];
 }
++(NSString *) jsonStringWithNumber:(NSNumber *) number{
+    return [NSString stringWithFormat:@"%d",[number intValue]];
+}
+
 +(NSString *) jsonStringWithArray:(NSArray *)array{
     NSMutableString *reString = [NSMutableString string];
     [reString appendString:@"["];
@@ -37,7 +41,7 @@
     for (int i=0; i<[keys count]; i++) {
         NSString *name = [keys objectAtIndex:i];
         id valueObj = [dictionary objectForKey:name];
-        NSString *value = [NSString jsonStringWithObject:valueObj];
+        NSObject *value = [NSString jsonStringWithObject:valueObj];
         if (value) {
             [keyValues addObject:[NSString stringWithFormat:@"\"%@\":%@",name,value]];
         }
@@ -57,6 +61,8 @@
         value = [NSString jsonStringWithDictionary:object];
     }else if([object isKindOfClass:[NSArray class]]){
         value = [NSString jsonStringWithArray:object];
+    }else if([object isKindOfClass:[NSNumber class]]){
+        value = [NSString jsonStringWithNumber:object];
     }
     return value;
 }
