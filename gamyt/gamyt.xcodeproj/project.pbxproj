@@ -26,6 +26,7 @@
 		E430A2221AA7443600CFBFC6 /* SlideNavigationController.m in Sources */ = {isa = PBXBuildFile; fileRef = E430A2141AA7443600CFBFC6 /* SlideNavigationController.m */; };
 		E430A2291AA755C600CFBFC6 /* leftMenu.jpg in Resources */ = {isa = PBXBuildFile; fileRef = E430A2281AA755C600CFBFC6 /* leftMenu.jpg */; };
 		E48A46381AB1B35C002CB434 /* AddReportViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E48A46371AB1B35C002CB434 /* AddReportViewController.m */; };
+		E4A4AF6B1AB1F2E800D14ABD /* UIButton+UIButtonImageWithLable.m in Sources */ = {isa = PBXBuildFile; fileRef = E4A4AF6A1AB1F2E800D14ABD /* UIButton+UIButtonImageWithLable.m */; };
 		E4DAB94A1AA76EB600C58A8E /* MyNoticeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E4DAB9491AA76EB600C58A8E /* MyNoticeViewController.m */; };
 		E4DAB94D1AA772FF00C58A8E /* DwglViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E4DAB94C1AA772FF00C58A8E /* DwglViewController.m */; };
 		E4DAB9501AA7742F00C58A8E /* SettingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E4DAB94F1AA7742F00C58A8E /* SettingViewController.m */; };
@@ -125,6 +126,8 @@
 		E430A2281AA755C600CFBFC6 /* leftMenu.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = leftMenu.jpg; sourceTree = "<group>"; };
 		E48A46361AB1B35C002CB434 /* AddReportViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AddReportViewController.h; sourceTree = "<group>"; };
 		E48A46371AB1B35C002CB434 /* AddReportViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AddReportViewController.m; sourceTree = "<group>"; };
+		E4A4AF691AB1F2E800D14ABD /* UIButton+UIButtonImageWithLable.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIButton+UIButtonImageWithLable.h"; sourceTree = "<group>"; };
+		E4A4AF6A1AB1F2E800D14ABD /* UIButton+UIButtonImageWithLable.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIButton+UIButtonImageWithLable.m"; sourceTree = "<group>"; };
 		E4DAB9481AA76EB600C58A8E /* MyNoticeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyNoticeViewController.h; sourceTree = "<group>"; };
 		E4DAB9491AA76EB600C58A8E /* MyNoticeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyNoticeViewController.m; sourceTree = "<group>"; };
 		E4DAB94B1AA772FF00C58A8E /* DwglViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DwglViewController.h; sourceTree = "<group>"; };
@@ -413,6 +416,8 @@
 				E412B3C81AA9C95A0015B7C1 /* NSString+HXAddtions.m */,
 				E4EEB8081AAF613A009CEFA1 /* NSDictionary+Category.h */,
 				E4EEB8091AAF613A009CEFA1 /* NSDictionary+Category.m */,
+				E4A4AF691AB1F2E800D14ABD /* UIButton+UIButtonImageWithLable.h */,
+				E4A4AF6A1AB1F2E800D14ABD /* UIButton+UIButtonImageWithLable.m */,
 			);
 			path = Category;
 			sourceTree = "<group>";
@@ -678,6 +683,7 @@
 				E4EB9BD51AB05C5D003FBC75 /* AFNetworkActivityIndicatorManager.m in Sources */,
 				E4F02F311AA5FA3100426A88 /* UIView+IQKeyboardToolbar.m in Sources */,
 				E4F02F2A1AA5FA3100426A88 /* IQKeyboardManager.m in Sources */,
+				E4A4AF6B1AB1F2E800D14ABD /* UIButton+UIButtonImageWithLable.m in Sources */,
 				E4ECC4BA1AADEBF500DADC94 /* MyReportTableViewCell.m in Sources */,
 				E4F02F351AA60B7200426A88 /* FindPasswordViewController.m in Sources */,
 				E48A46381AB1B35C002CB434 /* AddReportViewController.m in Sources */,

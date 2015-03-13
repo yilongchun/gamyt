@@ -16,6 +16,8 @@
 #define REPORT_PATH @"/files/report"
 #define NOTICE_PATH @"/files/notice/"
 
+#define BUTTON_BACKGROUND_COLOR [UIColor colorWithRed:37/255.0 green:134/255.0 blue:216/255.0 alpha:1]
+
 #define GENERAL 0 // 普通会员
 #define TASTER 1 // 审阅会员
 
