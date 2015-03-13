@@ -1045,6 +1045,7 @@
                     </view>
                     <connections>
                         <outlet property="tableView" destination="Swa-iK-Zkx" id="PeB-A8-67H"/>
+                        <segue destination="Y2b-fr-min" kind="show" identifier="toInfoDetail" id="Xpb-pl-Cn9"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="GxN-hX-oIu" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -1457,11 +1458,68 @@
                         <outlet property="sendpic" destination="0yw-AX-xAd" id="R4P-LB-jFa"/>
                         <outlet property="sepline" destination="dFo-CR-d9v" id="L74-r4-kc6"/>
                         <outlet property="sepline2" destination="H5g-KX-txb" id="ntD-S1-4qp"/>
+                        <segue destination="Qwg-RM-Ogg" kind="show" identifier="toInfoDetailStatus" id="gde-40-5Rd"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="MiG-us-v1F" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="3483" y="-609"/>
+        </scene>
+        <!--信息记录-->
+        <scene sceneID="YXO-9v-Q6q">
+            <objects>
+                <viewController storyboardIdentifier="InfoDetailStatusViewController" id="Qwg-RM-Ogg" customClass="InfoDetailStatusViewController" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="0yh-37-Bgj"/>
+                        <viewControllerLayoutGuide type="bottom" id="GPT-ao-p0c"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="mWq-Mf-78B">
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="IN2-tL-Eib">
+                                <rect key="frame" x="0.0" y="0.0" width="240" height="128"/>
+                            </scrollView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="IN2-tL-Eib" firstAttribute="top" secondItem="0yh-37-Bgj" secondAttribute="bottom" id="1ma-am-PPu"/>
+                            <constraint firstItem="IN2-tL-Eib" firstAttribute="leading" secondItem="mWq-Mf-78B" secondAttribute="leading" id="9zz-SB-rDE"/>
+                            <constraint firstItem="GPT-ao-p0c" firstAttribute="top" secondItem="IN2-tL-Eib" secondAttribute="bottom" id="qso-vP-y3u"/>
+                            <constraint firstAttribute="trailing" secondItem="IN2-tL-Eib" secondAttribute="trailing" id="sLD-Mw-Bbh"/>
+                        </constraints>
+                        <variation key="default">
+                            <mask key="subviews">
+                                <exclude reference="IN2-tL-Eib"/>
+                            </mask>
+                            <mask key="constraints">
+                                <exclude reference="1ma-am-PPu"/>
+                                <exclude reference="9zz-SB-rDE"/>
+                                <exclude reference="sLD-Mw-Bbh"/>
+                                <exclude reference="qso-vP-y3u"/>
+                            </mask>
+                        </variation>
+                        <variation key="heightClass=regular-widthClass=compact">
+                            <mask key="subviews">
+                                <include reference="IN2-tL-Eib"/>
+                            </mask>
+                            <mask key="constraints">
+                                <include reference="1ma-am-PPu"/>
+                                <include reference="9zz-SB-rDE"/>
+                                <include reference="sLD-Mw-Bbh"/>
+                                <include reference="qso-vP-y3u"/>
+                            </mask>
+                        </variation>
+                    </view>
+                    <navigationItem key="navigationItem" title="信息记录" id="M8G-SX-vr0">
+                        <barButtonItem key="rightBarButtonItem" systemItem="refresh" id="Ok1-AL-odb"/>
+                    </navigationItem>
+                    <connections>
+                        <outlet property="myscrollview" destination="IN2-tL-Eib" id="5KF-bR-b0G"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="kIH-z1-59U" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="4212" y="-609"/>
         </scene>
         <!--找回密码-->
         <scene sceneID="6ES-oc-enD">

@@ -7,6 +7,7 @@
 //
 
 #import "InfoDetailViewController.h"
+#import "InfoDetailStatusViewController.h"
 
 @implementation InfoDetailViewController{
     NSMutableArray *btns;
@@ -19,7 +20,7 @@
     }
     
     
-    UIBarButtonItem *rightitem = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"toread_record_icon_normal"] style:UIBarButtonItemStylePlain target:self action:nil];
+    UIBarButtonItem *rightitem = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"toread_record_icon_normal"] style:UIBarButtonItemStylePlain target:self action:@selector(toInfoDetailStatus)];
     self.navigationItem.rightBarButtonItem = rightitem;
     
     self.sendpic.layer.masksToBounds = YES;
@@ -401,6 +402,11 @@
 
 -(void)action4{
     NSLog(@"报审");
+}
+
+-(void)toInfoDetailStatus{
+    InfoDetailStatusViewController *vc = [[self storyboard] instantiateViewControllerWithIdentifier:@"InfoDetailStatusViewController"];
+    [self.navigationController pushViewController:vc animated:YES];
 }
 
 
