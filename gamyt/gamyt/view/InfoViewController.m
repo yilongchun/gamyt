@@ -48,7 +48,7 @@
     NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:url];
     [request setHTTPMethod:@"POST"];
     [request setHTTPBody:postData];
-    [request setTimeoutInterval:10.0];
+    [request setTimeoutInterval:30.0];
     [request setValue:@"application/json; charset=utf-8" forHTTPHeaderField:@"content-type"];
     NSNumberFormatter* numberFormatter = [[NSNumberFormatter alloc] init];
     [request setValue:[numberFormatter stringFromNumber:[Utils getUserId]] forHTTPHeaderField:USERID];
@@ -114,7 +114,7 @@
     NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:url];
     [request setHTTPMethod:@"POST"];
     [request setHTTPBody:postData];
-    [request setTimeoutInterval:10.0];
+    [request setTimeoutInterval:30.0];
     [request setValue:@"application/json; charset=utf-8" forHTTPHeaderField:@"content-type"];
     NSNumberFormatter* numberFormatter = [[NSNumberFormatter alloc] init];
     [request setValue:[numberFormatter stringFromNumber:[Utils getUserId]] forHTTPHeaderField:USERID];

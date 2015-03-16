@@ -39,7 +39,7 @@
     NSURL *url = [NSURL URLWithString:[str stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding]];
     NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:url];
     [request setHTTPMethod:@"POST"];
-    [request setTimeoutInterval:10.0];
+//    [request setTimeoutInterval:30.0];
     NSNumberFormatter* numberFormatter = [[NSNumberFormatter alloc] init];
     [request setValue:[numberFormatter stringFromNumber:[Utils getUserId]] forHTTPHeaderField:USERID];
     [request setValue:[Utils getToken] forHTTPHeaderField:TOKEN];
@@ -539,6 +539,7 @@
         UIAlertController *alert = [UIAlertController alertControllerWithTitle:title message:message preferredStyle:UIAlertControllerStyleAlert];
         [alert addAction:[UIAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleDestructive handler:^(UIAlertAction *action) {
             NSLog(@"确定");
+            [self archiveReport];
         }]];
         [alert addAction:[UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleCancel handler:nil]];
         [self presentViewController:alert animated:YES completion:nil];
@@ -549,7 +550,8 @@
     NSLog(@"报审");
 }
 
--(void)hireReport:(NSString *)title{//录用
+//录用
+-(void)hireReport:(NSString *)title{
     
     if (title && title.length > 0) {
         [self showHudInView:self.view hint:@"加载中"];
@@ -558,7 +560,7 @@
         NSURL *url = [NSURL URLWithString:[str stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding]];
         NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:url];
         [request setHTTPMethod:@"POST"];
-        [request setTimeoutInterval:10.0];
+        [request setTimeoutInterval:30.0];
         NSNumberFormatter* numberFormatter = [[NSNumberFormatter alloc] init];
         [request setValue:[numberFormatter stringFromNumber:[Utils getUserId]] forHTTPHeaderField:USERID];
         [request setValue:[Utils getToken] forHTTPHeaderField:TOKEN];
@@ -613,6 +615,65 @@
     }
 }
 
+//归档
+-(void)archiveReport{
+    [self showHudInView:self.view hint:@"加载中"];
+    NSString *str = [NSString stringWithFormat:@"%@%@",[Utils getHostname],@"/mobile/report/archiveReport"];
+    NSURL *url = [NSURL URLWithString:[str stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding]];
+    NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:url];
+    [request setHTTPMethod:@"POST"];
+    [request setTimeoutInterval:30.0];
+    NSNumberFormatter* numberFormatter = [[NSNumberFormatter alloc] init];
+    [request setValue:[numberFormatter stringFromNumber:[Utils getUserId]] forHTTPHeaderField:USERID];
+    [request setValue:[Utils getToken] forHTTPHeaderField:TOKEN];
+    
+    //JSON格式
+    //        [request setValue:@"application/json; charset=utf-8" forHTTPHeaderField:@"content-type"];
+    //        NSMutableDictionary *parameters = [NSMutableDictionary dictionary];
+    //        [parameters setObject:title forKey:@"title"];
+    //        [parameters setObject:newsid forKey:@"newid"];
+    //        [parameters setObject:reportid forKey:@"reportid"];
+    //        NSString *post=[NSString jsonStringWithDictionary:parameters];
+    //        NSData *postData = [post dataUsingEncoding:NSUTF8StringEncoding allowLossyConversion:YES];
+    //        [request setHTTPBody:postData];
+    //非JSON格式
+    NSString *param = [NSString stringWithFormat:@"newsid=%d&reportid=%d",[newsid intValue],[reportid intValue]];
+    [request setHTTPBody:[param dataUsingEncoding:NSUTF8StringEncoding]];
+    
+    AFHTTPRequestOperation *operation = [[AFHTTPRequestOperation alloc]initWithRequest:request];
+    [operation setCompletionBlockWithSuccess:^(AFHTTPRequestOperation *operation, id responseObject) {
+        NSString *html = operation.responseString;
+        NSData* data=[html dataUsingEncoding:NSUTF8StringEncoding];
+        id dict=[NSJSONSerialization  JSONObjectWithData:data options:0 error:nil];
+        NSLog(@"获取到的数据为：%@",dict);
+        NSDictionary *resultDict = [NSDictionary cleanNullForDic:dict];
+        if (resultDict == nil) {
+            NSLog(@"json parse failed \r\n");
+        }else{
+            NSLog(@"%@",resultDict);
+        }
+        NSNumber *code = [resultDict objectForKey:@"code"];
+        if ([code intValue] == 1) {
+            [self hideHud];
+            [self showHint:@"加载失败"];
+        }else if([code intValue] == 4){
+            [self hideHud];
+            [[NSNotificationCenter defaultCenter] postNotificationName:KNOTIFICATION_LOGINCHANGE object:self];
+        }else if([code intValue] == 0){
+            [self hideHud];
+            [self showHint:@"归档成功"];
+            [self loadData];
+            [[NSNotificationCenter defaultCenter] postNotificationName:@"refreshInfo" object:self];
+        }
+    }failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        NSLog(@"发生错误！%@",error);
+        [self hideHud];
+        [self showHint:@"连接失败"];
+    }];
+    NSOperationQueue *queue = [[NSOperationQueue alloc] init];
+    [queue addOperation:operation];
+}
+
 -(void)toInfoDetailStatus{
     InfoDetailStatusViewController *vc = [[self storyboard] instantiateViewControllerWithIdentifier:@"InfoDetailStatusViewController"];
     vc.newsid = newsid;
@@ -628,6 +689,7 @@
         }
     }else if (alertView.tag == 3) {//归档
         if (buttonIndex == 1) {//确定
+            [self archiveReport];
             NSLog(@"确定");
         }
     }

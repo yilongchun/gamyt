@@ -35,7 +35,7 @@
     NSURL *url = [NSURL URLWithString:[str stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding]];
     NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:url];
     [request setHTTPMethod:@"POST"];
-    [request setTimeoutInterval:10.0];
+    [request setTimeoutInterval:30.0];
     NSNumberFormatter* numberFormatter = [[NSNumberFormatter alloc] init];
     [request setValue:[numberFormatter stringFromNumber:[Utils getUserId]] forHTTPHeaderField:USERID];
     [request setValue:[Utils getToken] forHTTPHeaderField:TOKEN];
