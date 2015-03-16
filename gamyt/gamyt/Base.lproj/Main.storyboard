@@ -1460,6 +1460,7 @@
                         <outlet property="sepline" destination="dFo-CR-d9v" id="L74-r4-kc6"/>
                         <outlet property="sepline2" destination="H5g-KX-txb" id="ntD-S1-4qp"/>
                         <segue destination="Qwg-RM-Ogg" kind="show" identifier="toInfoDetailStatus" id="gde-40-5Rd"/>
+                        <segue destination="Dvq-xk-Gcn" kind="presentation" identifier="toUpReport" id="A8y-xk-hHX"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="MiG-us-v1F" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -1526,7 +1527,92 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="kIH-z1-59U" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="4212" y="-609"/>
+            <point key="canvasLocation" x="4386" y="-889.5"/>
+        </scene>
+        <!--转上报-->
+        <scene sceneID="son-oU-pTU">
+            <objects>
+                <viewController storyboardIdentifier="InfoToUpViewController" title="转上报" id="Dvq-xk-Gcn" customClass="InfoToUpViewController" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="9UD-E5-hry"/>
+                        <viewControllerLayoutGuide type="bottom" id="bIn-T7-0bK"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="VNo-c7-LMS">
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <navigationBar contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="EgH-9o-rfp">
+                                <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="44" id="Mx3-ev-VNW">
+                                        <variation key="heightClass=regular-widthClass=compact" constant="64"/>
+                                    </constraint>
+                                    <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="64" id="sRB-pE-WQh"/>
+                                </constraints>
+                                <color key="barTintColor" red="0.14117647059999999" green="0.40000000000000002" blue="0.6705882353" alpha="1" colorSpace="calibratedRGB"/>
+                                <textAttributes key="titleTextAttributes">
+                                    <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                </textAttributes>
+                                <items>
+                                    <navigationItem title="转上报" id="F9a-U8-AWq">
+                                        <barButtonItem key="leftBarButtonItem" title="取消" id="qvY-od-Njr">
+                                            <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                            <connections>
+                                                <action selector="cancel:" destination="Dvq-xk-Gcn" id="HYL-d0-jd2"/>
+                                            </connections>
+                                        </barButtonItem>
+                                        <barButtonItem key="rightBarButtonItem" title="上报" id="Jhz-TQ-L6B">
+                                            <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                            <connections>
+                                                <action selector="save:" destination="Dvq-xk-Gcn" id="9xi-lc-hAW"/>
+                                            </connections>
+                                        </barButtonItem>
+                                    </navigationItem>
+                                </items>
+                                <variation key="default">
+                                    <mask key="constraints">
+                                        <exclude reference="Mx3-ev-VNW"/>
+                                        <exclude reference="sRB-pE-WQh"/>
+                                    </mask>
+                                </variation>
+                                <variation key="heightClass=regular-widthClass=compact">
+                                    <mask key="constraints">
+                                        <include reference="Mx3-ev-VNW"/>
+                                        <include reference="sRB-pE-WQh"/>
+                                    </mask>
+                                </variation>
+                            </navigationBar>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstAttribute="trailing" secondItem="EgH-9o-rfp" secondAttribute="trailing" id="OJN-0f-jaa"/>
+                            <constraint firstItem="EgH-9o-rfp" firstAttribute="top" secondItem="VNo-c7-LMS" secondAttribute="top" id="PMu-La-Xq7"/>
+                            <constraint firstItem="EgH-9o-rfp" firstAttribute="leading" secondItem="VNo-c7-LMS" secondAttribute="leading" id="UEq-aT-RwV"/>
+                        </constraints>
+                        <variation key="default">
+                            <mask key="subviews">
+                                <exclude reference="EgH-9o-rfp"/>
+                            </mask>
+                            <mask key="constraints">
+                                <exclude reference="OJN-0f-jaa"/>
+                                <exclude reference="PMu-La-Xq7"/>
+                                <exclude reference="UEq-aT-RwV"/>
+                            </mask>
+                        </variation>
+                        <variation key="heightClass=regular-widthClass=compact">
+                            <mask key="subviews">
+                                <include reference="EgH-9o-rfp"/>
+                            </mask>
+                            <mask key="constraints">
+                                <include reference="OJN-0f-jaa"/>
+                                <include reference="PMu-La-Xq7"/>
+                                <include reference="UEq-aT-RwV"/>
+                            </mask>
+                        </variation>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Svz-yQ-hhy" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="4386" y="-231"/>
         </scene>
         <!--找回密码-->
         <scene sceneID="6ES-oc-enD">

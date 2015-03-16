@@ -75,6 +75,7 @@
 		E4EEB8041AAF3720009CEFA1 /* JYSlideSegmentController.m in Sources */ = {isa = PBXBuildFile; fileRef = E4EEB8031AAF3720009CEFA1 /* JYSlideSegmentController.m */; };
 		E4EEB8071AAF5E96009CEFA1 /* InfoDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E4EEB8061AAF5E95009CEFA1 /* InfoDetailViewController.m */; };
 		E4EEB80A1AAF613A009CEFA1 /* NSDictionary+Category.m in Sources */ = {isa = PBXBuildFile; fileRef = E4EEB8091AAF613A009CEFA1 /* NSDictionary+Category.m */; };
+		E4EFAE751AB7228A0056A92C /* InfoToUpViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E4EFAE741AB7228A0056A92C /* InfoToUpViewController.m */; };
 		E4F02EEF1AA5C5ED00426A88 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = E4F02EEE1AA5C5ED00426A88 /* main.m */; };
 		E4F02EF21AA5C5ED00426A88 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = E4F02EF11AA5C5ED00426A88 /* AppDelegate.m */; };
 		E4F02EF51AA5C5ED00426A88 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E4F02EF41AA5C5ED00426A88 /* ViewController.m */; };
@@ -241,6 +242,8 @@
 		E4EEB8061AAF5E95009CEFA1 /* InfoDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = InfoDetailViewController.m; sourceTree = "<group>"; };
 		E4EEB8081AAF613A009CEFA1 /* NSDictionary+Category.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSDictionary+Category.h"; sourceTree = "<group>"; };
 		E4EEB8091AAF613A009CEFA1 /* NSDictionary+Category.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSDictionary+Category.m"; sourceTree = "<group>"; };
+		E4EFAE731AB7228A0056A92C /* InfoToUpViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = InfoToUpViewController.h; sourceTree = "<group>"; };
+		E4EFAE741AB7228A0056A92C /* InfoToUpViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = InfoToUpViewController.m; sourceTree = "<group>"; };
 		E4F02EE91AA5C5ED00426A88 /* gamyt.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = gamyt.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		E4F02EED1AA5C5ED00426A88 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		E4F02EEE1AA5C5ED00426A88 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = main.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
@@ -635,6 +638,8 @@
 				E4EEB8061AAF5E95009CEFA1 /* InfoDetailViewController.m */,
 				E42910421AB3249B00B1B6E9 /* InfoDetailStatusViewController.h */,
 				E42910431AB3249B00B1B6E9 /* InfoDetailStatusViewController.m */,
+				E4EFAE731AB7228A0056A92C /* InfoToUpViewController.h */,
+				E4EFAE741AB7228A0056A92C /* InfoToUpViewController.m */,
 				E4DAB9481AA76EB600C58A8E /* MyNoticeViewController.h */,
 				E4DAB9491AA76EB600C58A8E /* MyNoticeViewController.m */,
 				E4DAB94B1AA772FF00C58A8E /* DwglViewController.h */,
@@ -786,6 +791,7 @@
 				E430A21F1AA7443600CFBFC6 /* SlideNavigationContorllerAnimatorSlideAndFade.m in Sources */,
 				E4EC77BA1AA8582300414B8B /* NSString+Valid.m in Sources */,
 				E4EC77BD1AA8582300414B8B /* UIViewController+HUD.m in Sources */,
+				E4EFAE751AB7228A0056A92C /* InfoToUpViewController.m in Sources */,
 				E4EB9BD01AB05C5D003FBC75 /* AFSecurityPolicy.m in Sources */,
 				E4F02F301AA5FA3100426A88 /* UIView+Hierarchy.m in Sources */,
 				E429103F1AB3242700B1B6E9 /* NSLayoutConstraint+MASDebugAdditions.m in Sources */,

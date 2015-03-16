@@ -8,7 +8,7 @@
 
 #import "InfoDetailStatusViewController.h"
 #import "TimeLineViewControl.h"
-#import "AFNetworking.h"
+
 
 @implementation InfoDetailStatusViewController{
     TimeLineViewControl *timeline;

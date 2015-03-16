@@ -8,7 +8,7 @@
 
 #import <UIKit/UIKit.h>
 
-@interface InfoDetailViewController : UIViewController
+@interface InfoDetailViewController : UIViewController<UIAlertViewDelegate,UITextFieldDelegate>
 
 @property(nonatomic, strong) NSDictionary *info;
 @property (weak, nonatomic) IBOutlet UIScrollView *myscrollview;

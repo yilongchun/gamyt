@@ -21,6 +21,10 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(loadData)
+                                                 name:@"refreshInfo"
+                                               object:nil];
     [self showHudInView:self.view hint:@"加载中"];
     tempTitle = self.title;
     _tableView.pullDelegate = self;

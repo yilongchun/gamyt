@@ -11,6 +11,9 @@
 
 @implementation InfoDetailViewController{
     NSMutableArray *btns;
+    NSString *infoTitle;
+    NSNumber *newsid;
+    NSNumber *reportid;
 }
 
 - (void)viewDidLoad{
@@ -26,17 +29,81 @@
     self.sendpic.layer.masksToBounds = YES;
     self.sendpic.layer.cornerRadius = 40;
    
+    [self initData];
+    
+}
+//获取数据
+-(void)loadData{
+    [self showHudInView:self.view hint:@"加载中"];
+    NSString *str = [NSString stringWithFormat:@"%@%@",[Utils getHostname],@"/mobile/report/getReportDetail"];
+    NSURL *url = [NSURL URLWithString:[str stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding]];
+    NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:url];
+    [request setHTTPMethod:@"POST"];
+    [request setTimeoutInterval:10.0];
+    NSNumberFormatter* numberFormatter = [[NSNumberFormatter alloc] init];
+    [request setValue:[numberFormatter stringFromNumber:[Utils getUserId]] forHTTPHeaderField:USERID];
+    [request setValue:[Utils getToken] forHTTPHeaderField:TOKEN];
+    
+    //JSON格式
+//    [request setValue:@"application/json; charset=utf-8" forHTTPHeaderField:@"content-type"];
+//    NSMutableDictionary *parameters = [NSMutableDictionary dictionary];
+//    [parameters setObject:[NSNumber numberWithInt:0] forKey:@"ismyreport"];
+//    [parameters setObject:[self.info objectForKey:@"id"] forKey:@"reportid"];
+//    NSString *post=[NSString jsonStringWithDictionary:parameters];
+//    NSData *postData = [post dataUsingEncoding:NSUTF8StringEncoding allowLossyConversion:YES];
+//    [request setHTTPBody:postData];
+    //非JSON格式
+    NSString *param = [NSString stringWithFormat:@"reportid=%d&ismyreport=0",[reportid intValue]];
+    [request setHTTPBody:[param dataUsingEncoding:NSUTF8StringEncoding]];
+    
+    AFHTTPRequestOperation *operation = [[AFHTTPRequestOperation alloc]initWithRequest:request];
+    [operation setCompletionBlockWithSuccess:^(AFHTTPRequestOperation *operation, id responseObject) {
+        NSString *html = operation.responseString;
+        NSData* data=[html dataUsingEncoding:NSUTF8StringEncoding];
+        id dict=[NSJSONSerialization  JSONObjectWithData:data options:0 error:nil];
+        NSLog(@"获取到的数据为：%@",dict);
+        NSDictionary *resultDict = [NSDictionary cleanNullForDic:dict];
+        if (resultDict == nil) {
+            NSLog(@"json parse failed \r\n");
+        }else{
+            NSLog(@"%@",resultDict);
+        }
+        NSNumber *code = [resultDict objectForKey:@"code"];
+        if ([code intValue] == 1) {
+            [self hideHud];
+            [self showHint:@"加载失败"];
+        }else if([code intValue] == 4){
+            [self hideHud];
+            [[NSNotificationCenter defaultCenter] postNotificationName:KNOTIFICATION_LOGINCHANGE object:self];
+        }else if([code intValue] == 0){
+            [self hideHud];
+            
+            NSDictionary *dic = [resultDict objectForKey:@"data"];
+            self.info = [NSDictionary cleanNullForDic:dic];
+            [self initData];
+        }
+    }failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        NSLog(@"发生错误！%@",error);
+        [self hideHud];
+        [self showHint:@"连接失败"];
+    }];
+    NSOperationQueue *queue = [[NSOperationQueue alloc] init];
+    [queue addOperation:operation];
+}
+//设置数据
+-(void)initData{
     NSString *sendname = [self.info objectForKey:@"sendname"];//姓名
     NSString *notename = [self.info objectForKey:@"notename"];//单位
     NSNumber *opttype = [self.info objectForKey:@"opttype"];//类型
     NSString *sendpic = [self.info objectForKey:@"sendpic"];//照片
     NSString *content = [self.info objectForKey:@"content"];//内容
-//    content = [NSString stringWithFormat:@"%@%@%@",content,content,content];
+    //    content = [NSString stringWithFormat:@"%@%@%@",content,content,content];
     NSString *addtime = [self.info objectForKey:@"addtime"];//时间
+    infoTitle = [self.info objectForKey:@"title"];//标题
+    newsid = [self.info objectForKey:@"newsid"];
+    reportid = [self.info objectForKey:@"id"];
     
     
-    
-
     self.sepline.backgroundColor = [UIColor colorWithRed:200/255.0 green:200/255.0 blue:200/255.0 alpha:1];
     self.sepline2.backgroundColor = [UIColor colorWithRed:200/255.0 green:200/255.0 blue:200/255.0 alpha:1];
     self.sendname.text = sendname;
@@ -77,7 +144,7 @@
         
     }
     [self.content setFrame:CGRectMake(self.content.frame.origin.x, self.content.frame.origin.y, textSize.width, textSize.height)];
-
+    
     
     [self initButtons];
     
@@ -114,10 +181,14 @@
     if ([[[UIDevice currentDevice] systemVersion] floatValue] < 8.0) {
         [self setLayout];
     }
-    
 }
-
+//设置按钮
 -(void)initButtons{
+    [self.btn1 removeFromSuperview];
+    [self.btn2 removeFromSuperview];
+    [self.btn3 removeFromSuperview];
+    [self.btn4 removeFromSuperview];
+    
     self.btn1 = [UIButton buttonWithType:UIButtonTypeCustom];
     self.btn2 = [UIButton buttonWithType:UIButtonTypeCustom];
     self.btn3 = [UIButton buttonWithType:UIButtonTypeCustom];
@@ -178,6 +249,24 @@
     NSNumber *type = [userdefaults objectForKey:@"type"];
     switch ([type integerValue]) {
         case MANAGER://管理员
+        {
+            //上报
+            NSNumber *reported = [self.info objectForKey:@"reported"];
+            if (![reported boolValue]) {
+                [btns addObject:self.btn2];
+                [self.myscrollview addSubview:self.btn2];
+            }
+            //归档
+            NSNumber *archived = [self.info objectForKey:@"archived"];
+            if (![archived boolValue]) {
+                [btns addObject:self.btn3];
+                [self.myscrollview addSubview:self.btn3];
+            }
+            //报审
+            [btns addObject:self.btn4];
+            [self.myscrollview addSubview:self.btn4];
+        }
+            break;
         case COUNTY_MANAGER://省管理员
         case CITY_MANAGER://市管理员
         case SHENG_MANAGER://县管理员
@@ -219,7 +308,7 @@
             break;
     }
 }
-
+//布局
 -(void)setLayout{
     NSString *path = [self.info objectForKey:@"path"];//照片路径
     if (path.length == 0) {
@@ -390,28 +479,171 @@
 
 -(void)action1{
     NSLog(@"录用");
+    NSString *title = @"信息录用";
+    NSString *message = @"信息标题:(最多20字)";
+    NSString *placeholder = @"请输入标题";
+    
+    if ([[UIDevice currentDevice] systemVersion].floatValue < 8.0) {
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:title message:message delegate:self cancelButtonTitle:@"取消" otherButtonTitles:@"确定", nil];
+        alert.alertViewStyle = UIAlertViewStylePlainTextInput;
+        UITextField *tf=[alert textFieldAtIndex:0];
+        if (infoTitle) {
+            tf.text = infoTitle;
+        }
+        [tf addTarget:self action:@selector(textFieldDidChange:) forControlEvents:UIControlEventEditingChanged];
+        tf.tag = 1;
+        tf.delegate = self;
+        tf.placeholder = placeholder;
+        alert.tag = 1;
+        [alert show];
+    }else{
+        UIAlertController *alert = [UIAlertController alertControllerWithTitle:title message:message preferredStyle:UIAlertControllerStyleAlert];
+        [alert addTextFieldWithConfigurationHandler:^(UITextField *textField) {
+            textField.placeholder = placeholder;
+            textField.delegate = self;
+            textField.tag = 1;
+            [textField addTarget:self action:@selector(textFieldDidChange:) forControlEvents:UIControlEventEditingChanged];
+            if (infoTitle) {
+                textField.text = infoTitle;
+            }
+        }];
+        
+        [alert addAction:[UIAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleDestructive handler:^(UIAlertAction *action) {
+            UITextField *tf=[[alert textFields] objectAtIndex:0];
+            [self hireReport:tf.text];
+        }]];
+        [alert addAction:[UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleCancel handler:nil]];
+        [self presentViewController:alert animated:YES completion:nil];
+    }
+
+    
 }
 
 -(void)action2{
     NSLog(@"上报");
+    
+    //UIViewController *vc = [[self storyboard] instantiateViewControllerWithIdentifier:@"InfoToUpViewController"];
+    [self performSegueWithIdentifier:@"toUpReport" sender:nil];
 }
 
 -(void)action3{
     NSLog(@"归档");
+    
+    NSString *title = @"归档上报";
+    NSString *message = @"您确定要归档这条上报信息吗?";
+    if ([[UIDevice currentDevice] systemVersion].floatValue < 8.0) {
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:title message:message delegate:self cancelButtonTitle:@"取消" otherButtonTitles:@"确定", nil];
+        alert.tag = 3;
+        [alert show];
+    }else{
+        UIAlertController *alert = [UIAlertController alertControllerWithTitle:title message:message preferredStyle:UIAlertControllerStyleAlert];
+        [alert addAction:[UIAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleDestructive handler:^(UIAlertAction *action) {
+            NSLog(@"确定");
+        }]];
+        [alert addAction:[UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleCancel handler:nil]];
+        [self presentViewController:alert animated:YES completion:nil];
+    }
 }
 
 -(void)action4{
     NSLog(@"报审");
 }
 
+-(void)hireReport:(NSString *)title{//录用
+    
+    if (title && title.length > 0) {
+        [self showHudInView:self.view hint:@"加载中"];
+        
+        NSString *str = [NSString stringWithFormat:@"%@%@",[Utils getHostname],@"/mobile/report/hireReport"];
+        NSURL *url = [NSURL URLWithString:[str stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding]];
+        NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:url];
+        [request setHTTPMethod:@"POST"];
+        [request setTimeoutInterval:10.0];
+        NSNumberFormatter* numberFormatter = [[NSNumberFormatter alloc] init];
+        [request setValue:[numberFormatter stringFromNumber:[Utils getUserId]] forHTTPHeaderField:USERID];
+        [request setValue:[Utils getToken] forHTTPHeaderField:TOKEN];
+        
+        //JSON格式
+//        [request setValue:@"application/json; charset=utf-8" forHTTPHeaderField:@"content-type"];
+//        NSMutableDictionary *parameters = [NSMutableDictionary dictionary];
+//        [parameters setObject:title forKey:@"title"];
+//        [parameters setObject:newsid forKey:@"newid"];
+//        [parameters setObject:reportid forKey:@"reportid"];
+//        NSString *post=[NSString jsonStringWithDictionary:parameters];
+//        NSData *postData = [post dataUsingEncoding:NSUTF8StringEncoding allowLossyConversion:YES];
+//        [request setHTTPBody:postData];
+        //非JSON格式
+        NSString *param = [NSString stringWithFormat:@"newsid=%d&reportid=%d&title=%@",[newsid intValue],[reportid intValue],title];
+        [request setHTTPBody:[param dataUsingEncoding:NSUTF8StringEncoding]];
+        
+        AFHTTPRequestOperation *operation = [[AFHTTPRequestOperation alloc]initWithRequest:request];
+        [operation setCompletionBlockWithSuccess:^(AFHTTPRequestOperation *operation, id responseObject) {
+            NSString *html = operation.responseString;
+            NSData* data=[html dataUsingEncoding:NSUTF8StringEncoding];
+            id dict=[NSJSONSerialization  JSONObjectWithData:data options:0 error:nil];
+            NSLog(@"获取到的数据为：%@",dict);
+            NSDictionary *resultDict = [NSDictionary cleanNullForDic:dict];
+            if (resultDict == nil) {
+                NSLog(@"json parse failed \r\n");
+            }else{
+                NSLog(@"%@",resultDict);
+            }
+            NSNumber *code = [resultDict objectForKey:@"code"];
+            if ([code intValue] == 1) {
+                [self hideHud];
+                [self showHint:@"加载失败"];
+            }else if([code intValue] == 4){
+                [self hideHud];
+                [[NSNotificationCenter defaultCenter] postNotificationName:KNOTIFICATION_LOGINCHANGE object:self];
+            }else if([code intValue] == 0){
+                [self hideHud];
+                [self showHint:@"录用成功"];
+                [self loadData];
+                [[NSNotificationCenter defaultCenter] postNotificationName:@"refreshInfo" object:self];
+            }
+        }failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+            NSLog(@"发生错误！%@",error);
+            [self hideHud];
+            [self showHint:@"连接失败"];
+        }];
+        NSOperationQueue *queue = [[NSOperationQueue alloc] init];
+        [queue addOperation:operation];
+    }else{
+        [self showHint:@"请输入标题"];
+    }
+}
+
 -(void)toInfoDetailStatus{
     InfoDetailStatusViewController *vc = [[self storyboard] instantiateViewControllerWithIdentifier:@"InfoDetailStatusViewController"];
-    
-    NSNumber *newsid = [self.info objectForKey:@"newsid"];
     vc.newsid = newsid;
-    
     [self.navigationController pushViewController:vc animated:YES];
 }
+
+#pragma mark - UIAlertViewDelegate
+- (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex{
+    if (alertView.tag == 1) {//录用
+        if (buttonIndex == 1) {//确定
+            UITextField *tf=[alertView textFieldAtIndex:0];
+            [self hireReport:tf.text];
+        }
+    }else if (alertView.tag == 3) {//归档
+        if (buttonIndex == 1) {//确定
+            NSLog(@"确定");
+        }
+    }
+}
+
+#pragma mark - UITextFieldDelegate
+- (void)textFieldDidChange:(UITextField *)textField{
+    if (textField.tag == 1) {
+        if (textField.text.length > 20) {
+            textField.text = [textField.text substringToIndex:20];
+        }
+    }
+}
+
+
+
 
 
 @end
