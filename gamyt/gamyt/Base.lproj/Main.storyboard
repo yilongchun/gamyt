@@ -617,10 +617,10 @@
             </objects>
             <point key="canvasLocation" x="2040" y="34.5"/>
         </scene>
-        <!--Add Report View Controller-->
+        <!--新增上报-->
         <scene sceneID="qUq-zO-iRs">
             <objects>
-                <viewController storyboardIdentifier="AddReportViewController" id="BhP-Y9-q5w" customClass="AddReportViewController" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="AddReportViewController" title="新增上报" id="BhP-Y9-q5w" customClass="AddReportViewController" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="0qJ-pQ-swD"/>
                         <viewControllerLayoutGuide type="bottom" id="OAD-Nq-7TE"/>
