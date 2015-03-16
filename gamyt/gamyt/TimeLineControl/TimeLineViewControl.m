@@ -76,7 +76,10 @@ const float VIEW_WIDTH = 225.0;
     if (self) {
         viewheight = 75.0;
 //        leftWidth = frame.size.width - (PROGRESS_VIEW_CONTAINER_LEFT + INITIAL_PROGRESS_CONTAINER_WIDTH + CIRCLE_RADIUS * 2);
-        leftWidth = frame.size.width - ([self.progressViewContainerLeft floatValue] + INITIAL_PROGRESS_CONTAINER_WIDTH + CIRCLE_RADIUS * 2);
+        
+        self.progressViewContainerLeft = [NSNumber numberWithFloat:([UIScreen mainScreen].bounds.size.width - 26) / 2];
+        
+        leftWidth = frame.size.width - ([self.progressViewContainerLeft floatValue] + INITIAL_PROGRESS_CONTAINER_WIDTH + CIRCLE_RADIUS * 2)-40;
         
         
         self.progressViewContainer = [[UIView alloc] init ];
@@ -115,7 +118,8 @@ const float VIEW_WIDTH = 225.0;
         
         [label setText:timeDescription];
         label.numberOfLines = 2;
-        label.textColor = i < currentStatus ? [UIColor blackColor] : [UIColor grayColor];
+        //label.textColor = i < currentStatus ? [UIColor blackColor] : [UIColor grayColor];
+        label.textColor = DEFAULT_BLUE_COLOR;
         label.textAlignment = NSTextAlignmentRight;
         label.lineBreakMode = NSLineBreakByWordWrapping;
         [label setFont:[UIFont fontWithName:@"HelveticaNeue" size:12.0]];
@@ -155,7 +159,8 @@ const float VIEW_WIDTH = 225.0;
         UILabel *label = [[UILabel alloc] init];
         [label setText:timeDescription];
         label.numberOfLines = 0;
-        label.textColor = i < currentStatus ? [UIColor blackColor] : [UIColor grayColor];
+//        label.textColor = i < currentStatus ? [UIColor blackColor] : [UIColor grayColor];
+        label.textColor = DEFAULT_BLUE_COLOR;
         label.textAlignment = NSTextAlignmentLeft;
         label.lineBreakMode = NSLineBreakByWordWrapping;
         [label setFont:[UIFont fontWithName:@"HelveticaNeue" size:14.0]];
@@ -174,12 +179,25 @@ const float VIEW_WIDTH = 225.0;
         totlaHeight += (fittingSizeLabel.height + betweenLabelOffset);
         lastLabel = label;
         
+        
+        NSMutableAttributedString *str = [[NSMutableAttributedString alloc] initWithString:timeDescription];
+        
+        NSRange range = [timeDescription rangeOfString:@"\n" options:NSBackwardsSearch];
+        [str addAttribute:NSForegroundColorAttributeName value:[UIColor blackColor] range:NSMakeRange(range.location,timeDescription.length - range.location)];
+//        [str addAttribute:NSFontAttributeName value:[UIFont fontWithName:@"Arial-BoldItalicMT" size:14.0] range:NSMakeRange(0, 5)];
+        
+        NSMutableParagraphStyle *paragraphStyle = [[NSMutableParagraphStyle alloc] init];
+        [paragraphStyle setLineSpacing:5];//调整行间距
+        [str addAttribute:NSParagraphStyleAttributeName value:paragraphStyle range:NSMakeRange(0, timeDescription.length)];
+        
+        label.attributedText = str;
+        
+        
         [self.labelDscriptionsArray addObject:label];
         i++;
     }
     
     viewheight = fittingSizeLabel.height;
-    
     // tell constraints they need updating
     [self setNeedsUpdateConstraints];
     // update constraints now
@@ -373,7 +391,6 @@ const float VIEW_WIDTH = 225.0;
         make.top.equalTo(self);
         make.height.equalTo(viewheight);
     }];
-    
     [super updateConstraints];
 }
 

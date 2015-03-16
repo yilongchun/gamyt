@@ -30,9 +30,9 @@
 }
 
 - (void)textViewDidChange:(UITextView *)textView{
-    NSLog(@"%d",textView.text.length);
+
     if (textView.text.length <= 200) {
-        NSString *s = [NSString stringWithFormat:@"最多能输入%d个字符",200 - textView.text.length];
+        NSString *s = [NSString stringWithFormat:@"最多能输入%lu个字符",200 - textView.text.length];
         self.textnumberLabel.text = s;
     }
     

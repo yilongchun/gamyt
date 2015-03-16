@@ -809,6 +809,7 @@
                     <connections>
                         <outlet property="backimage" destination="901-jv-4jO" id="OjE-0q-NFc"/>
                         <outlet property="content" destination="sgf-SS-AiF" id="uAf-L4-77Q"/>
+                        <outlet property="heightLayout" destination="eAi-Qu-656" id="Ced-SL-B4x"/>
                         <outlet property="leftLayout" destination="Vd1-Pu-ZQg" id="Low-8r-BwO"/>
                         <outlet property="textnumberLabel" destination="JZz-4R-W5p" id="H6H-gJ-mi3"/>
                     </connections>
@@ -1474,6 +1475,7 @@
                         <viewControllerLayoutGuide type="bottom" id="GPT-ao-p0c"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="mWq-Mf-78B">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="IN2-tL-Eib">
@@ -1492,10 +1494,10 @@
                                 <exclude reference="IN2-tL-Eib"/>
                             </mask>
                             <mask key="constraints">
+                                <exclude reference="qso-vP-y3u"/>
                                 <exclude reference="1ma-am-PPu"/>
                                 <exclude reference="9zz-SB-rDE"/>
                                 <exclude reference="sLD-Mw-Bbh"/>
-                                <exclude reference="qso-vP-y3u"/>
                             </mask>
                         </variation>
                         <variation key="heightClass=regular-widthClass=compact">
@@ -1503,18 +1505,23 @@
                                 <include reference="IN2-tL-Eib"/>
                             </mask>
                             <mask key="constraints">
+                                <include reference="qso-vP-y3u"/>
                                 <include reference="1ma-am-PPu"/>
                                 <include reference="9zz-SB-rDE"/>
                                 <include reference="sLD-Mw-Bbh"/>
-                                <include reference="qso-vP-y3u"/>
                             </mask>
                         </variation>
                     </view>
                     <navigationItem key="navigationItem" title="信息记录" id="M8G-SX-vr0">
-                        <barButtonItem key="rightBarButtonItem" systemItem="refresh" id="Ok1-AL-odb"/>
+                        <barButtonItem key="rightBarButtonItem" systemItem="refresh" id="Ok1-AL-odb">
+                            <connections>
+                                <action selector="refresh:" destination="Qwg-RM-Ogg" id="y9L-zV-iaV"/>
+                            </connections>
+                        </barButtonItem>
                     </navigationItem>
                     <connections>
                         <outlet property="myscrollview" destination="IN2-tL-Eib" id="5KF-bR-b0G"/>
+                        <outlet property="refreshBtn" destination="Ok1-AL-odb" id="msc-vX-TZp"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="kIH-z1-59U" userLabel="First Responder" sceneMemberID="firstResponder"/>

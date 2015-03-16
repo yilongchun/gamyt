@@ -16,5 +16,6 @@
 @property (weak, nonatomic) IBOutlet UITextView *content;
 @property (weak, nonatomic) IBOutlet UILabel *textnumberLabel;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *leftLayout;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *heightLayout;
 
 @end

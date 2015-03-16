@@ -12,5 +12,7 @@
 
 @property (weak, nonatomic) IBOutlet UIScrollView *myscrollview;
 @property (nonatomic, strong) NSNumber *newsid;
+- (IBAction)refresh:(id)sender;
+@property (weak, nonatomic) IBOutlet UIBarButtonItem *refreshBtn;
 
 @end
