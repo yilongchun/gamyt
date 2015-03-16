@@ -143,6 +143,7 @@
                 //    timeline.center = point;
                 [self.myscrollview addSubview:timeline];
                 [self.myscrollview setContentSize:CGSizeMake(self.view.frame.size.width, descriptionHeight+100)];
+                [self showHint:@"获取成功"];
             }
         }
     }failure:^(AFHTTPRequestOperation *operation, NSError *error) {
