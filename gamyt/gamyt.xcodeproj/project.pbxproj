@@ -522,8 +522,6 @@
 		E4F02EEB1AA5C5ED00426A88 /* gamyt */ = {
 			isa = PBXGroup;
 			children = (
-				E429101D1AB3242700B1B6E9 /* TimeLineControl */,
-				E4EB9BA61AB05C5D003FBC75 /* AFNetworking */,
 				E4F02EF01AA5C5ED00426A88 /* AppDelegate.h */,
 				E4F02EF11AA5C5ED00426A88 /* AppDelegate.m */,
 				E4F02EF31AA5C5ED00426A88 /* ViewController.h */,
@@ -537,6 +535,8 @@
 				E4EEB8031AAF3720009CEFA1 /* JYSlideSegmentController.m */,
 				E4F02F5B1AA61C2700426A88 /* view */,
 				E412B4121AA9F8740015B7C1 /* commons */,
+				E429101D1AB3242700B1B6E9 /* TimeLineControl */,
+				E4EB9BA61AB05C5D003FBC75 /* AFNetworking */,
 				E430A1F51AA7443600CFBFC6 /* SlideMenu */,
 				E4EC77AB1AA8582300414B8B /* Category */,
 				E4EC77A41AA855BF00414B8B /* MBProgressHUD */,
