@@ -8,6 +8,7 @@
 
 #import "InfoDetailViewController.h"
 #import "InfoDetailStatusViewController.h"
+#import "InfoToUpViewController.h"
 
 @implementation InfoDetailViewController{
     NSMutableArray *btns;
@@ -22,6 +23,10 @@
         self.automaticallyAdjustsScrollViewInsets = NO;
     }
     
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(loadData)
+                                                 name:@"refreshInfoDetail"
+                                               object:nil];
     
     UIBarButtonItem *rightitem = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"toread_record_icon_normal"] style:UIBarButtonItemStylePlain target:self action:@selector(toInfoDetailStatus)];
     self.navigationItem.rightBarButtonItem = rightitem;
@@ -522,8 +527,9 @@
 -(void)action2{
     NSLog(@"上报");
     
-    //UIViewController *vc = [[self storyboard] instantiateViewControllerWithIdentifier:@"InfoToUpViewController"];
-    [self performSegueWithIdentifier:@"toUpReport" sender:nil];
+    InfoToUpViewController *vc = [[self storyboard] instantiateViewControllerWithIdentifier:@"InfoToUpViewController"];
+    vc.info = self.info;
+    [self presentViewController:vc animated:YES completion:nil];
 }
 
 -(void)action3{

@@ -10,6 +10,10 @@
 
 @implementation InfoToUpViewController{
     BOOL edit;
+    UIPickerView *typepicker;
+    NSMutableArray *typeArr;
+    NSInteger selectRow;
+    NSNumber *reportType;
 }
 
 - (void)viewDidLoad {
@@ -27,6 +31,40 @@
     NSAttributedString *attrText = [[NSAttributedString alloc] initWithString:self.infoType.text attributes:@{ NSParagraphStyleAttributeName : paragraphStyle}];
     self.infoType.attributedText = attrText;
     
+    NSString *content = [self.info objectForKey:@"content"];//内容
+    self.content.text = content;
+    
+    [self.img1 setHidden:YES];
+    [self.img2 setHidden:YES];
+    [self.img3 setHidden:YES];
+    [self.img4 setHidden:YES];
+    NSString *path = [self.info objectForKey:@"path"];//照片路径
+    NSArray *imgArr =[path componentsSeparatedByString:NSLocalizedString(@",", nil)];
+    for (int i = 0; i < imgArr.count; i++) {
+        NSString *img = [imgArr objectAtIndex:i];
+        NSString *imagePath = [NSString stringWithFormat:@"%@%@%@",[Utils getHostname],REPORT_PATH,img];
+        switch (i) {
+            case 0:
+                [self.img1 setImageWithURL:[NSURL URLWithString:imagePath] placeholderImage:[UIImage imageNamed:@"defalut_pic"]];
+                [self.img1 setHidden:NO];
+                break;
+            case 1:
+                [self.img2 setImageWithURL:[NSURL URLWithString:imagePath] placeholderImage:[UIImage imageNamed:@"defalut_pic"]];
+                [self.img2 setHidden:NO];
+                break;
+            case 2:
+                [self.img3 setImageWithURL:[NSURL URLWithString:imagePath] placeholderImage:[UIImage imageNamed:@"defalut_pic"]];
+                [self.img3 setHidden:NO];
+                break;
+            case 3:
+                [self.img4 setImageWithURL:[NSURL URLWithString:imagePath] placeholderImage:[UIImage imageNamed:@"defalut_pic"]];
+                [self.img4 setHidden:NO];
+                break;
+            default:
+                break;
+        }
+    }
+    
     
     //设置layer
     CALayer *layer=[self.backimage layer];
@@ -38,6 +76,20 @@
     [layer setBorderColor:[BORDER_COLOR CGColor]];
     
     
+    typepicker = [[UIPickerView alloc] initWithFrame:CGRectMake(12, 32, self.view.frame.size.width-40, 216)];
+    typepicker.dataSource = self;
+    typepicker.delegate = self;
+    selectRow = 0;
+    
+}
+
+-(void)viewDidLayoutSubviews{
+    [super viewDidLayoutSubviews];
+    NSString *path = [self.info objectForKey:@"path"];//照片路径
+    if (path.length == 0) {
+        self.imageHeightLayout.constant = 0;
+    }else{
+    }
 }
 
 
@@ -48,28 +100,111 @@
 
 
 - (IBAction)cancel:(id)sender{
-    NSString *title = @"确定退出?";
-    NSString *message = @"离开后,您操作后的信息将不再保存!";
-    if ([[UIDevice currentDevice] systemVersion].floatValue < 8.0) {
-        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:title message:message delegate:self cancelButtonTitle:@"取消" otherButtonTitles:@"确定", nil];
-        alert.tag = 1;
-        [alert show];
+    
+    NSString *content = [self.info objectForKey:@"content"];//内容
+    if ([self.content.text isEqualToString:content]) {
+        [self cancelAndBack];
     }else{
-        UIAlertController *alert = [UIAlertController alertControllerWithTitle:title message:message preferredStyle:UIAlertControllerStyleAlert];
-        [alert addAction:[UIAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleDestructive handler:^(UIAlertAction *action) {
-            NSLog(@"确定");
-            [self cancelAndBack];
-        }]];
-        [alert addAction:[UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleCancel handler:nil]];
-        [self presentViewController:alert animated:YES completion:nil];
+        NSString *title = @"确定退出?";
+        NSString *message = @"离开后,您操作后的信息将不再保存!";
+        if ([[UIDevice currentDevice] systemVersion].floatValue < 8.0) {
+            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:title message:message delegate:self cancelButtonTitle:@"取消" otherButtonTitles:@"确定", nil];
+            alert.tag = 1;
+            [alert show];
+        }else{
+            UIAlertController *alert = [UIAlertController alertControllerWithTitle:title message:message preferredStyle:UIAlertControllerStyleAlert];
+            [alert addAction:[UIAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleDestructive handler:^(UIAlertAction *action) {
+                NSLog(@"确定");
+                [self cancelAndBack];
+            }]];
+            [alert addAction:[UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleCancel handler:nil]];
+            [self presentViewController:alert animated:YES completion:nil];
+        }
     }
-    
-    
-    
 }
 
 - (IBAction)save:(id)sender {
     NSLog(@"上报");
+    
+    if ([self.infoType.text isEqualToString:@"信息类别"]) {
+        [self showHint:@"请选择类别"];
+        return;
+    }
+    
+    NSNumber *newsid = [self.info objectForKey:@"newsid"];
+    NSNumber *reportid = [self.info objectForKey:@"id"];
+    NSString *content = [self.info objectForKey:@"content"];//内容
+    BOOL contentChanged;
+    if ([self.content.text isEqualToString:content]) {
+        contentChanged = NO;
+    }else{
+        contentChanged = YES;
+    }
+    NSLog(@"%@",newsid);
+    NSLog(@"%@",reportid);
+    NSLog(@"%@",self.content.text);
+    NSLog(@"%d",contentChanged);
+    NSLog(@"%d",[reportType intValue]);
+    
+    [self showHudInView:self.view hint:@"加载中"];
+    NSString *str = [NSString stringWithFormat:@"%@%@",[Utils getHostname],@"/mobile/report/upReport"];
+    NSURL *url = [NSURL URLWithString:[str stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding]];
+    NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:url];
+    [request setHTTPMethod:@"POST"];
+    [request setTimeoutInterval:30.0];
+    NSNumberFormatter* numberFormatter = [[NSNumberFormatter alloc] init];
+    [request setValue:[numberFormatter stringFromNumber:[Utils getUserId]] forHTTPHeaderField:USERID];
+    [request setValue:[Utils getToken] forHTTPHeaderField:TOKEN];
+    
+    //JSON格式
+    [request setValue:@"application/json; charset=utf-8" forHTTPHeaderField:@"content-type"];
+    NSMutableDictionary *parameters = [NSMutableDictionary dictionary];
+    [parameters setObject:self.content.text forKey:@"content"];
+    [parameters setObject:[NSNumber numberWithBool:contentChanged] forKey:@"contentChanged"];
+    [parameters setValue:newsid forKey:@"newsid"];
+    [parameters setValue:reportid forKey:@"reprotid"];
+    [parameters setValue:reportType forKey:@"type"];
+    NSString *post=[NSString jsonStringWithDictionary:parameters];
+    NSData *postData = [post dataUsingEncoding:NSUTF8StringEncoding allowLossyConversion:YES];
+    [request setHTTPBody:postData];
+    //非JSON格式
+//    NSString *param = [NSString stringWithFormat:@"reportid=%d&ismyreport=0",[reportid intValue]];
+//    [request setHTTPBody:[param dataUsingEncoding:NSUTF8StringEncoding]];
+    
+    AFHTTPRequestOperation *operation = [[AFHTTPRequestOperation alloc]initWithRequest:request];
+    [operation setCompletionBlockWithSuccess:^(AFHTTPRequestOperation *operation, id responseObject) {
+        NSString *html = operation.responseString;
+        NSData* data=[html dataUsingEncoding:NSUTF8StringEncoding];
+        id dict=[NSJSONSerialization  JSONObjectWithData:data options:0 error:nil];
+        NSLog(@"获取到的数据为：%@",dict);
+        NSDictionary *resultDict = [NSDictionary cleanNullForDic:dict];
+        if (resultDict == nil) {
+            NSLog(@"json parse failed \r\n");
+        }else{
+            NSLog(@"%@",resultDict);
+        }
+        NSNumber *code = [resultDict objectForKey:@"code"];
+        if ([code intValue] == 1) {
+            [self hideHud];
+            [self showHint:@"加载失败"];
+        }else if([code intValue] == 4){
+            [self hideHud];
+            [[NSNotificationCenter defaultCenter] postNotificationName:KNOTIFICATION_LOGINCHANGE object:self];
+        }else if([code intValue] == 0){
+            [self hideHud];
+            [self showHint:@"上报成功"];
+            [[NSNotificationCenter defaultCenter] postNotificationName:@"refreshInfoDetail" object:self];//刷新详情
+            [[NSNotificationCenter defaultCenter] postNotificationName:@"refreshInfo" object:self];//刷新列表
+            [self performSelector:@selector(cancelAndBack) withObject:nil afterDelay:1.0];
+            
+        }
+    }failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        NSLog(@"发生错误！%@",error);
+        [self hideHud];
+        [self showHint:@"连接失败"];
+    }];
+    NSOperationQueue *queue = [[NSOperationQueue alloc] init];
+    [queue addOperation:operation];
 }
 
 -(void)cancelAndBack{
@@ -98,7 +233,6 @@
         [self.textnumberLabel setHidden:YES];
         [self.content setUserInteractionEnabled:NO];
         [self.content setTextColor:[UIColor grayColor]];
-        
     }else{//修改
         edit = YES;
         [self.editBtn setImage:[UIImage imageNamed:@"modifycontent_normal"] forState:UIControlStateNormal];
@@ -111,5 +245,126 @@
         [self.content setTextColor:[UIColor blackColor]];
         
     }
+}
+
+//获取类别
+-(void)loadType{
+    [self showHudInView:self.view hint:@"加载中"];
+    NSString *str = [NSString stringWithFormat:@"%@%@",[Utils getHostname],@"/mobile/report/getAllSort"];
+    NSURL *url = [NSURL URLWithString:[str stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding]];
+    NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:url];
+    [request setHTTPMethod:@"POST"];
+    [request setTimeoutInterval:30.0];
+    NSNumberFormatter* numberFormatter = [[NSNumberFormatter alloc] init];
+    [request setValue:[numberFormatter stringFromNumber:[Utils getUserId]] forHTTPHeaderField:USERID];
+    [request setValue:[Utils getToken] forHTTPHeaderField:TOKEN];
+    AFHTTPRequestOperation *operation = [[AFHTTPRequestOperation alloc]initWithRequest:request];
+    [operation setCompletionBlockWithSuccess:^(AFHTTPRequestOperation *operation, id responseObject) {
+        ;
+        NSString *html = operation.responseString;
+        NSData* data=[html dataUsingEncoding:NSUTF8StringEncoding];
+        id dict=[NSJSONSerialization  JSONObjectWithData:data options:0 error:nil];
+        
+        NSDictionary *resultDict = [NSDictionary cleanNullForDic:dict];
+        if (resultDict == nil) {
+            NSLog(@"json parse failed \r\n");
+        }else{
+            NSLog(@"%@",resultDict);
+        }
+        NSNumber *code = [resultDict objectForKey:@"code"];
+        if ([code intValue] == 1) {
+            [self hideHud];
+            [self showHintInCenter:@"加载失败"];
+        }else if([code intValue] == 4){
+            [self hideHud];
+            [[NSNotificationCenter defaultCenter] postNotificationName:KNOTIFICATION_LOGINCHANGE object:self];
+        }else if([code intValue] == 0){
+            [self hideHud];
+            NSArray *data = [resultDict objectForKey:@"data"];
+            if (data != nil && ![data isKindOfClass:[NSString class]]) {
+                typeArr = [NSMutableArray arrayWithArray:data];
+                [self alert];
+            }
+        }
+    }failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        NSLog(@"发生错误！%@",error);
+        [self hideHud];
+        [self showHintInCenter:@"连接失败"];
+    }];
+    NSOperationQueue *queue = [[NSOperationQueue alloc] init];
+    [queue addOperation:operation];
+}
+
+- (IBAction)chooseType:(id)sender {
+    if (typeArr == nil) {
+        [self loadType];
+    }else{
+        [self alert];
+    }
+}
+
+-(void)alert{
+    if (CURRENT_SYSTEM_VERSION < 8.0) {
+        UIActionSheet *actionSheet = [[UIActionSheet alloc] initWithTitle:@"请选择类别\n\n\n\n\n\n\n\n\n\n\n"
+                                                                 delegate:self
+                                                        cancelButtonTitle:@"取消"
+                                                   destructiveButtonTitle:@"确定"
+                                                        otherButtonTitles:nil, nil];
+        actionSheet.tag = 1;
+        [actionSheet addSubview:typepicker];
+        [actionSheet showInView:self.view];
+    }else{
+        UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"请选择类别" message:@"\n\n\n\n\n\n\n\n\n\n\n" preferredStyle:UIAlertControllerStyleActionSheet];
+        
+        //        CGRect pickerFrame = CGRectMake(12, 32, self.view.frame.size.width-40, 216);
+        //        typepicker.frame = pickerFrame;
+        [alert.view addSubview:typepicker];
+        [alert addAction:[UIAlertAction actionWithTitle:@"确定"
+                                                  style:UIAlertActionStyleDestructive
+                                                handler:^(UIAlertAction *action) {
+                                                    [self confirmType];
+                                                }]];
+        [alert addAction:[UIAlertAction actionWithTitle:@"取消"
+                                                  style:UIAlertActionStyleCancel
+                                                handler:nil]];
+        [self presentViewController:alert animated:YES completion:nil];
+    }
+}
+//确定类型
+-(void)confirmType{
+    NSDictionary *type = [typeArr objectAtIndex:selectRow];
+    reportType = [type objectForKey:@"id"];
+    NSString *name = [type objectForKey:@"name"];
+    self.infoType.text = name;
+    NSMutableParagraphStyle *paragraphStyle = [[ NSMutableParagraphStyle alloc ] init ];
+    [paragraphStyle setFirstLineHeadIndent :10];
+    NSAttributedString *attrText = [[NSAttributedString alloc] initWithString:self.infoType.text attributes:@{ NSParagraphStyleAttributeName : paragraphStyle}];
+    self.infoType.attributedText = attrText;
+    NSLog(@"%d",[reportType intValue]);
+}
+
+#pragma mark - UIPickerViewDelegate
+- (NSInteger)numberOfComponentsInPickerView:(UIPickerView *)pickerView{
+    return 1;
+}
+- (NSInteger)pickerView:(UIPickerView *)pickerView numberOfRowsInComponent:(NSInteger)component{
+    return [typeArr count];
+}
+
+- (NSString *)pickerView:(UIPickerView *)pickerView titleForRow:(NSInteger)row forComponent:(NSInteger)component{
+    NSDictionary *type = [typeArr objectAtIndex:row];
+    NSString *name = [type objectForKey:@"name"];
+    return name;
+}
+
+- (void)pickerView:(UIPickerView *)pickerView didSelectRow:(NSInteger)row inComponent:(NSInteger)component{
+    selectRow = row;
+    NSDictionary *type = [typeArr objectAtIndex:selectRow];
+    NSString *name = [type objectForKey:@"name"];
+    self.infoType.text = name;
+    NSMutableParagraphStyle *paragraphStyle = [[ NSMutableParagraphStyle alloc ] init ];
+    [paragraphStyle setFirstLineHeadIndent :10 ];
+    NSAttributedString *attrText = [[NSAttributedString alloc] initWithString:self.infoType.text attributes:@{ NSParagraphStyleAttributeName : paragraphStyle}];
+    self.infoType.attributedText = attrText;
 }
 @end

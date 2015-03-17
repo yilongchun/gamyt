@@ -20,6 +20,8 @@
 #define BORDER_COLOR [UIColor colorWithRed:200/255.0 green:200/255.0 blue:200/255.0 alpha:1]
 #define BACKGROUND_COLOR [UIColor colorWithRed:235/255.0 green:235/255.0 blue:235/255.0 alpha:1]
 
+#define CURRENT_SYSTEM_VERSION [[UIDevice currentDevice] systemVersion].floatValue
+
 #define GENERAL 0 // 普通会员
 #define TASTER 1 // 审阅会员
 
