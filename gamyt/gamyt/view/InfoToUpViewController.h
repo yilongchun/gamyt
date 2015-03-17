@@ -12,5 +12,14 @@
 
 - (IBAction)cancel:(id)sender;
 - (IBAction)save:(id)sender;
+@property (weak, nonatomic) IBOutlet UILabel *infoType;
+@property (weak, nonatomic) IBOutlet UIButton *chooseInfoTypeBtn;
+@property (weak, nonatomic) IBOutlet UIButton *editBtn;
+- (IBAction)setEdit:(id)sender;
+
+@property (weak, nonatomic) IBOutlet UIImageView *backimage;
+@property (weak, nonatomic) IBOutlet UITextView *content;
+@property (weak, nonatomic) IBOutlet UILabel *textnumberLabel;
+
 
 @end
