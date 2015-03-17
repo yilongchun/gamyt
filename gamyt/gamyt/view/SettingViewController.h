@@ -10,9 +10,7 @@
 #import "SlideNavigationController.h"
 #import <StoreKit/StoreKit.h>
 
-@interface SettingViewController : UIViewController<SlideNavigationControllerDelegate,UITableViewDelegate,UITableViewDataSource,UIActionSheetDelegate,UIAlertViewDelegate,SKStoreProductViewControllerDelegate>
-
-@property (weak, nonatomic) IBOutlet UITableView *tableView;
+@interface SettingViewController : UITableViewController<SlideNavigationControllerDelegate,UIActionSheetDelegate,UIAlertViewDelegate,SKStoreProductViewControllerDelegate>
 
 
 @property (nonatomic, strong) UIAlertController *alert;

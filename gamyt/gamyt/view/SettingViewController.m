@@ -7,6 +7,7 @@
 //
 
 #import "SettingViewController.h"
+#import "UserinfoViewController.h"
 
 @implementation SettingViewController{
     NSString *trackViewUrl;
@@ -18,10 +19,10 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
-    if (floor(NSFoundationVersionNumber) > NSFoundationVersionNumber_iOS_6_1){
-        self.automaticallyAdjustsScrollViewInsets = NO;
-    }
-    [self.tableView setBackgroundColor:[UIColor colorWithRed:238/255.0 green:238/255.0 blue:238/255.0 alpha:1]];
+//    if (floor(NSFoundationVersionNumber) > NSFoundationVersionNumber_iOS_6_1){
+//        self.automaticallyAdjustsScrollViewInsets = NO;
+//    }
+//    [self.tableView setBackgroundColor:[UIColor colorWithRed:238/255.0 green:238/255.0 blue:238/255.0 alpha:1]];
 }
 
 #pragma mark - SlideNavigationController Methods -
@@ -43,6 +44,8 @@
     if (indexPath.section == 0) {
         if (indexPath.row == 0) {
             //个人信息
+            UserinfoViewController *vc = [[self storyboard] instantiateViewControllerWithIdentifier:@"UserinfoViewController"];
+            [self.navigationController pushViewController:vc animated:YES];
         }else if (indexPath.row == 1){
             //修改密码
             
@@ -75,53 +78,53 @@
     
 }
 
-- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
-    return 44;
-}
+//- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
+//    return 44;
+//}
 
-- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
-    if (section == 0) {
-        return 2;
-    }
-    return 1;
-}
+//- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
+//    if (section == 0) {
+//        return 2;
+//    }
+//    return 1;
+//}
+//
+//- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView{
+//    return 2;
+//}
 
-- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView{
-    return 2;
-}
-
-- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
-    
-    NSInteger section = indexPath.section;
-    NSInteger row = indexPath.row;
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"settingcell"];
-    switch (section) {
-        case 0:
-            if(row == 0)
-            {
-                cell.textLabel.text =  @"个人信息";
-            }else if(row == 1){
-                cell.textLabel.text =  @"密码设置";
-            }
-//            else if(row == 2){
-//                cell.textLabel.text =  @"版本更新";
+//- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
+//    
+//    NSInteger section = indexPath.section;
+//    NSInteger row = indexPath.row;
+//    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"settingcell"];
+//    switch (section) {
+//        case 0:
+//            if(row == 0)
+//            {
+//                cell.textLabel.text =  @"个人信息";
+//            }else if(row == 1){
+//                cell.textLabel.text =  @"密码设置";
 //            }
-//            else if(row == 3){
-//                cell.textLabel.text =  @"去评分";
-//            }
-            cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
-            break;
-        case 1:
-            cell.textLabel.text =  @"退出登录";
-            [cell.textLabel setTextColor:[UIColor redColor]];
-            [cell.textLabel setTextAlignment:NSTextAlignmentCenter];
-            break;
-        default:
-            break;
-    }
-    
-    return cell;
-}
+////            else if(row == 2){
+////                cell.textLabel.text =  @"版本更新";
+////            }
+////            else if(row == 3){
+////                cell.textLabel.text =  @"去评分";
+////            }
+//            cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
+//            break;
+//        case 1:
+//            cell.textLabel.text =  @"退出登录";
+//            [cell.textLabel setTextColor:[UIColor redColor]];
+//            [cell.textLabel setTextAlignment:NSTextAlignmentCenter];
+//            break;
+//        default:
+//            break;
+//    }
+//    
+//    return cell;
+//}
 
 #pragma mark - UIActionSheet Delegate
 - (void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex{

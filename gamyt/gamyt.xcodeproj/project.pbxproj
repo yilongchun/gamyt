@@ -59,6 +59,7 @@
 		E4EB9BDA1AB05C5D003FBC75 /* UIProgressView+AFNetworking.m in Sources */ = {isa = PBXBuildFile; fileRef = E4EB9BC71AB05C5D003FBC75 /* UIProgressView+AFNetworking.m */; };
 		E4EB9BDB1AB05C5D003FBC75 /* UIRefreshControl+AFNetworking.m in Sources */ = {isa = PBXBuildFile; fileRef = E4EB9BC91AB05C5D003FBC75 /* UIRefreshControl+AFNetworking.m */; };
 		E4EB9BDC1AB05C5D003FBC75 /* UIWebView+AFNetworking.m in Sources */ = {isa = PBXBuildFile; fileRef = E4EB9BCB1AB05C5D003FBC75 /* UIWebView+AFNetworking.m */; };
+		E4EC1AE01AB86F6A0088C96A /* UserinfoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E4EC1ADF1AB86F6A0088C96A /* UserinfoViewController.m */; };
 		E4EC77A91AA855BF00414B8B /* MBProgressHUD+Add.m in Sources */ = {isa = PBXBuildFile; fileRef = E4EC77A61AA855BF00414B8B /* MBProgressHUD+Add.m */; };
 		E4EC77AA1AA855BF00414B8B /* MBProgressHUD.m in Sources */ = {isa = PBXBuildFile; fileRef = E4EC77A81AA855BF00414B8B /* MBProgressHUD.m */; };
 		E4EC77B81AA8582300414B8B /* NSDate+Category.m in Sources */ = {isa = PBXBuildFile; fileRef = E4EC77AD1AA8582300414B8B /* NSDate+Category.m */; };
@@ -211,6 +212,8 @@
 		E4EB9BC91AB05C5D003FBC75 /* UIRefreshControl+AFNetworking.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIRefreshControl+AFNetworking.m"; sourceTree = "<group>"; };
 		E4EB9BCA1AB05C5D003FBC75 /* UIWebView+AFNetworking.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIWebView+AFNetworking.h"; sourceTree = "<group>"; };
 		E4EB9BCB1AB05C5D003FBC75 /* UIWebView+AFNetworking.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIWebView+AFNetworking.m"; sourceTree = "<group>"; };
+		E4EC1ADE1AB86F6A0088C96A /* UserinfoViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UserinfoViewController.h; sourceTree = "<group>"; };
+		E4EC1ADF1AB86F6A0088C96A /* UserinfoViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UserinfoViewController.m; sourceTree = "<group>"; };
 		E4EC77A51AA855BF00414B8B /* MBProgressHUD+Add.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "MBProgressHUD+Add.h"; sourceTree = "<group>"; };
 		E4EC77A61AA855BF00414B8B /* MBProgressHUD+Add.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "MBProgressHUD+Add.m"; sourceTree = "<group>"; };
 		E4EC77A71AA855BF00414B8B /* MBProgressHUD.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MBProgressHUD.h; sourceTree = "<group>"; };
@@ -648,6 +651,8 @@
 				E412B4101AA9F5910015B7C1 /* CheckInfoViewController.m */,
 				E4DAB94E1AA7742F00C58A8E /* SettingViewController.h */,
 				E4DAB94F1AA7742F00C58A8E /* SettingViewController.m */,
+				E4EC1ADE1AB86F6A0088C96A /* UserinfoViewController.h */,
+				E4EC1ADF1AB86F6A0088C96A /* UserinfoViewController.m */,
 			);
 			path = view;
 			sourceTree = "<group>";
@@ -758,6 +763,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				E4EB9BD41AB05C5D003FBC75 /* AFURLSessionManager.m in Sources */,
+				E4EC1AE01AB86F6A0088C96A /* UserinfoViewController.m in Sources */,
 				E430A21B1AA7443600CFBFC6 /* SlideNavigationContorllerAnimatorFade.m in Sources */,
 				E4EB9BDB1AB05C5D003FBC75 /* UIRefreshControl+AFNetworking.m in Sources */,
 				E4F02F2F1AA5FA3100426A88 /* NSArray+Sort.m in Sources */,

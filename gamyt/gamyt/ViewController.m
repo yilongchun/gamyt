@@ -163,11 +163,14 @@
                                            
                                            NSDictionary *data = [resultDict objectForKey:@"data"];
                                            NSString *token = [data objectForKey:@"token"];
-                                           NSDictionary *users = [data objectForKey:@"users"];
+                                           NSDictionary *users = [NSDictionary cleanNullForDic:[data objectForKey:@"users"]];
+                                           NSDictionary *notes = [NSDictionary cleanNullForDic:[data objectForKey:@"notes"]];
                                            NSNumber *userid = [users objectForKey:@"id"];
                                            NSNumber *type = [users objectForKey:@"type"];
                                            
                                            NSUserDefaults *userdefaults = [NSUserDefaults standardUserDefaults];
+                                           [userdefaults setObject:users forKey:@"users"];
+                                           [userdefaults setObject:notes forKey:@"notes"];
                                            [userdefaults setObject:type forKey:@"type"];
                                            [userdefaults setValue:token forKey:@"token"];
                                            [userdefaults setValue:userid forKey:@"userid"];
