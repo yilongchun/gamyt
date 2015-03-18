@@ -8,7 +8,7 @@
 
 #import <UIKit/UIKit.h>
 
-@interface UserinfoViewController : UITableViewController<UITextFieldDelegate>
+@interface UserinfoViewController : UITableViewController<UITextFieldDelegate,UIActionSheetDelegate,UINavigationControllerDelegate,UIImagePickerControllerDelegate>
 
 @property (weak, nonatomic) IBOutlet UIImageView *img;
 @property (weak, nonatomic) IBOutlet UILabel *unitname;
@@ -21,4 +21,6 @@
 @property (weak, nonatomic) IBOutlet UITextField *bank;
 @property (weak, nonatomic) IBOutlet UITextField *bankcard;
 @property (weak, nonatomic) IBOutlet UITextField *bankaddress;
+@property (strong, nonatomic) UIBarButtonItem *saveBtn;
+
 @end
