@@ -9,12 +9,15 @@
 #import "InfoDetailViewController.h"
 #import "InfoDetailStatusViewController.h"
 #import "InfoToUpViewController.h"
+#import "UIButton+WebCache.h"
 
 @implementation InfoDetailViewController{
     NSMutableArray *btns;
     NSString *infoTitle;
     NSNumber *newsid;
     NSNumber *reportid;
+    
+    
 }
 
 - (void)viewDidLoad{
@@ -34,6 +37,10 @@
     self.sendpic.layer.masksToBounds = YES;
     self.sendpic.layer.cornerRadius = 40;
    
+    
+    
+    
+    
     [self initData];
     
 }
@@ -154,11 +161,12 @@
     [self initButtons];
     
     NSString *path = [self.info objectForKey:@"path"];//照片路径
+    [self.img1 setHidden:YES];
+    [self.img2 setHidden:YES];
+    [self.img3 setHidden:YES];
+    [self.img4 setHidden:YES];
     if (path.length == 0) {
-        [self.img1 removeFromSuperview];
-        [self.img2 removeFromSuperview];
-        [self.img3 removeFromSuperview];
-        [self.img4 removeFromSuperview];
+        self.contentTopLayout.constant = 0;
     }else{
         NSArray *imgArr =[path componentsSeparatedByString:NSLocalizedString(@",", nil)];
         for (int i = 0; i < imgArr.count; i++) {
@@ -166,16 +174,36 @@
             NSString *imagePath = [NSString stringWithFormat:@"%@%@%@",[Utils getHostname],REPORT_PATH,img];
             switch (i) {
                 case 0:
-                    [self.img1 setImageWithURL:[NSURL URLWithString:imagePath] placeholderImage:[UIImage imageNamed:@"defalut_pic"]];
+                {
+                    [self.img1 setHidden:NO];
+                    [self.img1 sd_setImageWithURL:[NSURL URLWithString:imagePath] forState:UIControlStateNormal];
+                    [self.img1 setTag:0];
+                    [self.img1 addTarget:self action:@selector(buttonClick:) forControlEvents:UIControlEventTouchUpInside];
+                }
                     break;
                 case 1:
-                    [self.img2 setImageWithURL:[NSURL URLWithString:imagePath] placeholderImage:[UIImage imageNamed:@"defalut_pic"]];
+                {
+                    [self.img2 setHidden:NO];
+                    [self.img2 sd_setImageWithURL:[NSURL URLWithString:imagePath] forState:UIControlStateNormal];
+                    [self.img2 setTag:1];
+                    [self.img2 addTarget:self action:@selector(buttonClick:) forControlEvents:UIControlEventTouchUpInside];
+                }
                     break;
                 case 2:
-                    [self.img3 setImageWithURL:[NSURL URLWithString:imagePath] placeholderImage:[UIImage imageNamed:@"defalut_pic"]];
+                {
+                    [self.img3 setHidden:NO];
+                    [self.img3 sd_setImageWithURL:[NSURL URLWithString:imagePath] forState:UIControlStateNormal];
+                    [self.img3 setTag:2];
+                    [self.img3 addTarget:self action:@selector(buttonClick:) forControlEvents:UIControlEventTouchUpInside];
+                }
                     break;
                 case 3:
-                    [self.img4 setImageWithURL:[NSURL URLWithString:imagePath] placeholderImage:[UIImage imageNamed:@"defalut_pic"]];
+                {
+                    [self.img4 setHidden:NO];
+                    [self.img4 sd_setImageWithURL:[NSURL URLWithString:imagePath] forState:UIControlStateNormal];
+                    [self.img4 setTag:3];
+                    [self.img4 addTarget:self action:@selector(buttonClick:) forControlEvents:UIControlEventTouchUpInside];
+                }
                     break;
                 default:
                     break;
@@ -317,47 +345,13 @@
 -(void)setLayout{
     NSString *path = [self.info objectForKey:@"path"];//照片路径
     if (path.length == 0) {
-        self.contentTopLayout.constant = 8;
+        self.contentTopLayout.constant = 0;
     }else{
-        CGFloat width = [UIScreen mainScreen].bounds.size.width/4 - 10;
-        self.contentTopLayout.constant = width + 16;
-//        NSArray *imgArr =[path componentsSeparatedByString:NSLocalizedString(@",", nil)];
-//        for (int i = 0; i < imgArr.count; i++) {
-//            NSString *img = [imgArr objectAtIndex:i];
-//            NSString *imagePath = [NSString stringWithFormat:@"%@%@%@",[Utils getHostname],REPORT_PATH,img];
-//            UIImageView *image = [[UIImageView alloc]init];
-//            image.translatesAutoresizingMaskIntoConstraints = NO;
-//            [image setImageWithURL:[NSURL URLWithString:imagePath] placeholderImage:[UIImage imageNamed:@"defalut_pic"]];
-//            [self.img1 setImageWithURL:[NSURL URLWithString:imagePath] placeholderImage:[UIImage imageNamed:@"defalut_pic"]];
-//            [self.view addSubview:image];
-//            NSLayoutConstraint *imageWidth = [NSLayoutConstraint constraintWithItem:image attribute:NSLayoutAttributeWidth relatedBy:NSLayoutRelationEqual toItem:nil attribute:NSLayoutAttributeNotAnAttribute multiplier:1.0 constant:width];
-//            NSLayoutConstraint *imageHeight = [NSLayoutConstraint constraintWithItem:image attribute:NSLayoutAttributeHeight relatedBy:NSLayoutRelationEqual toItem:nil attribute:NSLayoutAttributeNotAnAttribute multiplier:1.0 constant:width];
-//            [image addConstraints:@[imageWidth,imageHeight]];
-//            [self.view addConstraint:[NSLayoutConstraint
-//                                      constraintWithItem:image
-//                                      attribute:NSLayoutAttributeLeading
-//                                      relatedBy:NSLayoutRelationEqual
-//                                      toItem:self.view
-//                                      attribute:NSLayoutAttributeLeading
-//                                      multiplier:1
-//                                      constant:10 + ((width + 5) * i)]];
-//            [self.view addConstraint:[NSLayoutConstraint
-//                                      constraintWithItem:image
-//                                      attribute:NSLayoutAttributeTop
-//                                      relatedBy:NSLayoutRelationEqual
-//                                      toItem:self.sepline
-//                                      attribute:NSLayoutAttributeBottom
-//                                      multiplier:1
-//                                      constant:8]];
-//        }
+        CGFloat width = [UIScreen mainScreen].bounds.size.width-10-10-5-5-5;
+        self.contentTopLayout.constant = width/4;
     }
     
-    
-    
-    
-    
-    
-    CGFloat width = [UIScreen mainScreen].bounds.size.width/4 - 10;
+    CGFloat width = ([UIScreen mainScreen].bounds.size.width-10-10-(5*(btns.count-1)))/btns.count;
     
     for (int i = 0 ; i < btns.count; i++) {
         UIButton *btn = [btns objectAtIndex:i];
@@ -386,15 +380,23 @@
     
 //    NSLayoutConstraint *btnWidth = [NSLayoutConstraint constraintWithItem:self.btn1 attribute:NSLayoutAttributeWidth relatedBy:NSLayoutRelationEqual toItem:nil attribute:NSLayoutAttributeNotAnAttribute multiplier:1.0 constant:width];
 //    NSLayoutConstraint *btnHeight = [NSLayoutConstraint constraintWithItem:self.btn1 attribute:NSLayoutAttributeHeight relatedBy:NSLayoutRelationEqual toItem:nil attribute:NSLayoutAttributeNotAnAttribute multiplier:1.0 constant:44];
-//    [self.btn1 addConstraints:@[btnWidth,btnHeight]];
+//    [self.btn1 addConstraints:@[btnHeight]];
 //    [self.view addConstraint:[NSLayoutConstraint
 //                            constraintWithItem:self.btn1
 //                            attribute:NSLayoutAttributeLeading
 //                            relatedBy:NSLayoutRelationEqual
-//                            toItem:self.view
+//                            toItem:self.myscrollview
 //                            attribute:NSLayoutAttributeLeading
 //                            multiplier:1
 //                            constant:10]];
+//    [self.view addConstraint:[NSLayoutConstraint
+//                              constraintWithItem:self.btn1
+//                              attribute:NSLayoutAttributeTrailing
+//                              relatedBy:NSLayoutRelationEqual
+//                              toItem:self.myscrollview
+//                              attribute:NSLayoutAttributeLeading
+//                              multiplier:1
+//                              constant:10]];
 //    [self.view addConstraint:[NSLayoutConstraint
 //                            constraintWithItem:self.btn1
 //                            attribute:NSLayoutAttributeTop
@@ -402,17 +404,25 @@
 //                            toItem:self.sepline2
 //                            attribute:NSLayoutAttributeBottom
 //                            multiplier:1
-//                            constant:+10]];
+//                            constant:10]];
     
 //    NSLayoutConstraint *btnWidth2 = [NSLayoutConstraint constraintWithItem:self.btn2 attribute:NSLayoutAttributeWidth relatedBy:NSLayoutRelationEqual toItem:nil attribute:NSLayoutAttributeNotAnAttribute multiplier:1.0 constant:width];
 //    NSLayoutConstraint *btnHeight2 = [NSLayoutConstraint constraintWithItem:self.btn2 attribute:NSLayoutAttributeHeight relatedBy:NSLayoutRelationEqual toItem:nil attribute:NSLayoutAttributeNotAnAttribute multiplier:1.0 constant:44];
-//    [self.btn2 addConstraints:@[btnWidth2,btnHeight2]];
+//    [self.btn2 addConstraints:@[btnHeight2]];
 //    [self.view addConstraint:[NSLayoutConstraint
 //                              constraintWithItem:self.btn2
 //                              attribute:NSLayoutAttributeLeading
 //                              relatedBy:NSLayoutRelationEqual
-//                              toItem:self.view
+//                              toItem:self.btn1
 //                              attribute:NSLayoutAttributeLeading
+//                              multiplier:1
+//                              constant:10]];
+//    [self.view addConstraint:[NSLayoutConstraint
+//                              constraintWithItem:self.btn2
+//                              attribute:NSLayoutAttributeTrailing
+//                              relatedBy:NSLayoutRelationEqual
+//                              toItem:self.myscrollview
+//                              attribute:NSLayoutAttributeTrailing
 //                              multiplier:1
 //                              constant:10]];
 //    [self.view addConstraint:[NSLayoutConstraint
@@ -710,8 +720,57 @@
     }
 }
 
+- (void)buttonClick:(UIButton *)button
+{
+    NSString *path = [self.info objectForKey:@"path"];
+    NSArray *imgArr =[path componentsSeparatedByString:NSLocalizedString(@",", nil)];
+    NSLog(@"%d",button.tag);
+    SDPhotoBrowser *browser = [[SDPhotoBrowser alloc] init];
+    browser.sourceImagesContainerView = self.imgSourceView; // 原图的父控件
+    browser.imageCount = imgArr.count; // 图片总数
+    browser.currentImageIndex = button.tag;
+    browser.delegate = self;
+    [browser show];
+    
+}
+
+#pragma mark - photobrowser代理方法
+
+// 返回临时占位图片（即原来的小图）
+- (UIImage *)photoBrowser:(SDPhotoBrowser *)browser placeholderImageForIndex:(NSInteger)index
+{
+    switch (index) {
+        case 0:
+            return [self.img1 currentImage];
+            break;
+        case 1:
+            return [self.img2 currentImage];
+            break;
+        case 2:
+            return [self.img3 currentImage];
+            break;
+        case 3:
+            return [self.img4 currentImage];
+            break;
+        default:
+            return nil;
+            break;
+    }
+    
+}
 
 
+// 返回高质量图片的url
+- (NSURL *)photoBrowser:(SDPhotoBrowser *)browser highQualityImageURLForIndex:(NSInteger)index
+{
+    NSString *path = [self.info objectForKey:@"path"];
+    NSArray *imgArr =[path componentsSeparatedByString:NSLocalizedString(@",", nil)];
+    NSString *img = [imgArr objectAtIndex:index];
+    NSString *imagePath = [NSString stringWithFormat:@"%@%@%@",[Utils getHostname],REPORT_PATH,img];
+    
+//    NSString *urlStr = [[self.photoItemArray[index] thumbnail_pic] stringByReplacingOccurrencesOfString:@"thumbnail" withString:@"bmiddle"];
+    return [NSURL URLWithString:imagePath];
+}
 
 
 @end
