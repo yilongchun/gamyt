@@ -8,7 +8,7 @@
 
 #import <UIKit/UIKit.h>
 
-@interface UserinfoViewController : UITableViewController
+@interface UserinfoViewController : UITableViewController<UITextFieldDelegate>
 
 @property (weak, nonatomic) IBOutlet UIImageView *img;
 @property (weak, nonatomic) IBOutlet UILabel *unitname;

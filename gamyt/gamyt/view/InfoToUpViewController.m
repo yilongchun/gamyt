@@ -34,6 +34,9 @@
     NSString *content = [self.info objectForKey:@"content"];//内容
     self.content.text = content;
     
+    NSString *s = [NSString stringWithFormat:@"最多能输入%lu个字符",200 - self.content.text.length];
+    self.textnumberLabel.text = s;
+    
     [self.img1 setHidden:YES];
     [self.img2 setHidden:YES];
     [self.img3 setHidden:YES];
@@ -114,7 +117,6 @@
         }else{
             UIAlertController *alert = [UIAlertController alertControllerWithTitle:title message:message preferredStyle:UIAlertControllerStyleAlert];
             [alert addAction:[UIAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleDestructive handler:^(UIAlertAction *action) {
-                NSLog(@"确定");
                 [self cancelAndBack];
             }]];
             [alert addAction:[UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleCancel handler:nil]];
@@ -124,8 +126,6 @@
 }
 
 - (IBAction)save:(id)sender {
-    NSLog(@"上报");
-    
     if ([self.infoType.text isEqualToString:@"信息类别"]) {
         [self showHint:@"请选择类别"];
         return;
@@ -140,11 +140,6 @@
     }else{
         contentChanged = YES;
     }
-    NSLog(@"%@",newsid);
-    NSLog(@"%@",reportid);
-    NSLog(@"%@",self.content.text);
-    NSLog(@"%d",contentChanged);
-    NSLog(@"%d",[reportType intValue]);
     
     [self showHudInView:self.view hint:@"加载中"];
     NSString *str = [NSString stringWithFormat:@"%@%@",[Utils getHostname],@"/mobile/report/upReport"];
@@ -176,7 +171,6 @@
         NSString *html = operation.responseString;
         NSData* data=[html dataUsingEncoding:NSUTF8StringEncoding];
         id dict=[NSJSONSerialization  JSONObjectWithData:data options:0 error:nil];
-        NSLog(@"获取到的数据为：%@",dict);
         NSDictionary *resultDict = [NSDictionary cleanNullForDic:dict];
         if (resultDict == nil) {
             NSLog(@"json parse failed \r\n");
@@ -215,9 +209,17 @@
 - (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex{
     if (alertView.tag == 1) {
         if (buttonIndex == 1) {//确定
-            NSLog(@"确定");
             [self cancelAndBack];
         }
+    }
+}
+#pragma mark - UITextViewDelegate
+- (void)textViewDidChange:(UITextView *)textView{
+    if (textView.text.length <= 200) {
+        NSString *s = [NSString stringWithFormat:@"最多能输入%lu个字符",200 - textView.text.length];
+        self.textnumberLabel.text = s;//提醒字数
+    }else{
+        textView.text = [textView.text substringToIndex:200];
     }
 }
 

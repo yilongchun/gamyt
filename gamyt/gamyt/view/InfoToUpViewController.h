@@ -8,7 +8,7 @@
 
 #import <UIKit/UIKit.h>
 
-@interface InfoToUpViewController : UIViewController<UIAlertViewDelegate,UIPickerViewDelegate,UIPickerViewDataSource,UIActionSheetDelegate>
+@interface InfoToUpViewController : UIViewController<UIAlertViewDelegate,UIPickerViewDelegate,UIPickerViewDataSource,UIActionSheetDelegate,UITextViewDelegate>
 
 - (IBAction)cancel:(id)sender;
 - (IBAction)save:(id)sender;

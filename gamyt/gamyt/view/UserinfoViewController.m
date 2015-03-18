@@ -20,6 +20,12 @@
 //        self.automaticallyAdjustsScrollViewInsets = NO;
 //    }
     
+    [self.phone addTarget:self action:@selector(textFieldDidChange:) forControlEvents:UIControlEventEditingChanged];
+    [self.bank addTarget:self action:@selector(textFieldDidChange:) forControlEvents:UIControlEventEditingChanged];
+    [self.bankcard addTarget:self action:@selector(textFieldDidChange:) forControlEvents:UIControlEventEditingChanged];
+    [self.bankaddress addTarget:self action:@selector(textFieldDidChange:) forControlEvents:UIControlEventEditingChanged];
+    
+    
     NSUserDefaults *userdefaults = [NSUserDefaults standardUserDefaults];
     users = [userdefaults objectForKey:@"users"];
     notes = [userdefaults objectForKey:@"notes"];
@@ -151,8 +157,29 @@
     [queue addOperation:operation];
 }
 
+#pragma mark - UITableViewDelegate
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
+}
+
+#pragma mark - UITextFieldDelegate
+- (void)textFieldDidChange:(UITextField *)textField{
+    switch (textField.tag) {
+        case 1:
+            if (textField.text.length > 11) {
+                textField.text = [textField.text substringToIndex:11];
+            }
+            break;
+        case 2:
+        case 3:
+        case 4:
+            if (textField.text.length > 30) {
+                textField.text = [textField.text substringToIndex:30];
+            }
+            break;
+        default:
+            break;
+    }
 }
 
 @end
