@@ -18,12 +18,27 @@
     NSNumber *reportid;
     NSMutableArray *shenyueDataSource;
     NSMutableArray *selectedArr;
+    
+    UITableView *alertTableView;
 }
 
 - (void)viewDidLoad{
     [super viewDidLoad];
     if (floor(NSFoundationVersionNumber) > NSFoundationVersionNumber_iOS_6_1){
         self.automaticallyAdjustsScrollViewInsets = NO;
+    }
+    
+    alertTableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 50, 270, 173) style:UITableViewStylePlain];
+    alertTableView.backgroundColor = [UIColor clearColor];
+    alertTableView.dataSource = self;
+    alertTableView.delegate = self;
+    UIView *v = [[UIView alloc] initWithFrame:CGRectZero];
+    [alertTableView setTableFooterView:v];
+    if ([alertTableView respondsToSelector:@selector(setSeparatorInset:)]) {
+        [alertTableView setSeparatorInset:UIEdgeInsetsZero];
+    }
+    if ([alertTableView respondsToSelector:@selector(setLayoutMargins:)]) {
+        [alertTableView setLayoutMargins:UIEdgeInsetsZero];
     }
     
     [[NSNotificationCenter defaultCenter] addObserver:self
@@ -592,7 +607,7 @@
     NSLog(@"报审");
     
     if (shenyueDataSource == nil) {
-        [self showHudInView:self.view hint:@"加载中"];
+        [self showHudInView:alertTableView hint:@"加载中"];
         NSString *str = [NSString stringWithFormat:@"%@%@",[Utils getHostname],@"/mobile/user/getTasters"];
         NSURL *url = [NSURL URLWithString:[str stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding]];
         NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:url];
@@ -626,7 +641,7 @@
                 
                 NSArray *array = [resultDict objectForKey:@"data"];
                 shenyueDataSource = [NSMutableArray arrayWithArray:array];
-                [self chooseShenYueYuan];
+                [alertTableView reloadData];
             }
         }failure:^(AFHTTPRequestOperation *operation, NSError *error) {
             NSLog(@"发生错误！%@",error);
@@ -635,9 +650,8 @@
         }];
         NSOperationQueue *queue = [[NSOperationQueue alloc] init];
         [queue addOperation:operation];
-    }else{
-        [self chooseShenYueYuan];
     }
+    [self chooseShenYueYuan];
 }
 
 //报审
@@ -716,40 +730,15 @@
 //选择审阅员
 -(void)chooseShenYueYuan{
     [selectedArr removeAllObjects];
+    [alertTableView reloadData];
     if (CURRENT_SYSTEM_VERSION < 8.0) {
         UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"请选择您需要报审的审阅员!" message:@"\n\n\n\n\n\n\n\n\n\n" delegate:nil cancelButtonTitle:@"取消" otherButtonTitles:@"确定", nil];
         alert.tag = 4;
-        UITableView *table = [[UITableView alloc] initWithFrame:CGRectMake(0, 50, 280, 173) style:UITableViewStylePlain];
-        table.backgroundColor = [UIColor clearColor];
-        table.dataSource = self;
-        table.delegate = self;
-        UIView *v = [[UIView alloc] initWithFrame:CGRectZero];
-        [table setTableFooterView:v];
-        if ([table respondsToSelector:@selector(setSeparatorInset:)]) {
-            [table setSeparatorInset:UIEdgeInsetsZero];
-        }
-        if ([table respondsToSelector:@selector(setLayoutMargins:)]) {
-            [table setLayoutMargins:UIEdgeInsetsZero];
-        }
-        [alert addSubview:table];
+        [alert addSubview:alertTableView];
         [alert show];
-        
     }else{
         UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"请选择您需要报审的审阅员!" message:@"\n\n\n\n\n\n\n\n\n\n" preferredStyle:UIAlertControllerStyleAlert];
-        UITableView *table = [[UITableView alloc] initWithFrame:CGRectMake(0, 50, 280, 173) style:UITableViewStylePlain];
-        table.backgroundColor = [UIColor clearColor];
-        table.dataSource = self;
-        table.delegate = self;
-        UIView *v = [[UIView alloc] initWithFrame:CGRectZero];
-        [table setTableFooterView:v];
-        if ([table respondsToSelector:@selector(setSeparatorInset:)]) {
-            [table setSeparatorInset:UIEdgeInsetsZero];
-        }
-        if ([table respondsToSelector:@selector(setLayoutMargins:)]) {
-            [table setLayoutMargins:UIEdgeInsetsZero];
-        }
-        [alert.view addSubview:table];
-        
+        [alert.view addSubview:alertTableView];
         [alert addAction:[UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleCancel handler:nil]];
         [alert addAction:[UIAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleDestructive handler:^(UIAlertAction *action) {
             [self levelCheck];
