@@ -43,25 +43,42 @@
     [self.img4 setHidden:YES];
     NSString *path = [self.info objectForKey:@"path"];//照片路径
     NSArray *imgArr =[path componentsSeparatedByString:NSLocalizedString(@",", nil)];
+    
     for (int i = 0; i < imgArr.count; i++) {
         NSString *img = [imgArr objectAtIndex:i];
         NSString *imagePath = [NSString stringWithFormat:@"%@%@%@",[Utils getHostname],REPORT_PATH,img];
         switch (i) {
             case 0:
+            {
                 [self.img1 setImageWithURL:[NSURL URLWithString:imagePath] placeholderImage:[UIImage imageNamed:@"defalut_pic"]];
                 [self.img1 setHidden:NO];
+                UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(imageClick:)];
+                [self.img1 addGestureRecognizer:tap];
+            }
                 break;
             case 1:
+            {
                 [self.img2 setImageWithURL:[NSURL URLWithString:imagePath] placeholderImage:[UIImage imageNamed:@"defalut_pic"]];
                 [self.img2 setHidden:NO];
+                UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(imageClick:)];
+                [self.img2 addGestureRecognizer:tap];
+            }
                 break;
             case 2:
+            {
                 [self.img3 setImageWithURL:[NSURL URLWithString:imagePath] placeholderImage:[UIImage imageNamed:@"defalut_pic"]];
                 [self.img3 setHidden:NO];
+                UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(imageClick:)];
+                [self.img3 addGestureRecognizer:tap];
+            }
                 break;
             case 3:
+            {
                 [self.img4 setImageWithURL:[NSURL URLWithString:imagePath] placeholderImage:[UIImage imageNamed:@"defalut_pic"]];
                 [self.img4 setHidden:NO];
+                UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(imageClick:)];
+                [self.img4 addGestureRecognizer:tap];
+            }
                 break;
             default:
                 break;
@@ -368,5 +385,40 @@
     [paragraphStyle setFirstLineHeadIndent :10 ];
     NSAttributedString *attrText = [[NSAttributedString alloc] initWithString:self.infoType.text attributes:@{ NSParagraphStyleAttributeName : paragraphStyle}];
     self.infoType.attributedText = attrText;
+}
+
+- (void)imageClick:(UITapGestureRecognizer *)recognizer
+{
+    
+    NSString *path = [self.info objectForKey:@"path"];
+    NSArray *imgArr =[path componentsSeparatedByString:NSLocalizedString(@",", nil)];
+    SDPhotoBrowser *browser = [[SDPhotoBrowser alloc] init];
+    browser.sourceImagesContainerView = self.sourceImagesContainerView; // 原图的父控件
+    browser.imageCount = imgArr.count; // 图片总数
+    browser.currentImageIndex = (int)recognizer.view.tag;
+    browser.delegate = self;
+    [browser show];
+}
+
+#pragma mark - photobrowser代理方法
+
+// 返回临时占位图片（即原来的小图）
+- (UIImage *)photoBrowser:(SDPhotoBrowser *)browser placeholderImageForIndex:(NSInteger)index
+{
+    NSLog(@"%@",self.sourceImagesContainerView.subviews[index]);
+    return [self.sourceImagesContainerView.subviews[index] image];
+}
+
+
+// 返回高质量图片的url
+- (NSURL *)photoBrowser:(SDPhotoBrowser *)browser highQualityImageURLForIndex:(NSInteger)index
+{
+    NSString *path = [self.info objectForKey:@"path"];
+    NSArray *imgArr =[path componentsSeparatedByString:NSLocalizedString(@",", nil)];
+    NSString *img = [imgArr objectAtIndex:index];
+    NSString *imagePath = [NSString stringWithFormat:@"%@%@%@",[Utils getHostname],REPORT_PATH,img];
+    
+    //    NSString *urlStr = [[self.photoItemArray[index] thumbnail_pic] stringByReplacingOccurrencesOfString:@"thumbnail" withString:@"bmiddle"];
+    return [NSURL URLWithString:imagePath];
 }
 @end

@@ -142,7 +142,6 @@
 // 加载图片
 - (void)setupImageOfImageViewForIndex:(NSInteger)index
 {
-    NSLog(@"%d",index);
     if (index < _scrollView.subviews.count) {
         SDBrowserImageView *imageView = _scrollView.subviews[index];
         if (imageView.hasLoadedImage) return;

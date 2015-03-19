@@ -7,8 +7,9 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "SDPhotoBrowser.h"
 
-@interface InfoToUpViewController : UIViewController<UIAlertViewDelegate,UIPickerViewDelegate,UIPickerViewDataSource,UIActionSheetDelegate,UITextViewDelegate>
+@interface InfoToUpViewController : UIViewController<UIAlertViewDelegate,UIPickerViewDelegate,UIPickerViewDataSource,UIActionSheetDelegate,UITextViewDelegate,SDPhotoBrowserDelegate>
 
 - (IBAction)cancel:(id)sender;
 - (IBAction)save:(id)sender;
@@ -27,5 +28,6 @@
 @property (weak, nonatomic) IBOutlet UIImageView *img3;
 @property (weak, nonatomic) IBOutlet UIImageView *img4;
 @property(nonatomic, strong) NSDictionary *info;
+@property (weak, nonatomic) IBOutlet UIView *sourceImagesContainerView;
 
 @end
