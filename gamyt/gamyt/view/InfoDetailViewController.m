@@ -16,8 +16,6 @@
     NSString *infoTitle;
     NSNumber *newsid;
     NSNumber *reportid;
-    
-    
 }
 
 - (void)viewDidLoad{
@@ -376,107 +374,6 @@
                                   multiplier:1
                                   constant:+10]];
     }
-    
-    
-//    NSLayoutConstraint *btnWidth = [NSLayoutConstraint constraintWithItem:self.btn1 attribute:NSLayoutAttributeWidth relatedBy:NSLayoutRelationEqual toItem:nil attribute:NSLayoutAttributeNotAnAttribute multiplier:1.0 constant:width];
-//    NSLayoutConstraint *btnHeight = [NSLayoutConstraint constraintWithItem:self.btn1 attribute:NSLayoutAttributeHeight relatedBy:NSLayoutRelationEqual toItem:nil attribute:NSLayoutAttributeNotAnAttribute multiplier:1.0 constant:44];
-//    [self.btn1 addConstraints:@[btnHeight]];
-//    [self.view addConstraint:[NSLayoutConstraint
-//                            constraintWithItem:self.btn1
-//                            attribute:NSLayoutAttributeLeading
-//                            relatedBy:NSLayoutRelationEqual
-//                            toItem:self.myscrollview
-//                            attribute:NSLayoutAttributeLeading
-//                            multiplier:1
-//                            constant:10]];
-//    [self.view addConstraint:[NSLayoutConstraint
-//                              constraintWithItem:self.btn1
-//                              attribute:NSLayoutAttributeTrailing
-//                              relatedBy:NSLayoutRelationEqual
-//                              toItem:self.myscrollview
-//                              attribute:NSLayoutAttributeLeading
-//                              multiplier:1
-//                              constant:10]];
-//    [self.view addConstraint:[NSLayoutConstraint
-//                            constraintWithItem:self.btn1
-//                            attribute:NSLayoutAttributeTop
-//                            relatedBy:NSLayoutRelationEqual
-//                            toItem:self.sepline2
-//                            attribute:NSLayoutAttributeBottom
-//                            multiplier:1
-//                            constant:10]];
-    
-//    NSLayoutConstraint *btnWidth2 = [NSLayoutConstraint constraintWithItem:self.btn2 attribute:NSLayoutAttributeWidth relatedBy:NSLayoutRelationEqual toItem:nil attribute:NSLayoutAttributeNotAnAttribute multiplier:1.0 constant:width];
-//    NSLayoutConstraint *btnHeight2 = [NSLayoutConstraint constraintWithItem:self.btn2 attribute:NSLayoutAttributeHeight relatedBy:NSLayoutRelationEqual toItem:nil attribute:NSLayoutAttributeNotAnAttribute multiplier:1.0 constant:44];
-//    [self.btn2 addConstraints:@[btnHeight2]];
-//    [self.view addConstraint:[NSLayoutConstraint
-//                              constraintWithItem:self.btn2
-//                              attribute:NSLayoutAttributeLeading
-//                              relatedBy:NSLayoutRelationEqual
-//                              toItem:self.btn1
-//                              attribute:NSLayoutAttributeLeading
-//                              multiplier:1
-//                              constant:10]];
-//    [self.view addConstraint:[NSLayoutConstraint
-//                              constraintWithItem:self.btn2
-//                              attribute:NSLayoutAttributeTrailing
-//                              relatedBy:NSLayoutRelationEqual
-//                              toItem:self.myscrollview
-//                              attribute:NSLayoutAttributeTrailing
-//                              multiplier:1
-//                              constant:10]];
-//    [self.view addConstraint:[NSLayoutConstraint
-//                              constraintWithItem:self.btn1
-//                              attribute:NSLayoutAttributeTop
-//                              relatedBy:NSLayoutRelationEqual
-//                              toItem:self.sepline2
-//                              attribute:NSLayoutAttributeBottom
-//                              multiplier:1
-//                              constant:+10]];
-    
-//    NSLayoutConstraint *btnWidth3 = [NSLayoutConstraint constraintWithItem:self.btn3 attribute:NSLayoutAttributeWidth relatedBy:NSLayoutRelationEqual toItem:nil attribute:NSLayoutAttributeNotAnAttribute multiplier:1.0 constant:width];
-//    NSLayoutConstraint *btnHeight3 = [NSLayoutConstraint constraintWithItem:self.btn3 attribute:NSLayoutAttributeHeight relatedBy:NSLayoutRelationEqual toItem:nil attribute:NSLayoutAttributeNotAnAttribute multiplier:1.0 constant:44];
-//    [self.btn3 addConstraints:@[btnWidth3,btnHeight3]];
-//    [self.view addConstraint:[NSLayoutConstraint
-//                              constraintWithItem:self.btn1
-//                              attribute:NSLayoutAttributeLeading
-//                              relatedBy:NSLayoutRelationEqual
-//                              toItem:self.view
-//                              attribute:NSLayoutAttributeLeading
-//                              multiplier:1
-//                              constant:10]];
-//    [self.view addConstraint:[NSLayoutConstraint
-//                              constraintWithItem:self.btn1
-//                              attribute:NSLayoutAttributeTop
-//                              relatedBy:NSLayoutRelationEqual
-//                              toItem:self.sepline2
-//                              attribute:NSLayoutAttributeBottom
-//                              multiplier:1
-//                              constant:+10]];
-    
-//    NSLayoutConstraint *btnWidth4 = [NSLayoutConstraint constraintWithItem:self.btn4 attribute:NSLayoutAttributeWidth relatedBy:NSLayoutRelationEqual toItem:nil attribute:NSLayoutAttributeNotAnAttribute multiplier:1.0 constant:width];
-//    NSLayoutConstraint *btnHeight4 = [NSLayoutConstraint constraintWithItem:self.btn4 attribute:NSLayoutAttributeHeight relatedBy:NSLayoutRelationEqual toItem:nil attribute:NSLayoutAttributeNotAnAttribute multiplier:1.0 constant:44];
-//    [self.btn4 addConstraints:@[btnWidth4,btnHeight4]];
-//    [self.view addConstraint:[NSLayoutConstraint
-//                              constraintWithItem:self.btn1
-//                              attribute:NSLayoutAttributeLeading
-//                              relatedBy:NSLayoutRelationEqual
-//                              toItem:self.view
-//                              attribute:NSLayoutAttributeLeading
-//                              multiplier:1
-//                              constant:10]];
-//    [self.view addConstraint:[NSLayoutConstraint
-//                              constraintWithItem:self.btn1
-//                              attribute:NSLayoutAttributeTop
-//                              relatedBy:NSLayoutRelationEqual
-//                              toItem:self.sepline2
-//                              attribute:NSLayoutAttributeBottom
-//                              multiplier:1
-//                              constant:+10]];
-    
-    
-    
-    
 }
 
 -(void)viewDidAppear:(BOOL)animated{
@@ -724,7 +621,6 @@
 {
     NSString *path = [self.info objectForKey:@"path"];
     NSArray *imgArr =[path componentsSeparatedByString:NSLocalizedString(@",", nil)];
-    NSLog(@"%d",button.tag);
     SDPhotoBrowser *browser = [[SDPhotoBrowser alloc] init];
     browser.sourceImagesContainerView = self.imgSourceView; // 原图的父控件
     browser.imageCount = imgArr.count; // 图片总数
