@@ -133,10 +133,10 @@
             [alert show];
         }else{
             UIAlertController *alert = [UIAlertController alertControllerWithTitle:title message:message preferredStyle:UIAlertControllerStyleAlert];
+            [alert addAction:[UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleCancel handler:nil]];
             [alert addAction:[UIAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleDestructive handler:^(UIAlertAction *action) {
                 [self cancelAndBack];
             }]];
-            [alert addAction:[UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleCancel handler:nil]];
             [self presentViewController:alert animated:YES completion:nil];
         }
     }
@@ -338,14 +338,14 @@
         //        CGRect pickerFrame = CGRectMake(12, 32, self.view.frame.size.width-40, 216);
         //        typepicker.frame = pickerFrame;
         [alert.view addSubview:typepicker];
+        [alert addAction:[UIAlertAction actionWithTitle:@"取消"
+                                                  style:UIAlertActionStyleCancel
+                                                handler:nil]];
         [alert addAction:[UIAlertAction actionWithTitle:@"确定"
                                                   style:UIAlertActionStyleDestructive
                                                 handler:^(UIAlertAction *action) {
                                                     [self confirmType];
                                                 }]];
-        [alert addAction:[UIAlertAction actionWithTitle:@"取消"
-                                                  style:UIAlertActionStyleCancel
-                                                handler:nil]];
         [self presentViewController:alert animated:YES completion:nil];
     }
 }

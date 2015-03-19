@@ -9,7 +9,7 @@
 #import <UIKit/UIKit.h>
 #import "SDPhotoBrowser.h"
 
-@interface InfoDetailViewController : UIViewController<UIAlertViewDelegate,UITextFieldDelegate,SDPhotoBrowserDelegate>
+@interface InfoDetailViewController : UIViewController<UIAlertViewDelegate,UITextFieldDelegate,SDPhotoBrowserDelegate,UITableViewDelegate,UITableViewDataSource>
 
 @property(nonatomic, strong) NSDictionary *info;
 @property (weak, nonatomic) IBOutlet UIScrollView *myscrollview;
