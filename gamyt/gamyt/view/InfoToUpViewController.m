@@ -268,7 +268,7 @@
 
 //获取类别
 -(void)loadType{
-    [self showHudInView:self.view hint:@"加载中"];
+    [self showHudInView:typepicker hint:@"加载中"];
     NSString *str = [NSString stringWithFormat:@"%@%@",[Utils getHostname],@"/mobile/report/getAllSort"];
     NSURL *url = [NSURL URLWithString:[str stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding]];
     NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:url];
@@ -302,7 +302,8 @@
             NSArray *data = [resultDict objectForKey:@"data"];
             if (data != nil && ![data isKindOfClass:[NSString class]]) {
                 typeArr = [NSMutableArray arrayWithArray:data];
-                [self alert];
+                [typepicker reloadAllComponents];
+                
             }
         }
     }failure:^(AFHTTPRequestOperation *operation, NSError *error) {
@@ -317,9 +318,8 @@
 - (IBAction)chooseType:(id)sender {
     if (typeArr == nil) {
         [self loadType];
-    }else{
-        [self alert];
     }
+    [self alert];
 }
 
 -(void)alert{
