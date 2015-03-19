@@ -27,7 +27,11 @@
 
 #define KNOTIFICATION_LOGINCHANGE @"loginStateChange"
 
-
+#if TARGET_IPHONE_SIMULATOR
+#define SIMULATOR 1
+#elif TARGET_OS_IPHONE
+#define SIMULATOR 0
+#endif
 
 #ifdef DEBUG
 #define NSLog(...)NSLog(__VA_ARGS__)

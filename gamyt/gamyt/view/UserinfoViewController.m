@@ -485,7 +485,7 @@
     //设置HTTPHeader
     [request setValue:content forHTTPHeaderField:@"Content-Type"];
     //设置Content-Length
-    [request setValue:[NSString stringWithFormat:@"%d", [myRequestData length]] forHTTPHeaderField:@"Content-Length"];
+    [request setValue:[NSString stringWithFormat:@"%d", (int)[myRequestData length]] forHTTPHeaderField:@"Content-Length"];
     //设置http body
     [request setHTTPBody:myRequestData];
     NSNumberFormatter* numberFormatter = [[NSNumberFormatter alloc] init];

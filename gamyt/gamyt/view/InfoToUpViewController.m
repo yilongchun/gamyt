@@ -405,7 +405,6 @@
 // 返回临时占位图片（即原来的小图）
 - (UIImage *)photoBrowser:(SDPhotoBrowser *)browser placeholderImageForIndex:(NSInteger)index
 {
-    NSLog(@"%@",self.sourceImagesContainerView.subviews[index]);
     return [self.sourceImagesContainerView.subviews[index] image];
 }
 

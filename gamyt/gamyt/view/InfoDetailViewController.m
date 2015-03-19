@@ -173,34 +173,34 @@
             switch (i) {
                 case 0:
                 {
+                    [self.img1 setImageWithURL:[NSURL URLWithString:imagePath] placeholderImage:[UIImage imageNamed:@"defalut_pic"]];
                     [self.img1 setHidden:NO];
-                    [self.img1 sd_setImageWithURL:[NSURL URLWithString:imagePath] forState:UIControlStateNormal];
-                    [self.img1 setTag:0];
-                    [self.img1 addTarget:self action:@selector(buttonClick:) forControlEvents:UIControlEventTouchUpInside];
+                    UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(imageClick:)];
+                    [self.img1 addGestureRecognizer:tap];
                 }
                     break;
                 case 1:
                 {
+                    [self.img2 setImageWithURL:[NSURL URLWithString:imagePath] placeholderImage:[UIImage imageNamed:@"defalut_pic"]];
                     [self.img2 setHidden:NO];
-                    [self.img2 sd_setImageWithURL:[NSURL URLWithString:imagePath] forState:UIControlStateNormal];
-                    [self.img2 setTag:1];
-                    [self.img2 addTarget:self action:@selector(buttonClick:) forControlEvents:UIControlEventTouchUpInside];
+                    UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(imageClick:)];
+                    [self.img2 addGestureRecognizer:tap];
                 }
                     break;
                 case 2:
                 {
+                    [self.img3 setImageWithURL:[NSURL URLWithString:imagePath] placeholderImage:[UIImage imageNamed:@"defalut_pic"]];
                     [self.img3 setHidden:NO];
-                    [self.img3 sd_setImageWithURL:[NSURL URLWithString:imagePath] forState:UIControlStateNormal];
-                    [self.img3 setTag:2];
-                    [self.img3 addTarget:self action:@selector(buttonClick:) forControlEvents:UIControlEventTouchUpInside];
+                    UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(imageClick:)];
+                    [self.img3 addGestureRecognizer:tap];
                 }
                     break;
                 case 3:
                 {
+                    [self.img4 setImageWithURL:[NSURL URLWithString:imagePath] placeholderImage:[UIImage imageNamed:@"defalut_pic"]];
                     [self.img4 setHidden:NO];
-                    [self.img4 sd_setImageWithURL:[NSURL URLWithString:imagePath] forState:UIControlStateNormal];
-                    [self.img4 setTag:3];
-                    [self.img4 addTarget:self action:@selector(buttonClick:) forControlEvents:UIControlEventTouchUpInside];
+                    UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(imageClick:)];
+                    [self.img4 addGestureRecognizer:tap];
                 }
                     break;
                 default:
@@ -617,17 +617,17 @@
     }
 }
 
-- (void)buttonClick:(UIButton *)button
+- (void)imageClick:(UITapGestureRecognizer *)recognizer
 {
+    
     NSString *path = [self.info objectForKey:@"path"];
     NSArray *imgArr =[path componentsSeparatedByString:NSLocalizedString(@",", nil)];
     SDPhotoBrowser *browser = [[SDPhotoBrowser alloc] init];
-    browser.sourceImagesContainerView = self.imgSourceView; // 原图的父控件
+    browser.sourceImagesContainerView = self.sourceImagesContainerView; // 原图的父控件
     browser.imageCount = imgArr.count; // 图片总数
-    browser.currentImageIndex = button.tag;
+    browser.currentImageIndex = (int)recognizer.view.tag;
     browser.delegate = self;
     [browser show];
-    
 }
 
 #pragma mark - photobrowser代理方法
@@ -635,24 +635,7 @@
 // 返回临时占位图片（即原来的小图）
 - (UIImage *)photoBrowser:(SDPhotoBrowser *)browser placeholderImageForIndex:(NSInteger)index
 {
-    switch (index) {
-        case 0:
-            return [self.img1 currentImage];
-            break;
-        case 1:
-            return [self.img2 currentImage];
-            break;
-        case 2:
-            return [self.img3 currentImage];
-            break;
-        case 3:
-            return [self.img4 currentImage];
-            break;
-        default:
-            return nil;
-            break;
-    }
-    
+    return [self.sourceImagesContainerView.subviews[index] image];    
 }
 
 
