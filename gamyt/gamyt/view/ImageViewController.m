@@ -11,25 +11,13 @@
 
 @implementation ImageViewController{
     BOOL flag;
+    int selectIndex;
 }
 
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
-    for (int i = 0 ; i < self.chosenImages.count; i++) {
-        UIImage *image = [self.chosenImages objectAtIndex:i];
-        UIImageView *imageview = [[UIImageView alloc] initWithFrame:CGRectZero];
-        imageview.image = image;
-        [imageview setContentMode:UIViewContentModeScaleAspectFit];
-        [self.myscrollview addSubview:imageview];
-    }
     
-    if (self.chosenImages.count == 1) {
-        [self.pageLabel setHidden:YES];
-    }
-    flag = NO;
-    
-    self.pageLabel.text = [NSString stringWithFormat:@"%d/%ld", [self.current intValue]+1, (long)self.chosenImages.count];
     
     
 //    CGFloat dx = 50;
@@ -50,7 +38,24 @@
     
     
     
+    [self initData];
+}
+
+-(void)initData{
+    for (int i = 0 ; i < self.chosenImages.count; i++) {
+        UIImage *image = [self.chosenImages objectAtIndex:i];
+        UIImageView *imageview = [[UIImageView alloc] initWithFrame:CGRectZero];
+        imageview.image = image;
+        [imageview setContentMode:UIViewContentModeScaleAspectFit];
+        [self.myscrollview addSubview:imageview];
+    }
     
+    if (self.chosenImages.count == 1) {
+        [self.pageLabel setHidden:YES];
+    }
+    flag = NO;
+    
+    self.pageLabel.text = [NSString stringWithFormat:@"%d/%ld", [self.current intValue]+1, (long)self.chosenImages.count];
 }
 
 
@@ -77,6 +82,7 @@
         
         [self.myscrollview.subviews enumerateObjectsUsingBlock:^(UIImageView *obj, NSUInteger idx, BOOL *stop) {
             CGFloat x = SDPhotoBrowserImageViewMargin + idx * (SDPhotoBrowserImageViewMargin * 2 + w);
+            [obj setContentMode:UIViewContentModeScaleAspectFit];
             obj.frame = CGRectMake(x, y, w, h);
         }];
         
@@ -92,6 +98,39 @@
     [[UIApplication sharedApplication] setStatusBarHidden:NO withAnimation:UIStatusBarAnimationSlide];
     [self dismissViewControllerAnimated:YES completion:nil];
 }
+
+- (IBAction)deleteImg:(id)sender {
+    if (selectIndex < self.myscrollview.subviews.count) {
+        [self.myscrollview.subviews[selectIndex] removeFromSuperview];
+        [self.chosenImages removeObjectAtIndex:selectIndex];
+        NSMutableDictionary *userinfo = [NSMutableDictionary dictionary];
+        [userinfo setObject:[NSNumber numberWithInt:selectIndex] forKey:@"deleteImageIndex"];
+        [[NSNotificationCenter defaultCenter] postNotificationName:@"deleteImage" object:nil userInfo:userinfo];
+//        if (selectIndex > 0) {
+//            selectIndex -= 1;
+//        }
+        
+        if (self.myscrollview.subviews.count > 0) {
+            CGRect rect = self.view.bounds;
+            self.myscrollview.bounds = rect;
+            CGFloat y = SDPhotoBrowserImageViewMargin;
+            CGFloat w = self.myscrollview.frame.size.width - SDPhotoBrowserImageViewMargin * 2;
+            CGFloat h = self.myscrollview.frame.size.height - SDPhotoBrowserImageViewMargin * 2;
+            [self.myscrollview.subviews enumerateObjectsUsingBlock:^(UIImageView *obj, NSUInteger idx, BOOL *stop) {
+                CGFloat x = SDPhotoBrowserImageViewMargin + idx * (SDPhotoBrowserImageViewMargin * 2 + w);
+                obj.frame = CGRectMake(x, y, w, h);
+                [obj setContentMode:UIViewContentModeScaleAspectFit];
+            }];
+            self.myscrollview.contentSize = CGSizeMake(self.myscrollview.subviews.count * self.myscrollview.frame.size.width, 0);
+            self.myscrollview.contentOffset = CGPointMake(selectIndex * self.myscrollview.frame.size.width, 0);//偏移
+            self.pageLabel.text = [NSString stringWithFormat:@"%d/%ld", selectIndex+1, (long)self.chosenImages.count];
+        }else{
+            [self cancel:nil];
+        }
+    }
+}
+
+
 
 #pragma mark - scrollview代理方法
 
@@ -115,7 +154,7 @@
 //        
 //    }
     
-    
+    selectIndex = index;
     self.pageLabel.text = [NSString stringWithFormat:@"%d/%ld", index + 1, (long)self.chosenImages.count];
     
 }

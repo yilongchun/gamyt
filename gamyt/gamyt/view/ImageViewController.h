@@ -15,4 +15,6 @@
 @property (nonatomic, strong) NSNumber *current;
 @property (weak, nonatomic) IBOutlet UILabel *pageLabel;
 - (IBAction)cancel:(id)sender;
+- (IBAction)deleteImg:(id)sender;
+
 @end

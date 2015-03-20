@@ -1503,9 +1503,6 @@
                                 <rect key="frame" x="-23" y="-15" width="46" height="30"/>
                                 <constraints>
                                     <constraint firstAttribute="width" secondItem="W7L-GO-C5R" secondAttribute="height" multiplier="1:1" id="fq5-k1-aCq"/>
-                                    <constraint firstAttribute="width" constant="54" id="kFr-r1-7f2">
-                                        <variation key="heightClass=regular-widthClass=compact" constant="80"/>
-                                    </constraint>
                                 </constraints>
                                 <state key="normal" image="imgadd_normal">
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
@@ -1514,13 +1511,11 @@
                                 <variation key="default">
                                     <mask key="constraints">
                                         <exclude reference="fq5-k1-aCq"/>
-                                        <exclude reference="kFr-r1-7f2"/>
                                     </mask>
                                 </variation>
                                 <variation key="heightClass=regular-widthClass=compact">
                                     <mask key="constraints">
                                         <include reference="fq5-k1-aCq"/>
-                                        <include reference="kFr-r1-7f2"/>
                                     </mask>
                                 </variation>
                                 <connections>
@@ -1544,11 +1539,12 @@
                             </constraint>
                             <constraint firstAttribute="width" secondItem="901-jv-4jO" secondAttribute="width" constant="10" id="Sef-ki-3C0"/>
                             <constraint firstItem="W7L-GO-C5R" firstAttribute="leading" secondItem="ZUN-L5-mN0" secondAttribute="leading" constant="16" id="Vd1-Pu-ZQg">
-                                <variation key="heightClass=regular-widthClass=compact" constant="16"/>
+                                <variation key="heightClass=regular-widthClass=compact" constant="15"/>
                             </constraint>
                             <constraint firstItem="0EN-Ub-oyy" firstAttribute="leading" secondItem="ZUN-L5-mN0" secondAttribute="leading" id="efH-lb-MAR"/>
                             <constraint firstAttribute="trailing" secondItem="0EN-Ub-oyy" secondAttribute="trailing" id="fCZ-Td-s31"/>
                             <constraint firstItem="901-jv-4jO" firstAttribute="top" secondItem="0EN-Ub-oyy" secondAttribute="bottom" constant="5" id="mP3-hf-wfX"/>
+                            <constraint firstItem="W7L-GO-C5R" firstAttribute="width" secondItem="901-jv-4jO" secondAttribute="width" multiplier="1:4" constant="-10" id="srW-FK-tr9"/>
                             <constraint firstItem="sgf-SS-AiF" firstAttribute="leading" secondItem="ZUN-L5-mN0" secondAttribute="leading" constant="7" id="vXC-aI-ZeY">
                                 <variation key="heightClass=regular-widthClass=compact" constant="6"/>
                             </constraint>
@@ -1580,6 +1576,7 @@
                                 <exclude reference="Epy-n5-HQQ"/>
                                 <exclude reference="Fsb-AC-UZ2"/>
                                 <exclude reference="Vd1-Pu-ZQg"/>
+                                <exclude reference="srW-FK-tr9"/>
                                 <exclude reference="DJA-it-JxM"/>
                                 <exclude reference="Sdi-oQ-XsV"/>
                             </mask>
@@ -1605,6 +1602,7 @@
                                 <include reference="Epy-n5-HQQ"/>
                                 <include reference="Fsb-AC-UZ2"/>
                                 <include reference="Vd1-Pu-ZQg"/>
+                                <include reference="srW-FK-tr9"/>
                                 <include reference="DJA-it-JxM"/>
                                 <include reference="Sdi-oQ-XsV"/>
                             </mask>
@@ -1645,7 +1643,7 @@
                                             <constraint firstAttribute="width" constant="46" id="JKx-nf-Pa5"/>
                                             <constraint firstAttribute="height" constant="30" id="yik-Rz-KX6"/>
                                         </constraints>
-                                        <state key="normal" title="取消">
+                                        <state key="normal" title="返回">
                                             <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                             <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                         </state>
@@ -1662,7 +1660,33 @@
                                             </mask>
                                         </variation>
                                         <connections>
-                                            <action selector="cancel:" destination="upR-wu-3gm" eventType="touchUpInside" id="cpR-Ri-OlW"/>
+                                            <action selector="cancel:" destination="upR-wu-3gm" eventType="touchUpInside" id="z38-tL-ZYo"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="5Of-JN-IQ1">
+                                        <rect key="frame" x="-23" y="-15" width="46" height="30"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="30" id="J4P-sS-c83"/>
+                                            <constraint firstAttribute="width" constant="46" id="UBl-eN-mQY"/>
+                                        </constraints>
+                                        <state key="normal" title="删除">
+                                            <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                            <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                        </state>
+                                        <variation key="default">
+                                            <mask key="constraints">
+                                                <exclude reference="UBl-eN-mQY"/>
+                                                <exclude reference="J4P-sS-c83"/>
+                                            </mask>
+                                        </variation>
+                                        <variation key="heightClass=regular-widthClass=compact">
+                                            <mask key="constraints">
+                                                <include reference="UBl-eN-mQY"/>
+                                                <include reference="J4P-sS-c83"/>
+                                            </mask>
+                                        </variation>
+                                        <connections>
+                                            <action selector="deleteImg:" destination="upR-wu-3gm" eventType="touchUpInside" id="uM5-8H-fqR"/>
                                         </connections>
                                     </button>
                                 </subviews>
@@ -1671,27 +1695,35 @@
                                     <constraint firstAttribute="height" constant="44" id="741-8t-R1H">
                                         <variation key="heightClass=regular-widthClass=compact" constant="50"/>
                                     </constraint>
+                                    <constraint firstAttribute="centerY" secondItem="5Of-JN-IQ1" secondAttribute="centerY" id="COu-eO-Tbo"/>
                                     <constraint firstItem="HI8-Ct-goD" firstAttribute="leading" secondItem="VwD-SW-UgV" secondAttribute="leading" constant="8" id="ES6-kY-l05"/>
                                     <constraint firstAttribute="centerY" secondItem="HI8-Ct-goD" secondAttribute="centerY" id="K27-tT-7Ba"/>
+                                    <constraint firstAttribute="trailing" secondItem="5Of-JN-IQ1" secondAttribute="trailing" constant="8" id="PO3-Mw-gPd"/>
                                 </constraints>
                                 <variation key="default">
                                     <mask key="subviews">
                                         <exclude reference="HI8-Ct-goD"/>
+                                        <exclude reference="5Of-JN-IQ1"/>
                                     </mask>
                                     <mask key="constraints">
                                         <exclude reference="741-8t-R1H"/>
                                         <exclude reference="ES6-kY-l05"/>
                                         <exclude reference="K27-tT-7Ba"/>
+                                        <exclude reference="COu-eO-Tbo"/>
+                                        <exclude reference="PO3-Mw-gPd"/>
                                     </mask>
                                 </variation>
                                 <variation key="heightClass=regular-widthClass=compact">
                                     <mask key="subviews">
                                         <include reference="HI8-Ct-goD"/>
+                                        <include reference="5Of-JN-IQ1"/>
                                     </mask>
                                     <mask key="constraints">
                                         <include reference="741-8t-R1H"/>
                                         <include reference="ES6-kY-l05"/>
                                         <include reference="K27-tT-7Ba"/>
+                                        <include reference="COu-eO-Tbo"/>
+                                        <include reference="PO3-Mw-gPd"/>
                                     </mask>
                                 </variation>
                             </view>
@@ -1707,7 +1739,7 @@
                                 <constraints>
                                     <constraint firstAttribute="height" constant="21" id="saC-Fk-OsR"/>
                                 </constraints>
-                                <fontDescription key="fontDescription" type="boldSystem" pointSize="17"/>
+                                <fontDescription key="fontDescription" type="boldSystem" pointSize="20"/>
                                 <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                                 <variation key="default">

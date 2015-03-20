@@ -21,6 +21,11 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(deleteImage:)
+                                                 name:@"deleteImage"
+                                               object:nil];
+    
     self.backimage.backgroundColor = [UIColor whiteColor];
     //设置layer
     CALayer *layer=[self.backimage layer];
@@ -197,7 +202,7 @@
 - (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info
 {
     CGRect workingFrame = self.choseBtn.frame;
-    workingFrame.origin.x = 16 + (self.chosenImages.count * (workingFrame.size.width + 5));
+    workingFrame.origin.x = 15 + (self.chosenImages.count * (workingFrame.size.width + 5));
     if ([[info objectForKey:UIImagePickerControllerMediaType] isEqualToString:@"public.image"]) {
         UIImage  *image = [info objectForKey:UIImagePickerControllerEditedImage];
         UIImageView *imageview = [[UIImageView alloc] initWithImage:image];
@@ -232,7 +237,7 @@
 //    NSMutableArray *images = [NSMutableArray arrayWithCapacity:[info count]];
     
     CGRect workingFrame = self.choseBtn.frame;
-    workingFrame.origin.x = 16 + (self.chosenImages.count * (workingFrame.size.width + 5));
+    workingFrame.origin.x = 15 + (self.chosenImages.count * (workingFrame.size.width + 5));
     for (NSDictionary *dict in info) {
         if ([dict objectForKey:UIImagePickerControllerMediaType] == ALAssetTypePhoto){
             if ([dict objectForKey:UIImagePickerControllerOriginalImage]){
@@ -319,18 +324,46 @@
     CGRect workingFrame = self.choseBtn.frame;
     
     for (int i = 0 ; i < self.chosenImages.count ; i++) {
-        workingFrame.origin.x = 16 + (i * (workingFrame.size.width + 5));
+        workingFrame.origin.x = 15 + (i * (workingFrame.size.width + 5));
         UIImageView *imageview = [self.chosenImages objectAtIndex:i];
         imageview.frame = workingFrame;
+        imageview.tag = i+1;
     }
     
-    workingFrame.origin.x = 16 + (self.chosenImages.count * (workingFrame.size.width + 5));
+    workingFrame.origin.x = 15 + (self.chosenImages.count * (workingFrame.size.width + 5));
     self.leftLayout.constant = workingFrame.origin.x;
     if (self.chosenImages.count >= 4) {
         [self.choseBtn setHidden:YES];
     }else{
         [self.choseBtn setHidden:NO];
     }
+}
+
+-(void)deleteImage:(NSNotification *)notification{
+    NSDictionary *userinfo = [notification userInfo];
+    NSNumber *index = [userinfo objectForKey:@"deleteImageIndex"];
+    if ([index intValue] < self.chosenImages.count) {
+        UIImageView *imageview = [self.chosenImages objectAtIndex:[index intValue]];
+        [imageview removeFromSuperview];
+        [self.chosenImages removeObjectAtIndex:[index intValue]];
+        
+        CGRect workingFrame = self.choseBtn.frame;
+        for (int i = 0 ; i < self.chosenImages.count ; i++) {
+            workingFrame.origin.x = 15 + (i * (workingFrame.size.width + 5));
+            UIImageView *imageview = [self.chosenImages objectAtIndex:i];
+            imageview.frame = workingFrame;
+            imageview.tag = i+1;
+        }
+        workingFrame.origin.x = 15 + (self.chosenImages.count * (workingFrame.size.width + 5));
+        self.leftLayout.constant = workingFrame.origin.x;
+        if (self.chosenImages.count >= 4) {
+            [self.choseBtn setHidden:YES];
+        }else{
+            [self.choseBtn setHidden:NO];
+        }
+        NSLog(@"%@",self.chosenImages);
+    }
+    
 }
 
 
