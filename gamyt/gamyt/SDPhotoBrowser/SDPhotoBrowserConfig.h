@@ -13,13 +13,13 @@ typedef enum {
 } SDWaitingViewMode;
 
 // 图片保存成功提示文字
-#define SDPhotoBrowserSaveImageSuccessText @" ^_^ 保存成功 ";
+#define SDPhotoBrowserSaveImageSuccessText @"保存成功";
 
 // 图片保存失败提示文字
-#define SDPhotoBrowserSaveImageFailText @" >_< 保存失败 ";
+#define SDPhotoBrowserSaveImageFailText @"保存失败";
 
 // browser背景颜色
-#define SDPhotoBrowserBackgrounColor [UIColor colorWithRed:0 green:0 blue:0 alpha:0.95]
+#define SDPhotoBrowserBackgrounColor [UIColor colorWithRed:0 green:0 blue:0 alpha:1]
 
 // browser中图片间的margin
 #define SDPhotoBrowserImageViewMargin 10

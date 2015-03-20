@@ -1502,8 +1502,10 @@
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="W7L-GO-C5R">
                                 <rect key="frame" x="-23" y="-15" width="46" height="30"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="54" id="Yv1-Vg-Lfp"/>
-                                    <constraint firstAttribute="width" constant="54" id="kFr-r1-7f2"/>
+                                    <constraint firstAttribute="width" secondItem="W7L-GO-C5R" secondAttribute="height" multiplier="1:1" id="fq5-k1-aCq"/>
+                                    <constraint firstAttribute="width" constant="54" id="kFr-r1-7f2">
+                                        <variation key="heightClass=regular-widthClass=compact" constant="80"/>
+                                    </constraint>
                                 </constraints>
                                 <state key="normal" image="imgadd_normal">
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
@@ -1511,13 +1513,13 @@
                                 <state key="highlighted" image="imgadd_press"/>
                                 <variation key="default">
                                     <mask key="constraints">
-                                        <exclude reference="Yv1-Vg-Lfp"/>
+                                        <exclude reference="fq5-k1-aCq"/>
                                         <exclude reference="kFr-r1-7f2"/>
                                     </mask>
                                 </variation>
                                 <variation key="heightClass=regular-widthClass=compact">
                                     <mask key="constraints">
-                                        <include reference="Yv1-Vg-Lfp"/>
+                                        <include reference="fq5-k1-aCq"/>
                                         <include reference="kFr-r1-7f2"/>
                                     </mask>
                                 </variation>
@@ -1528,9 +1530,6 @@
                         </subviews>
                         <color key="backgroundColor" red="0.93333333333333335" green="0.93333333333333335" blue="0.93333333333333335" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
-                            <constraint firstItem="sgf-SS-AiF" firstAttribute="height" secondItem="901-jv-4jO" secondAttribute="height" constant="-100" id="1Pw-AP-yOC">
-                                <variation key="heightClass=regular-widthClass=compact" constant="-93"/>
-                            </constraint>
                             <constraint firstItem="sgf-SS-AiF" firstAttribute="top" secondItem="0EN-Ub-oyy" secondAttribute="bottom" constant="7" id="6dd-1r-Vn0">
                                 <variation key="heightClass=regular-widthClass=compact" constant="6"/>
                             </constraint>
@@ -1538,6 +1537,8 @@
                             <constraint firstItem="JZz-4R-W5p" firstAttribute="bottom" secondItem="901-jv-4jO" secondAttribute="bottom" constant="-1" id="DJA-it-JxM">
                                 <variation key="heightClass=regular-widthClass=compact" constant="-5"/>
                             </constraint>
+                            <constraint firstItem="W7L-GO-C5R" firstAttribute="top" secondItem="sgf-SS-AiF" secondAttribute="bottom" constant="8" id="Epy-n5-HQQ"/>
+                            <constraint firstItem="W7L-GO-C5R" firstAttribute="bottom" secondItem="901-jv-4jO" secondAttribute="bottom" constant="-30" id="Fsb-AC-UZ2"/>
                             <constraint firstItem="JZz-4R-W5p" firstAttribute="trailing" secondItem="901-jv-4jO" secondAttribute="trailing" constant="-1" id="Sdi-oQ-XsV">
                                 <variation key="heightClass=regular-widthClass=compact" constant="-5"/>
                             </constraint>
@@ -1545,7 +1546,6 @@
                             <constraint firstItem="W7L-GO-C5R" firstAttribute="leading" secondItem="ZUN-L5-mN0" secondAttribute="leading" constant="16" id="Vd1-Pu-ZQg">
                                 <variation key="heightClass=regular-widthClass=compact" constant="16"/>
                             </constraint>
-                            <constraint firstItem="W7L-GO-C5R" firstAttribute="bottom" secondItem="901-jv-4jO" secondAttribute="bottom" constant="-30" id="atP-It-niK"/>
                             <constraint firstItem="0EN-Ub-oyy" firstAttribute="leading" secondItem="ZUN-L5-mN0" secondAttribute="leading" id="efH-lb-MAR"/>
                             <constraint firstAttribute="trailing" secondItem="0EN-Ub-oyy" secondAttribute="trailing" id="fCZ-Td-s31"/>
                             <constraint firstItem="901-jv-4jO" firstAttribute="top" secondItem="0EN-Ub-oyy" secondAttribute="bottom" constant="5" id="mP3-hf-wfX"/>
@@ -1568,20 +1568,20 @@
                                 <exclude reference="W7L-GO-C5R"/>
                             </mask>
                             <mask key="constraints">
-                                <exclude reference="DJA-it-JxM"/>
-                                <exclude reference="Sdi-oQ-XsV"/>
-                                <exclude reference="Vd1-Pu-ZQg"/>
-                                <exclude reference="atP-It-niK"/>
                                 <exclude reference="efH-lb-MAR"/>
                                 <exclude reference="fCZ-Td-s31"/>
                                 <exclude reference="wCv-o4-XO5"/>
                                 <exclude reference="9tA-wt-lLr"/>
                                 <exclude reference="Sef-ki-3C0"/>
                                 <exclude reference="mP3-hf-wfX"/>
-                                <exclude reference="1Pw-AP-yOC"/>
                                 <exclude reference="6dd-1r-Vn0"/>
                                 <exclude reference="vXC-aI-ZeY"/>
                                 <exclude reference="xQj-dH-npS"/>
+                                <exclude reference="Epy-n5-HQQ"/>
+                                <exclude reference="Fsb-AC-UZ2"/>
+                                <exclude reference="Vd1-Pu-ZQg"/>
+                                <exclude reference="DJA-it-JxM"/>
+                                <exclude reference="Sdi-oQ-XsV"/>
                             </mask>
                         </variation>
                         <variation key="heightClass=regular-widthClass=compact">
@@ -1593,20 +1593,20 @@
                                 <include reference="W7L-GO-C5R"/>
                             </mask>
                             <mask key="constraints">
-                                <include reference="DJA-it-JxM"/>
-                                <include reference="Sdi-oQ-XsV"/>
-                                <include reference="Vd1-Pu-ZQg"/>
-                                <include reference="atP-It-niK"/>
                                 <include reference="efH-lb-MAR"/>
                                 <include reference="fCZ-Td-s31"/>
                                 <include reference="wCv-o4-XO5"/>
                                 <include reference="9tA-wt-lLr"/>
                                 <include reference="Sef-ki-3C0"/>
                                 <include reference="mP3-hf-wfX"/>
-                                <include reference="1Pw-AP-yOC"/>
                                 <include reference="6dd-1r-Vn0"/>
                                 <include reference="vXC-aI-ZeY"/>
                                 <include reference="xQj-dH-npS"/>
+                                <include reference="Epy-n5-HQQ"/>
+                                <include reference="Fsb-AC-UZ2"/>
+                                <include reference="Vd1-Pu-ZQg"/>
+                                <include reference="DJA-it-JxM"/>
+                                <include reference="Sdi-oQ-XsV"/>
                             </mask>
                         </variation>
                     </view>

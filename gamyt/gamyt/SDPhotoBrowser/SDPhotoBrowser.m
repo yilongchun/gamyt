@@ -38,12 +38,14 @@
     if (self) {
         self.backgroundColor = SDPhotoBrowserBackgrounColor;
     }
+    [[UIApplication sharedApplication] setStatusBarHidden:YES withAnimation:UIStatusBarAnimationSlide];
     return self;
 }
 
 
 - (void)didMoveToSuperview
 {
+    
     [self setupScrollView];
     
     [self setupToolbars];
@@ -66,12 +68,15 @@
     [self addSubview:indexLabel];
     
     // 2.保存按钮
-    UIButton *saveButton = [[UIButton alloc] init];
+    UIButton *saveButton = [UIButton buttonWithType:UIButtonTypeSystem];
     [saveButton setTitle:@"保存" forState:UIControlStateNormal];
+    saveButton.titleLabel.font = [UIFont systemFontOfSize:14];
     [saveButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
-    saveButton.backgroundColor = [UIColor colorWithRed:0.1f green:0.1f blue:0.1f alpha:0.90f];
-    saveButton.frame = CGRectMake(30, self.bounds.size.height - 70, 50, 25);
-    saveButton.layer.cornerRadius = 5;
+//    saveButton.backgroundColor = [UIColor colorWithRed:0.145f green:0.145f blue:0.145f alpha:1.0f];
+    saveButton.frame = CGRectMake(30, self.bounds.size.height - 70, 50, 30);
+    [saveButton.layer setBorderWidth:1.0f];
+    [saveButton.layer setBorderColor:[UIColor colorWithRed:0.145f green:0.145f blue:0.145f alpha:1.0f].CGColor];
+    saveButton.layer.cornerRadius = 2;
     saveButton.clipsToBounds = YES;
     [saveButton addTarget:self action:@selector(saveImage) forControlEvents:UIControlEventTouchUpInside];
     _saveButton = saveButton;
@@ -118,6 +123,7 @@
 
 - (void)setupScrollView
 {
+    
     _scrollView = [[UIScrollView alloc] init];
     _scrollView.delegate = self;
     _scrollView.showsHorizontalScrollIndicator = NO;
@@ -159,6 +165,7 @@
 
 - (void)photoClick:(UITapGestureRecognizer *)recognizer
 {
+    [[UIApplication sharedApplication] setStatusBarHidden:NO withAnimation:UIStatusBarAnimationSlide];
     _scrollView.hidden = YES;
     
     SDBrowserImageView *currentImageView = (SDBrowserImageView *)recognizer.view;
