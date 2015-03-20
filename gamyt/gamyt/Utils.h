@@ -20,4 +20,6 @@
 
 + (NSString *)getOptTypeName:(NSNumber *)opttype;
 
++ (NSMutableURLRequest *)postRequestWithParems:(NSURL *)url postParams:(NSMutableDictionary *)postParams images: (NSArray *)images;
+
 @end

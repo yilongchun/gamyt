@@ -28,7 +28,7 @@
         self.automaticallyAdjustsScrollViewInsets = NO;
     }
     
-    alertTableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 50, 270, 173) style:UITableViewStylePlain];
+    alertTableView = [[UITableView alloc] initWithFrame:CGRectMake(10, 50, 270-20, 173) style:UITableViewStylePlain];
     alertTableView.backgroundColor = [UIColor clearColor];
     alertTableView.dataSource = self;
     alertTableView.delegate = self;
@@ -40,7 +40,6 @@
     if ([alertTableView respondsToSelector:@selector(setLayoutMargins:)]) {
         [alertTableView setLayoutMargins:UIEdgeInsetsZero];
     }
-    
     [[NSNotificationCenter defaultCenter] addObserver:self
                                              selector:@selector(loadData)
                                                  name:@"refreshInfoDetail"
@@ -52,9 +51,7 @@
     self.sendpic.layer.masksToBounds = YES;
     self.sendpic.layer.cornerRadius = 40;
    
-    
     selectedArr = [NSMutableArray array];
-    
     
     [self initData];
     

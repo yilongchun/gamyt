@@ -130,6 +130,7 @@
         SDBrowserImageView *imageView = [[SDBrowserImageView alloc] init];
         imageView.tag = i;
         [imageView addGestureRecognizer:[[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(photoClick:)]];
+        [imageView setContentMode:UIViewContentModeScaleAspectFit];
         [_scrollView addSubview:imageView];
     }
     
@@ -145,12 +146,13 @@
     if (index < _scrollView.subviews.count) {
         SDBrowserImageView *imageView = _scrollView.subviews[index];
         if (imageView.hasLoadedImage) return;
-        if ([self highQualityImageURLForIndex:index]) {
-            [imageView setImageWithURL:[self highQualityImageURLForIndex:index] placeholderImage:[self placeholderImageForIndex:index]];
-        } else {
+//        if ([self highQualityImageURLForIndex:index]) {
+//            [imageView setImageWithURL:[self highQualityImageURLForIndex:index] placeholderImage:[self placeholderImageForIndex:index]];
+//        } else {
             imageView.image = [self placeholderImageForIndex:index];
-        }
+//        }
         imageView.hasLoadedImage = YES;
+        [imageView setContentMode:UIViewContentModeScaleAspectFit];
     }
     
 }
@@ -179,7 +181,7 @@
     [self addSubview:tempView];
 
     _saveButton.hidden = YES;
-    
+    _indexLabel.hidden = YES;
     [UIView animateWithDuration:SDPhotoBrowserHideImageAnimationDuration animations:^{
         tempView.frame = targetTemp;
         self.backgroundColor = [UIColor clearColor];

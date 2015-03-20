@@ -23,10 +23,15 @@
         self.automaticallyAdjustsScrollViewInsets = NO;
     }
     
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(loadData)
+                                                 name:@"refreshMyReport"
+                                               object:nil];
+    
     UIBarButtonItem *rightitem = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"add_report_normal"] style:UIBarButtonItemStylePlain target:self action:@selector(toAdd)];
     self.navigationItem.rightBarButtonItem = rightitem;
     
-    [self showHudInView:self.view hint:@"加载中"];
+    
     
     _tableView.pullDelegate = self;
     _tableView.canPullDown = YES;
@@ -49,7 +54,7 @@
 }
 
 -(void)loadData{
-    
+    [self showHudInView:self.view hint:@"加载中"];
     page = [NSNumber numberWithInt:0];
     NSMutableDictionary *parameters = [NSMutableDictionary dictionary];
     [parameters setObject:[NSString stringWithFormat:@"%d",PAGE_COUNT] forKey:@"count"];
