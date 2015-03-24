@@ -411,6 +411,7 @@
 
 -(void)action1{
     NSLog(@"录用");
+    
     NSString *title = @"信息录用";
     NSString *message = @"信息标题:(最多20字)";
     NSString *placeholder = @"请输入标题";
@@ -450,7 +451,7 @@
 
 //录用
 -(void)hireReport:(NSString *)title{
-    
+    [[IQKeyboardManager sharedManager] resignFirstResponder];
     if (title && title.length > 0) {
         [self showHudInView:self.view hint:@"加载中"];
         

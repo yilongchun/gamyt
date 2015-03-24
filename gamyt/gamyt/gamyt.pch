@@ -24,6 +24,7 @@
 #import "NSDictionary+Category.h"
 #import "UIImageView+AFNetworking.h"
 #import "UIButton+UIButtonImageWithLable.h"
+#import "IQKeyboardManager.h"
 
 #define KNOTIFICATION_LOGINCHANGE @"loginStateChange"
 

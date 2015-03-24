@@ -57,7 +57,7 @@
 
 - (IBAction)save:(id)sender {
     NSLog(@"上报");
-    
+    [[IQKeyboardManager sharedManager] resignFirstResponder];
     if (self.content.text.length == 0) {
         [self showHint:@"请填写上报内容"];
         return;

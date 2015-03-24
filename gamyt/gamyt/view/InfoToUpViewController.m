@@ -154,6 +154,7 @@
 }
 
 - (IBAction)save:(id)sender {
+    [[IQKeyboardManager sharedManager] resignFirstResponder];
     if ([self.infoType.text isEqualToString:@"信息类别"]) {
         [self showHint:@"请选择类别"];
         return;

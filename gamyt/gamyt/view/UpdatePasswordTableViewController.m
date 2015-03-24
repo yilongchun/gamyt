@@ -8,6 +8,7 @@
 
 #import "UpdatePasswordTableViewController.h"
 
+
 @implementation UpdatePasswordTableViewController
 
 
@@ -37,6 +38,10 @@
 }
 
 - (IBAction)save:(id)sender {
+    
+    [[IQKeyboardManager sharedManager] resignFirstResponder];
+    
+    
     if(self.oldpwdLabel.text.length == 0){
         [self showHint:@"请输入旧密码"];
         return;
