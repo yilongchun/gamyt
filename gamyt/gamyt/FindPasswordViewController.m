@@ -60,4 +60,11 @@
 }
 */
 
+- (IBAction)find:(id)sender {
+    [[IQKeyboardManager sharedManager] resignFirstResponder];
+    if (self.phone.text.length != 11) {
+        [self showHint:@"手机号码必须是11位"];
+        return;
+    }
+}
 @end

@@ -10,4 +10,7 @@
 
 @interface FindPasswordViewController : UITableViewController
 
+@property (weak, nonatomic) IBOutlet UITextField *phone;
+@property (weak, nonatomic) IBOutlet UITextField *idcard;
+- (IBAction)find:(id)sender;
 @end

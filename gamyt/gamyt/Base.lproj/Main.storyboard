@@ -3833,8 +3833,16 @@
                         </connections>
                     </tableView>
                     <navigationItem key="navigationItem" title="找回密码" id="rU8-Q6-8Sx">
-                        <barButtonItem key="rightBarButtonItem" title="确定" id="vcS-3R-fXI"/>
+                        <barButtonItem key="rightBarButtonItem" title="确定" id="vcS-3R-fXI">
+                            <connections>
+                                <action selector="find:" destination="596-hM-Fyx" id="JQZ-OV-Fiz"/>
+                            </connections>
+                        </barButtonItem>
                     </navigationItem>
+                    <connections>
+                        <outlet property="idcard" destination="4Dr-rk-MOY" id="3k0-9g-8Eo"/>
+                        <outlet property="phone" destination="XB1-Hm-FUD" id="pp9-gw-ERE"/>
+                    </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Yy9-Js-nNP" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
