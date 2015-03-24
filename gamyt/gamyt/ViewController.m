@@ -225,11 +225,13 @@
         case CITY_MANAGER:
         case SHENG_MANAGER:
             //5个菜单 省 市 县 管理员
-            [menus addObjectsFromArray:@[menu1,menu2,menu3,menu4,menu6]];
+            [menus addObjectsFromArray:@[menu1,menu2,menu3,menu6]];
+            //[menus addObjectsFromArray:@[menu1,menu2,menu3,menu4,menu6]];
             break;
         case SMANAGER:
             //4个菜单 超级管理员
-            [menus addObjectsFromArray:@[menu2,menu3,menu4,menu6]];
+            [menus addObjectsFromArray:@[menu2,menu3,menu6]];
+            //[menus addObjectsFromArray:@[menu2,menu3,menu4,menu6]];
             break;
         case GENERAL://普通会员
             [menus addObjectsFromArray:@[menu1,menu3,menu6]];

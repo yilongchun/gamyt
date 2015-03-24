@@ -10,7 +10,7 @@
 
 #define USERID @"uid"
 #define TOKEN @"tk"
-#define PAGE_COUNT 10
+#define PAGE_COUNT 20
 
 #define IMAGE_PATH @"/files/users/"
 #define REPORT_PATH @"/files/report"
@@ -18,7 +18,7 @@
 
 #define DEFAULT_BLUE_COLOR [UIColor colorWithRed:37/255.0 green:134/255.0 blue:216/255.0 alpha:1]
 #define BORDER_COLOR [UIColor colorWithRed:200/255.0 green:200/255.0 blue:200/255.0 alpha:1]
-#define BACKGROUND_COLOR [UIColor colorWithRed:235/255.0 green:235/255.0 blue:235/255.0 alpha:1]
+#define BACKGROUND_COLOR [UIColor colorWithRed:238/255.0 green:238/255.0 blue:238/255.0 alpha:1]
 
 #define CURRENT_SYSTEM_VERSION [[UIDevice currentDevice] systemVersion].floatValue
 

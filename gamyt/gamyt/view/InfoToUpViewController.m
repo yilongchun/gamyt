@@ -241,6 +241,14 @@
         }
     }
 }
+#pragma mark - UIActionSheetDelegate
+- (void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex{
+    if (actionSheet.tag == 1) {
+        if (buttonIndex == 0) {//确定
+            [self confirmType];
+        }
+    }
+}
 #pragma mark - UITextViewDelegate
 - (void)textViewDidChange:(UITextView *)textView{
     if (textView.text.length <= 200) {
