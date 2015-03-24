@@ -8,6 +8,7 @@
 
 #import "SettingViewController.h"
 #import "UserinfoViewController.h"
+#import "UpdatePasswordTableViewController.h"
 
 @implementation SettingViewController{
     NSString *trackViewUrl;
@@ -48,7 +49,8 @@
             [self.navigationController pushViewController:vc animated:YES];
         }else if (indexPath.row == 1){
             //修改密码
-            
+            UpdatePasswordTableViewController * vc = [[self storyboard] instantiateViewControllerWithIdentifier:@"UpdatePasswordTableViewController"];
+            [self.navigationController pushViewController:vc animated:YES];
         }
 //        else if (indexPath.row == 2){
 //            [self checkUpdateWithAPPID:@"950217200"];

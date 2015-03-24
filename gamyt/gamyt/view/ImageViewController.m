@@ -18,7 +18,9 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     
-    
+    if (floor(NSFoundationVersionNumber) > NSFoundationVersionNumber_iOS_6_1){
+        self.automaticallyAdjustsScrollViewInsets = NO;
+    }
     
 //    CGFloat dx = 50;
 //    CGFloat itemWidth = self.myscrollview.bounds.size.width + dx * 2.0;
@@ -61,7 +63,7 @@
 
 
 -(void)viewDidLayoutSubviews{
-    if (!flag) {
+//    if (!flag) {
 //        for (int i = 0 ; i < self.chosenImages.count; i++) {
 //            [[self.myscrollview.subviews objectAtIndex:i] setFrame:CGRectMake(0 + (self.myscrollview.frame.size.width * i), 0, self.myscrollview.frame.size.width, self.myscrollview.frame.size.height)];
 //        }
@@ -73,24 +75,24 @@
         
         self.myscrollview.bounds = rect;
         
-        CGFloat y = SDPhotoBrowserImageViewMargin;
+        CGFloat y = rect.origin.y;NSLog(@"%f",y);
         CGFloat w = self.myscrollview.frame.size.width - SDPhotoBrowserImageViewMargin * 2;
         CGFloat h = self.myscrollview.frame.size.height - SDPhotoBrowserImageViewMargin * 2;
         
         self.myscrollview.showsHorizontalScrollIndicator = NO;
         self.myscrollview.showsVerticalScrollIndicator = NO;
-        
-        [self.myscrollview.subviews enumerateObjectsUsingBlock:^(UIImageView *obj, NSUInteger idx, BOOL *stop) {
-            CGFloat x = SDPhotoBrowserImageViewMargin + idx * (SDPhotoBrowserImageViewMargin * 2 + w);
-            [obj setContentMode:UIViewContentModeScaleAspectFit];
-            obj.frame = CGRectMake(x, y, w, h);
-        }];
-        
         self.myscrollview.contentSize = CGSizeMake(self.myscrollview.subviews.count * self.myscrollview.frame.size.width, 0);
         self.myscrollview.contentOffset = CGPointMake([self.current intValue] * self.myscrollview.frame.size.width, 0);//偏移
         self.myscrollview.pagingEnabled = YES;
-        flag = YES;
-    }
+        [self.myscrollview.subviews enumerateObjectsUsingBlock:^(UIImageView *obj, NSUInteger idx, BOOL *stop) {
+            CGFloat x = SDPhotoBrowserImageViewMargin + idx * (SDPhotoBrowserImageViewMargin * 2 + w);
+            [obj setContentMode:UIViewContentModeScaleAspectFit];
+            obj.frame = CGRectMake(x, y, w, h);NSLog(@"%f",y);
+        }];
+        
+        
+//        flag = YES;
+//    }
     
 }
 
@@ -106,9 +108,7 @@
         NSMutableDictionary *userinfo = [NSMutableDictionary dictionary];
         [userinfo setObject:[NSNumber numberWithInt:selectIndex] forKey:@"deleteImageIndex"];
         [[NSNotificationCenter defaultCenter] postNotificationName:@"deleteImage" object:nil userInfo:userinfo];
-//        if (selectIndex > 0) {
-//            selectIndex -= 1;
-//        }
+
         
         if (self.myscrollview.subviews.count > 0) {
             CGRect rect = self.view.bounds;
@@ -119,11 +119,22 @@
             [self.myscrollview.subviews enumerateObjectsUsingBlock:^(UIImageView *obj, NSUInteger idx, BOOL *stop) {
                 CGFloat x = SDPhotoBrowserImageViewMargin + idx * (SDPhotoBrowserImageViewMargin * 2 + w);
                 obj.frame = CGRectMake(x, y, w, h);
+                
                 [obj setContentMode:UIViewContentModeScaleAspectFit];
             }];
             self.myscrollview.contentSize = CGSizeMake(self.myscrollview.subviews.count * self.myscrollview.frame.size.width, 0);
-            self.myscrollview.contentOffset = CGPointMake(selectIndex * self.myscrollview.frame.size.width, 0);//偏移
-            self.pageLabel.text = [NSString stringWithFormat:@"%d/%ld", selectIndex+1, (long)self.chosenImages.count];
+            if (selectIndex == self.myscrollview.subviews.count) {
+                selectIndex = selectIndex - 1;
+                self.myscrollview.contentOffset = CGPointMake(selectIndex * self.myscrollview.frame.size.width, 0);//偏移
+                
+                self.pageLabel.text = [NSString stringWithFormat:@"%d/%ld", selectIndex+1, (long)self.chosenImages.count];
+            }else{
+                self.myscrollview.contentOffset = CGPointMake(selectIndex * self.myscrollview.frame.size.width, 0);//偏移
+                
+                self.pageLabel.text = [NSString stringWithFormat:@"%d/%ld", selectIndex+1, (long)self.chosenImages.count];
+            }
+            
+            
         }else{
             [self cancel:nil];
         }

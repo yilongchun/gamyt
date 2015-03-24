@@ -51,6 +51,8 @@
     [[NSNotificationCenter defaultCenter] addObserverForName:SlideNavigationControllerDidReveal object:nil queue:nil usingBlock:^(NSNotification *note) {
         NSString *menu = note.userInfo[@"menu"];
         NSLog(@"Revealed %@", menu);
+        [[NSNotificationCenter defaultCenter] postNotificationName:@"loadUnreadCount" object:self];
+        
     }];
     
     return YES;

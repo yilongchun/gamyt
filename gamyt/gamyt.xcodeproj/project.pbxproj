@@ -51,6 +51,11 @@
 		E4BF3BCD1ABB11A000BD7004 /* Overlay.png in Resources */ = {isa = PBXBuildFile; fileRef = E4BF3BC11ABB11A000BD7004 /* Overlay.png */; };
 		E4BF3BCE1ABB11A000BD7004 /* Overlay@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = E4BF3BC21ABB11A000BD7004 /* Overlay@2x.png */; };
 		E4BF3BD11ABB318B00BD7004 /* ImageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E4BF3BD01ABB318B00BD7004 /* ImageViewController.m */; };
+		E4C39DFA1AC01408004D4F89 /* LeftMenuCell.m in Sources */ = {isa = PBXBuildFile; fileRef = E4C39DF91AC01408004D4F89 /* LeftMenuCell.m */; };
+		E4C39DFD1AC022E3004D4F89 /* NoticeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E4C39DFC1AC022E3004D4F89 /* NoticeViewController.m */; };
+		E4C39E001AC02749004D4F89 /* NoticeTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = E4C39DFF1AC02749004D4F89 /* NoticeTableViewCell.m */; };
+		E4C39E031AC0356B004D4F89 /* NoticeDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E4C39E021AC0356B004D4F89 /* NoticeDetailViewController.m */; };
+		E4C39E061AC080E7004D4F89 /* UpdatePasswordTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E4C39E051AC080E7004D4F89 /* UpdatePasswordTableViewController.m */; };
 		E4D6FE9E1AB9C5F600F1CAAA /* IQNSArray+Sort.m in Sources */ = {isa = PBXBuildFile; fileRef = E4D6FE801AB9C5F600F1CAAA /* IQNSArray+Sort.m */; };
 		E4D6FE9F1AB9C5F600F1CAAA /* IQUIView+Hierarchy.m in Sources */ = {isa = PBXBuildFile; fileRef = E4D6FE821AB9C5F600F1CAAA /* IQUIView+Hierarchy.m */; };
 		E4D6FEA01AB9C5F600F1CAAA /* IQUIWindow+Hierarchy.m in Sources */ = {isa = PBXBuildFile; fileRef = E4D6FE841AB9C5F600F1CAAA /* IQUIWindow+Hierarchy.m */; };
@@ -226,6 +231,16 @@
 		E4BF3BC21ABB11A000BD7004 /* Overlay@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Overlay@2x.png"; sourceTree = "<group>"; };
 		E4BF3BCF1ABB318B00BD7004 /* ImageViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ImageViewController.h; sourceTree = "<group>"; };
 		E4BF3BD01ABB318B00BD7004 /* ImageViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ImageViewController.m; sourceTree = "<group>"; };
+		E4C39DF81AC01408004D4F89 /* LeftMenuCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LeftMenuCell.h; sourceTree = "<group>"; };
+		E4C39DF91AC01408004D4F89 /* LeftMenuCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LeftMenuCell.m; sourceTree = "<group>"; };
+		E4C39DFB1AC022E3004D4F89 /* NoticeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NoticeViewController.h; sourceTree = "<group>"; };
+		E4C39DFC1AC022E3004D4F89 /* NoticeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NoticeViewController.m; sourceTree = "<group>"; };
+		E4C39DFE1AC02749004D4F89 /* NoticeTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NoticeTableViewCell.h; sourceTree = "<group>"; };
+		E4C39DFF1AC02749004D4F89 /* NoticeTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NoticeTableViewCell.m; sourceTree = "<group>"; };
+		E4C39E011AC0356B004D4F89 /* NoticeDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NoticeDetailViewController.h; sourceTree = "<group>"; };
+		E4C39E021AC0356B004D4F89 /* NoticeDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NoticeDetailViewController.m; sourceTree = "<group>"; };
+		E4C39E041AC080E7004D4F89 /* UpdatePasswordTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UpdatePasswordTableViewController.h; sourceTree = "<group>"; };
+		E4C39E051AC080E7004D4F89 /* UpdatePasswordTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UpdatePasswordTableViewController.m; sourceTree = "<group>"; };
 		E4D6FE7F1AB9C5F600F1CAAA /* IQNSArray+Sort.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "IQNSArray+Sort.h"; sourceTree = "<group>"; };
 		E4D6FE801AB9C5F600F1CAAA /* IQNSArray+Sort.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "IQNSArray+Sort.m"; sourceTree = "<group>"; };
 		E4D6FE811AB9C5F600F1CAAA /* IQUIView+Hierarchy.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "IQUIView+Hierarchy.h"; sourceTree = "<group>"; };
@@ -476,6 +491,8 @@
 			children = (
 				E430A1FB1AA7443600CFBFC6 /* LeftMenuViewController.h */,
 				E430A1FC1AA7443600CFBFC6 /* LeftMenuViewController.m */,
+				E4C39DF81AC01408004D4F89 /* LeftMenuCell.h */,
+				E4C39DF91AC01408004D4F89 /* LeftMenuCell.m */,
 			);
 			path = "Helper Classes";
 			sourceTree = "<group>";
@@ -802,7 +819,6 @@
 		E4F02EEB1AA5C5ED00426A88 /* gamyt */ = {
 			isa = PBXGroup;
 			children = (
-				E4BF3BAB1ABB11A000BD7004 /* ELCImagePicker */,
 				E4F02EF01AA5C5ED00426A88 /* AppDelegate.h */,
 				E4F02EF11AA5C5ED00426A88 /* AppDelegate.m */,
 				E4F02EF31AA5C5ED00426A88 /* ViewController.h */,
@@ -816,6 +832,7 @@
 				E4EEB8031AAF3720009CEFA1 /* JYSlideSegmentController.m */,
 				E4F02F5B1AA61C2700426A88 /* view */,
 				E412B4121AA9F8740015B7C1 /* commons */,
+				E4BF3BAB1ABB11A000BD7004 /* ELCImagePicker */,
 				E4D6FF3C1AB9D0EB00F1CAAA /* SDWebImage */,
 				E4D6FF311AB9D0AF00F1CAAA /* SDPhotoBrowser */,
 				E4D6FE7D1AB9C5F600F1CAAA /* IQKeyBoardManager */,
@@ -895,6 +912,12 @@
 				E4EFAE741AB7228A0056A92C /* InfoToUpViewController.m */,
 				E4DAB9481AA76EB600C58A8E /* MyNoticeViewController.h */,
 				E4DAB9491AA76EB600C58A8E /* MyNoticeViewController.m */,
+				E4C39DFB1AC022E3004D4F89 /* NoticeViewController.h */,
+				E4C39DFC1AC022E3004D4F89 /* NoticeViewController.m */,
+				E4C39DFE1AC02749004D4F89 /* NoticeTableViewCell.h */,
+				E4C39DFF1AC02749004D4F89 /* NoticeTableViewCell.m */,
+				E4C39E011AC0356B004D4F89 /* NoticeDetailViewController.h */,
+				E4C39E021AC0356B004D4F89 /* NoticeDetailViewController.m */,
 				E4DAB94B1AA772FF00C58A8E /* DwglViewController.h */,
 				E4DAB94C1AA772FF00C58A8E /* DwglViewController.m */,
 				E412B40F1AA9F5910015B7C1 /* CheckInfoViewController.h */,
@@ -903,6 +926,8 @@
 				E4DAB94F1AA7742F00C58A8E /* SettingViewController.m */,
 				E4EC1ADE1AB86F6A0088C96A /* UserinfoViewController.h */,
 				E4EC1ADF1AB86F6A0088C96A /* UserinfoViewController.m */,
+				E4C39E041AC080E7004D4F89 /* UpdatePasswordTableViewController.h */,
+				E4C39E051AC080E7004D4F89 /* UpdatePasswordTableViewController.m */,
 			);
 			path = view;
 			sourceTree = "<group>";
@@ -1066,6 +1091,7 @@
 				E429103F1AB3242700B1B6E9 /* NSLayoutConstraint+MASDebugAdditions.m in Sources */,
 				E4EB9BD81AB05C5D003FBC75 /* UIButton+AFNetworking.m in Sources */,
 				E4D6FEA81AB9C5F600F1CAAA /* IQUIView+IQKeyboardToolbar.m in Sources */,
+				E4C39DFA1AC01408004D4F89 /* LeftMenuCell.m in Sources */,
 				E4EB9BCF1AB05C5D003FBC75 /* AFNetworkReachabilityManager.m in Sources */,
 				E4D6FF391AB9D0AF00F1CAAA /* SDBrowserImageView.m in Sources */,
 				E4D6FEA01AB9C5F600F1CAAA /* IQUIWindow+Hierarchy.m in Sources */,
@@ -1075,6 +1101,7 @@
 				E429103E1AB3242700B1B6E9 /* NSArray+MASAdditions.m in Sources */,
 				E42910401AB3242700B1B6E9 /* View+MASAdditions.m in Sources */,
 				E4BF3BC61ABB11A000BD7004 /* ELCAssetTablePicker.m in Sources */,
+				E4C39DFD1AC022E3004D4F89 /* NoticeViewController.m in Sources */,
 				E4EB9BD91AB05C5D003FBC75 /* UIImageView+AFNetworking.m in Sources */,
 				E4D6FEA31AB9C5F600F1CAAA /* IQSegmentedNextPrevious.m in Sources */,
 				E4D6FF6D1AB9D0EB00F1CAAA /* UIView+WebCacheOperation.m in Sources */,
@@ -1114,12 +1141,15 @@
 				E42910441AB3249B00B1B6E9 /* InfoDetailStatusViewController.m in Sources */,
 				E430A21E1AA7443600CFBFC6 /* SlideNavigationContorllerAnimatorSlide.m in Sources */,
 				E4D6FF661AB9D0EB00F1CAAA /* SDWebImagePrefetcher.m in Sources */,
+				E4C39E031AC0356B004D4F89 /* NoticeDetailViewController.m in Sources */,
 				E4D6FF631AB9D0EB00F1CAAA /* SDWebImageDownloader.m in Sources */,
 				E4EEB80A1AAF613A009CEFA1 /* NSDictionary+Category.m in Sources */,
 				E4EC77BC1AA8582300414B8B /* UIViewController+DismissKeyboard.m in Sources */,
 				E4EC77A91AA855BF00414B8B /* MBProgressHUD+Add.m in Sources */,
 				E412B4111AA9F5910015B7C1 /* CheckInfoViewController.m in Sources */,
+				E4C39E061AC080E7004D4F89 /* UpdatePasswordTableViewController.m in Sources */,
 				E4DAB94D1AA772FF00C58A8E /* DwglViewController.m in Sources */,
+				E4C39E001AC02749004D4F89 /* NoticeTableViewCell.m in Sources */,
 				E4DAB9531AA7767300C58A8E /* HomeViewController.m in Sources */,
 				E42910391AB3242700B1B6E9 /* MASConstraint.m in Sources */,
 			);
@@ -1244,12 +1274,13 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
-				CODE_SIGN_IDENTITY = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "iPhone Distribution";
 				GCC_PREFIX_HEADER = gamyt/gamyt.pch;
 				INFOPLIST_FILE = gamyt/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "7a1d33c7-f8ce-4963-adbb-ea47fdb86bdb";
 			};
 			name = Debug;
 		};
@@ -1258,12 +1289,13 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
-				CODE_SIGN_IDENTITY = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "iPhone Distribution";
 				GCC_PREFIX_HEADER = gamyt/gamyt.pch;
 				INFOPLIST_FILE = gamyt/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "7a1d33c7-f8ce-4963-adbb-ea47fdb86bdb";
 			};
 			name = Release;
 		};
