@@ -361,7 +361,6 @@
         }else{
             [self.choseBtn setHidden:NO];
         }
-        NSLog(@"%@",self.chosenImages);
     }
     
 }

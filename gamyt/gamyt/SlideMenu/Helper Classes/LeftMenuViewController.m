@@ -295,7 +295,7 @@
     }
     
 //    UIApplication *application = [UIApplication sharedApplication];
-//    [application setApplicationIconBadgeNumber:unreadCount];
+//    [application setApplicationIconBadgeNumber:0];
 }
 
 //-(void)setupUnreadMessage{

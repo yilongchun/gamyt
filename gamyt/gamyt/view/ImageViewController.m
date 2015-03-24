@@ -58,11 +58,44 @@
     flag = NO;
     
     self.pageLabel.text = [NSString stringWithFormat:@"%d/%ld", [self.current intValue]+1, (long)self.chosenImages.count];
+    
+    CGRect rect = self.view.bounds;
+    //        rect.size.width += SDPhotoBrowserImageViewMargin * 2;
+    
+    self.myscrollview.bounds = rect;
+    
+    CGFloat y = rect.origin.y;
+    CGFloat w = self.myscrollview.frame.size.width - SDPhotoBrowserImageViewMargin * 2;
+    CGFloat h = self.myscrollview.frame.size.height - SDPhotoBrowserImageViewMargin * 2;
+    
+    self.myscrollview.showsHorizontalScrollIndicator = NO;
+    self.myscrollview.showsVerticalScrollIndicator = NO;
+    self.myscrollview.contentSize = CGSizeMake(self.myscrollview.subviews.count * self.myscrollview.frame.size.width, 0);
+    self.myscrollview.contentOffset = CGPointMake([self.current intValue] * self.myscrollview.frame.size.width, 0);//偏移
+    self.myscrollview.pagingEnabled = YES;
+    [self.myscrollview.subviews enumerateObjectsUsingBlock:^(UIImageView *obj, NSUInteger idx, BOOL *stop) {
+        CGFloat x = SDPhotoBrowserImageViewMargin + idx * (SDPhotoBrowserImageViewMargin * 2 + w);
+        [obj setContentMode:UIViewContentModeScaleAspectFit];
+        obj.frame = CGRectMake(x, y, w, h);
+    }];
 }
 
-
+-(void)viewDidAppear:(BOOL)animated{
+    [super viewDidAppear:animated];
+    flag = YES;
+}
 
 -(void)viewDidLayoutSubviews{
+    [super viewDidLayoutSubviews];
+    CGRect rect = self.myscrollview.bounds;
+    CGFloat y = rect.origin.y;
+    CGFloat w = self.myscrollview.frame.size.width - SDPhotoBrowserImageViewMargin * 2;
+    CGFloat h = self.myscrollview.frame.size.height - SDPhotoBrowserImageViewMargin * 2;
+    [self.myscrollview.subviews enumerateObjectsUsingBlock:^(UIImageView *obj, NSUInteger idx, BOOL *stop) {
+        CGFloat x = SDPhotoBrowserImageViewMargin + idx * (SDPhotoBrowserImageViewMargin * 2 + w);
+        [obj setContentMode:UIViewContentModeScaleAspectFit];
+        obj.frame = CGRectMake(x, y, w, h);
+    }];
 //    if (!flag) {
 //        for (int i = 0 ; i < self.chosenImages.count; i++) {
 //            [[self.myscrollview.subviews objectAtIndex:i] setFrame:CGRectMake(0 + (self.myscrollview.frame.size.width * i), 0, self.myscrollview.frame.size.width, self.myscrollview.frame.size.height)];
@@ -70,28 +103,10 @@
 //        [self.myscrollview setContentSize:CGSizeMake(self.myscrollview.frame.size.width * self.chosenImages.count, self.myscrollview.frame.size.height)];
 //        [self.myscrollview scrollRectToVisible:CGRectMake(0 + (self.myscrollview.frame.size.width * [self.current intValue]), 0, self.myscrollview.frame.size.width, self.myscrollview.frame.size.height) animated:NO];
         
-        CGRect rect = self.view.bounds;
-//        rect.size.width += SDPhotoBrowserImageViewMargin * 2;
-        
-        self.myscrollview.bounds = rect;
-        
-        CGFloat y = rect.origin.y;NSLog(@"%f",y);
-        CGFloat w = self.myscrollview.frame.size.width - SDPhotoBrowserImageViewMargin * 2;
-        CGFloat h = self.myscrollview.frame.size.height - SDPhotoBrowserImageViewMargin * 2;
-        
-        self.myscrollview.showsHorizontalScrollIndicator = NO;
-        self.myscrollview.showsVerticalScrollIndicator = NO;
-        self.myscrollview.contentSize = CGSizeMake(self.myscrollview.subviews.count * self.myscrollview.frame.size.width, 0);
-        self.myscrollview.contentOffset = CGPointMake([self.current intValue] * self.myscrollview.frame.size.width, 0);//偏移
-        self.myscrollview.pagingEnabled = YES;
-        [self.myscrollview.subviews enumerateObjectsUsingBlock:^(UIImageView *obj, NSUInteger idx, BOOL *stop) {
-            CGFloat x = SDPhotoBrowserImageViewMargin + idx * (SDPhotoBrowserImageViewMargin * 2 + w);
-            [obj setContentMode:UIViewContentModeScaleAspectFit];
-            obj.frame = CGRectMake(x, y, w, h);NSLog(@"%f",y);
-        }];
+    
         
         
-//        flag = YES;
+        
 //    }
     
 }
@@ -111,9 +126,8 @@
 
         
         if (self.myscrollview.subviews.count > 0) {
-            CGRect rect = self.view.bounds;
-            self.myscrollview.bounds = rect;
-            CGFloat y = SDPhotoBrowserImageViewMargin;
+            CGRect rect = self.myscrollview.bounds;
+            CGFloat y = rect.origin.y;
             CGFloat w = self.myscrollview.frame.size.width - SDPhotoBrowserImageViewMargin * 2;
             CGFloat h = self.myscrollview.frame.size.height - SDPhotoBrowserImageViewMargin * 2;
             [self.myscrollview.subviews enumerateObjectsUsingBlock:^(UIImageView *obj, NSUInteger idx, BOOL *stop) {
