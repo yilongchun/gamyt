@@ -101,15 +101,26 @@
     typepicker.delegate = self;
     selectRow = 0;
     
+    if ([[[UIDevice currentDevice] systemVersion] floatValue] < 8.0) {
+        NSString *path = [self.info objectForKey:@"path"];//照片路径
+        if (path.length == 0) {
+            self.imageHeightLayout.constant = 0;
+        }else{
+        }
+    }
+    
 }
 
 -(void)viewDidLayoutSubviews{
     [super viewDidLayoutSubviews];
-    NSString *path = [self.info objectForKey:@"path"];//照片路径
-    if (path.length == 0) {
-        self.imageHeightLayout.constant = 0;
-    }else{
+    if ([[[UIDevice currentDevice] systemVersion] floatValue] >= 8.0) {
+        NSString *path = [self.info objectForKey:@"path"];//照片路径
+        if (path.length == 0) {
+            self.imageHeightLayout.constant = 0;
+        }else{
+        }
     }
+    
 }
 
 
@@ -324,19 +335,17 @@
 
 -(void)alert{
     if (CURRENT_SYSTEM_VERSION < 8.0) {
-        UIActionSheet *actionSheet = [[UIActionSheet alloc] initWithTitle:@"请选择类别\n\n\n\n\n\n\n\n\n\n\n"
+        UIActionSheet *actionSheet = [[UIActionSheet alloc] initWithTitle:@"请选择类别\n\n\n\n\n\n\n\n\n\n\n\n"
                                                                  delegate:self
                                                         cancelButtonTitle:@"取消"
                                                    destructiveButtonTitle:@"确定"
                                                         otherButtonTitles:nil, nil];
         actionSheet.tag = 1;
+        [typepicker setFrame:CGRectMake(20, 32, self.view.frame.size.width-40, 210)];
         [actionSheet addSubview:typepicker];
         [actionSheet showInView:self.view];
     }else{
         UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"请选择类别" message:@"\n\n\n\n\n\n\n\n\n\n\n" preferredStyle:UIAlertControllerStyleActionSheet];
-        
-        //        CGRect pickerFrame = CGRectMake(12, 32, self.view.frame.size.width-40, 216);
-        //        typepicker.frame = pickerFrame;
         [alert.view addSubview:typepicker];
         [alert addAction:[UIAlertAction actionWithTitle:@"取消"
                                                   style:UIAlertActionStyleCancel
