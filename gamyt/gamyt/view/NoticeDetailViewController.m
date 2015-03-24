@@ -18,13 +18,17 @@
     if (floor(NSFoundationVersionNumber) > NSFoundationVersionNumber_iOS_6_1){
         self.automaticallyAdjustsScrollViewInsets = NO;
     }
-    
-    NSNumber *readed = [self.info objectForKey:@"readed"];
-    if ([readed boolValue]) {
+    if ([self.type isEqualToString:@"1"]) {
         [self initData];
-    }else{
-        [self loadData];
+    }else if([self.type isEqualToString:@"2"]){
+        NSNumber *readed = [self.info objectForKey:@"readed"];
+        if ([readed boolValue]) {
+            [self initData];
+        }else{
+            [self loadData];
+        }
     }
+    
     
 }
 
@@ -82,14 +86,31 @@
 
 -(void)initData{
     NSString *sendname = [self.info objectForKey:@"sendname"];
-    NSString *sendnodename = [self.info objectForKey:@"sendnodename"];
-    NSString *addtime = [self.info objectForKey:@"addtime"];
+    
+    
     NSString *title = [self.info objectForKey:@"title"];
     NSString *path = [self.info objectForKey:@"path"];
     NSString *content = [self.info objectForKey:@"content"];
     self.sendname.text = [NSString stringWithFormat:@"发布人:%@",sendname];
-    self.sendnodename.text = [NSString stringWithFormat:@"发布单位:%@",sendnodename];
-    self.addtime.text = [NSString stringWithFormat:@"发布时间:%@",addtime];
+    
+    if ([self.type isEqualToString:@"1"]) {
+        NSString *notename = [self.info objectForKey:@"notename"];
+        self.sendnodename.text = [NSString stringWithFormat:@"发布单位:%@",notename];
+        NSNumber *addtime = [self.info objectForKey:@"addtime"];
+        NSTimeInterval time = [addtime doubleValue] / 1000;
+        NSDate *confromTimesp = [NSDate dateWithTimeIntervalSince1970:time];
+        NSDateFormatter*df = [[NSDateFormatter alloc]init];//格式化
+        [df setDateFormat:@"yyyy-MM-dd HH:mm:ss"];
+        NSString *date = [df stringFromDate:confromTimesp];
+        self.addtime.text = [NSString stringWithFormat:@"发布时间:%@",date];
+    }else if([self.type isEqualToString:@"2"]){
+        NSString *sendnodename = [self.info objectForKey:@"sendnodename"];
+        self.sendnodename.text = [NSString stringWithFormat:@"发布单位:%@",sendnodename];
+        NSString *addtime = [self.info objectForKey:@"addtime"];
+        self.addtime.text = [NSString stringWithFormat:@"发布时间:%@",addtime];
+    }
+    
+    
     self.titleLabel.text = title;
     self.contentLabel.text = content;
     self.contentLabel.numberOfLines = 0;

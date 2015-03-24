@@ -222,23 +222,44 @@
     NSDictionary *info = [self.dataSource objectAtIndex:indexPath.row];
     info = [NSDictionary cleanNullForDic:info];
     NSString *sendname = [info objectForKey:@"sendname"];
-    NSString *addtime = [info objectForKey:@"addtime"];
-    NSString *content = [info objectForKey:@"content"];
-    NSNumber *readed = [info objectForKey:@"readed"];
-    NSString *path = [info objectForKey:@"path"];
     
+    NSString *content = [info objectForKey:@"content"];
+    
+    NSString *path = [info objectForKey:@"path"];
+    if ([self.type isEqualToString:@"1"]) {
+        [cell.unreadStatus setHidden:YES];
+        
+        NSNumber *addtime = [info objectForKey:@"addtime"];
+        NSTimeInterval time = [addtime doubleValue] / 1000;
+        NSDate *confromTimesp = [NSDate dateWithTimeIntervalSince1970:time];
+        NSDateFormatter*df = [[NSDateFormatter alloc]init];//格式化
+        [df setDateFormat:@"yyyy-MM-dd HH:mm:ss"];
+        NSString *date = [df stringFromDate:confromTimesp];
+        cell.date.text = [NSString stringWithFormat:@"%@",date];
+    }else if ([self.type isEqualToString:@"2"]) {
+        NSNumber *readed = [info objectForKey:@"readed"];
+        [cell.unreadStatus setHidden:[readed boolValue]];
+        
+        NSString *addtime = [info objectForKey:@"addtime"];
+        cell.date.text = [NSString stringWithFormat:@"%@",addtime];
+    }
     if (path.length == 0) {
         [cell.haveimg setHidden:YES];
     }else{
         [cell.haveimg setHidden:NO];
     }
     
-    [cell.unreadStatus setHidden:[readed boolValue]];
+    
 //    cell.unreadStatus.layer.cornerRadius = 4.0f;
 //    cell.unreadStatus.layer.masksToBounds = YES;
     
     cell.username.text = sendname;
-    cell.date.text = addtime;
+//    if ([addtime isKindOfClass:[NSString class]]) {
+//        cell.date.text = addtime;
+//    }else{
+//        cell.date.text = @"";
+//    }
+    
     cell.content.text = content;
 
     cell.content.numberOfLines = 0;
@@ -294,6 +315,7 @@
     NoticeDetailViewController *infoDetail = [[self storyboard] instantiateViewControllerWithIdentifier:@"NoticeDetailViewController"];
     infoDetail.info = info;
     infoDetail.title = @"公告详情";
+    infoDetail.type = self.type;
     [self.navigationController pushViewController:infoDetail animated:YES];
     //[[NSNotificationCenter defaultCenter] postNotificationName:@"setupUnreadMessage" object:self];
     
