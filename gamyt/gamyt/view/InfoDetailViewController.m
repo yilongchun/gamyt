@@ -729,10 +729,10 @@
     [selectedArr removeAllObjects];
     [alertTableView reloadData];
     if (CURRENT_SYSTEM_VERSION < 8.0) {
-        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"请选择您需要报审的审阅员!" message:@"\n\n\n\n\n\n\n\n\n\n" delegate:nil cancelButtonTitle:@"取消" otherButtonTitles:@"确定", nil];
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"请选择您需要报审的审阅员!" message:nil delegate:self cancelButtonTitle:@"取消" otherButtonTitles:@"确定", nil];
         alert.tag = 4;
-        alertTableView.backgroundColor = [UIColor grayColor];
-        [alert addSubview:alertTableView];
+        [alert setValue:alertTableView forKey:@"accessoryView"];
+//        [alert addSubview:alertTableView];
         [alert show];
     }else{
         UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"请选择您需要报审的审阅员!" message:@"\n\n\n\n\n\n\n\n\n\n" preferredStyle:UIAlertControllerStyleAlert];
