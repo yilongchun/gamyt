@@ -3933,8 +3933,12 @@
                                                 <constraint firstItem="WtG-nu-oS3" firstAttribute="leading" secondItem="8Z7-P7-tkI" secondAttribute="leading" id="1T4-wG-K1Z"/>
                                                 <constraint firstItem="WtG-nu-oS3" firstAttribute="top" secondItem="8Z7-P7-tkI" secondAttribute="top" id="43F-vZ-okt"/>
                                                 <constraint firstAttribute="centerY" secondItem="qBi-FJ-VYx" secondAttribute="centerY" id="8of-UP-69B"/>
-                                                <constraint firstItem="WtG-nu-oS3" firstAttribute="top" secondItem="0Pi-Yf-rwc" secondAttribute="top" constant="5" id="Hka-JW-G0U"/>
-                                                <constraint firstItem="WtG-nu-oS3" firstAttribute="leading" secondItem="qBi-FJ-VYx" secondAttribute="trailing" constant="5" id="IRe-X7-oPg"/>
+                                                <constraint firstItem="WtG-nu-oS3" firstAttribute="top" secondItem="0Pi-Yf-rwc" secondAttribute="top" constant="5" id="Hka-JW-G0U">
+                                                    <variation key="heightClass=regular-widthClass=compact" constant="8"/>
+                                                </constraint>
+                                                <constraint firstItem="WtG-nu-oS3" firstAttribute="leading" secondItem="qBi-FJ-VYx" secondAttribute="trailing" constant="5" id="IRe-X7-oPg">
+                                                    <variation key="heightClass=regular-widthClass=compact" constant="3"/>
+                                                </constraint>
                                                 <constraint firstItem="qBi-FJ-VYx" firstAttribute="leading" secondItem="L37-Rx-NEY" secondAttribute="trailing" constant="15" id="Mzp-95-fVg"/>
                                                 <constraint firstItem="WtG-nu-oS3" firstAttribute="height" secondItem="8Z7-P7-tkI" secondAttribute="height" id="Nwo-t6-IS5"/>
                                                 <constraint firstAttribute="centerY" secondItem="L37-Rx-NEY" secondAttribute="centerY" id="S7q-rk-nU1"/>
