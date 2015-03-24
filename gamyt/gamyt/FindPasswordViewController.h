@@ -8,7 +8,7 @@
 
 #import <UIKit/UIKit.h>
 
-@interface FindPasswordViewController : UITableViewController
+@interface FindPasswordViewController : UITableViewController<UIAlertViewDelegate>
 
 @property (weak, nonatomic) IBOutlet UITextField *phone;
 @property (weak, nonatomic) IBOutlet UITextField *idcard;
