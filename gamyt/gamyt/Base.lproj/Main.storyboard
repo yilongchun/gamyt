@@ -973,7 +973,7 @@
                                                         <constraint firstAttribute="height" constant="43" id="o3h-zC-FAO"/>
                                                     </constraints>
                                                     <fontDescription key="fontDescription" type="system" pointSize="16"/>
-                                                    <textInputTraits key="textInputTraits"/>
+                                                    <textInputTraits key="textInputTraits" secureTextEntry="YES"/>
                                                     <variation key="default">
                                                         <mask key="constraints">
                                                             <exclude reference="o3h-zC-FAO"/>
@@ -1053,7 +1053,7 @@
                                                         <constraint firstAttribute="height" constant="43" id="XQq-sB-cNT"/>
                                                     </constraints>
                                                     <fontDescription key="fontDescription" type="system" pointSize="16"/>
-                                                    <textInputTraits key="textInputTraits"/>
+                                                    <textInputTraits key="textInputTraits" secureTextEntry="YES"/>
                                                     <variation key="default">
                                                         <mask key="constraints">
                                                             <exclude reference="XQq-sB-cNT"/>
@@ -1118,7 +1118,7 @@
                                                         <constraint firstAttribute="height" constant="43" id="QdO-GW-HDB"/>
                                                     </constraints>
                                                     <fontDescription key="fontDescription" type="system" pointSize="16"/>
-                                                    <textInputTraits key="textInputTraits"/>
+                                                    <textInputTraits key="textInputTraits" secureTextEntry="YES"/>
                                                     <variation key="default">
                                                         <mask key="constraints">
                                                             <exclude reference="QdO-GW-HDB"/>
@@ -1175,8 +1175,17 @@
                         </connections>
                     </tableView>
                     <navigationItem key="navigationItem" title="修改密码" id="u3s-qU-PpO">
-                        <barButtonItem key="rightBarButtonItem" title="确定" id="qre-LD-UKP"/>
+                        <barButtonItem key="rightBarButtonItem" title="确定" id="qre-LD-UKP">
+                            <connections>
+                                <action selector="save:" destination="44z-KQ-Vl3" id="G9g-4S-NXS"/>
+                            </connections>
+                        </barButtonItem>
                     </navigationItem>
+                    <connections>
+                        <outlet property="newpwd2Label" destination="LOM-QM-cQz" id="4sb-mh-lrx"/>
+                        <outlet property="newpwdLabel" destination="Qc1-oe-VnN" id="VqL-jx-CCZ"/>
+                        <outlet property="oldpwdLabel" destination="fSi-CT-C6h" id="ZJN-ZK-jGv"/>
+                    </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="lLy-Kb-faK" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>

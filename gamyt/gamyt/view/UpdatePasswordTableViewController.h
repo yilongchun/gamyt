@@ -10,4 +10,8 @@
 
 @interface UpdatePasswordTableViewController : UITableViewController
 
+@property (weak, nonatomic) IBOutlet UITextField *oldpwdLabel;
+@property (weak, nonatomic) IBOutlet UITextField *newpwdLabel;
+@property (weak, nonatomic) IBOutlet UITextField *newpwd2Label;
+- (IBAction)save:(id)sender;
 @end
