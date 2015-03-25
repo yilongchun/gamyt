@@ -21,6 +21,11 @@
 - (void)viewDidLoad{
     [super viewDidLoad];
     
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(loadData)
+                                                 name:@"refreshSignReport"
+                                               object:nil];
+    
     if ([self.type isEqualToString:@"1"]) {
         urlStr = @"/mobile/report/getNoSignreadReport";
     }else if([self.type isEqualToString:@"2"]){

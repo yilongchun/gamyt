@@ -8,6 +8,7 @@
 
 #import "SignReportDetailViewController.h"
 #import "InfoDetailStatusViewController.h"
+#import "SignReportViewController.h"
 
 @implementation SignReportDetailViewController{
     
@@ -21,6 +22,11 @@
     if (floor(NSFoundationVersionNumber) > NSFoundationVersionNumber_iOS_6_1){
         self.automaticallyAdjustsScrollViewInsets = NO;
     }
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(refreshSignReportDetail:)
+                                                 name:@"refreshSignReportDetail"
+                                               object:nil];
     
     UIBarButtonItem *rightitem = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"toread_record_icon_normal"] style:UIBarButtonItemStylePlain target:self action:@selector(toInfoDetailStatus)];
     self.navigationItem.rightBarButtonItem = rightitem;
@@ -36,6 +42,17 @@
     self.bottonView.layer.borderWidth = 1.0f;
     
     [self initData];
+    
+}
+
+-(void)refreshSignReportDetail:(NSNotification *)notification{
+    [self showHudInView:self.view hint:@"加载中"];
+    self.type = @"2";
+    NSDictionary *userinfo = notification.userInfo;
+    NSString *signcontent = [userinfo objectForKey:@"signcontent"];
+    [self.info setValue:signcontent forKey:@"content"];
+    [self initData];
+    [self hideHud];
     
 }
 
@@ -156,9 +173,10 @@
         self.contentTopLayout.constant = width/4;
     }
     if ([self.type isEqualToString:@"1"]) {
-        [self.bottonView removeFromSuperview];
+        [self.bottonView setHidden:YES];
     }else if([self.type isEqualToString:@"2"]) {
         self.btnHeightLayoutConstraint.constant = 0;
+        [self.bottonView setHidden:NO];
     }
 }
 
@@ -215,6 +233,10 @@
 }
 
 - (IBAction)sign:(id)sender {
-    NSLog(@"签阅");
+    
+    SignReportViewController *vc = [[self storyboard] instantiateViewControllerWithIdentifier:@"SignReportViewController"];
+    vc.info = self.info;
+    [self presentViewController:vc animated:YES completion:nil];
+    
 }
 @end

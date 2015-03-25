@@ -4752,6 +4752,7 @@
                         </variation>
                     </view>
                     <navigationItem key="navigationItem" title="审阅详细" id="V3u-KF-J0y"/>
+                    <simulatedStatusBarMetrics key="simulatedStatusBarMetrics" statusBarStyle="lightContent"/>
                     <connections>
                         <outlet property="addtime" destination="laR-Bl-kd0" id="hjy-L6-fKp"/>
                         <outlet property="bottonView" destination="WXe-9e-XLV" id="Mjw-CS-537"/>
@@ -4770,11 +4771,130 @@
                         <outlet property="sepline2" destination="V98-wU-gdV" id="y7t-GD-S3J"/>
                         <outlet property="signContent" destination="HRX-4j-dL9" id="cJy-Im-fbR"/>
                         <outlet property="sourceImagesContainerView" destination="Qk0-BS-6cs" id="Wuv-gU-nUl"/>
+                        <segue destination="0Fa-eD-Bfh" kind="presentation" identifier="toSignReport" id="23v-4j-fkq"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="BbT-p1-dGV" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="3483" y="1967.25"/>
+        </scene>
+        <!--审阅信息-->
+        <scene sceneID="EEz-az-xva">
+            <objects>
+                <viewController storyboardIdentifier="SignReportViewController" title="审阅信息" id="0Fa-eD-Bfh" customClass="SignReportViewController" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="sNO-zB-KvX"/>
+                        <viewControllerLayoutGuide type="bottom" id="qOW-H3-6NT"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="vws-oN-Wwu">
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <navigationBar contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="yrW-6i-k9f">
+                                <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="64" id="FW4-EH-Jbh"/>
+                                </constraints>
+                                <color key="barTintColor" red="0.14117647059999999" green="0.40000000000000002" blue="0.6705882353" alpha="1" colorSpace="calibratedRGB"/>
+                                <textAttributes key="titleTextAttributes">
+                                    <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                </textAttributes>
+                                <items>
+                                    <navigationItem title="审阅信息" id="yPS-4Y-oIc">
+                                        <barButtonItem key="leftBarButtonItem" title="取消" id="61d-NL-mNw">
+                                            <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                            <connections>
+                                                <action selector="cancel:" destination="0Fa-eD-Bfh" id="CnS-jn-wYf"/>
+                                            </connections>
+                                        </barButtonItem>
+                                        <barButtonItem key="rightBarButtonItem" title="确定" id="WBN-RJ-ahy">
+                                            <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                            <connections>
+                                                <action selector="ok:" destination="0Fa-eD-Bfh" id="2uh-RA-RkG"/>
+                                            </connections>
+                                        </barButtonItem>
+                                    </navigationItem>
+                                </items>
+                                <variation key="default">
+                                    <mask key="constraints">
+                                        <exclude reference="FW4-EH-Jbh"/>
+                                    </mask>
+                                </variation>
+                                <variation key="heightClass=regular-widthClass=compact">
+                                    <mask key="constraints">
+                                        <include reference="FW4-EH-Jbh"/>
+                                    </mask>
+                                </variation>
+                            </navigationBar>
+                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="gUm-nF-M6I">
+                                <rect key="frame" x="0.0" y="0.0" width="240" height="128"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="150" id="Q7H-uv-OIv">
+                                        <variation key="heightClass=regular-widthClass=compact" constant="120"/>
+                                    </constraint>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                                <variation key="default">
+                                    <mask key="constraints">
+                                        <exclude reference="Q7H-uv-OIv"/>
+                                    </mask>
+                                </variation>
+                                <variation key="heightClass=regular-widthClass=compact">
+                                    <mask key="constraints">
+                                        <include reference="Q7H-uv-OIv"/>
+                                    </mask>
+                                </variation>
+                            </textView>
+                        </subviews>
+                        <color key="backgroundColor" red="0.93333333330000001" green="0.93333333330000001" blue="0.93333333330000001" alpha="1" colorSpace="calibratedRGB"/>
+                        <constraints>
+                            <constraint firstItem="gUm-nF-M6I" firstAttribute="top" secondItem="yrW-6i-k9f" secondAttribute="bottom" constant="10" id="30B-Jm-iF5">
+                                <variation key="heightClass=regular-widthClass=compact" constant="17"/>
+                            </constraint>
+                            <constraint firstAttribute="trailing" secondItem="gUm-nF-M6I" secondAttribute="trailing" id="9B3-aL-ayq"/>
+                            <constraint firstAttribute="trailing" secondItem="yrW-6i-k9f" secondAttribute="trailing" id="MG0-eW-Xvv"/>
+                            <constraint firstItem="gUm-nF-M6I" firstAttribute="leading" secondItem="vws-oN-Wwu" secondAttribute="leading" id="s6b-9M-hvk"/>
+                            <constraint firstItem="yrW-6i-k9f" firstAttribute="leading" secondItem="vws-oN-Wwu" secondAttribute="leading" id="tBc-XU-wrB"/>
+                            <constraint firstItem="yrW-6i-k9f" firstAttribute="top" secondItem="vws-oN-Wwu" secondAttribute="top" id="wd2-4O-foH"/>
+                        </constraints>
+                        <variation key="default">
+                            <mask key="subviews">
+                                <exclude reference="yrW-6i-k9f"/>
+                                <exclude reference="gUm-nF-M6I"/>
+                            </mask>
+                            <mask key="constraints">
+                                <exclude reference="MG0-eW-Xvv"/>
+                                <exclude reference="tBc-XU-wrB"/>
+                                <exclude reference="wd2-4O-foH"/>
+                                <exclude reference="30B-Jm-iF5"/>
+                                <exclude reference="9B3-aL-ayq"/>
+                                <exclude reference="s6b-9M-hvk"/>
+                            </mask>
+                        </variation>
+                        <variation key="heightClass=regular-widthClass=compact">
+                            <mask key="subviews">
+                                <include reference="yrW-6i-k9f"/>
+                                <include reference="gUm-nF-M6I"/>
+                            </mask>
+                            <mask key="constraints">
+                                <include reference="MG0-eW-Xvv"/>
+                                <include reference="tBc-XU-wrB"/>
+                                <include reference="wd2-4O-foH"/>
+                                <include reference="30B-Jm-iF5"/>
+                                <include reference="9B3-aL-ayq"/>
+                                <include reference="s6b-9M-hvk"/>
+                            </mask>
+                        </variation>
+                    </view>
+                    <simulatedStatusBarMetrics key="simulatedStatusBarMetrics" statusBarStyle="lightContent"/>
+                    <connections>
+                        <outlet property="mytextview" destination="gUm-nF-M6I" id="GfC-Gd-ozc"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="eeH-rA-BDO" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="4185" y="1967.25"/>
         </scene>
     </scenes>
     <resources>

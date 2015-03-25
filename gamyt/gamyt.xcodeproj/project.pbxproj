@@ -137,6 +137,7 @@
 		E4F02F5E1AA61C3500426A88 /* MyReportViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E4F02F5D1AA61C3500426A88 /* MyReportViewController.m */; };
 		E4F3F6E11AC2AFF600B46D78 /* SignReportTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = E4F3F6E01AC2AFF600B46D78 /* SignReportTableViewCell.m */; };
 		E4F3F6E41AC2CC0500B46D78 /* SignReportDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E4F3F6E31AC2CC0500B46D78 /* SignReportDetailViewController.m */; };
+		E4F3F6E71AC2F0C900B46D78 /* SignReportViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E4F3F6E61AC2F0C900B46D78 /* SignReportViewController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -413,6 +414,8 @@
 		E4F3F6E01AC2AFF600B46D78 /* SignReportTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SignReportTableViewCell.m; sourceTree = "<group>"; };
 		E4F3F6E21AC2CC0500B46D78 /* SignReportDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SignReportDetailViewController.h; sourceTree = "<group>"; };
 		E4F3F6E31AC2CC0500B46D78 /* SignReportDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SignReportDetailViewController.m; sourceTree = "<group>"; };
+		E4F3F6E51AC2F0C900B46D78 /* SignReportViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SignReportViewController.h; sourceTree = "<group>"; };
+		E4F3F6E61AC2F0C900B46D78 /* SignReportViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SignReportViewController.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -937,6 +940,8 @@
 				E4F3F6E01AC2AFF600B46D78 /* SignReportTableViewCell.m */,
 				E4F3F6E21AC2CC0500B46D78 /* SignReportDetailViewController.h */,
 				E4F3F6E31AC2CC0500B46D78 /* SignReportDetailViewController.m */,
+				E4F3F6E51AC2F0C900B46D78 /* SignReportViewController.h */,
+				E4F3F6E61AC2F0C900B46D78 /* SignReportViewController.m */,
 				E4DAB94E1AA7742F00C58A8E /* SettingViewController.h */,
 				E4DAB94F1AA7742F00C58A8E /* SettingViewController.m */,
 				E4EC1ADE1AB86F6A0088C96A /* UserinfoViewController.h */,
@@ -1098,6 +1103,7 @@
 				E4F02F5E1AA61C3500426A88 /* MyReportViewController.m in Sources */,
 				E429103D1AB3242700B1B6E9 /* MASViewConstraint.m in Sources */,
 				E4D6FF671AB9D0EB00F1CAAA /* UIButton+WebCache.m in Sources */,
+				E4F3F6E71AC2F0C900B46D78 /* SignReportViewController.m in Sources */,
 				E4BF3BC41ABB11A000BD7004 /* ELCAsset.m in Sources */,
 				E430A21F1AA7443600CFBFC6 /* SlideNavigationContorllerAnimatorSlideAndFade.m in Sources */,
 				E4EC77BA1AA8582300414B8B /* NSString+Valid.m in Sources */,
