@@ -3476,7 +3476,7 @@
                         </variation>
                     </view>
                     <navigationItem key="navigationItem" title="信息记录" id="M8G-SX-vr0">
-                        <barButtonItem key="rightBarButtonItem" systemItem="refresh" id="Ok1-AL-odb">
+                        <barButtonItem key="rightBarButtonItem" title="刷新" id="Ok1-AL-odb">
                             <connections>
                                 <action selector="refresh:" destination="Qwg-RM-Ogg" id="y9L-zV-iaV"/>
                             </connections>
@@ -4089,6 +4089,7 @@
         <scene sceneID="rIj-pi-8Cr">
             <objects>
                 <navigationController title="导航" id="ZfB-8W-SDF" customClass="SlideNavigationController" sceneMemberID="viewController">
+                    <simulatedStatusBarMetrics key="simulatedStatusBarMetrics" statusBarStyle="lightContent"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="Spa-gr-kdk">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
