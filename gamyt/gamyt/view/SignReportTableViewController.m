@@ -8,6 +8,7 @@
 
 #import "SignReportTableViewController.h"
 #import "SignReportTableViewCell.h"
+#import "SignReportDetailViewController.h"
 
 @implementation SignReportTableViewController{
     NSNumber *count;
@@ -144,6 +145,7 @@
             }
         }
         [self.tableView stopLoadWithState:PullDownLoadState];
+        
     }failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         NSLog(@"发生错误！%@",error);
         [self hideHud];
@@ -266,6 +268,7 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
+    [self toDetail:indexPath];
 }
 
 - (void)checkButtonTapped:(id)sender event:(id)event
@@ -277,8 +280,17 @@
     NSIndexPath *indexPath = [self.tableView indexPathForRowAtPoint: currentTouchPosition];
     if (indexPath != nil)
     {
-        NSLog(@"%d",indexPath.row);
+        [self toDetail:indexPath];
     }
+}
+
+-(void)toDetail:(NSIndexPath *)indexPath{
+    NSDictionary *info = [self.dataSource objectAtIndex:indexPath.row];
+    info = [NSDictionary cleanNullForDic:info];
+    SignReportDetailViewController *infoDetail = [[self storyboard] instantiateViewControllerWithIdentifier:@"SignReportDetailViewController"];
+    infoDetail.info = info;
+    infoDetail.type = self.type;
+    [self.navigationController pushViewController:infoDetail animated:YES];
 }
 
 #pragma mark -

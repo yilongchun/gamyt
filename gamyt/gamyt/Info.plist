@@ -37,7 +37,7 @@
 	<key>httpurl</key>
 	<string>http://ycly.minyitong.cn/yc</string>
 	<key>httpurl2</key>
-	<string>http://192.168.1.111:8080/myt</string>
+	<string>http://192.168.1.113:8080/myt</string>
 	<key>httpurl3</key>
 	<string>http://ycga.minyitong.cn:81</string>
 	<key>UISupportedInterfaceOrientations</key>

@@ -136,6 +136,7 @@
 		E4F02F351AA60B7200426A88 /* FindPasswordViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E4F02F341AA60B7200426A88 /* FindPasswordViewController.m */; };
 		E4F02F5E1AA61C3500426A88 /* MyReportViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E4F02F5D1AA61C3500426A88 /* MyReportViewController.m */; };
 		E4F3F6E11AC2AFF600B46D78 /* SignReportTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = E4F3F6E01AC2AFF600B46D78 /* SignReportTableViewCell.m */; };
+		E4F3F6E41AC2CC0500B46D78 /* SignReportDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E4F3F6E31AC2CC0500B46D78 /* SignReportDetailViewController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -410,6 +411,8 @@
 		E4F02F5F1AA621F700426A88 /* gamyt.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; lineEnding = 0; path = gamyt.pch; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
 		E4F3F6DF1AC2AFF600B46D78 /* SignReportTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SignReportTableViewCell.h; sourceTree = "<group>"; };
 		E4F3F6E01AC2AFF600B46D78 /* SignReportTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SignReportTableViewCell.m; sourceTree = "<group>"; };
+		E4F3F6E21AC2CC0500B46D78 /* SignReportDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SignReportDetailViewController.h; sourceTree = "<group>"; };
+		E4F3F6E31AC2CC0500B46D78 /* SignReportDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SignReportDetailViewController.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -932,6 +935,8 @@
 				E4B1A0A01AC1D7E700C970A9 /* SignReportTableViewController.m */,
 				E4F3F6DF1AC2AFF600B46D78 /* SignReportTableViewCell.h */,
 				E4F3F6E01AC2AFF600B46D78 /* SignReportTableViewCell.m */,
+				E4F3F6E21AC2CC0500B46D78 /* SignReportDetailViewController.h */,
+				E4F3F6E31AC2CC0500B46D78 /* SignReportDetailViewController.m */,
 				E4DAB94E1AA7742F00C58A8E /* SettingViewController.h */,
 				E4DAB94F1AA7742F00C58A8E /* SettingViewController.m */,
 				E4EC1ADE1AB86F6A0088C96A /* UserinfoViewController.h */,
@@ -1143,6 +1148,7 @@
 				E4D6FEA71AB9C5F600F1CAAA /* IQToolbar.m in Sources */,
 				E4DAB9501AA7742F00C58A8E /* SettingViewController.m in Sources */,
 				E430A21D1AA7443600CFBFC6 /* SlideNavigationContorllerAnimatorScaleAndFade.m in Sources */,
+				E4F3F6E41AC2CC0500B46D78 /* SignReportDetailViewController.m in Sources */,
 				E4ECC4921AADC16F00DADC94 /* InfoTableViewCell.m in Sources */,
 				E4EB9BDA1AB05C5D003FBC75 /* UIProgressView+AFNetworking.m in Sources */,
 				E429103A1AB3242700B1B6E9 /* MASConstraintMaker.m in Sources */,
