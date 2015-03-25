@@ -17,6 +17,8 @@
 #import "LeftMenuCell.h"
 #import "MyNoticeViewController.h"
 #import "NoticeViewController.h"
+#import "SignReportTableViewController.h"
+#import "CheckInfoViewController.h"
 
 @implementation LeftMenuViewController{
     
@@ -267,6 +269,20 @@
             mynotice.indicator.backgroundColor = [UIColor colorWithRed:72/255.0 green:147/255.0 blue:219/255.0 alpha:1];
         
         [[SlideNavigationController sharedInstance] popToRootAndSwitchToViewController:mynotice
+                                                                 withSlideOutAnimation:self.slideOutAnimationEnabled
+                                                                         andCompletion:nil];
+    }else if([vcname isEqualToString:@"CheckInfoViewController"]){//审阅信息
+        SignReportTableViewController *vc1 = [[self storyboard] instantiateViewControllerWithIdentifier: @"SignReportTableViewController"];
+        vc1.title = @"待审阅信息";
+        vc1.type = @"1";
+        SignReportTableViewController *vc2 = [[self storyboard] instantiateViewControllerWithIdentifier: @"SignReportTableViewController"];
+        vc2.title = @"已审阅信息";
+        vc2.type = @"2";
+        CheckInfoViewController *vc = [[CheckInfoViewController alloc] initWithViewControllers:@[vc1,vc2]];
+        vc.title = @"审阅信息";
+        vc.indicatorInsets = UIEdgeInsetsMake(0, 0, 8, 0);
+        vc.indicator.backgroundColor = [UIColor colorWithRed:72/255.0 green:147/255.0 blue:219/255.0 alpha:1];
+        [[SlideNavigationController sharedInstance] popToRootAndSwitchToViewController:vc
                                                                  withSlideOutAnimation:self.slideOutAnimationEnabled
                                                                          andCompletion:nil];
     }else{

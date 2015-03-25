@@ -11,6 +11,8 @@
 #import "InfoViewController.h"
 #import "MyNoticeViewController.h"
 #import "NoticeViewController.h"
+#import "SignReportTableViewController.h"
+#import "CheckInfoViewController.h"
 
 @interface ViewController ()
 
@@ -66,7 +68,8 @@
 //    self.account.text = @"18972590038";//市级管理员:18972590038 111111
 //    self.account.text = @"18972592846";//县级管理员:18972592846 111111
 //    self.account.text = @"18972593062";//管理员:18972593062 111111
-    self.account.text = @"18972593057";//审阅员:18972593057 111111
+//    self.account.text = @"15997644858";//审阅员:18972593057 111111
+    self.account.text = @"11111111111";
 //    self.account.text = @"15671055205";//会员:15671055205 111111
     self.password.text = @"111111";
 }
@@ -327,6 +330,18 @@
             mynotice.indicatorInsets = UIEdgeInsetsMake(0, 0, 8, 0);
             mynotice.indicator.backgroundColor = [UIColor colorWithRed:72/255.0 green:147/255.0 blue:219/255.0 alpha:1];
         [self.navigationController pushViewController:mynotice animated:YES];
+    }else if([vcname isEqualToString:@"CheckInfoViewController"]){//审阅信息
+        SignReportTableViewController *vc1 = [[self storyboard] instantiateViewControllerWithIdentifier: @"SignReportTableViewController"];
+        vc1.title = @"待审阅信息";
+        vc1.type = @"1";
+        SignReportTableViewController *vc2 = [[self storyboard] instantiateViewControllerWithIdentifier: @"SignReportTableViewController"];
+        vc2.title = @"已审阅信息";
+        vc2.type = @"2";
+        CheckInfoViewController *vc = [[CheckInfoViewController alloc] initWithViewControllers:@[vc1,vc2]];
+        vc.title = @"审阅信息";
+        vc.indicatorInsets = UIEdgeInsetsMake(0, 0, 8, 0);
+        vc.indicator.backgroundColor = [UIColor colorWithRed:72/255.0 green:147/255.0 blue:219/255.0 alpha:1];
+        [self.navigationController pushViewController:vc animated:YES];
     }else{
         UIViewController *firstvc = [[self storyboard]
                                      instantiateViewControllerWithIdentifier:vcname];
