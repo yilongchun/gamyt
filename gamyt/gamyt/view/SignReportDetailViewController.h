@@ -33,4 +33,5 @@
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *btnHeightLayoutConstraint;
 @property (nonatomic, strong) NSString *type;
 @property (weak, nonatomic) IBOutlet UIView *bottonView;
+- (IBAction)sign:(id)sender;
 @end

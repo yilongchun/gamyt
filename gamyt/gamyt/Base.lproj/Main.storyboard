@@ -4518,6 +4518,9 @@
                                                 <include reference="ux6-0z-2ml"/>
                                             </mask>
                                         </variation>
+                                        <connections>
+                                            <action selector="sign:" destination="0QE-9J-qWN" eventType="touchUpInside" id="HmB-ha-oJG"/>
+                                        </connections>
                                     </button>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="WXe-9e-XLV">
                                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>

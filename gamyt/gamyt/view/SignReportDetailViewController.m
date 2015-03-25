@@ -211,9 +211,10 @@
     NSArray *imgArr =[path componentsSeparatedByString:NSLocalizedString(@",", nil)];
     NSString *img = [imgArr objectAtIndex:index];
     NSString *imagePath = [NSString stringWithFormat:@"%@%@%@",[Utils getHostname],REPORT_PATH,img];
-    
-    //    NSString *urlStr = [[self.photoItemArray[index] thumbnail_pic] stringByReplacingOccurrencesOfString:@"thumbnail" withString:@"bmiddle"];
     return [NSURL URLWithString:imagePath];
 }
 
+- (IBAction)sign:(id)sender {
+    NSLog(@"签阅");
+}
 @end
