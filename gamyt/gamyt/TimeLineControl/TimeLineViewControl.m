@@ -182,8 +182,16 @@ const float VIEW_WIDTH = 225.0;
         
         NSMutableAttributedString *str = [[NSMutableAttributedString alloc] initWithString:timeDescription];
         
-        NSRange range = [timeDescription rangeOfString:@"\n" options:NSBackwardsSearch];
-        [str addAttribute:NSForegroundColorAttributeName value:[UIColor blackColor] range:NSMakeRange(range.location,timeDescription.length - range.location)];
+        
+        
+        NSRange range = [timeDescription rangeOfString:@"\n" options:NSCaseInsensitiveSearch];
+        
+        
+        
+        NSRange range2 = [timeDescription rangeOfString:@"\n" options:NSCaseInsensitiveSearch range:NSMakeRange(range.location+1, timeDescription.length - range.location -1)];
+        
+        
+        [str addAttribute:NSForegroundColorAttributeName value:[UIColor blackColor] range:NSMakeRange(range2.location,timeDescription.length - range2.location)];
 //        [str addAttribute:NSFontAttributeName value:[UIFont fontWithName:@"Arial-BoldItalicMT" size:14.0] range:NSMakeRange(0, 5)];
         
         NSMutableParagraphStyle *paragraphStyle = [[NSMutableParagraphStyle alloc] init];

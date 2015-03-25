@@ -82,8 +82,14 @@
                     NSString *notename = [info objectForKey:@"notename"];
                     NSString *peoplename = [info objectForKey:@"peoplename"];
                     NSString *opttypename = [info objectForKey:@"opttypename"];
+                    NSString *opinion = [info objectForKey:@"opinion"];
                     [times addObject:addtime];
-                    NSString *description = [NSString stringWithFormat:@"%@\n%@\n%@",notename,peoplename,opttypename];
+                    
+                    NSMutableString *description = [NSMutableString stringWithFormat:@"%@\n%@\n%@",notename,peoplename,opttypename];
+                    if (opinion != nil && opinion.length != 0) {
+                        [description appendFormat:@"\n%@",opinion];
+                    }
+                    
                     [descriptions addObject:description];
                     
                     
