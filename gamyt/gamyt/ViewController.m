@@ -13,8 +13,12 @@
 #import "NoticeViewController.h"
 #import "SignReportTableViewController.h"
 #import "CheckInfoViewController.h"
+#import "BPush.h"
 
-@interface ViewController ()
+@interface ViewController (){
+    NSString *channelid;
+    NSString *pushuserid;
+}
 
 @end
 
@@ -69,9 +73,16 @@
 //    self.account.text = @"18972592846";//县级管理员:18972592846 111111
 //    self.account.text = @"18972593062";//管理员:18972593062 111111
 //    self.account.text = @"15997644858";//审阅员:18972593057 111111
-    self.account.text = @"11111111111";
-//    self.account.text = @"15671055205";//会员:15671055205 111111
+//    self.account.text = @"11111111111";
+    self.account.text = @"15671055205";//会员:15671055205 111111
     self.password.text = @"111111";
+    
+    NSUserDefaults *ud = [NSUserDefaults standardUserDefaults];
+    NSNumber *isLogin = [ud objectForKey:@"isLogin"];
+    if ([isLogin boolValue]) {
+        [self goToHome:NO];
+    }
+    
 }
 
 - (void)textFieldDidBeginEditing:(UITextField *)textField{
@@ -114,81 +125,136 @@
         return;
     }
     
-    [self showHudInView:self.view hint:@"加载中"];
     NSMutableDictionary *parameters = [NSMutableDictionary dictionary];
     [parameters setValue:[self gen_uuid] forKey:@"deviceid"];
     [parameters setValue:@"4" forKey:@"devicetype"];
     [parameters setValue:self.password.text forKey:@"pwd"];
     [parameters setValue:self.account.text forKey:@"username"];
     
-    [self httpAsynchronousRequest:[NSString jsonStringWithDictionary:parameters]];
-}
-
-- (void)httpAsynchronousRequest:(NSString *)params{
-    NSString *urlstring = [NSString stringWithFormat:@"%@%@",[Utils getHostname],@"/mobile/user/login"];
-    NSURL *url = [NSURL URLWithString:urlstring];
-    NSString *post=params;
-    NSData *postData = [post dataUsingEncoding:NSUTF8StringEncoding allowLossyConversion:YES];
+    
+    
+    [self showHudInView:self.view hint:@"加载中"];
+    NSString *str = [NSString stringWithFormat:@"%@%@",[Utils getHostname],@"/mobile/user/login"];
+    NSURL *url = [NSURL URLWithString:[str stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding]];
     NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:url];
     [request setHTTPMethod:@"POST"];
-    [request setHTTPBody:postData];
     [request setTimeoutInterval:30.0];
+    //JSON格式
     [request setValue:@"application/json; charset=utf-8" forHTTPHeaderField:@"content-type"];
-    NSOperationQueue *queue = [[NSOperationQueue alloc]init];
-    [NSURLConnection sendAsynchronousRequest:request
-                                       queue:queue
-                           completionHandler:^(NSURLResponse *response, NSData *data, NSError *error){
-                               dispatch_async(dispatch_get_main_queue(), ^{
-                                   if (error) {
-                                       [self hideHud];
-                                       [self showHintInCenter:@"连接失败"];
-                                       NSLog(@"Httperror:%@%ld", error.localizedDescription,(long)error.code);
-                                   }else{
-//                                       NSInteger responseCode = [(NSHTTPURLResponse *)response statusCode];
-//                                       NSString *responseString = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
-//                                       
-//                                       
-//                                       
-//                                       responseString = [responseString stringByReplacingOccurrencesOfString:@"<null>" withString:@""];
-                                       
-                                       NSError *error;
-                                       NSDictionary *resultDict = [NSJSONSerialization JSONObjectWithData:data options:kNilOptions error:&error];
-                                       if (resultDict == nil) {
-                                           NSLog(@"json parse failed \r\n");
-                                       }else{
-                                           NSLog(@"%@",resultDict);
-                                       }
-                                       NSNumber *code = [resultDict objectForKey:@"code"];
-                                       if ([code intValue] == 1) {
-                                           [self hideHud];
-                                           [self showHintInCenter:@"用户名或密码错误"];
-                                       }else if([code intValue] == 0){
-                                           [self hideHud];
-                                           
-                                           NSDictionary *data = [resultDict objectForKey:@"data"];
-                                           NSString *token = [data objectForKey:@"token"];
-                                           NSDictionary *users = [NSDictionary cleanNullForDic:[data objectForKey:@"users"]];
-                                           NSDictionary *notes = [NSDictionary cleanNullForDic:[data objectForKey:@"notes"]];
-                                           NSNumber *userid = [users objectForKey:@"id"];
-                                           NSNumber *type = [users objectForKey:@"type"];
-                                           
-                                           NSUserDefaults *userdefaults = [NSUserDefaults standardUserDefaults];
-                                           [userdefaults setObject:users forKey:@"users"];
-                                           [userdefaults setObject:notes forKey:@"notes"];
-                                           [userdefaults setObject:type forKey:@"type"];
-                                           [userdefaults setValue:token forKey:@"token"];
-                                           [userdefaults setValue:userid forKey:@"userid"];
-                                           
-                                           [self goToHome:type];
-                                       }
-                                   }
-                               });
-                           }];
+    NSString *post=[NSString jsonStringWithDictionary:parameters];
+    NSData *postData = [post dataUsingEncoding:NSUTF8StringEncoding allowLossyConversion:YES];
+    [request setHTTPBody:postData];
+    AFHTTPRequestOperation *operation = [[AFHTTPRequestOperation alloc]initWithRequest:request];
+    [operation setCompletionBlockWithSuccess:^(AFHTTPRequestOperation *operation, id responseObject) {
+        NSString *html = operation.responseString;
+        NSData* data=[html dataUsingEncoding:NSUTF8StringEncoding];
+        id dict=[NSJSONSerialization  JSONObjectWithData:data options:0 error:nil];
+        NSLog(@"获取到的数据为：%@",dict);
+        NSDictionary *resultDict = [NSDictionary cleanNullForDic:dict];
+        if (resultDict == nil) {
+            NSLog(@"json parse failed \r\n");
+        }else{
+            NSLog(@"%@",resultDict);
+        }
+        NSNumber *code = [resultDict objectForKey:@"code"];
+        [self hideHud];
+        if ([code intValue] == 1) {
+            
+            [self showHintInCenter:@"用户名或密码错误"];
+        }else if([code intValue] == 0){
+            NSDictionary *data = [resultDict objectForKey:@"data"];
+            NSString *token = [data objectForKey:@"token"];
+            NSDictionary *users = [NSDictionary cleanNullForDic:[data objectForKey:@"users"]];
+            NSDictionary *notes = [NSDictionary cleanNullForDic:[data objectForKey:@"notes"]];
+            NSNumber *userid = [users objectForKey:@"id"];
+            NSNumber *type = [users objectForKey:@"type"];
+            
+            NSUserDefaults *userdefaults = [NSUserDefaults standardUserDefaults];
+            [userdefaults setObject:users forKey:@"users"];
+            [userdefaults setObject:notes forKey:@"notes"];
+            [userdefaults setObject:type forKey:@"type"];
+            [userdefaults setValue:token forKey:@"token"];
+            [userdefaults setValue:userid forKey:@"userid"];
+            [userdefaults setObject:[NSNumber numberWithInt:1] forKey:@"isLogin"];
+            [self bindChannel];
+            [self goToHome:YES];
+            
+            
+        }
+    }failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        NSLog(@"发生错误！%@",error);
+        [self hideHud];
+        [self showHint:@"连接失败"];
+    }];
+    NSOperationQueue *queue = [[NSOperationQueue alloc] init];
+    [queue addOperation:operation];
+}
+
+-(void)bindChannel{
+    [BPush bindChannel];
+    
+    NSString *str = [NSString stringWithFormat:@"%@%@",[Utils getHostname],@"/mobile/user/updatePushInfo"];
+    NSURL *url = [NSURL URLWithString:[str stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding]];
+    NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:url];
+    [request setHTTPMethod:@"POST"];
+    [request setTimeoutInterval:30.0];
+    
+    NSUserDefaults *ud = [NSUserDefaults standardUserDefaults];
+    
+    if ([BPush getChannelId] && [BPush getChannelId].length != 0) {
+        channelid = [BPush getChannelId];
+        [ud setObject:channelid forKey:@"channelid"];
+    }else{
+        channelid = [ud objectForKey:@"channelid"];
+    }
+    if ([BPush getUserId] && [BPush getUserId].length != 0) {
+        pushuserid = [BPush getUserId];
+        [ud setObject:pushuserid forKey:@"pushUserId"];
+    }else{
+        pushuserid = [ud objectForKey:@"pushUserId"];
+    }
+    
+    //非JSON格式
+    NSString *param = [NSString stringWithFormat:@"channelId=%@&pushUserId=%@",channelid,pushuserid];
+    [request setHTTPBody:[param dataUsingEncoding:NSUTF8StringEncoding]];
+    
+    NSNumberFormatter* numberFormatter = [[NSNumberFormatter alloc] init];
+    [request setValue:[numberFormatter stringFromNumber:[Utils getUserId]] forHTTPHeaderField:USERID];
+    [request setValue:[Utils getToken] forHTTPHeaderField:TOKEN];
+    AFHTTPRequestOperation *operation = [[AFHTTPRequestOperation alloc]initWithRequest:request];
+    [operation setCompletionBlockWithSuccess:^(AFHTTPRequestOperation *operation, id responseObject) {
+        NSString *html = operation.responseString;
+        NSData* data=[html dataUsingEncoding:NSUTF8StringEncoding];
+        id dict=[NSJSONSerialization  JSONObjectWithData:data options:0 error:nil];
+        NSLog(@"获取到的数据为：bindChannel:%@",dict);
+        NSDictionary *resultDict = [NSDictionary cleanNullForDic:dict];
+        if (resultDict == nil) {
+            NSLog(@"json parse failed \r\n");
+        }else{
+            NSLog(@"%@",resultDict);
+        }
+        NSNumber *code = [resultDict objectForKey:@"code"];
+        if ([code intValue] == 1) {
+            NSLog(@"注册失败!");
+            
+        }else if([code intValue] == 0){
+            NSLog(@"注册成功!");
+        }
+    }failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        NSLog(@"注册错误！%@",error);
+        
+        
+    }];
+    NSOperationQueue *queue = [[NSOperationQueue alloc] init];
+    [queue addOperation:operation];
 }
 
 
 //进入第一个菜单，同时控制左侧菜单
--(void)goToHome:(NSNumber *)type{
+-(void)goToHome:(BOOL)animated{
+    
+    NSUserDefaults *ud = [NSUserDefaults standardUserDefaults];
+    NSNumber *type = [ud objectForKey:@"type"];
     
     NSMutableArray *menus = [NSMutableArray array];
     
@@ -297,7 +363,7 @@
         vc2.indicatorInsets = UIEdgeInsetsMake(0, 0, 8, 0);
         vc2.indicator.backgroundColor = [UIColor colorWithRed:72/255.0 green:147/255.0 blue:219/255.0 alpha:1];
         
-        [self.navigationController pushViewController:vc2 animated:YES];
+        [self.navigationController pushViewController:vc2 animated:animated];
     }else if([vcname isEqualToString:@"MyNoticeViewController"]){//我的公告
         
             NoticeViewController *notice1 = [[self storyboard] instantiateViewControllerWithIdentifier: @"NoticeViewController"];
@@ -329,7 +395,7 @@
             mynotice.title = @"我的公告";
             mynotice.indicatorInsets = UIEdgeInsetsMake(0, 0, 8, 0);
             mynotice.indicator.backgroundColor = [UIColor colorWithRed:72/255.0 green:147/255.0 blue:219/255.0 alpha:1];
-        [self.navigationController pushViewController:mynotice animated:YES];
+        [self.navigationController pushViewController:mynotice animated:animated];
     }else if([vcname isEqualToString:@"CheckInfoViewController"]){//审阅信息
         SignReportTableViewController *vc1 = [[self storyboard] instantiateViewControllerWithIdentifier: @"SignReportTableViewController"];
         vc1.title = @"待审阅信息";
@@ -341,11 +407,11 @@
         vc.title = @"审阅信息";
         vc.indicatorInsets = UIEdgeInsetsMake(0, 0, 8, 0);
         vc.indicator.backgroundColor = [UIColor colorWithRed:72/255.0 green:147/255.0 blue:219/255.0 alpha:1];
-        [self.navigationController pushViewController:vc animated:YES];
+        [self.navigationController pushViewController:vc animated:animated];
     }else{
         UIViewController *firstvc = [[self storyboard]
                                      instantiateViewControllerWithIdentifier:vcname];
-        [self.navigationController pushViewController:firstvc animated:YES];
+        [self.navigationController pushViewController:firstvc animated:animated];
     }
     
     
@@ -360,9 +426,12 @@
         [alert addAction:[UIAlertAction actionWithTitle:@"确定"
                                                   style:UIAlertActionStyleDestructive
                                                 handler:^(UIAlertAction *action) {
+                                                    [BPush unbindChannel];
+                                                    NSUserDefaults *ud = [NSUserDefaults standardUserDefaults];
+                                                    [ud removeObjectForKey:@"isLogin"];
                                                     [[SlideNavigationController sharedInstance] popToRootViewControllerAnimated:YES];
                                                 }]];
-        [s presentViewController:alert animated:YES completion:nil];
+        [s.view.window.rootViewController presentViewController:alert animated:YES completion:nil];
     }else{
         
         UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"用户状态出现错误,可能原因如下:" message:@"1.登录状态过期.\n2.账号用其他手机登陆." delegate:self cancelButtonTitle:nil otherButtonTitles:@"确定", nil];
@@ -371,6 +440,9 @@
 }
 
 - (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex{
+    [BPush unbindChannel];
+    NSUserDefaults *ud = [NSUserDefaults standardUserDefaults];
+    [ud removeObjectForKey:@"isLogin"];
     [[SlideNavigationController sharedInstance] popToRootViewControllerAnimated:YES];
 }
 

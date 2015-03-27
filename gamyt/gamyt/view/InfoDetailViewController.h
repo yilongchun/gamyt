@@ -12,6 +12,7 @@
 @interface InfoDetailViewController : UIViewController<UIAlertViewDelegate,UITextFieldDelegate,SDPhotoBrowserDelegate,UITableViewDelegate,UITableViewDataSource>
 
 @property(nonatomic, strong) NSDictionary *info;
+@property(nonatomic, strong) NSNumber *reportid;
 @property (weak, nonatomic) IBOutlet UIScrollView *myscrollview;
 @property (weak, nonatomic) IBOutlet UIImageView *sendpic;
 @property (weak, nonatomic) IBOutlet UILabel *sendname;

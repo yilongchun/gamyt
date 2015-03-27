@@ -9,6 +9,7 @@
 #import "SettingViewController.h"
 #import "UserinfoViewController.h"
 #import "UpdatePasswordTableViewController.h"
+#import "BPush.h"
 
 @implementation SettingViewController{
     NSString *trackViewUrl;
@@ -63,6 +64,9 @@
             [alert addAction:[UIAlertAction actionWithTitle:@"退出登录"
                                                       style:UIAlertActionStyleDestructive
                                                     handler:^(UIAlertAction *action) {
+                                                        [BPush unbindChannel];
+                                                        NSUserDefaults *ud = [NSUserDefaults standardUserDefaults];
+                                                        [ud removeObjectForKey:@"isLogin"];
                                                         //退出登陆
                                                         [[SlideNavigationController sharedInstance] popToRootViewControllerAnimated:YES];
                                                     }]];
@@ -132,6 +136,9 @@
 - (void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex{
     if (actionSheet.tag == 100) {
         if (buttonIndex == 0) {
+            [BPush unbindChannel];
+            NSUserDefaults *ud = [NSUserDefaults standardUserDefaults];
+            [ud removeObjectForKey:@"isLogin"];
             //退出登陆
             [[SlideNavigationController sharedInstance] popToRootViewControllerAnimated:YES];
         }

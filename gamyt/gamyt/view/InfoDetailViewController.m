@@ -15,7 +15,7 @@
     NSMutableArray *btns;
     NSString *infoTitle;
     NSNumber *newsid;
-    NSNumber *reportid;
+    
     NSMutableArray *shenyueDataSource;
     NSMutableArray *selectedArr;
     
@@ -52,8 +52,12 @@
     self.sendpic.layer.cornerRadius = 40;
    
     selectedArr = [NSMutableArray array];
+    if (self.info) {
+        [self initData];
+    }else if(self.reportid){
+        [self loadData];
+    }
     
-    [self initData];
     
 }
 //获取数据
@@ -77,7 +81,7 @@
 //    NSData *postData = [post dataUsingEncoding:NSUTF8StringEncoding allowLossyConversion:YES];
 //    [request setHTTPBody:postData];
     //非JSON格式
-    NSString *param = [NSString stringWithFormat:@"reportid=%d&ismyreport=0",[reportid intValue]];
+    NSString *param = [NSString stringWithFormat:@"reportid=%d&ismyreport=0",[self.reportid intValue]];
     [request setHTTPBody:[param dataUsingEncoding:NSUTF8StringEncoding]];
     
     AFHTTPRequestOperation *operation = [[AFHTTPRequestOperation alloc]initWithRequest:request];
@@ -85,7 +89,6 @@
         NSString *html = operation.responseString;
         NSData* data=[html dataUsingEncoding:NSUTF8StringEncoding];
         id dict=[NSJSONSerialization  JSONObjectWithData:data options:0 error:nil];
-        NSLog(@"获取到的数据为：%@",dict);
         NSDictionary *resultDict = [NSDictionary cleanNullForDic:dict];
         if (resultDict == nil) {
             NSLog(@"json parse failed \r\n");
@@ -125,7 +128,7 @@
     NSString *addtime = [self.info objectForKey:@"addtime"];//时间
     infoTitle = [self.info objectForKey:@"title"];//标题
     newsid = [self.info objectForKey:@"newsid"];
-    reportid = [self.info objectForKey:@"id"];
+    self.reportid = [self.info objectForKey:@"id"];
     
     
     self.sepline.backgroundColor = [UIColor colorWithRed:200/255.0 green:200/255.0 blue:200/255.0 alpha:1];
@@ -474,7 +477,7 @@
         //        NSData *postData = [post dataUsingEncoding:NSUTF8StringEncoding allowLossyConversion:YES];
         //        [request setHTTPBody:postData];
         //非JSON格式
-        NSString *param = [NSString stringWithFormat:@"newsid=%d&reportid=%d&title=%@",[newsid intValue],[reportid intValue],title];
+        NSString *param = [NSString stringWithFormat:@"newsid=%d&reportid=%d&title=%@",[newsid intValue],[self.reportid intValue],title];
         [request setHTTPBody:[param dataUsingEncoding:NSUTF8StringEncoding]];
         
         AFHTTPRequestOperation *operation = [[AFHTTPRequestOperation alloc]initWithRequest:request];
@@ -564,7 +567,7 @@
     //        NSData *postData = [post dataUsingEncoding:NSUTF8StringEncoding allowLossyConversion:YES];
     //        [request setHTTPBody:postData];
     //非JSON格式
-    NSString *param = [NSString stringWithFormat:@"newsid=%d&reportid=%d",[newsid intValue],[reportid intValue]];
+    NSString *param = [NSString stringWithFormat:@"newsid=%d&reportid=%d",[newsid intValue],[self.reportid intValue]];
     [request setHTTPBody:[param dataUsingEncoding:NSUTF8StringEncoding]];
     
     AFHTTPRequestOperation *operation = [[AFHTTPRequestOperation alloc]initWithRequest:request];

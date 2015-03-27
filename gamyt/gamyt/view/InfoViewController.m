@@ -25,6 +25,10 @@
                                              selector:@selector(loadData)
                                                  name:@"refreshInfo"
                                                object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(toInfoDetail:)
+                                                 name:@"toInfoDetail"
+                                               object:nil];
     [self showHudInView:self.view hint:@"加载中"];
     tempTitle = self.title;
     _tableView.pullDelegate = self;
@@ -290,6 +294,14 @@
     infoDetail.info = info;
     [self.navigationController pushViewController:infoDetail animated:YES];
     
+}
+
+-(void)toInfoDetail:(NSNotification *) notification{
+    NSDictionary *userinfo = [notification userInfo];
+    NSNumber *infoId = [userinfo objectForKey:@"infoId"];
+    InfoDetailViewController *infoDetail = [[self storyboard] instantiateViewControllerWithIdentifier:@"InfoDetailViewController"];
+    infoDetail.reportid = infoId;
+    [self.navigationController pushViewController:infoDetail animated:YES];
 }
 
 #pragma mark -
