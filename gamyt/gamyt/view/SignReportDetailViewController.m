@@ -41,8 +41,12 @@
     self.bottonView.layer.borderColor = BORDER_COLOR.CGColor;
     self.bottonView.layer.borderWidth = 1.0f;
     
+    if (self.info) {
+        [self initData];
+    }else if (self.reportid){
+        [self loadData];
+    }
     
-    [self initData];
     
 }
 
@@ -55,6 +59,57 @@
     [self initData];
     [self hideHud];
     
+}
+
+-(void)loadData{
+    [self showHudInView:self.view hint:@"加载中"];
+    NSString *str = [NSString stringWithFormat:@"%@%@",[Utils getHostname],@"/mobile/report/getMobileLevelreadDetail"];
+    NSURL *url = [NSURL URLWithString:[str stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding]];
+    NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:url];
+    [request setHTTPMethod:@"POST"];
+    //    [request setTimeoutInterval:30.0];
+    NSNumberFormatter* numberFormatter = [[NSNumberFormatter alloc] init];
+    [request setValue:[numberFormatter stringFromNumber:[Utils getUserId]] forHTTPHeaderField:USERID];
+    [request setValue:[Utils getToken] forHTTPHeaderField:TOKEN];
+    
+    //非JSON格式
+    NSString *param = [NSString stringWithFormat:@"lrid=%d",[self.reportid intValue]];
+    [request setHTTPBody:[param dataUsingEncoding:NSUTF8StringEncoding]];
+    
+    AFHTTPRequestOperation *operation = [[AFHTTPRequestOperation alloc]initWithRequest:request];
+    [operation setCompletionBlockWithSuccess:^(AFHTTPRequestOperation *operation, id responseObject) {
+        NSString *html = operation.responseString;
+        NSData* data=[html dataUsingEncoding:NSUTF8StringEncoding];
+        id dict=[NSJSONSerialization  JSONObjectWithData:data options:0 error:nil];
+        NSLog(@"获取到的数据为：%@",dict);
+        NSDictionary *resultDict = [NSDictionary cleanNullForDic:dict];
+        if (resultDict == nil) {
+            NSLog(@"json parse failed \r\n");
+        }else{
+            NSLog(@"%@",resultDict);
+        }
+        NSNumber *code = [resultDict objectForKey:@"code"];
+        if ([code intValue] == 1) {
+            [self hideHud];
+            [self showHint:@"加载失败"];
+        }else if([code intValue] == 4){
+            [self hideHud];
+            [[NSNotificationCenter defaultCenter] postNotificationName:KNOTIFICATION_LOGINCHANGE object:self];
+        }else if([code intValue] == 0){
+            [self hideHud];
+            NSDictionary *dic = [NSDictionary cleanNullForDic:[resultDict objectForKey:@"data"]];
+            self.info = dic;
+            [self initData];
+        }
+        
+    }failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        NSLog(@"发生错误！%@",error);
+        [self hideHud];
+        [self showHint:@"连接失败"];
+        
+    }];
+    NSOperationQueue *queue = [[NSOperationQueue alloc] init];
+    [queue addOperation:operation];
 }
 
 //设置数据
