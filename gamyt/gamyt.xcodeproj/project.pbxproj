@@ -57,6 +57,7 @@
 		E4C39E001AC02749004D4F89 /* NoticeTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = E4C39DFF1AC02749004D4F89 /* NoticeTableViewCell.m */; };
 		E4C39E031AC0356B004D4F89 /* NoticeDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E4C39E021AC0356B004D4F89 /* NoticeDetailViewController.m */; };
 		E4C39E061AC080E7004D4F89 /* UpdatePasswordTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E4C39E051AC080E7004D4F89 /* UpdatePasswordTableViewController.m */; };
+		E4C401931AC57C79007E841A /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E4C4018C1AC5607E007E841A /* AudioToolbox.framework */; };
 		E4D6FE9E1AB9C5F600F1CAAA /* IQNSArray+Sort.m in Sources */ = {isa = PBXBuildFile; fileRef = E4D6FE801AB9C5F600F1CAAA /* IQNSArray+Sort.m */; };
 		E4D6FE9F1AB9C5F600F1CAAA /* IQUIView+Hierarchy.m in Sources */ = {isa = PBXBuildFile; fileRef = E4D6FE821AB9C5F600F1CAAA /* IQUIView+Hierarchy.m */; };
 		E4D6FEA01AB9C5F600F1CAAA /* IQUIWindow+Hierarchy.m in Sources */ = {isa = PBXBuildFile; fileRef = E4D6FE841AB9C5F600F1CAAA /* IQUIWindow+Hierarchy.m */; };
@@ -251,6 +252,8 @@
 		E4C39E021AC0356B004D4F89 /* NoticeDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NoticeDetailViewController.m; sourceTree = "<group>"; };
 		E4C39E041AC080E7004D4F89 /* UpdatePasswordTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UpdatePasswordTableViewController.h; sourceTree = "<group>"; };
 		E4C39E051AC080E7004D4F89 /* UpdatePasswordTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UpdatePasswordTableViewController.m; sourceTree = "<group>"; };
+		E4C4018C1AC5607E007E841A /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = System/Library/Frameworks/AudioToolbox.framework; sourceTree = SDKROOT; };
+		E4C401911AC56D7A007E841A /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
 		E4D6FE7F1AB9C5F600F1CAAA /* IQNSArray+Sort.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "IQNSArray+Sort.h"; sourceTree = "<group>"; };
 		E4D6FE801AB9C5F600F1CAAA /* IQNSArray+Sort.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "IQNSArray+Sort.m"; sourceTree = "<group>"; };
 		E4D6FE811AB9C5F600F1CAAA /* IQUIView+Hierarchy.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "IQUIView+Hierarchy.h"; sourceTree = "<group>"; };
@@ -432,6 +435,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E4C401931AC57C79007E841A /* AudioToolbox.framework in Frameworks */,
 				E4F3F6F11AC3157800B46D78 /* libz.dylib in Frameworks */,
 				E4F3F6EF1AC3156900B46D78 /* CoreTelephony.framework in Frameworks */,
 				E4F3F6ED1AC3155E00B46D78 /* Foundation.framework in Frameworks */,
@@ -904,6 +908,8 @@
 		E4F02F591AA6196B00426A88 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				E4C401911AC56D7A007E841A /* AVFoundation.framework */,
+				E4C4018C1AC5607E007E841A /* AudioToolbox.framework */,
 				E4F3F6F01AC3157800B46D78 /* libz.dylib */,
 				E4F3F6EE1AC3156900B46D78 /* CoreTelephony.framework */,
 				E4F3F6EC1AC3155E00B46D78 /* Foundation.framework */,

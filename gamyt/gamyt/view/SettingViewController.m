@@ -140,7 +140,7 @@
             NSUserDefaults *ud = [NSUserDefaults standardUserDefaults];
             [ud removeObjectForKey:@"isLogin"];
             //退出登陆
-            [[SlideNavigationController sharedInstance] popToRootViewControllerAnimated:YES];
+            [[SlideNavigationController sharedInstance] popToRootViewControllerAnimated:NO];
         }
     }
 }

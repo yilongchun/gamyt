@@ -72,7 +72,7 @@
 //    self.account.text = @"18972590038";//市级管理员:18972590038 111111
 //    self.account.text = @"18972592846";//县级管理员:18972592846 111111
 //    self.account.text = @"18972593062";//管理员:18972593062 111111
-//    self.account.text = @"15997644858";//审阅员:18972593057 111111
+//    self.account.text = @"18972593057";//审阅员:18972593057 111111
 //    self.account.text = @"11111111111";
     self.account.text = @"15671055205";//会员:15671055205 111111
     self.password.text = @"111111";
@@ -429,7 +429,7 @@
                                                     [BPush unbindChannel];
                                                     NSUserDefaults *ud = [NSUserDefaults standardUserDefaults];
                                                     [ud removeObjectForKey:@"isLogin"];
-                                                    [[SlideNavigationController sharedInstance] popToRootViewControllerAnimated:YES];
+                                                    [[SlideNavigationController sharedInstance] popToRootViewControllerAnimated:NO];
                                                 }]];
         [s.view.window.rootViewController presentViewController:alert animated:YES completion:nil];
     }else{
@@ -443,7 +443,7 @@
     [BPush unbindChannel];
     NSUserDefaults *ud = [NSUserDefaults standardUserDefaults];
     [ud removeObjectForKey:@"isLogin"];
-    [[SlideNavigationController sharedInstance] popToRootViewControllerAnimated:YES];
+    [[SlideNavigationController sharedInstance] popToRootViewControllerAnimated:NO];
 }
 
 @end

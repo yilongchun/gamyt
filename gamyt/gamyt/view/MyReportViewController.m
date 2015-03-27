@@ -87,7 +87,7 @@
                                        if (resultDict == nil) {
                                            NSLog(@"json parse failed \r\n");
                                        }else{
-                                           NSLog(@"%@",resultDict);
+                                           
                                        }
                                        NSNumber *code = [resultDict objectForKey:@"code"];
                                        if ([code intValue] == 1) {

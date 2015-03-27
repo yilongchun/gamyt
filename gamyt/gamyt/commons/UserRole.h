@@ -22,6 +22,32 @@
 
 #define CURRENT_SYSTEM_VERSION [[UIDevice currentDevice] systemVersion].floatValue
 
+
+
+
+/**
+ * 新的上报
+ */
+#define NEW_REPORT 0
+
+/**
+ * 新的公告
+ */
+#define NEW_NOTICE 1
+/**
+ * 新的审阅
+ */
+#define NEW_TOREAD 2
+/**
+ * 已录用
+ */
+#define NEW_HIRE 3
+/**
+ * 发评论
+ */
+#define NEW_COMM 4
+
+
 #define GENERAL 0 // 普通会员
 #define TASTER 1 // 审阅会员
 

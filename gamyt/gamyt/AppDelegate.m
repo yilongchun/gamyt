@@ -10,7 +10,6 @@
 #import "IQKeyboardManager.h"
 #import "LeftMenuViewController.h"
 #import "BPush.h"
-#import <AudioToolbox/AudioToolbox.h>
 #import "InfoDetailViewController.h"
 #import "SlideNavigationController.h"
 
@@ -29,10 +28,8 @@
     
 //    [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleLightContent];
     
-    [[NSNotificationCenter defaultCenter] addObserver:self
-                                             selector:@selector(unbindChannel)
-                                                 name:@"unbindChannel"
-                                               object:nil];
+    application.applicationIconBadgeNumber = 0;
+    [[UIApplication sharedApplication] cancelAllLocalNotifications];
     
     if ([[[UIDevice currentDevice] systemVersion] floatValue] >= 7.0) {
         [[UINavigationBar appearance] setBarTintColor:[UIColor colorWithRed:36/255.0 green:102/255.0 blue:171/255.0 alpha:1]];
@@ -95,10 +92,10 @@
     if (userInfo) {
         NSLog(@"从消息启动:%@",userInfo);
         [BPush handleNotification:userInfo];
-        [self performSelector:@selector(toRemoteNotificationView:) withObject:userInfo afterDelay:0.3f];
+        [self showAlert:userInfo];
     }
-    application.applicationIconBadgeNumber = 0;
-    [[UIApplication sharedApplication] cancelAllLocalNotifications];
+//    application.applicationIconBadgeNumber = 0;
+//    [[UIApplication sharedApplication] cancelAllLocalNotifications];
     
     return YES;
 }
@@ -124,129 +121,157 @@
     NSLog(@"%@",userInfo);
     // App 收到推送的通知
     [BPush handleNotification:userInfo];
-    application.applicationIconBadgeNumber = 0;
     
-    NSDictionary *dic = [userInfo objectForKey:@"aps"];
-    NSString *message = [dic objectForKey:@"alert"];
+    NSDictionary *aps = [userInfo objectForKey:@"aps"];
+    NSString *alertBoay = [aps objectForKey:@"alert"];
     
     
     //判断应用程序当前的运行状态，如果是激活状态，则进行提醒，否则不提醒
     if (application.applicationState == UIApplicationStateActive) {
-        if (!flag) {
-            flag = YES;
-            if (CURRENT_SYSTEM_VERSION < 8.0) {
-                UIAlertView *alert = [[UIAlertView alloc] initWithTitle:message message:nil delegate:self cancelButtonTitle:@"关闭" otherButtonTitles:@"打开", nil,nil];
-                tempUserInfo = userInfo;
-                [alert show];
-            }else{
-                UIAlertController *alert2 = [UIAlertController alertControllerWithTitle:message message:nil preferredStyle:UIAlertControllerStyleAlert];
-                [alert2 addAction:[UIAlertAction actionWithTitle:@"关闭" style:UIAlertActionStyleCancel handler:^(UIAlertAction *action) {
-                    flag = NO;
-                }]];
-                [alert2 addAction:[UIAlertAction actionWithTitle:@"打开" style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
-                    flag = NO;
-                    [self performSelector:@selector(toRemoteNotificationView:) withObject:userInfo afterDelay:0.3f];
-                }]];
-                [self.window.rootViewController presentViewController:alert2 animated:YES completion:nil];
-            }
-        }
+        NSLog(@"不发送本地推送 活动状态");
+//        //发送本地推送
+//        UILocalNotification *notification = [[UILocalNotification alloc] init];
+//        notification.fireDate = [NSDate date]; //触发通知的时间
+//        notification.fireDate=[[NSDate new] dateByAddingTimeInterval:3];
+//        notification.alertBody = alertBoay;
+//        notification.soundName = UILocalNotificationDefaultSoundName;
+//        notification.alertAction = @"打开";
+//        notification.timeZone = [NSTimeZone defaultTimeZone];
+//        notification.userInfo = userInfo;
+//        notification.applicationIconBadgeNumber = 1;
+//        [[UIApplication sharedApplication] scheduleLocalNotification:notification];
+        [self showAlert:userInfo];
     }else{
-        [self showNotificationWithMessage:message];
+        NSLog(@"发送本地推送 非活动状态");
+        //发送本地推送
+        UILocalNotification *notification = [[UILocalNotification alloc] init];
+        notification.fireDate = [NSDate date]; //触发通知的时间
+        notification.fireDate=[[NSDate new] dateByAddingTimeInterval:3];
+        notification.alertBody = alertBoay;
+        notification.soundName = UILocalNotificationDefaultSoundName;
+        notification.alertAction = @"打开";
+        notification.timeZone = [NSTimeZone defaultTimeZone];
+        notification.userInfo = userInfo;
+        notification.applicationIconBadgeNumber = [[[UIApplication sharedApplication] scheduledLocalNotifications] count]+1;
+        [[UIApplication sharedApplication] scheduleLocalNotification:notification];
+    }
+}
+- (void)application:(UIApplication *)application didReceiveLocalNotification:(UILocalNotification *)notification{
+    NSDictionary* userInfo = [notification userInfo];
+    NSLog(@"didReceiveLocalNotification dict = %@", userInfo);
+    
+//    [[UIApplication sharedApplication] cancelLocalNotification:notification];
+    
+    
+    if (notification)
+    {
+        application.applicationIconBadgeNumber=0;
+        int count =[[[UIApplication sharedApplication] scheduledLocalNotifications] count];
+        if(count>0)
+        {
+            NSMutableArray *newarry= [NSMutableArray arrayWithCapacity:0];
+            for (int i=0; i<count; i++)
+                {
+                    UILocalNotification *notif=[[[UIApplication sharedApplication] scheduledLocalNotifications] objectAtIndex:i];
+                    notif.applicationIconBadgeNumber=i+1;
+                    [newarry addObject:notif];
+                }
+            [[UIApplication sharedApplication] cancelAllLocalNotifications];
+            if (newarry.count>0)
+                {
+                    for (int i=0; i<newarry.count; i++)
+                        {
+                            UILocalNotification *notif = [newarry objectAtIndex:i];
+                            [[UIApplication sharedApplication] scheduleLocalNotification:notif];
+                        }
+                }
+        }
+    }
+    
+//    int count =[[[UIApplication sharedApplication] scheduledLocalNotifications] count];
+//    NSLog(@"didReceiveLocalNotification count %d",count);
+//    for (UILocalNotification *noti in [[UIApplication sharedApplication] scheduledLocalNotifications]) {
+//        NSLog(@"1 %@",userInfo);
+//        NSLog(@"2 %@",[noti userInfo]);
+//        if (userInfo == [noti userInfo]) {
+//            [[UIApplication sharedApplication] cancelLocalNotification:noti];
+//            NSLog(@"3 true");
+//            return;
+//        }
+//        NSLog(@"3 false");
+//    }
+    
+//    application.applicationIconBadgeNumber = count;
+    if (userInfo) {
+        [self showAlert:userInfo];
     }
     
     
-}
-- (void)application:(UIApplication *)application didReceiveLocalNotification:(UILocalNotification *)notification{
     
-    NSLog(@"didReceiveLocalNotification:%@",notification.userInfo);
-    
-//    // App 收到本地的通知
-//    if ([[notification.userInfo objectForKey:@"id"] isEqualToString:@"affair.schedule"]) {
-//        //判断应用程序当前的运行状态，如果是激活状态，则进行提醒，否则不提醒
-//        if (application.applicationState == UIApplicationStateActive) {
-//            
-//            if (CURRENT_SYSTEM_VERSION < 8.0) {
-//                UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"提醒" message:notification.alertBody delegate:self cancelButtonTitle:@"关闭" otherButtonTitles:notification.alertAction, nil,nil];
-//                [alert show];
-//            }else{
-//                UIAlertController *alert2 = [UIAlertController alertControllerWithTitle:@"提醒" message:notification.alertBody preferredStyle:UIAlertControllerStyleAlert];
-//                [alert2 addAction:[UIAlertAction actionWithTitle:@"关闭" style:UIAlertActionStyleCancel handler:nil]];
-//                [alert2 addAction:[UIAlertAction actionWithTitle:notification.alertAction style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
-//                    [self performSelector:@selector(toRemoteNotificationView:) withObject:userInfo afterDelay:0.3f];
-//                }]];
-//                [self.window.rootViewController presentViewController:alert2 animated:YES completion:nil];
-//            }
-//        }
-//    }
+
 }
-
-//- (void)application:(UIApplication *)application didReceiveLocalNotification:(UILocalNotification *)notification
-//{
-//    if (notification)
-//    {
-//        application.applicationIconBadgeNumber=0;
-//        int count =[[[UIApplication sharedApplication] scheduledLocalNotifications] count];
-//        if(count>0)
-//        {
-//            NSMutableArray *newarry= [NSMutableArray arrayWithCapacity:0];
-//            for (int i=0; i<count; i++)
-//                {
-//                    UILocalNotification *notif=[[[UIApplication sharedApplication] scheduledLocalNotifications] objectAtIndex:i];
-//                    notif.applicationIconBadgeNumber=i+1;
-//                    [newarry addObject:notif];
-//                }
-//            [[UIApplication sharedApplication] cancelAllLocalNotifications];
-//            if (newarry.count>0)
-//                {
-//                    for (int i=0; i<newarry.count; i++)
-//                        {
-//                            UILocalNotification *notif = [newarry objectAtIndex:i];
-//                            [[UIApplication sharedApplication] scheduleLocalNotification:notif];
-//                        }
-//                }
-//        }
-//    }
-//}
-
 
 - (void)applicationDidBecomeActive:(UIApplication *)application{
     // Restart any tasks that were paused (or not yet started) while the application was inactive. If the application was previously in the background, optionally refresh the user interface.
-    
+    NSLog(@"applicationDidBecomeActive");
     //reset applicationIconBadgeNumber;
     application.applicationIconBadgeNumber=0;
     int count =[[[UIApplication sharedApplication] scheduledLocalNotifications] count];
+    NSLog(@"applicationDidBecomeActive count %d",count);
     if(count>0)
     {
         NSMutableArray *newarry= [NSMutableArray arrayWithCapacity:0];
         for (int i=0; i<count; i++)
         {
-                UILocalNotification *notif=[[[UIApplication sharedApplication] scheduledLocalNotifications] objectAtIndex:i];
-                notif.applicationIconBadgeNumber=i+1;
-                [newarry addObject:notif];
-            }
+            UILocalNotification *notif=[[[UIApplication sharedApplication] scheduledLocalNotifications] objectAtIndex:i];
+            notif.applicationIconBadgeNumber=i+1;
+            [newarry addObject:notif];
+            NSLog(@"%d %@",i,notif.userInfo);
+        }
         [[UIApplication sharedApplication] cancelAllLocalNotifications];
         if (newarry.count>0)
         {
-                for (int i=0; i<newarry.count; i++)
-                {
-                        UILocalNotification *notif = [newarry objectAtIndex:i];
-                        [[UIApplication sharedApplication] scheduleLocalNotification:notif];
-                    }
+            for (int i=0; i<newarry.count; i++)
+            {
+                UILocalNotification *notif = [newarry objectAtIndex:i];
+                [[UIApplication sharedApplication] scheduleLocalNotification:notif];
             }
+        }
     }
-}
-
-- (void)showNotificationWithMessage:(NSString *)message{
-    //发送本地推送
-    UILocalNotification *notification = [[UILocalNotification alloc] init];
-    notification.fireDate = [NSDate date]; //触发通知的时间
-    notification.fireDate=[[NSDate new] dateByAddingTimeInterval:3];
-    notification.alertBody = message;
-    notification.soundName = UILocalNotificationDefaultSoundName;
-    notification.alertAction = @"打开";
-    notification.timeZone = [NSTimeZone defaultTimeZone];
-    notification.applicationIconBadgeNumber = [[[UIApplication sharedApplication] scheduledLocalNotifications] count]+1;
-    [[UIApplication sharedApplication] scheduleLocalNotification:notification];
+    
+    
+    
+//    UIApplication *app = [UIApplication sharedApplication];
+//    //获取本地推送数组
+//    NSArray *localArr = [app scheduledLocalNotifications];
+//    //声明本地通知对象
+//    UILocalNotification *localNoti;
+//    if (localArr) {
+//        for (UILocalNotification *noti in localArr) {
+//            NSDictionary *dict = noti.userInfo;
+//            if (dict) {
+//                NSString *inKey = [dict objectForKey:@"key"];
+//                if ([inKey isEqualToString:key]) {
+//                    if (localNoti){
+//                        localNoti = nil;
+//                    }
+//                    break;
+//                }
+//            }
+//        }
+//        //判断是否找到已经存在的相同key的推送
+//        if (!localNoti) {
+//            //不存在 初始化
+//            localNoti = [[UILocalNotification alloc] init];
+//        }
+//        if (localNoti) {
+//            //不推送 取消推送
+//            [app cancelLocalNotification:localNoti];
+//            return;
+//        }
+//    }
+    
+    
 }
 
 #pragma mark Push Delegate
@@ -261,34 +286,106 @@
     }
 }
 
+//弹出推送提示
+-(void)showAlert:(NSDictionary *)userInfo{
+    NSDictionary *aps = [userInfo objectForKey:@"aps"];
+    NSString *alertBoay = [aps objectForKey:@"alert"];
+    NSNumber *messageType = [userInfo objectForKey:@"messageType"];
+    NSString *title = [userInfo objectForKey:@"title"];
+    if (!flag) {
+        flag = YES;
+        
+        switch ([messageType intValue]) {
+            case NEW_REPORT://新的上报
+            {
+                if (CURRENT_SYSTEM_VERSION < 8.0) {
+                    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:title message:alertBoay delegate:self cancelButtonTitle:@"关闭" otherButtonTitles:@"打开", nil,nil];
+                    alert.tag = NEW_REPORT;
+                    tempUserInfo = userInfo;
+                    [alert show];
+                }else{
+                    UIAlertController *alert2 = [UIAlertController alertControllerWithTitle:title message:alertBoay preferredStyle:UIAlertControllerStyleAlert];
+                    [alert2 addAction:[UIAlertAction actionWithTitle:@"关闭" style:UIAlertActionStyleCancel handler:^(UIAlertAction *action) {
+                        flag = NO;
+                    }]];
+                    [alert2 addAction:[UIAlertAction actionWithTitle:@"打开" style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
+                        flag = NO;
+                        [self performSelector:@selector(toRemoteNotificationView:) withObject:userInfo afterDelay:0.3f];
+                    }]];
+                    [self.window.rootViewController presentViewController:alert2 animated:YES completion:nil];
+                }
+            }
+                break;
+            case NEW_NOTICE://新的公告
+            {
+                
+            }
+                break;
+            case NEW_TOREAD://新的审阅
+            {
+                
+            }
+                break;
+            case NEW_HIRE://已录用
+            {
+                if (CURRENT_SYSTEM_VERSION < 8.0) {
+                    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:title message:alertBoay delegate:self cancelButtonTitle:@"关闭" otherButtonTitles:nil, nil,nil];
+                    alert.tag = NEW_HIRE;
+                    [alert show];
+                }else{
+                    UIAlertController *alert2 = [UIAlertController alertControllerWithTitle:title message:alertBoay preferredStyle:UIAlertControllerStyleAlert];
+                    [alert2 addAction:[UIAlertAction actionWithTitle:@"关闭" style:UIAlertActionStyleCancel handler:^(UIAlertAction *action) {
+                        flag = NO;
+                    }]];
+                    [self.window.rootViewController presentViewController:alert2 animated:YES completion:nil];
+                }
+            }
+            default:
+                break;
+        }
+    }
+}
 
 -(void)toRemoteNotificationView:(NSDictionary *)userInfo{
+    NSDictionary *aps = [userInfo objectForKey:@"aps"];
+    NSString *alertBoay = [aps objectForKey:@"alert"];
     NSNumber *messageType = [userInfo objectForKey:@"messageType"];
+    NSString *title = [userInfo objectForKey:@"title"];
     switch ([messageType intValue]) {
-        case 0://有新的上报信息
+        case NEW_REPORT://新的上报
         {
             NSNumber *infoId = [userInfo objectForKey:@"infoId"];
-            //            NSMutableDictionary *userinfo = [NSMutableDictionary dictionary];
-            //            [userinfo setObject:infoId forKey:@"infoId"];
-            //            [[NSNotificationCenter defaultCenter] postNotificationName:@"toInfoDetail" object:nil userInfo:userinfo];
-            
-            
-            
             InfoDetailViewController *infoDetail = [[UIStoryboard storyboardWithName:@"Main"
                                                                               bundle: nil] instantiateViewControllerWithIdentifier:@"InfoDetailViewController"];
             infoDetail.reportid = infoId;
+            [[SlideNavigationController sharedInstance] pushViewController:infoDetail animated:YES];
             
-                        [[SlideNavigationController sharedInstance] pushViewController:infoDetail animated:YES];
-            
-            //            [[SlideNavigationController sharedInstance] popToRootAndSwitchToViewController:infoDetail
-            //                                                                     withSlideOutAnimation:NO
-            //                                                                             andCompletion:nil];
-            
-//            [self.window.rootViewController.navigationController pushViewController:infoDetail animated:YES];
-            //            [self.window.rootViewController   presentViewController:infoDetail animated:YES completion:nil];
         }
             break;
+        case NEW_NOTICE://新的公告
+        {
             
+        }
+            break;
+        case NEW_TOREAD://新的审阅
+        {
+            
+        }
+            break;
+        case NEW_HIRE://已录用
+        {
+            if (CURRENT_SYSTEM_VERSION < 8.0) {
+                UIAlertView *alert = [[UIAlertView alloc] initWithTitle:title message:alertBoay delegate:self cancelButtonTitle:@"关闭" otherButtonTitles:nil, nil,nil];
+                alert.tag = NEW_HIRE;
+                [alert show];
+            }else{
+                UIAlertController *alert2 = [UIAlertController alertControllerWithTitle:title message:alertBoay preferredStyle:UIAlertControllerStyleAlert];
+                [alert2 addAction:[UIAlertAction actionWithTitle:@"关闭" style:UIAlertActionStyleCancel handler:^(UIAlertAction *action) {
+                    flag = NO;
+                }]];
+                [self.window.rootViewController presentViewController:alert2 animated:YES completion:nil];
+            }
+        }
         default:
             break;
     }
@@ -296,7 +393,23 @@
 
 - (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex{
     if (buttonIndex == 1) {
-        [self performSelector:@selector(toRemoteNotificationView:) withObject:tempUserInfo afterDelay:0.3f];
+        switch (alertView.tag) {
+            case NEW_REPORT://新的上报
+                [self performSelector:@selector(toRemoteNotificationView:) withObject:tempUserInfo afterDelay:0.3f];
+                break;
+            case NEW_NOTICE://新的公告
+            {
+                
+            }
+                break;
+            case NEW_TOREAD://新的审阅
+            {
+                
+            }
+                break;
+            default:
+                break;
+        }
     }
     flag = NO;
 }
