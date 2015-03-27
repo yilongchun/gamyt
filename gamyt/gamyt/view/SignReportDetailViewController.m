@@ -41,6 +41,7 @@
     self.bottonView.layer.borderColor = BORDER_COLOR.CGColor;
     self.bottonView.layer.borderWidth = 1.0f;
     
+    
     [self initData];
     
 }

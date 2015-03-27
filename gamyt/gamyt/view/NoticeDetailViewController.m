@@ -10,6 +10,8 @@
 
 @implementation NoticeDetailViewController{
     CGSize textSize;
+    
+    
 }
 
 - (void)viewDidLoad{
@@ -18,16 +20,24 @@
     if (floor(NSFoundationVersionNumber) > NSFoundationVersionNumber_iOS_6_1){
         self.automaticallyAdjustsScrollViewInsets = NO;
     }
-    if ([self.type isEqualToString:@"1"]) {
-        [self initData];
-    }else if([self.type isEqualToString:@"2"]){
-        NSNumber *readed = [self.info objectForKey:@"readed"];
-        if ([readed boolValue]) {
+    
+    if (self.info) {
+        self.noticeId = [self.info objectForKey:@"id"];
+        if ([self.type isEqualToString:@"1"]) {
             [self initData];
-        }else{
-            [self loadData];
+        }else if([self.type isEqualToString:@"2"]){
+            NSNumber *readed = [self.info objectForKey:@"readed"];
+            if ([readed boolValue]) {
+                [self initData];
+            }else{
+                [self loadData];
+            }
         }
+    }else if (self.noticeId){
+        [self loadData];
     }
+    
+    
     
     
 }
@@ -44,7 +54,7 @@
     [request setValue:[Utils getToken] forHTTPHeaderField:TOKEN];
     
     //非JSON格式
-    NSString *param = [NSString stringWithFormat:@"nid=%d",[[self.info objectForKey:@"id"] intValue]];
+    NSString *param = [NSString stringWithFormat:@"nid=%d",[self.noticeId intValue]];
     [request setHTTPBody:[param dataUsingEncoding:NSUTF8StringEncoding]];
     
     AFHTTPRequestOperation *operation = [[AFHTTPRequestOperation alloc]initWithRequest:request];

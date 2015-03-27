@@ -12,6 +12,7 @@
 @interface NoticeDetailViewController : UIViewController<SDPhotoBrowserDelegate>
 
 @property(nonatomic, strong) NSDictionary *info;
+@property(nonatomic, strong) NSNumber *noticeId;
 
 @property (weak, nonatomic) IBOutlet UILabel *addtime;
 @property (weak, nonatomic) IBOutlet UILabel *sendname;

@@ -12,6 +12,7 @@
 #import "BPush.h"
 #import "InfoDetailViewController.h"
 #import "SlideNavigationController.h"
+#import "NoticeDetailViewController.h"
 
 @interface AppDelegate ()<BPushDelegate>
 
@@ -318,7 +319,22 @@
                 break;
             case NEW_NOTICE://新的公告
             {
-                
+                if (CURRENT_SYSTEM_VERSION < 8.0) {
+                    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:title message:alertBoay delegate:self cancelButtonTitle:@"关闭" otherButtonTitles:@"打开", nil,nil];
+                    alert.tag = NEW_NOTICE;
+                    tempUserInfo = userInfo;
+                    [alert show];
+                }else{
+                    UIAlertController *alert2 = [UIAlertController alertControllerWithTitle:title message:alertBoay preferredStyle:UIAlertControllerStyleAlert];
+                    [alert2 addAction:[UIAlertAction actionWithTitle:@"关闭" style:UIAlertActionStyleCancel handler:^(UIAlertAction *action) {
+                        flag = NO;
+                    }]];
+                    [alert2 addAction:[UIAlertAction actionWithTitle:@"打开" style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
+                        flag = NO;
+                        [self performSelector:@selector(toRemoteNotificationView:) withObject:userInfo afterDelay:0.3f];
+                    }]];
+                    [self.window.rootViewController presentViewController:alert2 animated:YES completion:nil];
+                }
             }
                 break;
             case NEW_TOREAD://新的审阅
@@ -364,7 +380,12 @@
             break;
         case NEW_NOTICE://新的公告
         {
-            
+            NSNumber *infoId = [userInfo objectForKey:@"infoId"];
+            NoticeDetailViewController *infoDetail = [[UIStoryboard storyboardWithName:@"Main"
+                                                                              bundle: nil] instantiateViewControllerWithIdentifier:@"NoticeDetailViewController"];
+            infoDetail.noticeId = infoId;
+            infoDetail.type = @"2";
+            [[SlideNavigationController sharedInstance] pushViewController:infoDetail animated:YES];
         }
             break;
         case NEW_TOREAD://新的审阅
@@ -399,7 +420,7 @@
                 break;
             case NEW_NOTICE://新的公告
             {
-                
+                [self performSelector:@selector(toRemoteNotificationView:) withObject:tempUserInfo afterDelay:0.3f];
             }
                 break;
             case NEW_TOREAD://新的审阅
