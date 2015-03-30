@@ -11,15 +11,15 @@
 
 
 @interface Utils : NSObject
-
+//获取userid
 + (NSNumber *)getUserId;
-
+//获取token
 + (NSString *)getToken;
-
+//获取服务器接口路径
 + (NSString *)getHostname;
-
+//返回消息类型
 + (NSString *)getOptTypeName:(NSNumber *)opttype;
-
+//上传多图片
 + (NSMutableURLRequest *)postRequestWithParems:(NSURL *)url postParams:(NSMutableDictionary *)postParams images: (NSArray *)images;
 
 @end
