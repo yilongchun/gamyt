@@ -34,7 +34,7 @@
     NSString *content = [self.info objectForKey:@"content"];//内容
     self.content.text = content;
     
-    NSString *s = [NSString stringWithFormat:@"最多能输入%u个字符",200 - self.content.text.length];
+    NSString *s = [NSString stringWithFormat:@"最多能输入%lu个字符",200 - self.content.text.length];
     self.textnumberLabel.text = s;
     
     [self.img1 setHidden:YES];
@@ -253,7 +253,7 @@
 #pragma mark - UITextViewDelegate
 - (void)textViewDidChange:(UITextView *)textView{
     if (textView.text.length <= 200) {
-        NSString *s = [NSString stringWithFormat:@"最多能输入%u个字符",200 - textView.text.length];
+        NSString *s = [NSString stringWithFormat:@"最多能输入%lu个字符",200 - textView.text.length];
         self.textnumberLabel.text = s;//提醒字数
     }else{
         textView.text = [textView.text substringToIndex:200];

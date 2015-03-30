@@ -2532,10 +2532,10 @@
                                 <constraints>
                                     <constraint firstAttribute="width" secondItem="W7L-GO-C5R" secondAttribute="height" multiplier="1:1" id="fq5-k1-aCq"/>
                                 </constraints>
-                                <state key="normal" image="imgadd_normal">
+                                <state key="normal" image="compose_pic_add">
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
-                                <state key="highlighted" image="imgadd_press"/>
+                                <state key="highlighted" image="compose_pic_add_highlighted"/>
                                 <variation key="default">
                                     <mask key="constraints">
                                         <exclude reference="fq5-k1-aCq"/>
@@ -2796,7 +2796,7 @@
                             <constraint firstItem="VwD-SW-UgV" firstAttribute="leading" secondItem="EOf-BE-PfC" secondAttribute="leading" id="Utc-XW-Omc"/>
                             <constraint firstAttribute="centerX" secondItem="bmI-Ya-LU8" secondAttribute="centerX" id="Z8j-cu-Dp4"/>
                             <constraint firstItem="VwD-SW-UgV" firstAttribute="top" secondItem="pv8-iA-gFB" secondAttribute="bottom" constant="70" id="cUr-mm-FLI">
-                                <variation key="heightClass=regular-widthClass=compact" constant="20"/>
+                                <variation key="heightClass=regular-widthClass=compact" constant="10"/>
                             </constraint>
                             <constraint firstItem="pv8-iA-gFB" firstAttribute="leading" secondItem="EOf-BE-PfC" secondAttribute="leading" id="grU-0W-adC"/>
                         </constraints>
@@ -4967,13 +4967,13 @@
     <resources>
         <image name="base_blue_btn_normal" width="11" height="11"/>
         <image name="base_blue_btn_pressed" width="11" height="11"/>
+        <image name="compose_pic_add" width="70" height="70"/>
+        <image name="compose_pic_add_highlighted" width="70" height="70"/>
         <image name="defalut_photo" width="140" height="140"/>
         <image name="defalut_pic" width="160" height="143"/>
         <image name="detail_review_icon" width="18" height="18"/>
         <image name="have_image" width="34" height="34"/>
         <image name="ico_nowdl" width="21" height="21"/>
-        <image name="imgadd_normal" width="54" height="54"/>
-        <image name="imgadd_press" width="54" height="54"/>
         <image name="menu_item_notice_icon" width="24" height="24"/>
         <image name="modifycontent_normal" width="18" height="18"/>
         <image name="modifycontent_pressed" width="18" height="18"/>

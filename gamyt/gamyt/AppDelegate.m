@@ -168,7 +168,7 @@
     if (notification)
     {
         application.applicationIconBadgeNumber=0;
-        int count =[[[UIApplication sharedApplication] scheduledLocalNotifications] count];
+        NSUInteger count =[[[UIApplication sharedApplication] scheduledLocalNotifications] count];
         if(count>0)
         {
             NSMutableArray *newarry= [NSMutableArray arrayWithCapacity:0];
@@ -218,8 +218,8 @@
     NSLog(@"applicationDidBecomeActive");
     //reset applicationIconBadgeNumber;
     application.applicationIconBadgeNumber=0;
-    int count =[[[UIApplication sharedApplication] scheduledLocalNotifications] count];
-    NSLog(@"applicationDidBecomeActive count %d",count);
+    NSUInteger count =[[[UIApplication sharedApplication] scheduledLocalNotifications] count];
+    NSLog(@"applicationDidBecomeActive count %ld",count);
     if(count>0)
     {
         NSMutableArray *newarry= [NSMutableArray arrayWithCapacity:0];

@@ -36,11 +36,12 @@
     //设置边框线的颜色
     [layer setBorderColor:[[UIColor colorWithRed:200/255.0 green:200/255.0 blue:200/255.0 alpha:1] CGColor]];
     self.chosenImages = [NSMutableArray array];
+    [self.choseBtn.imageView setContentMode:UIViewContentModeScaleAspectFit];
 }
 
 - (void)textViewDidChange:(UITextView *)textView{
     if (textView.text.length <= 200) {
-        NSString *s = [NSString stringWithFormat:@"最多能输入%u个字符",200 - textView.text.length];
+        NSString *s = [NSString stringWithFormat:@"最多能输入%lu个字符",200 - textView.text.length];
         self.textnumberLabel.text = s;
     }
     
@@ -297,7 +298,7 @@
 //    }else{
 //        [self.choseBtn setHidden:NO];
 //    }
-    NSLog(@"%d",recognizer.view.tag);
+    NSLog(@"%ld",(long)recognizer.view.tag);
     
     ImageViewController *view = [[self storyboard] instantiateViewControllerWithIdentifier:@"ImageViewController"];
     
@@ -310,7 +311,7 @@
     
     
     view.chosenImages = arr;
-    view.current = [NSNumber numberWithInt:recognizer.view.tag-1];
+    view.current = [NSNumber numberWithLong:recognizer.view.tag-1];
     [[UIApplication sharedApplication] setStatusBarHidden:YES withAnimation:UIStatusBarAnimationSlide];
     [self presentViewController:view animated:YES completion:nil];
     
