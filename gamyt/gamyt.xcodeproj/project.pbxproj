@@ -36,6 +36,7 @@
 		E430A2211AA7443600CFBFC6 /* menu-button@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = E430A2121AA7443600CFBFC6 /* menu-button@2x.png */; };
 		E430A2221AA7443600CFBFC6 /* SlideNavigationController.m in Sources */ = {isa = PBXBuildFile; fileRef = E430A2141AA7443600CFBFC6 /* SlideNavigationController.m */; };
 		E430A2291AA755C600CFBFC6 /* leftMenu.jpg in Resources */ = {isa = PBXBuildFile; fileRef = E430A2281AA755C600CFBFC6 /* leftMenu.jpg */; };
+		E4421BDA1AC9960800F4A83B /* QRcodeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E4421BD91AC9960800F4A83B /* QRcodeViewController.m */; };
 		E48A46381AB1B35C002CB434 /* AddReportViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E48A46371AB1B35C002CB434 /* AddReportViewController.m */; };
 		E4A4AF6B1AB1F2E800D14ABD /* UIButton+UIButtonImageWithLable.m in Sources */ = {isa = PBXBuildFile; fileRef = E4A4AF6A1AB1F2E800D14ABD /* UIButton+UIButtonImageWithLable.m */; };
 		E4B1A0A11AC1D7E700C970A9 /* SignReportTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E4B1A0A01AC1D7E700C970A9 /* SignReportTableViewController.m */; };
@@ -212,6 +213,8 @@
 		E430A2131AA7443600CFBFC6 /* SlideNavigationController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SlideNavigationController.h; sourceTree = "<group>"; };
 		E430A2141AA7443600CFBFC6 /* SlideNavigationController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SlideNavigationController.m; sourceTree = "<group>"; };
 		E430A2281AA755C600CFBFC6 /* leftMenu.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = leftMenu.jpg; sourceTree = "<group>"; };
+		E4421BD81AC9960800F4A83B /* QRcodeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QRcodeViewController.h; sourceTree = "<group>"; };
+		E4421BD91AC9960800F4A83B /* QRcodeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QRcodeViewController.m; sourceTree = "<group>"; };
 		E48A46361AB1B35C002CB434 /* AddReportViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AddReportViewController.h; sourceTree = "<group>"; };
 		E48A46371AB1B35C002CB434 /* AddReportViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AddReportViewController.m; sourceTree = "<group>"; };
 		E4A4AF691AB1F2E800D14ABD /* UIButton+UIButtonImageWithLable.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIButton+UIButtonImageWithLable.h"; sourceTree = "<group>"; };
@@ -971,6 +974,8 @@
 				E4EC1ADF1AB86F6A0088C96A /* UserinfoViewController.m */,
 				E4C39E041AC080E7004D4F89 /* UpdatePasswordTableViewController.h */,
 				E4C39E051AC080E7004D4F89 /* UpdatePasswordTableViewController.m */,
+				E4421BD81AC9960800F4A83B /* QRcodeViewController.h */,
+				E4421BD91AC9960800F4A83B /* QRcodeViewController.m */,
 			);
 			path = view;
 			sourceTree = "<group>";
@@ -1150,6 +1155,7 @@
 				E4EB9BCF1AB05C5D003FBC75 /* AFNetworkReachabilityManager.m in Sources */,
 				E4D6FF391AB9D0AF00F1CAAA /* SDBrowserImageView.m in Sources */,
 				E4D6FEA01AB9C5F600F1CAAA /* IQUIWindow+Hierarchy.m in Sources */,
+				E4421BDA1AC9960800F4A83B /* QRcodeViewController.m in Sources */,
 				E4F02EF51AA5C5ED00426A88 /* ViewController.m in Sources */,
 				E412B40E1AA9F44C0015B7C1 /* Utils.m in Sources */,
 				E4F02EF21AA5C5ED00426A88 /* AppDelegate.m in Sources */,

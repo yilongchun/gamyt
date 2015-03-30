@@ -12,10 +12,11 @@
 
 @implementation SignReportDetailViewController{
     
-    NSNumber *reportid;
+    
     NSNumber *newsid;
     
 }
+@synthesize reportid;
 
 - (void)viewDidLoad{
     [super viewDidLoad];

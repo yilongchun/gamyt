@@ -1160,11 +1160,76 @@
                     <connections>
                         <segue destination="q8k-Qq-e59" kind="show" identifier="toUserinfo" id="9rw-NE-WK1"/>
                         <segue destination="44z-KQ-Vl3" kind="show" identifier="toUpdatePassword" id="aKF-JX-uca"/>
+                        <segue destination="hGX-dA-myc" kind="show" identifier="toQRcode" id="XRH-QS-Oo4"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="sUW-la-37x" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1389" y="2615.25"/>
+        </scene>
+        <!--二维码-->
+        <scene sceneID="Vge-xH-GdV">
+            <objects>
+                <viewController storyboardIdentifier="QRcodeViewController" id="hGX-dA-myc" customClass="QRcodeViewController" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="KDx-Lj-8g7"/>
+                        <viewControllerLayoutGuide type="bottom" id="9ca-un-wro"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="hAV-BN-4Ln">
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <imageView userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="defalut_pic" translatesAutoresizingMaskIntoConstraints="NO" id="Q7g-ML-iuf">
+                                <rect key="frame" x="0.0" y="0.0" width="240" height="128"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" secondItem="Q7g-ML-iuf" secondAttribute="height" multiplier="1:1" id="DeY-C5-V05"/>
+                                </constraints>
+                                <variation key="default">
+                                    <mask key="constraints">
+                                        <exclude reference="DeY-C5-V05"/>
+                                    </mask>
+                                </variation>
+                                <variation key="heightClass=regular-widthClass=compact">
+                                    <mask key="constraints">
+                                        <include reference="DeY-C5-V05"/>
+                                    </mask>
+                                </variation>
+                            </imageView>
+                        </subviews>
+                        <color key="backgroundColor" red="0.93333333330000001" green="0.93333333330000001" blue="0.93333333330000001" alpha="1" colorSpace="calibratedRGB"/>
+                        <constraints>
+                            <constraint firstAttribute="centerY" secondItem="Q7g-ML-iuf" secondAttribute="centerY" id="E8I-Nr-Qxy"/>
+                            <constraint firstAttribute="trailing" secondItem="Q7g-ML-iuf" secondAttribute="trailing" id="V03-VG-sgW"/>
+                            <constraint firstAttribute="width" secondItem="Q7g-ML-iuf" secondAttribute="width" id="w0M-YC-a01"/>
+                        </constraints>
+                        <variation key="default">
+                            <mask key="subviews">
+                                <exclude reference="Q7g-ML-iuf"/>
+                            </mask>
+                            <mask key="constraints">
+                                <exclude reference="E8I-Nr-Qxy"/>
+                                <exclude reference="V03-VG-sgW"/>
+                                <exclude reference="w0M-YC-a01"/>
+                            </mask>
+                        </variation>
+                        <variation key="heightClass=regular-widthClass=compact">
+                            <mask key="subviews">
+                                <include reference="Q7g-ML-iuf"/>
+                            </mask>
+                            <mask key="constraints">
+                                <include reference="E8I-Nr-Qxy"/>
+                                <include reference="V03-VG-sgW"/>
+                                <include reference="w0M-YC-a01"/>
+                            </mask>
+                        </variation>
+                    </view>
+                    <navigationItem key="navigationItem" title="二维码" id="HPQ-0D-SWh"/>
+                    <connections>
+                        <outlet property="imageview" destination="Q7g-ML-iuf" id="R2V-bd-71I"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="a2X-NM-kbH" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2746.5" y="3922.5"/>
         </scene>
         <!--修改密码-->
         <scene sceneID="8uu-T9-kpt">

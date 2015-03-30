@@ -9,6 +9,7 @@
 #import "SettingViewController.h"
 #import "UserinfoViewController.h"
 #import "UpdatePasswordTableViewController.h"
+#import "QRcodeViewController.h"
 #import "BPush.h"
 
 @implementation SettingViewController{
@@ -50,10 +51,11 @@
             //修改密码
             UpdatePasswordTableViewController * vc = [[self storyboard] instantiateViewControllerWithIdentifier:@"UpdatePasswordTableViewController"];
             [self.navigationController pushViewController:vc animated:YES];
+        }else if (indexPath.row == 2){
+            QRcodeViewController *vc = [[self storyboard] instantiateViewControllerWithIdentifier:@"QRcodeViewController"];
+            [self.navigationController pushViewController:vc animated:YES];
         }
-//        else if (indexPath.row == 2){
-//            [self checkUpdateWithAPPID:@"950217200"];
-//        }else if (indexPath.row == 3){
+//        else if (indexPath.row == 3){
 //            [self showStoreProductInApp:@"950217200"];
 //        }
     }else{
