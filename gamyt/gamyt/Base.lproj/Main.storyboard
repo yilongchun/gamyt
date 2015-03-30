@@ -1164,7 +1164,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="sUW-la-37x" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1389" y="2616.75"/>
+            <point key="canvasLocation" x="1389" y="2615.25"/>
         </scene>
         <!--修改密码-->
         <scene sceneID="8uu-T9-kpt">
