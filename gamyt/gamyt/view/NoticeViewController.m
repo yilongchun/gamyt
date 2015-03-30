@@ -190,7 +190,7 @@
         paragraphStyle.lineBreakMode = NSLineBreakByWordWrapping;
         NSDictionary *attributes = @{NSFontAttributeName:font, NSParagraphStyleAttributeName:paragraphStyle.copy};
         NSStringDrawingOptions options = NSStringDrawingUsesLineFragmentOrigin;
-        textSize = [content boundingRectWithSize:CGSizeMake(contentWidth-21, MAXFLOAT)
+        textSize = [content boundingRectWithSize:CGSizeMake(contentWidth-11-20, MAXFLOAT)
                                          options:options
                                       attributes:attributes
                                          context:nil].size;
@@ -198,7 +198,7 @@
 #pragma clang diagnostic push
 #pragma clang diagnostic ignored "-Wdeprecated-declarations"
         textSize = [content sizeWithFont:font
-                       constrainedToSize:CGSizeMake(contentWidth-21, MAXFLOAT)
+                       constrainedToSize:CGSizeMake(contentWidth-11-20, MAXFLOAT)
                            lineBreakMode:NSLineBreakByWordWrapping];
 #pragma clang diagnostic pop
         
@@ -278,7 +278,7 @@
         paragraphStyle.lineBreakMode = NSLineBreakByWordWrapping;
         NSDictionary *attributes = @{NSFontAttributeName:font, NSParagraphStyleAttributeName:paragraphStyle.copy};
         NSStringDrawingOptions options = NSStringDrawingUsesLineFragmentOrigin;
-        textSize = [content boundingRectWithSize:CGSizeMake(contentWidth-21, MAXFLOAT)
+        textSize = [content boundingRectWithSize:CGSizeMake(contentWidth-11-20, MAXFLOAT)
                                          options:options
                                       attributes:attributes
                                          context:nil].size;
@@ -286,7 +286,7 @@
 #pragma clang diagnostic push
 #pragma clang diagnostic ignored "-Wdeprecated-declarations"
         textSize = [content sizeWithFont:font
-                       constrainedToSize:CGSizeMake(contentWidth-21, MAXFLOAT)
+                       constrainedToSize:CGSizeMake(contentWidth-11-20, MAXFLOAT)
                            lineBreakMode:NSLineBreakByWordWrapping];
 #pragma clang diagnostic pop
         
