@@ -851,7 +851,6 @@
 		E4F02EEB1AA5C5ED00426A88 /* gamyt */ = {
 			isa = PBXGroup;
 			children = (
-				E4F3F6E81AC3153B00B46D78 /* LibBPush */,
 				E4F02EF01AA5C5ED00426A88 /* AppDelegate.h */,
 				E4F02EF11AA5C5ED00426A88 /* AppDelegate.m */,
 				E4F02EF31AA5C5ED00426A88 /* ViewController.h */,
@@ -865,6 +864,7 @@
 				E4EEB8031AAF3720009CEFA1 /* JYSlideSegmentController.m */,
 				E4F02F5B1AA61C2700426A88 /* view */,
 				E412B4121AA9F8740015B7C1 /* commons */,
+				E4F3F6E81AC3153B00B46D78 /* LibBPush */,
 				E4BF3BAB1ABB11A000BD7004 /* ELCImagePicker */,
 				E4D6FF3C1AB9D0EB00F1CAAA /* SDWebImage */,
 				E4D6FF311AB9D0AF00F1CAAA /* SDPhotoBrowser */,
@@ -1336,6 +1336,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "iPhone Distribution";
 				GCC_PREFIX_HEADER = gamyt/gamyt.pch;
 				INFOPLIST_FILE = gamyt/Info.plist;
@@ -1347,6 +1348,7 @@
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "5c035ad5-0899-4316-ad8b-fb9db06df859";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 			};
 			name = Debug;
 		};
@@ -1355,6 +1357,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "iPhone Distribution";
 				GCC_PREFIX_HEADER = gamyt/gamyt.pch;
 				INFOPLIST_FILE = gamyt/Info.plist;

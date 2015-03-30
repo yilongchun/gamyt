@@ -150,7 +150,7 @@
     }
     [self.contentLabel setFrame:CGRectMake(self.contentLabel.frame.origin.x, self.contentLabel.frame.origin.y, contentWidth-16, textSize.height)];
     
-    NSString *imagePath = [NSString stringWithFormat:@"%@%@%@",[Utils getHostname],REPORT_PATH,path];
+    NSString *imagePath = [NSString stringWithFormat:@"%@%@%@",[Utils getHostname],NOTICE_PATH,path];
     [self.img setImageWithURL:[NSURL URLWithString:imagePath] placeholderImage:[UIImage imageNamed:@"defalut_pic"]];
     [self.img setHidden:NO];
     UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(imageClick:)];
