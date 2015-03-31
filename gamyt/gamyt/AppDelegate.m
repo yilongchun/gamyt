@@ -120,7 +120,8 @@
     NSLog(@"DeviceToken 获取失败，原因：%@",error);
 }
 - (void)application:(UIApplication *)application didReceiveRemoteNotification:(NSDictionary *)userInfo{
-    NSLog(@"%@",userInfo);
+    NSLog(@"---------------didReceiveRemoteNotification start------------------");
+    NSLog(@"didReceiveRemoteNotification userinfo = %@\n",userInfo);
     // App 收到推送的通知
     [BPush handleNotification:userInfo];
     
@@ -130,7 +131,8 @@
     
     //判断应用程序当前的运行状态，如果是激活状态，则进行提醒，否则不提醒
     if (application.applicationState == UIApplicationStateActive) {
-        NSLog(@"不发送本地推送 活动状态");
+        NSLog(@"不发送本地推送 活动状态\n");
+        
 //        //发送本地推送
 //        UILocalNotification *notification = [[UILocalNotification alloc] init];
 //        notification.fireDate = [NSDate date]; //触发通知的时间
@@ -144,7 +146,7 @@
 //        [[UIApplication sharedApplication] scheduleLocalNotification:notification];
         [self showAlert:userInfo];
     }else{
-        NSLog(@"发送本地推送 非活动状态");
+        NSLog(@"发送本地推送 非活动状态\n");
         //发送本地推送
         UILocalNotification *notification = [[UILocalNotification alloc] init];
         notification.fireDate = [NSDate date]; //触发通知的时间
@@ -153,14 +155,21 @@
         notification.soundName = UILocalNotificationDefaultSoundName;
         notification.alertAction = @"打开";
         notification.timeZone = [NSTimeZone defaultTimeZone];
-        notification.userInfo = userInfo;
-        notification.applicationIconBadgeNumber = [[[UIApplication sharedApplication] scheduledLocalNotifications] count]+1;
+        NSMutableDictionary *infoDic = [NSMutableDictionary dictionary];
+        [infoDic setDictionary:userInfo];
+        NSNumber *infoId = [userInfo objectForKey:@"infoId"];
+        [infoDic setObject:infoId forKey:@"infoId"];
+        notification.userInfo = infoDic;
+        notification.applicationIconBadgeNumber++;
         [[UIApplication sharedApplication] scheduleLocalNotification:notification];
     }
+    NSLog(@"----------------didReceiveRemoteNotification end-----------------");
 }
 - (void)application:(UIApplication *)application didReceiveLocalNotification:(UILocalNotification *)notification{
+    NSLog(@"----------------didReceiveLocalNotification start-----------------");
     NSDictionary* userInfo = [notification userInfo];
-    NSLog(@"didReceiveLocalNotification dict = %@", userInfo);
+    NSNumber *infoId = [userInfo objectForKey:@"infoId"];
+    NSLog(@"didReceiveLocalNotification dict = %@ infoid = %d\n", userInfo,[infoId intValue]);
     
 //    [[UIApplication sharedApplication] cancelLocalNotification:notification];
     
@@ -175,10 +184,17 @@
             for (int i=0; i<count; i++)
                 {
                     UILocalNotification *notif=[[[UIApplication sharedApplication] scheduledLocalNotifications] objectAtIndex:i];
-                    notif.applicationIconBadgeNumber=i+1;
-                    [newarry addObject:notif];
+                    NSNumber *tempInfoId = [notif.userInfo objectForKey:@"infoId"];
+                    if ([tempInfoId intValue] == [infoId intValue]) {
+                        [[UIApplication sharedApplication] cancelLocalNotification:notif];
+                        NSLog(@"didReceiveLocalNotification 取消一个本地推送 infoid = %d\n",[tempInfoId intValue]);
+                    }else{
+                        [newarry addObject:notif];
+                        NSLog(@"didReceiveLocalNotification 添加一个本地推送 infoid = %d\n",[tempInfoId intValue]);
+                    }
+//                    notif.applicationIconBadgeNumber=i+1;
                 }
-            [[UIApplication sharedApplication] cancelAllLocalNotifications];
+//            [[UIApplication sharedApplication] cancelAllLocalNotifications];
             if (newarry.count>0)
                 {
                     for (int i=0; i<newarry.count; i++)
@@ -207,36 +223,37 @@
     if (userInfo) {
         [self showAlert:userInfo];
     }
-    
-    
-    
-
+    NSLog(@"----------------didReceiveLocalNotification end-----------------");
 }
 
 - (void)applicationDidBecomeActive:(UIApplication *)application{
     // Restart any tasks that were paused (or not yet started) while the application was inactive. If the application was previously in the background, optionally refresh the user interface.
+    NSLog(@"---------------applicationDidBecomeActive start------------------");
     NSLog(@"applicationDidBecomeActive");
     //reset applicationIconBadgeNumber;
     application.applicationIconBadgeNumber=0;
     NSUInteger count =[[[UIApplication sharedApplication] scheduledLocalNotifications] count];
-    NSLog(@"applicationDidBecomeActive count %ld",count);
+    NSLog(@"applicationDidBecomeActive 推送数量 %ld 个\n",count);
     if(count>0)
     {
         NSMutableArray *newarry= [NSMutableArray arrayWithCapacity:0];
         for (int i=0; i<count; i++)
         {
             UILocalNotification *notif=[[[UIApplication sharedApplication] scheduledLocalNotifications] objectAtIndex:i];
-            notif.applicationIconBadgeNumber=i+1;
+//            notif.applicationIconBadgeNumber=i+1;
             [newarry addObject:notif];
-            NSLog(@"%d %@",i,notif.userInfo);
+            NSNumber *tempInfoId = [notif.userInfo objectForKey:@"infoId"];
+            NSLog(@"applicationDidBecomeActive 添加 %d 个本地推送 infoid = %d\n",i+1,[tempInfoId intValue]);
         }
-        [[UIApplication sharedApplication] cancelAllLocalNotifications];
+//        [[UIApplication sharedApplication] cancelAllLocalNotifications];
         if (newarry.count>0)
         {
             for (int i=0; i<newarry.count; i++)
             {
                 UILocalNotification *notif = [newarry objectAtIndex:i];
                 [[UIApplication sharedApplication] scheduleLocalNotification:notif];
+                NSNumber *tempInfoId = [notif.userInfo objectForKey:@"infoId"];
+                NSLog(@"applicationDidBecomeActive 发送 %d 个本地推送 infoid = %d\n",i+1,[tempInfoId intValue]);
             }
         }
     }
@@ -273,12 +290,12 @@
 //        }
 //    }
     
-    
+    NSLog(@"---------------applicationDidBecomeActive end------------------");
 }
 
 #pragma mark Push Delegate
 - (void)onMethod:(NSString*)method response:(NSDictionary*)data{
-    NSLog(@"Method: %@\n%@",method,data);
+//    NSLog(@"Method: %@\n%@",method,data);
     if ([method isEqualToString:@"bind"]) {
         NSUserDefaults *ud = [NSUserDefaults standardUserDefaults];
         NSString *channelid = [BPush getChannelId];
