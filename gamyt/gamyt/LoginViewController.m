@@ -30,11 +30,6 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view, typically from a nib.
     
-//    [[NSNotificationCenter defaultCenter] addObserver:self
-//                                             selector:@selector(loginStateChange:)
-//                                                 name:KNOTIFICATION_LOGINCHANGE
-//                                               object:nil];
-    
     UIView *leftview = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 30, 50)];
     UIImageView *usernameImg = [[UIImageView alloc] initWithFrame:CGRectMake(5, 15, 20, 20)];
     [usernameImg setImage:[UIImage imageNamed:@"login_username_icon.png"]];
@@ -66,7 +61,7 @@
     }
     [self.navigationController.navigationBar setTitleTextAttributes:[NSDictionary dictionaryWithObjectsAndKeys:[UIColor whiteColor], NSForegroundColorAttributeName, nil]];
     
-//    [[UITextField appearance] setTintColor:[UIColor whiteColor]];
+
     
     
 //    self.account.text = @"18972590049";//超级管理员:18972590049 111111
@@ -96,12 +91,6 @@
 - (void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
-    
-//    NSUserDefaults *ud = [NSUserDefaults standardUserDefaults];
-//    NSNumber *isLogin = [ud objectForKey:@"isLogin"];
-//    if ([isLogin boolValue]) {
-//        [self goToHome:NO];
-//    }
     [self.navigationController setNavigationBarHidden:YES animated:animated];
 }
 
@@ -156,7 +145,7 @@
         NSString *html = operation.responseString;
         NSData* data=[html dataUsingEncoding:NSUTF8StringEncoding];
         id dict=[NSJSONSerialization  JSONObjectWithData:data options:0 error:nil];
-        NSLog(@"获取到的数据为：%@",dict);
+        
         NSDictionary *resultDict = [NSDictionary cleanNullForDic:dict];
         if (resultDict == nil) {
             NSLog(@"json parse failed \r\n");
@@ -323,149 +312,9 @@
     
     NSUserDefaults *userdefaults = [NSUserDefaults standardUserDefaults];
     [userdefaults setObject:menus forKey:@"menus"];
-//    NSDictionary *firstmenu = [menus objectAtIndex:0];
-//    NSString *vcname = [firstmenu objectForKey:@"vcname"];
-//    
-//    if ([vcname isEqualToString:@"HomeViewController"]) {//下级上报
-//        InfoViewController *info1 = [[self storyboard] instantiateViewControllerWithIdentifier: @"InfoViewController"];
-//        info1.title = @"全部";
-//        
-//        InfoViewController *info2 = [[self storyboard] instantiateViewControllerWithIdentifier: @"InfoViewController"];
-//        info2.title = @"未处理";
-//        info2.opttype = @"-1";
-//        
-//        InfoViewController *info3 = [[self storyboard] instantiateViewControllerWithIdentifier: @"InfoViewController"];
-//        info3.title = @"已归档";
-//        info3.opttype = @"1";
-//        
-//        InfoViewController *info4 = [[self storyboard] instantiateViewControllerWithIdentifier: @"InfoViewController"];
-//        info4.title = @"已上报";
-//        info4.opttype = @"3";
-//        
-//        InfoViewController *info5 = [[self storyboard] instantiateViewControllerWithIdentifier: @"InfoViewController"];
-//        info5.title = @"已录用";
-//        info5.opttype = @"5";
-//        
-//        NSMutableArray *vcs = [NSMutableArray array];
-//        NSUserDefaults *userdefaults = [NSUserDefaults standardUserDefaults];
-//        NSNumber *type = [userdefaults objectForKey:@"type"];
-//        switch ([type integerValue]) {
-//            case MANAGER://管理员(全部.未处理,已归档,已上报)
-//                [vcs addObjectsFromArray:@[info1,info2,info3,info4]];
-//                break;
-//            case COUNTY_MANAGER://省管理员
-//            case CITY_MANAGER://市管理员
-//            case SHENG_MANAGER://县管理员
-//                //(全部,未处理,已归档,已上报,已录用)
-//                [vcs addObjectsFromArray:@[info1,info2,info3,info4,info5]];
-//                break;
-//            case SMANAGER:
-//                //超级管理员(全部,未处理,已归档)
-//                [vcs addObjectsFromArray:@[info1,info2,info3]];
-//                break;
-//            default:
-//                break;
-//        }
-//        
-//        HomeViewController *vc2 = [[HomeViewController alloc] initWithViewControllers:vcs];
-//        vc2.title = @"下级上报";
-//        vc2.indicatorInsets = UIEdgeInsetsMake(0, 0, 8, 0);
-//        vc2.indicator.backgroundColor = [UIColor colorWithRed:72/255.0 green:147/255.0 blue:219/255.0 alpha:1];
-//        
-//        [self.navigationController pushViewController:vc2 animated:animated];
-//    }else if([vcname isEqualToString:@"MyNoticeViewController"]){//我的公告
-//        
-//            NoticeViewController *notice1 = [[self storyboard] instantiateViewControllerWithIdentifier: @"NoticeViewController"];
-//            notice1.title = @"发送的公告";
-//            notice1.url = @"/mobile/notice/getNoticeHistory";
-//            
-//            NoticeViewController *notice2 = [[self storyboard] instantiateViewControllerWithIdentifier: @"NoticeViewController"];
-//            notice2.title = @"接受的公告";
-//            notice2.url = @"/mobile/notice/getReceiveNotice";
-//            
-//            NSUserDefaults *userdefaults = [NSUserDefaults standardUserDefaults];
-//            NSNumber *type = [userdefaults objectForKey:@"type"];
-//            NSMutableArray *arr = [NSMutableArray array];
-//            switch ([type integerValue]) {
-//                case MANAGER:
-//                case COUNTY_MANAGER:
-//                case CITY_MANAGER:
-//                case SHENG_MANAGER:
-//                    [arr addObjectsFromArray:@[notice1,notice2]];
-//                    break;
-//                case SMANAGER:
-//                    [arr addObjectsFromArray:@[notice1]];
-//                    break;
-//                default:
-//                    [arr addObjectsFromArray:@[notice2]];
-//                    break;
-//            }
-//            MyNoticeViewController *mynotice = [[MyNoticeViewController alloc] initWithViewControllers:arr];
-//            mynotice.title = @"我的公告";
-//            mynotice.indicatorInsets = UIEdgeInsetsMake(0, 0, 8, 0);
-//            mynotice.indicator.backgroundColor = [UIColor colorWithRed:72/255.0 green:147/255.0 blue:219/255.0 alpha:1];
-//        [self.navigationController pushViewController:mynotice animated:animated];
-//    }else if([vcname isEqualToString:@"CheckInfoViewController"]){//审阅信息
-//        SignReportTableViewController *vc1 = [[self storyboard] instantiateViewControllerWithIdentifier: @"SignReportTableViewController"];
-//        vc1.title = @"待审阅信息";
-//        vc1.type = @"1";
-//        SignReportTableViewController *vc2 = [[self storyboard] instantiateViewControllerWithIdentifier: @"SignReportTableViewController"];
-//        vc2.title = @"已审阅信息";
-//        vc2.type = @"2";
-//        CheckInfoViewController *vc = [[CheckInfoViewController alloc] initWithViewControllers:@[vc1,vc2]];
-//        vc.title = @"审阅信息";
-//        vc.indicatorInsets = UIEdgeInsetsMake(0, 0, 8, 0);
-//        vc.indicator.backgroundColor = [UIColor colorWithRed:72/255.0 green:147/255.0 blue:219/255.0 alpha:1];
-//        [self.navigationController pushViewController:vc animated:animated];
-//    }else{
-//        UIViewController *firstvc = [[self storyboard]
-//                                     instantiateViewControllerWithIdentifier:vcname];
-//        [self.navigationController pushViewController:firstvc animated:animated];
-//    }
-//    
-//    
-//    [self.navigationController setNavigationBarHidden:NO];
-//    [[NSNotificationCenter defaultCenter] postNotificationName:@"reloadLeftMenu" object:nil];
+
     MenuViewController *menu = [self.storyboard instantiateViewControllerWithIdentifier:@"MenuViewController"];
-//    [XDKAirMenuController attemptDealloc];
-    //UIModalTransitionStyleCoverVertical   底部滑入
-    //UIModalTransitionStyleFlipHorizontal  水平翻转
-    //UIModalTransitionStyleCrossDissolve   交叉溶解
-    //UIModalTransitionStylePartialCurl     翻页
-//    [menu setModalTransitionStyle:UIModalTransitionStyleCrossDissolve];
-//    [self presentViewController:menu animated:animated completion:nil];
     [self.navigationController pushViewController:menu animated:YES];
 }
-
-//-(void)loginStateChange:(NSNotification *)notification{
-//    if (floor(NSFoundationVersionNumber) > NSFoundationVersionNumber_iOS_7_1){
-//        UIViewController *s = [notification object];
-//        UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"用户状态出现错误,可能原因如下:" message:@"1.登录状态过期.\n2.账号用其他手机登陆." preferredStyle:UIAlertControllerStyleAlert];
-//        [alert addAction:[UIAlertAction actionWithTitle:@"确定"
-//                                                  style:UIAlertActionStyleDestructive
-//                                                handler:^(UIAlertAction *action) {
-//                                                    [BPush unbindChannel];
-//                                                    NSUserDefaults *ud = [NSUserDefaults standardUserDefaults];
-//                                                    [ud removeObjectForKey:@"isLogin"];
-//                                                    
-//                                                    
-//                                                    
-//                                                    
-////                                                    [[SlideNavigationController sharedInstance] popToRootViewControllerAnimated:NO];
-//                                                }]];
-//        [s.view.window.rootViewController presentViewController:alert animated:YES completion:nil];
-//    }else{
-//        
-//        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"用户状态出现错误,可能原因如下:" message:@"1.登录状态过期.\n2.账号用其他手机登陆." delegate:self cancelButtonTitle:nil otherButtonTitles:@"确定", nil];
-//        [alert show];
-//    }
-//}
-//
-//- (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex{
-//    [BPush unbindChannel];
-//    NSUserDefaults *ud = [NSUserDefaults standardUserDefaults];
-//    [ud removeObjectForKey:@"isLogin"];
-//    [[SlideNavigationController sharedInstance] popToRootViewControllerAnimated:NO];
-//}
 
 @end

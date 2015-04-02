@@ -64,7 +64,7 @@
         NSString *html = operation.responseString;
         NSData* data=[html dataUsingEncoding:NSUTF8StringEncoding];
         id dict=[NSJSONSerialization  JSONObjectWithData:data options:0 error:nil];
-        NSLog(@"获取到的数据为：%@",dict);
+        
         NSDictionary *resultDict = [NSDictionary cleanNullForDic:dict];
         if (resultDict == nil) {
             NSLog(@"json parse failed \r\n");
@@ -129,7 +129,7 @@
         NSString *html = operation.responseString;
         NSData* data=[html dataUsingEncoding:NSUTF8StringEncoding];
         id dict=[NSJSONSerialization  JSONObjectWithData:data options:0 error:nil];
-        NSLog(@"获取到的数据为：%@",dict);
+        
         NSDictionary *resultDict = [NSDictionary cleanNullForDic:dict];
         if (resultDict == nil) {
             NSLog(@"json parse failed \r\n");
@@ -348,14 +348,11 @@
 - (void)PullDownLoadEnd {
     [self loadData];
     self.tableView.canPullUp = YES;
-    NSLog(@"PullDownLoadEnd");
 }
 
 - (void)PullUpLoadEnd {
     page = [NSNumber numberWithInt:[page intValue] + PAGE_COUNT];
-    
     [self loadMore];
-    NSLog(@"PullUpLoadEnd");
 }
 
 @end

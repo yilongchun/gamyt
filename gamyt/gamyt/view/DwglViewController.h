@@ -7,8 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "SlideNavigationController.h"
 
-@interface DwglViewController : UIViewController<SlideNavigationControllerDelegate>
+@interface DwglViewController : UIViewController
 
 @end

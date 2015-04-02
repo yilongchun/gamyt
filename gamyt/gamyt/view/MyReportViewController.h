@@ -7,7 +7,6 @@
 //
 
 #import <UIKit/UIKit.h>
-//#import "SlideNavigationController.h"
 #import "UIScrollView+PullLoad.h"
 
 @interface MyReportViewController : UIViewController<UITableViewDelegate,UITableViewDataSource,PullDelegate>

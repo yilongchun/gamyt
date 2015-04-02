@@ -11,7 +11,6 @@
 #import "LeftMenuViewController.h"
 #import "BPush.h"
 #import "InfoDetailViewController.h"
-#import "SlideNavigationController.h"
 #import "NoticeDetailViewController.h"
 #import "SignReportDetailViewController.h"
 #import "LoginViewController.h"
@@ -31,47 +30,16 @@
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     // Override point for customization after application launch.
     
-//    [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleLightContent];
-    
     [[NSNotificationCenter defaultCenter] addObserver:self
                                              selector:@selector(loginStateChange:)
                                                  name:KNOTIFICATION_LOGINCHANGE
                                                object:nil];
     
-    application.applicationIconBadgeNumber = 0;
-    [[UIApplication sharedApplication] cancelAllLocalNotifications];
     
     if ([[[UIDevice currentDevice] systemVersion] floatValue] >= 7.0) {
         [[UINavigationBar appearance] setBarTintColor:[UIColor colorWithRed:36/255.0 green:102/255.0 blue:171/255.0 alpha:1]];
     }
-    
-//    UIStoryboard *mainStoryboard = [UIStoryboard storyboardWithName:@"Main"
-//                                                             bundle: nil];
-//    
-//    LeftMenuViewController *leftMenu = (LeftMenuViewController*)[mainStoryboard
-//                                                                 instantiateViewControllerWithIdentifier: @"LeftMenuViewController"];
-//    [SlideNavigationController sharedInstance].leftMenu = leftMenu;
-//    [SlideNavigationController sharedInstance].menuRevealAnimationDuration = .18;
-//    [SlideNavigationController sharedInstance].enableSwipeGesture = NO;
-//    [SlideNavigationController sharedInstance].portraitSlideOffset = [UIScreen mainScreen].bounds.size.width-200;
-//    [[NSNotificationCenter defaultCenter] addObserverForName:SlideNavigationControllerDidClose object:nil queue:nil usingBlock:^(NSNotification *note) {
-//        NSString *menu = note.userInfo[@"menu"];
-//        NSLog(@"Closed %@", menu);
-//    }];
-//    
-//    [[NSNotificationCenter defaultCenter] addObserverForName:SlideNavigationControllerDidOpen object:nil queue:nil usingBlock:^(NSNotification *note) {
-//        NSString *menu = note.userInfo[@"menu"];
-//        NSLog(@"Opened %@", menu);
-//    }];
-//    
-//    [[NSNotificationCenter defaultCenter] addObserverForName:SlideNavigationControllerDidReveal object:nil queue:nil usingBlock:^(NSNotification *note) {
-//        NSString *menu = note.userInfo[@"menu"];
-//        NSLog(@"Revealed %@", menu);
-//        [[NSNotificationCenter defaultCenter] postNotificationName:@"loadUnreadCount" object:self];
-//        
-//    }];
-    
-    
+
     
     //推送
     // iOS8 下需要使用新的 API
@@ -112,7 +80,7 @@
     
     
     
-    
+    //设置自动登录
     NSUserDefaults *ud = [NSUserDefaults standardUserDefaults];
     NSNumber *isLogin = [ud objectForKey:@"isLogin"];
     BOOL isLoggedIn = [isLogin boolValue];
@@ -438,15 +406,15 @@
                     airmenu = (XDKAirMenuController *)view;
                     break;
                 }else if([view isKindOfClass:[MenuViewController class]]){
-                    NSLog(@"XDKAirMenuController");
+//                    NSLog(@"XDKAirMenuController");
                     MenuViewController *menu = (MenuViewController *)view;
                     airmenu = menu.airMenuController;
-                    NSLog(@"%@", menu.airMenuController);
+//                    NSLog(@"%@", menu.airMenuController);
                     break;
                 }
             }
-            NSLog(@"%@",self.window.rootViewController.childViewControllers);
-            NSLog(@"%@",airmenu.currentViewController);
+//            NSLog(@"%@",self.window.rootViewController.childViewControllers);
+//            NSLog(@"%@",airmenu.currentViewController);
             UINavigationController *nav = (UINavigationController *)airmenu.currentViewController;
             [nav popToRootViewControllerAnimated:NO];
             [nav pushViewController:infoDetail animated:YES];
@@ -466,15 +434,15 @@
                     airmenu = (XDKAirMenuController *)view;
                     break;
                 }else if([view isKindOfClass:[MenuViewController class]]){
-                    NSLog(@"XDKAirMenuController");
+//                    NSLog(@"XDKAirMenuController");
                     MenuViewController *menu = (MenuViewController *)view;
                     airmenu = menu.airMenuController;
-                    NSLog(@"%@", menu.airMenuController);
+//                    NSLog(@"%@", menu.airMenuController);
                     break;
                 }
             }
-            NSLog(@"%@",self.window.rootViewController.childViewControllers);
-            NSLog(@"%@",airmenu.currentViewController);
+//            NSLog(@"%@",self.window.rootViewController.childViewControllers);
+//            NSLog(@"%@",airmenu.currentViewController);
             UINavigationController *nav = (UINavigationController *)airmenu.currentViewController;
             [nav popToRootViewControllerAnimated:NO];
             [nav pushViewController:infoDetail animated:YES];
@@ -495,15 +463,15 @@
                     airmenu = (XDKAirMenuController *)view;
                     break;
                 }else if([view isKindOfClass:[MenuViewController class]]){
-                    NSLog(@"XDKAirMenuController");
+//                    NSLog(@"XDKAirMenuController");
                     MenuViewController *menu = (MenuViewController *)view;
                     airmenu = menu.airMenuController;
-                    NSLog(@"%@", menu.airMenuController);
+//                    NSLog(@"%@", menu.airMenuController);
                     break;
                 }
             }
-            NSLog(@"%@",self.window.rootViewController.childViewControllers);
-            NSLog(@"%@",airmenu.currentViewController);
+//            NSLog(@"%@",self.window.rootViewController.childViewControllers);
+//            NSLog(@"%@",airmenu.currentViewController);
             UINavigationController *nav = (UINavigationController *)airmenu.currentViewController;
             [nav popToRootViewControllerAnimated:NO];
             [nav pushViewController:infoDetail animated:YES];

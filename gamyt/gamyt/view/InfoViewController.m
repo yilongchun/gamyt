@@ -319,14 +319,11 @@
 - (void)PullDownLoadEnd {
     [self loadData];
     _tableView.canPullUp = YES;
-    NSLog(@"PullDownLoadEnd");
 }
 
 - (void)PullUpLoadEnd {
     page = [NSNumber numberWithInt:[page intValue] + PAGE_COUNT];
-    
     [self loadMore];
-    NSLog(@"PullUpLoadEnd");
 }
 
 

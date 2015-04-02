@@ -252,14 +252,11 @@
 - (void)PullDownLoadEnd {
     [self loadData];
     _tableView.canPullUp = YES;
-    NSLog(@"PullDownLoadEnd");
 }
 
 - (void)PullUpLoadEnd {
     page = [NSNumber numberWithInt:[page intValue] + PAGE_COUNT];
-    
     [self loadMore];
-    NSLog(@"PullUpLoadEnd");
 }
 
 - (IBAction)menuButtonPressed:(id)sender
@@ -271,18 +268,6 @@
     else
         [menu openMenuAnimated];
 }
-
-//#pragma mark - SlideNavigationController Methods -
-//
-//- (BOOL)slideNavigationControllerShouldDisplayLeftMenu
-//{
-//    return YES;
-//}
-//
-//- (BOOL)slideNavigationControllerShouldDisplayRightMenu
-//{
-//    return NO;
-//}
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
