@@ -639,7 +639,7 @@
                 [[NSNotificationCenter defaultCenter] postNotificationName:KNOTIFICATION_LOGINCHANGE object:self];
             }else if([code intValue] == 0){
                 [self hideHud];
-                
+                [self chooseShenYueYuan];
                 NSArray *array = [resultDict objectForKey:@"data"];
                 shenyueDataSource = [NSMutableArray arrayWithArray:array];
                 [alertTableView reloadData];
@@ -651,8 +651,10 @@
         }];
         NSOperationQueue *queue = [[NSOperationQueue alloc] init];
         [queue addOperation:operation];
+    }else{
+        [self chooseShenYueYuan];
     }
-    [self chooseShenYueYuan];
+    
 }
 
 //报审

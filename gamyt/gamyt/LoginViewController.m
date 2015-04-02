@@ -315,6 +315,8 @@
 
     MenuViewController *menu = [self.storyboard instantiateViewControllerWithIdentifier:@"MenuViewController"];
     [self.navigationController pushViewController:menu animated:YES];
+    self.account.text = @"";
+    self.password.text = @"";
 }
 
 @end

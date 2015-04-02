@@ -498,9 +498,10 @@
 
 - (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex{
     if (alertView.tag == 999) {
-        
+        //进入登录界面
         LoginViewController *login = [[UIStoryboard storyboardWithName:@"Main" bundle: nil] instantiateViewControllerWithIdentifier:@"LoginViewController"];
         UINavigationController *vc = [[UINavigationController alloc] initWithRootViewController:login];
+        [vc setModalTransitionStyle:UIModalTransitionStyleCrossDissolve];
         self.window.rootViewController = vc;
     }else{
         if (buttonIndex == 1) {
@@ -528,24 +529,32 @@
 }
 
 -(void)loginStateChange:(NSNotification *)notification{
+    //遇到账号在其他设备登录 先销毁左侧菜单 再解绑推送 去掉登录信息
     [XDKAirMenuController destroyDealloc];
     [BPush unbindChannel];
     NSUserDefaults *ud = [NSUserDefaults standardUserDefaults];
     [ud removeObjectForKey:@"isLogin"];
     
+    
+    
+    //弹出提示
     if (floor(NSFoundationVersionNumber) > NSFoundationVersionNumber_iOS_7_1){
-        LoginViewController *login = [[UIStoryboard storyboardWithName:@"Main" bundle: nil] instantiateViewControllerWithIdentifier:@"LoginViewController"];
-        UINavigationController *vc = [[UINavigationController alloc] initWithRootViewController:login];
-        self.window.rootViewController = vc;
         if (!flag) {
-            flag = YES;
+            
             UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"用户状态出现错误,可能原因如下:" message:@"1.登录状态过期.\n2.账号用其他手机登陆." preferredStyle:UIAlertControllerStyleAlert];
             [alert addAction:[UIAlertAction actionWithTitle:@"确定"
                                                       style:UIAlertActionStyleDestructive
                                                     handler:^(UIAlertAction *action) {
                                                         flag = NO;
+                                                        //进入登录界面
+                                                        LoginViewController *login = [[UIStoryboard storyboardWithName:@"Main" bundle: nil] instantiateViewControllerWithIdentifier:@"LoginViewController"];
+                                                        UINavigationController *vc = [[UINavigationController alloc] initWithRootViewController:login];
+                                                        [vc setModalTransitionStyle:UIModalTransitionStyleCrossDissolve];
+                                                        self.window.rootViewController = vc;
                                                     }]];
-            [self.window.rootViewController presentViewController:alert animated:YES completion:nil];
+            [self.window.rootViewController presentViewController:alert animated:YES completion:^{
+                flag = YES;
+            }];
         }
     }else{
         if (!flag) {

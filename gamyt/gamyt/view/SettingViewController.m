@@ -71,13 +71,7 @@
                                                       style:UIAlertActionStyleDestructive
                                                     handler:^(UIAlertAction *action) {
                                                         //退出登陆
-                                                        [BPush unbindChannel];
-                                                        NSUserDefaults *ud = [NSUserDefaults standardUserDefaults];
-                                                        [ud removeObjectForKey:@"isLogin"];
-                                                        [XDKAirMenuController destroyDealloc];
-                                                        LoginViewController *login = [[UIStoryboard storyboardWithName:@"Main" bundle: nil] instantiateViewControllerWithIdentifier:@"LoginViewController"];
-                                                        UINavigationController *vc = [[UINavigationController alloc] initWithRootViewController:login];
-                                                        self.view.window.rootViewController = vc;
+                                                        [self logout];
                                                     }]];
             [alert addAction:[UIAlertAction actionWithTitle:@"取消"
                                                       style:UIAlertActionStyleCancel
@@ -98,17 +92,50 @@
 - (void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex{
     if (actionSheet.tag == 100) {
         if (buttonIndex == 0) {
-            [XDKAirMenuController destroyDealloc];
-            [BPush unbindChannel];
-            NSUserDefaults *ud = [NSUserDefaults standardUserDefaults];
-            [ud removeObjectForKey:@"isLogin"];
-            LoginViewController *login = [[UIStoryboard storyboardWithName:@"Main" bundle: nil] instantiateViewControllerWithIdentifier:@"LoginViewController"];
-            UINavigationController *vc = [[UINavigationController alloc] initWithRootViewController:login];
-            self.view.window.rootViewController = vc;
+            
+            
+            [self logout];
+            
+            
+        }else{
             
         }
     }
 }
+
+-(void)logout{
+    [XDKAirMenuController destroyDealloc];
+    [BPush unbindChannel];
+    NSUserDefaults *ud = [NSUserDefaults standardUserDefaults];
+    [ud removeObjectForKey:@"isLogin"];
+    NSArray *views = self.view.window.rootViewController.childViewControllers;
+    LoginViewController *loginViewController = nil;
+    NSMutableArray *deleteViews = [NSMutableArray array];
+    for (UIViewController *view in views) {
+        if ([view isKindOfClass:[LoginViewController class]]) {
+            loginViewController = (LoginViewController *)view;
+        }else{
+            [deleteViews addObject:view];
+//            [view removeFromParentViewController];
+        }
+    }
+    if (loginViewController == nil) {
+        loginViewController = [[UIStoryboard storyboardWithName:@"Main" bundle: nil] instantiateViewControllerWithIdentifier:@"LoginViewController"];
+    }
+    loginViewController.account.text = @"";
+    loginViewController.password.text = @"";
+    UINavigationController *vc = [[UINavigationController alloc] initWithRootViewController:loginViewController];
+    [vc setModalTransitionStyle:UIModalTransitionStyleCrossDissolve];
+    [self presentViewController:vc animated:YES completion:^{
+        for (UIViewController *view in deleteViews) {
+            [view removeFromParentViewController];
+        }
+        NSLog(@"1 %@",self.view.window.rootViewController);
+        NSLog(@"2 %@",self.view.window.rootViewController.childViewControllers);
+    }];
+    
+}
+
 #pragma mark - UIAlertView Delegate
 - (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex{
     if (alertView.tag==10000) {
