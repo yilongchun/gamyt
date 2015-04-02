@@ -260,8 +260,8 @@ typedef enum {
                 //上拉在上拉状态进行上拉界面位置设定，这个时候scrollView的contentSize已经确定
                 [downView setState:PullStateUpPulling];
                 downView.hidden = NO;
-                CGRect frame = downView.frame;
-                frame = CGRectMake(0, scrollView.contentSize.height, scrollView.frame.size.width, 300);
+//                CGRect frame = downView.frame;
+                CGRect frame = CGRectMake(0, scrollView.contentSize.height, scrollView.frame.size.width, 300);
                 downView.frame=frame;
             }
         }

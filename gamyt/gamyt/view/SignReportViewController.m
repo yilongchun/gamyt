@@ -14,6 +14,7 @@
 }
 
 -(void)viewDidLoad{
+    [super viewDidLoad];
     self.mytextview.layer.borderColor = BORDER_COLOR.CGColor;
     self.mytextview.layer.borderWidth = 0.5f;
     
