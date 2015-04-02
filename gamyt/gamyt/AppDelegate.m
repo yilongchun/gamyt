@@ -56,7 +56,7 @@
 #warning 上线 AppStore 时需要修改 pushMode
     // 在 App 启动时注册百度云推送服务，需要提供 Apikey
     //正式
-//    [BPush registerChannel:launchOptions apiKey:@"ZUbGFfu96LviK68lNRR1GxPr" pushMode:BPushModeDevelopment isDebug:YES];
+//    [BPush registerChannel:launchOptions apiKey:@"ZUbGFfu96LviK68lNRR1GxPr" BPushModeProduction isDebug:NO];
     
     //测试
     [BPush registerChannel:launchOptions apiKey:@"XoW4d6oBCmduBq1ISjDclNcl" pushMode:BPushModeDevelopment isDebug:YES];
@@ -234,8 +234,8 @@
             UILocalNotification *notif=[[[UIApplication sharedApplication] scheduledLocalNotifications] objectAtIndex:i];
 //            notif.applicationIconBadgeNumber=i+1;
             [newarry addObject:notif];
-            NSNumber *tempInfoId = [notif.userInfo objectForKey:@"infoId"];
-            NSLog(@"applicationDidBecomeActive 添加 %d 个本地推送 infoid = %d\n",i+1,[tempInfoId intValue]);
+//            NSNumber *tempInfoId = [notif.userInfo objectForKey:@"infoId"];
+//            NSLog(@"applicationDidBecomeActive 添加 %d 个本地推送 infoid = %d\n",i+1,[tempInfoId intValue]);
         }
 //        [[UIApplication sharedApplication] cancelAllLocalNotifications];
         if (newarry.count>0)
@@ -244,8 +244,8 @@
             {
                 UILocalNotification *notif = [newarry objectAtIndex:i];
                 [[UIApplication sharedApplication] scheduleLocalNotification:notif];
-                NSNumber *tempInfoId = [notif.userInfo objectForKey:@"infoId"];
-                NSLog(@"applicationDidBecomeActive 发送 %d 个本地推送 infoid = %d\n",i+1,[tempInfoId intValue]);
+//                NSNumber *tempInfoId = [notif.userInfo objectForKey:@"infoId"];
+//                NSLog(@"applicationDidBecomeActive 发送 %d 个本地推送 infoid = %d\n",i+1,[tempInfoId intValue]);
             }
         }
     }
