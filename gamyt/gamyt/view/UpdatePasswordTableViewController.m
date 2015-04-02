@@ -16,7 +16,7 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view.
    
-    
+    self.tableView.rowHeight = 44.0f;
     UIView *v = [[UIView alloc] initWithFrame:CGRectZero];
     [self.tableView setTableFooterView:v];
     

@@ -25,7 +25,9 @@ NSString * const segmentBarItemID = @"JYSegmentBarItem";
 @end
 
 
-@implementation JYSegmentBarItem
+@implementation JYSegmentBarItem{
+    BOOL scrollLeftOrRight;
+}
 
 - (id)initWithFrame:(CGRect)frame
 {

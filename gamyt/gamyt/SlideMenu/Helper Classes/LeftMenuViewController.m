@@ -7,11 +7,11 @@
 //
 
 #import "LeftMenuViewController.h"
-#import "SlideNavigationContorllerAnimatorFade.h"
-#import "SlideNavigationContorllerAnimatorSlide.h"
-#import "SlideNavigationContorllerAnimatorScale.h"
-#import "SlideNavigationContorllerAnimatorScaleAndFade.h"
-#import "SlideNavigationContorllerAnimatorSlideAndFade.h"
+//#import "SlideNavigationContorllerAnimatorFade.h"
+//#import "SlideNavigationContorllerAnimatorSlide.h"
+//#import "SlideNavigationContorllerAnimatorScale.h"
+//#import "SlideNavigationContorllerAnimatorScaleAndFade.h"
+//#import "SlideNavigationContorllerAnimatorSlideAndFade.h"
 #import "HomeViewController.h"
 #import "InfoViewController.h"
 #import "LeftMenuCell.h"
@@ -21,23 +21,25 @@
 #import "CheckInfoViewController.h"
 
 @implementation LeftMenuViewController{
-    
-   
     UILabel *unreadlabel;
     UIImageView *unreadImage;
+    NSInteger selectedIndex;
 }
 
 #pragma mark - UIViewController Methods -
 
-- (id)initWithCoder:(NSCoder *)aDecoder
-{
-	self.slideOutAnimationEnabled = NO;
-	return [super initWithCoder:aDecoder];
-}
+//- (id)initWithCoder:(NSCoder *)aDecoder
+//{
+//	self.slideOutAnimationEnabled = NO;
+//	return [super initWithCoder:aDecoder];
+//}
 
 - (void)viewDidLoad
 {
 	[super viewDidLoad];
+//    if (CURRENT_SYSTEM_VERSION > 6.0){
+//        self.automaticallyAdjustsScrollViewInsets = NO;
+//    }
 //	self.tableView.separatorColor = [UIColor lightGrayColor];
     self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
 	
@@ -61,7 +63,7 @@
 }
 
 -(void)loadData{
-    [SlideNavigationController sharedInstance].selectIndex = 0;
+    selectedIndex = 0;
     NSUserDefaults *userdefaults = [NSUserDefaults standardUserDefaults];
     NSArray *menus = [userdefaults objectForKey:@"menus"];
     self.dataSource = [NSMutableArray arrayWithArray:menus];
@@ -150,11 +152,11 @@
     cell.menuImage.image = [UIImage imageNamed:imagename];
     cell.menuName.text = menuname;
     
-    if ([SlideNavigationController sharedInstance].selectIndex == indexPath.row) {
-        cell.backgroundColor = [UIColor colorWithRed:50/255.0 green:60/255.0 blue:90/255.0 alpha:1];
-    }else{
-        cell.backgroundColor = [UIColor clearColor];
-    }
+//    if (selectedIndex == indexPath.row) {
+//        cell.backgroundColor = [UIColor colorWithRed:50/255.0 green:60/255.0 blue:90/255.0 alpha:1];
+//    }else{
+//        cell.backgroundColor = [UIColor clearColor];
+//    }
 //    cell.unreadLabel.layer.cornerRadius = 10;
 //    cell.unreadLabel.layer.masksToBounds = YES;
 //    cell.unreadLabel.layer.borderWidth = 1.0f;
@@ -167,135 +169,135 @@
         unreadImage = cell.unreadImage;
 //        [self setupUnreadMessageCount:1];
     }
-    
+//    cell.selectionStyle = UITableViewCellSelectionStyleNone;
     
     
     
 	return cell;
 }
 
-- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    NSIndexPath *lastIndexPaht = [NSIndexPath indexPathForItem:[SlideNavigationController sharedInstance].selectIndex inSection:0];
-    
-    UITableViewCell *cell = [tableView cellForRowAtIndexPath:lastIndexPaht];
-    cell.backgroundColor = [UIColor clearColor];
-    [SlideNavigationController sharedInstance].selectIndex = indexPath.row;
-	UIStoryboard *mainStoryboard = [self storyboard];
-	UIViewController *vc ;
-    NSDictionary *info = [self.dataSource objectAtIndex:indexPath.row];
-    NSString *vcname = [info objectForKey:@"vcname"];
-    vc = [mainStoryboard instantiateViewControllerWithIdentifier: vcname];
-    
-    if ([vcname isEqualToString:@"HomeViewController"]) {//下级上报
-        
-            InfoViewController *info1 = [[self storyboard] instantiateViewControllerWithIdentifier: @"InfoViewController"];
-            info1.title = @"全部";
-            
-            InfoViewController *info2 = [[self storyboard] instantiateViewControllerWithIdentifier: @"InfoViewController"];
-            info2.title = @"未处理";
-            info2.opttype = @"-1";
-            
-            InfoViewController *info3 = [[self storyboard] instantiateViewControllerWithIdentifier: @"InfoViewController"];
-            info3.title = @"已归档";
-            info3.opttype = @"1";
-            
-            InfoViewController *info4 = [[self storyboard] instantiateViewControllerWithIdentifier: @"InfoViewController"];
-            info4.title = @"已上报";
-            info4.opttype = @"3";
-            
-            InfoViewController *info5 = [[self storyboard] instantiateViewControllerWithIdentifier: @"InfoViewController"];
-            info5.title = @"已录用";
-            info5.opttype = @"5";
-            
-            NSMutableArray *vcs = [NSMutableArray array];
-            NSUserDefaults *userdefaults = [NSUserDefaults standardUserDefaults];
-            NSNumber *type = [userdefaults objectForKey:@"type"];
-            switch ([type integerValue]) {
-                case MANAGER://管理员(全部.未处理,已归档,已上报)
-                    [vcs addObjectsFromArray:@[info1,info2,info3,info4]];
-                    break;
-                case COUNTY_MANAGER://省管理员
-                case CITY_MANAGER://市管理员
-                case SHENG_MANAGER://县管理员
-                    //(全部,未处理,已归档,已上报,已录用)
-                    [vcs addObjectsFromArray:@[info1,info2,info3,info4,info5]];
-                    break;
-                case SMANAGER:
-                    //超级管理员(全部,未处理,已归档)
-                    [vcs addObjectsFromArray:@[info1,info2,info3]];
-                    break;
-                default:
-                    break;
-            }
-            HomeViewController *vc2 = [[HomeViewController alloc] initWithViewControllers:vcs];
-            vc2.title = @"下级上报";
-            vc2.indicatorInsets = UIEdgeInsetsMake(0, 0, 8, 0);
-            vc2.indicator.backgroundColor = [UIColor colorWithRed:72/255.0 green:147/255.0 blue:219/255.0 alpha:1];
-        
-        [[SlideNavigationController sharedInstance] popToRootAndSwitchToViewController:vc2
-                                                                 withSlideOutAnimation:self.slideOutAnimationEnabled
-                                                                         andCompletion:nil];
-    }else if([vcname isEqualToString:@"MyNoticeViewController"]){//我的公告
-        
-            NoticeViewController *notice1 = [[self storyboard] instantiateViewControllerWithIdentifier: @"NoticeViewController"];
-            notice1.title = @"发送的公告";
-            notice1.url = @"/mobile/notice/getNoticeHistory";
-            notice1.type = @"1";
-            
-            NoticeViewController *notice2 = [[self storyboard] instantiateViewControllerWithIdentifier: @"NoticeViewController"];
-            notice2.title = @"接受的公告";
-            notice2.url = @"/mobile/notice/getReceiveNotice";
-            notice2.type = @"2";
-            NSUserDefaults *userdefaults = [NSUserDefaults standardUserDefaults];
-            NSNumber *type = [userdefaults objectForKey:@"type"];
-            NSMutableArray *arr = [NSMutableArray array];
-            switch ([type integerValue]) {
-                case MANAGER:
-                case COUNTY_MANAGER:
-                case CITY_MANAGER:
-                case SHENG_MANAGER:
-                case SMANAGER:
-                    [arr addObjectsFromArray:@[notice1,notice2]];
-                    break;
-                default:
-                    [arr addObjectsFromArray:@[notice2]];
-                    break;
-            }
-            
-            MyNoticeViewController *mynotice = [[MyNoticeViewController alloc] initWithViewControllers:arr];
-            mynotice.title = @"我的公告";
-            mynotice.indicatorInsets = UIEdgeInsetsMake(0, 0, 8, 0);
-            mynotice.indicator.backgroundColor = [UIColor colorWithRed:72/255.0 green:147/255.0 blue:219/255.0 alpha:1];
-        
-        [[SlideNavigationController sharedInstance] popToRootAndSwitchToViewController:mynotice
-                                                                 withSlideOutAnimation:self.slideOutAnimationEnabled
-                                                                         andCompletion:nil];
-    }else if([vcname isEqualToString:@"CheckInfoViewController"]){//审阅信息
-        SignReportTableViewController *vc1 = [[self storyboard] instantiateViewControllerWithIdentifier: @"SignReportTableViewController"];
-        vc1.title = @"待审阅信息";
-        vc1.type = @"1";
-        SignReportTableViewController *vc2 = [[self storyboard] instantiateViewControllerWithIdentifier: @"SignReportTableViewController"];
-        vc2.title = @"已审阅信息";
-        vc2.type = @"2";
-        CheckInfoViewController *vc = [[CheckInfoViewController alloc] initWithViewControllers:@[vc1,vc2]];
-        vc.title = @"审阅信息";
-        vc.indicatorInsets = UIEdgeInsetsMake(0, 0, 8, 0);
-        vc.indicator.backgroundColor = [UIColor colorWithRed:72/255.0 green:147/255.0 blue:219/255.0 alpha:1];
-        [[SlideNavigationController sharedInstance] popToRootAndSwitchToViewController:vc
-                                                                 withSlideOutAnimation:self.slideOutAnimationEnabled
-                                                                         andCompletion:nil];
-    }else{
-        [[SlideNavigationController sharedInstance] popToRootAndSwitchToViewController:vc
-                                                                 withSlideOutAnimation:self.slideOutAnimationEnabled
-                                                                         andCompletion:nil];
-    }
-}
+//- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+//{
+//    NSIndexPath *lastIndexPaht = [NSIndexPath indexPathForItem:[SlideNavigationController sharedInstance].selectIndex inSection:0];
+//    
+//    UITableViewCell *cell = [tableView cellForRowAtIndexPath:lastIndexPaht];
+//    cell.backgroundColor = [UIColor clearColor];
+//    [SlideNavigationController sharedInstance].selectIndex = indexPath.row;
+//	UIStoryboard *mainStoryboard = [self storyboard];
+//	UIViewController *vc ;
+//    NSDictionary *info = [self.dataSource objectAtIndex:indexPath.row];
+//    NSString *vcname = [info objectForKey:@"vcname"];
+//    vc = [mainStoryboard instantiateViewControllerWithIdentifier: vcname];
+//    
+//    if ([vcname isEqualToString:@"HomeViewController"]) {//下级上报
+//        
+//            InfoViewController *info1 = [[self storyboard] instantiateViewControllerWithIdentifier: @"InfoViewController"];
+//            info1.title = @"全部";
+//            
+//            InfoViewController *info2 = [[self storyboard] instantiateViewControllerWithIdentifier: @"InfoViewController"];
+//            info2.title = @"未处理";
+//            info2.opttype = @"-1";
+//            
+//            InfoViewController *info3 = [[self storyboard] instantiateViewControllerWithIdentifier: @"InfoViewController"];
+//            info3.title = @"已归档";
+//            info3.opttype = @"1";
+//            
+//            InfoViewController *info4 = [[self storyboard] instantiateViewControllerWithIdentifier: @"InfoViewController"];
+//            info4.title = @"已上报";
+//            info4.opttype = @"3";
+//            
+//            InfoViewController *info5 = [[self storyboard] instantiateViewControllerWithIdentifier: @"InfoViewController"];
+//            info5.title = @"已录用";
+//            info5.opttype = @"5";
+//            
+//            NSMutableArray *vcs = [NSMutableArray array];
+//            NSUserDefaults *userdefaults = [NSUserDefaults standardUserDefaults];
+//            NSNumber *type = [userdefaults objectForKey:@"type"];
+//            switch ([type integerValue]) {
+//                case MANAGER://管理员(全部.未处理,已归档,已上报)
+//                    [vcs addObjectsFromArray:@[info1,info2,info3,info4]];
+//                    break;
+//                case COUNTY_MANAGER://省管理员
+//                case CITY_MANAGER://市管理员
+//                case SHENG_MANAGER://县管理员
+//                    //(全部,未处理,已归档,已上报,已录用)
+//                    [vcs addObjectsFromArray:@[info1,info2,info3,info4,info5]];
+//                    break;
+//                case SMANAGER:
+//                    //超级管理员(全部,未处理,已归档)
+//                    [vcs addObjectsFromArray:@[info1,info2,info3]];
+//                    break;
+//                default:
+//                    break;
+//            }
+//            HomeViewController *vc2 = [[HomeViewController alloc] initWithViewControllers:vcs];
+//            vc2.title = @"下级上报";
+//            vc2.indicatorInsets = UIEdgeInsetsMake(0, 0, 8, 0);
+//            vc2.indicator.backgroundColor = [UIColor colorWithRed:72/255.0 green:147/255.0 blue:219/255.0 alpha:1];
+//        
+//        [[SlideNavigationController sharedInstance] popToRootAndSwitchToViewController:vc2
+//                                                                 withSlideOutAnimation:self.slideOutAnimationEnabled
+//                                                                         andCompletion:nil];
+//    }else if([vcname isEqualToString:@"MyNoticeViewController"]){//我的公告
+//        
+//            NoticeViewController *notice1 = [[self storyboard] instantiateViewControllerWithIdentifier: @"NoticeViewController"];
+//            notice1.title = @"发送的公告";
+//            notice1.url = @"/mobile/notice/getNoticeHistory";
+//            notice1.type = @"1";
+//            
+//            NoticeViewController *notice2 = [[self storyboard] instantiateViewControllerWithIdentifier: @"NoticeViewController"];
+//            notice2.title = @"接受的公告";
+//            notice2.url = @"/mobile/notice/getReceiveNotice";
+//            notice2.type = @"2";
+//            NSUserDefaults *userdefaults = [NSUserDefaults standardUserDefaults];
+//            NSNumber *type = [userdefaults objectForKey:@"type"];
+//            NSMutableArray *arr = [NSMutableArray array];
+//            switch ([type integerValue]) {
+//                case MANAGER:
+//                case COUNTY_MANAGER:
+//                case CITY_MANAGER:
+//                case SHENG_MANAGER:
+//                case SMANAGER:
+//                    [arr addObjectsFromArray:@[notice1,notice2]];
+//                    break;
+//                default:
+//                    [arr addObjectsFromArray:@[notice2]];
+//                    break;
+//            }
+//            
+//            MyNoticeViewController *mynotice = [[MyNoticeViewController alloc] initWithViewControllers:arr];
+//            mynotice.title = @"我的公告";
+//            mynotice.indicatorInsets = UIEdgeInsetsMake(0, 0, 8, 0);
+//            mynotice.indicator.backgroundColor = [UIColor colorWithRed:72/255.0 green:147/255.0 blue:219/255.0 alpha:1];
+//        
+//        [[SlideNavigationController sharedInstance] popToRootAndSwitchToViewController:mynotice
+//                                                                 withSlideOutAnimation:self.slideOutAnimationEnabled
+//                                                                         andCompletion:nil];
+//    }else if([vcname isEqualToString:@"CheckInfoViewController"]){//审阅信息
+//        SignReportTableViewController *vc1 = [[self storyboard] instantiateViewControllerWithIdentifier: @"SignReportTableViewController"];
+//        vc1.title = @"待审阅信息";
+//        vc1.type = @"1";
+//        SignReportTableViewController *vc2 = [[self storyboard] instantiateViewControllerWithIdentifier: @"SignReportTableViewController"];
+//        vc2.title = @"已审阅信息";
+//        vc2.type = @"2";
+//        CheckInfoViewController *vc = [[CheckInfoViewController alloc] initWithViewControllers:@[vc1,vc2]];
+//        vc.title = @"审阅信息";
+//        vc.indicatorInsets = UIEdgeInsetsMake(0, 0, 8, 0);
+//        vc.indicator.backgroundColor = [UIColor colorWithRed:72/255.0 green:147/255.0 blue:219/255.0 alpha:1];
+//        [[SlideNavigationController sharedInstance] popToRootAndSwitchToViewController:vc
+//                                                                 withSlideOutAnimation:self.slideOutAnimationEnabled
+//                                                                         andCompletion:nil];
+//    }else{
+//        [[SlideNavigationController sharedInstance] popToRootAndSwitchToViewController:vc
+//                                                                 withSlideOutAnimation:self.slideOutAnimationEnabled
+//                                                                         andCompletion:nil];
+//    }
+//}
 
 //设置未读消息数
 - (void)setupUnreadMessageCount:(NSInteger)unreadCount{
     if (unreadCount > 0) {
-        if (unreadCount < 9) {
+        if (unreadCount <= 9) {
             unreadlabel.font = [UIFont systemFontOfSize:13];
         }else if(unreadCount > 9 && unreadCount < 99){
             unreadlabel.font = [UIFont systemFontOfSize:12];

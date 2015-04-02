@@ -26,8 +26,8 @@
         if ([self.type isEqualToString:@"1"]) {
             [self initData];
         }else if([self.type isEqualToString:@"2"]){
-            NSNumber *readed = [self.info objectForKey:@"readed"];
-            if ([readed boolValue]) {
+            //NSNumber *readed = [self.info objectForKey:@"readed"];
+            if ([self.readed boolValue]) {
                 [self initData];
             }else{
                 [self loadData];

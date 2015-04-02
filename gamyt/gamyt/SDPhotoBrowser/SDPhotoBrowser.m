@@ -207,9 +207,10 @@
     _scrollView.bounds = rect;
     _scrollView.center = self.center;
     
-    CGFloat y = SDPhotoBrowserImageViewMargin;
+    
+    CGFloat y = rect.origin.y;
     CGFloat w = _scrollView.frame.size.width - SDPhotoBrowserImageViewMargin * 2;
-    CGFloat h = _scrollView.frame.size.height - SDPhotoBrowserImageViewMargin * 2;
+    CGFloat h = _scrollView.frame.size.height;
     
     _scrollView.showsHorizontalScrollIndicator = NO;
     _scrollView.showsVerticalScrollIndicator = NO;
@@ -217,6 +218,7 @@
     [_scrollView.subviews enumerateObjectsUsingBlock:^(SDBrowserImageView *obj, NSUInteger idx, BOOL *stop) {
         CGFloat x = SDPhotoBrowserImageViewMargin + idx * (SDPhotoBrowserImageViewMargin * 2 + w);
         obj.frame = CGRectMake(x, y, w, h);
+        [obj setContentMode:UIViewContentModeScaleAspectFit];
     }];
     
     _scrollView.contentSize = CGSizeMake(_scrollView.subviews.count * _scrollView.frame.size.width, 0);
@@ -251,7 +253,7 @@
     CGRect targetTemp = [_scrollView.subviews[self.currentImageIndex] bounds];
     
     tempView.frame = rect;
-    tempView.contentMode = [_scrollView.subviews[self.currentImageIndex] contentMode];
+    tempView.contentMode = UIViewContentModeScaleAspectFit;
     _scrollView.hidden = YES;
     
     

@@ -7,9 +7,9 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "SlideNavigationController.h"
+
 #import "JYSlideSegmentController.h"
 
-@interface CheckInfoViewController : JYSlideSegmentController<SlideNavigationControllerDelegate>
+@interface CheckInfoViewController : JYSlideSegmentController
 
 @end

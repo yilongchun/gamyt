@@ -7,12 +7,12 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "SlideNavigationController.h"
+//#import "SlideNavigationController.h"
 
-@interface LeftMenuViewController : UIViewController <UITableViewDelegate, UITableViewDataSource>
+@interface LeftMenuViewController : UITableViewController
 
-@property (weak, nonatomic) IBOutlet UITableView *tableView;
+//@property (weak, nonatomic) IBOutlet UITableView *tableView;
 @property (nonatomic, strong) NSMutableArray *dataSource;
-@property (nonatomic, assign) BOOL slideOutAnimationEnabled;
+//@property (nonatomic, assign) BOOL slideOutAnimationEnabled;
 
 @end

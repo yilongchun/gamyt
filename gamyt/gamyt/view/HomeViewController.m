@@ -7,7 +7,8 @@
 //
 
 #import "HomeViewController.h"
-#import "LeftMenuViewController.h"
+#import "XDKAirMenuController.h"
+//#import "LeftMenuViewController.h"
 
 
 @implementation HomeViewController
@@ -17,6 +18,14 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    
+    UIImage *image = [UIImage imageNamed:@"menuchange_normal"];
+    UIBarButtonItem *leftItem = [[UIBarButtonItem alloc] initWithImage:image style:UIBarButtonItemStylePlain target:self action:@selector(menuButtonPressed:)];
+    self.navigationItem.leftBarButtonItem = leftItem;
+    
+    
+    
+    
 //    [self.navigationController setNavigationBarHidden:NO];
     
 //    NSLog(@"123");
@@ -81,19 +90,27 @@
 
 }
 
-
-
-#pragma mark - SlideNavigationController Methods -
-
-- (BOOL)slideNavigationControllerShouldDisplayLeftMenu
+- (IBAction)menuButtonPressed:(id)sender
 {
-	return YES;
+    XDKAirMenuController *menu = [XDKAirMenuController sharedInstance];
+    [[NSNotificationCenter defaultCenter] postNotificationName:@"loadUnreadCount" object:self];
+    if (menu.isMenuOpened)
+        [menu closeMenuAnimated];
+    else
+        [menu openMenuAnimated];
 }
 
-- (BOOL)slideNavigationControllerShouldDisplayRightMenu
-{
-	return NO;
-}
+//#pragma mark - SlideNavigationController Methods -
+//
+//- (BOOL)slideNavigationControllerShouldDisplayLeftMenu
+//{
+//	return YES;
+//}
+//
+//- (BOOL)slideNavigationControllerShouldDisplayRightMenu
+//{
+//	return NO;
+//}
 
 
 

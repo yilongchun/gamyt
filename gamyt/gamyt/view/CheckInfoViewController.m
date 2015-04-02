@@ -7,25 +7,27 @@
 //
 
 #import "CheckInfoViewController.h"
+#import "XDKAirMenuController.h"
 
 @implementation CheckInfoViewController
 
 - (void)viewDidLoad{
     [super viewDidLoad];
     
+    UIImage *image = [UIImage imageNamed:@"menuchange_normal"];
+    UIBarButtonItem *leftItem = [[UIBarButtonItem alloc] initWithImage:image style:UIBarButtonItemStylePlain target:self action:@selector(menuButtonPressed:)];
+    self.navigationItem.leftBarButtonItem = leftItem;
 }
 
-
-#pragma mark - SlideNavigationController Methods -
-
-- (BOOL)slideNavigationControllerShouldDisplayLeftMenu
+- (IBAction)menuButtonPressed:(id)sender
 {
-    return YES;
+    XDKAirMenuController *menu = [XDKAirMenuController sharedInstance];
+    [[NSNotificationCenter defaultCenter] postNotificationName:@"loadUnreadCount" object:self];
+    if (menu.isMenuOpened)
+        [menu closeMenuAnimated];
+    else
+        [menu openMenuAnimated];
 }
 
-- (BOOL)slideNavigationControllerShouldDisplayRightMenu
-{
-    return NO;
-}
 
 @end

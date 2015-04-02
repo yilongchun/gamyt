@@ -11,6 +11,9 @@
 #import "UpdatePasswordTableViewController.h"
 #import "QRcodeViewController.h"
 #import "BPush.h"
+#import "XDKAirMenuController.h"
+#import "LoginViewController.h"
+
 
 @implementation SettingViewController{
     NSString *trackViewUrl;
@@ -24,18 +27,21 @@
 //    if (floor(NSFoundationVersionNumber) > NSFoundationVersionNumber_iOS_6_1){
 //        self.automaticallyAdjustsScrollViewInsets = NO;
 //    }
+    UIImage *image = [UIImage imageNamed:@"menuchange_normal"];
+    UIBarButtonItem *leftItem = [[UIBarButtonItem alloc] initWithImage:image style:UIBarButtonItemStylePlain target:self action:@selector(menuButtonPressed:)];
+    self.navigationItem.leftBarButtonItem = leftItem;
+    
+    self.tableView.rowHeight = 44.0f;
 }
 
-#pragma mark - SlideNavigationController Methods -
-
-- (BOOL)slideNavigationControllerShouldDisplayLeftMenu
+- (IBAction)menuButtonPressed:(id)sender
 {
-    return YES;
-}
-
-- (BOOL)slideNavigationControllerShouldDisplayRightMenu
-{
-    return NO;
+    XDKAirMenuController *menu = [XDKAirMenuController sharedInstance];
+    [[NSNotificationCenter defaultCenter] postNotificationName:@"loadUnreadCount" object:self];
+    if (menu.isMenuOpened)
+        [menu closeMenuAnimated];
+    else
+        [menu openMenuAnimated];
 }
 
 #pragma mark - UITableView Delegate & Datasrouce -
@@ -64,11 +70,14 @@
             [alert addAction:[UIAlertAction actionWithTitle:@"退出登录"
                                                       style:UIAlertActionStyleDestructive
                                                     handler:^(UIAlertAction *action) {
+                                                        //退出登陆
                                                         [BPush unbindChannel];
                                                         NSUserDefaults *ud = [NSUserDefaults standardUserDefaults];
                                                         [ud removeObjectForKey:@"isLogin"];
-                                                        //退出登陆
-                                                        [[SlideNavigationController sharedInstance] popToRootViewControllerAnimated:YES];
+                                                        [XDKAirMenuController destroyDealloc];
+                                                        LoginViewController *login = [[UIStoryboard storyboardWithName:@"Main" bundle: nil] instantiateViewControllerWithIdentifier:@"LoginViewController"];
+                                                        UINavigationController *vc = [[UINavigationController alloc] initWithRootViewController:login];
+                                                        self.view.window.rootViewController = vc;
                                                     }]];
             [alert addAction:[UIAlertAction actionWithTitle:@"取消"
                                                       style:UIAlertActionStyleCancel
@@ -89,11 +98,14 @@
 - (void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex{
     if (actionSheet.tag == 100) {
         if (buttonIndex == 0) {
+            [XDKAirMenuController destroyDealloc];
             [BPush unbindChannel];
             NSUserDefaults *ud = [NSUserDefaults standardUserDefaults];
             [ud removeObjectForKey:@"isLogin"];
-            //退出登陆
-            [[SlideNavigationController sharedInstance] popToRootViewControllerAnimated:NO];
+            LoginViewController *login = [[UIStoryboard storyboardWithName:@"Main" bundle: nil] instantiateViewControllerWithIdentifier:@"LoginViewController"];
+            UINavigationController *vc = [[UINavigationController alloc] initWithRootViewController:login];
+            self.view.window.rootViewController = vc;
+            
         }
     }
 }

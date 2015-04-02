@@ -7,10 +7,9 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "SlideNavigationController.h"
 #import <StoreKit/StoreKit.h>
 
-@interface SettingViewController : UITableViewController<SlideNavigationControllerDelegate,UIActionSheetDelegate,UIAlertViewDelegate,SKStoreProductViewControllerDelegate>
+@interface SettingViewController : UITableViewController<UIActionSheetDelegate,UIAlertViewDelegate,SKStoreProductViewControllerDelegate>
 
 
 @end

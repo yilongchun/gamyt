@@ -156,12 +156,12 @@
                 self.tableView.canPullUp = NO;
             }
         }
-        [self.tableView stopLoadWithState:PullDownLoadState];
+        [self.tableView stopLoadWithState:PullUpLoadState];
     }failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         NSLog(@"发生错误！%@",error);
         [self hideHud];
         [self showHint:@"连接失败"];
-        [self.tableView stopLoadWithState:PullDownLoadState];
+        [self.tableView stopLoadWithState:PullUpLoadState];
     }];
     NSOperationQueue *queue = [[NSOperationQueue alloc] init];
     [queue addOperation:operation];
@@ -310,11 +310,22 @@
     NSNumber *readed = [info objectForKey:@"readed"];
     if (![readed boolValue]) {
         [cell.unreadStatus setHidden:YES];
+        [info setValue:[NSNumber numberWithInt:1] forKey:@"readed"];
+//        [self.dataSource removeObjectAtIndex:indexPath.row];
+//        [self.dataSource insertObject:info atIndex:indexPath.row];
+        [self.dataSource replaceObjectAtIndex:indexPath.row withObject:info];
     }
+    
+    
     
     
     NoticeDetailViewController *infoDetail = [[self storyboard] instantiateViewControllerWithIdentifier:@"NoticeDetailViewController"];
     infoDetail.info = info;
+    if ([readed boolValue]) {
+        infoDetail.readed = [NSNumber numberWithInt:1];
+    }else{
+        infoDetail.readed = [NSNumber numberWithInt:0];
+    }
     infoDetail.title = @"公告详情";
     infoDetail.type = self.type;
     [self.navigationController pushViewController:infoDetail animated:YES];

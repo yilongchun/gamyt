@@ -112,6 +112,8 @@
 		E4EB9BDB1AB05C5D003FBC75 /* UIRefreshControl+AFNetworking.m in Sources */ = {isa = PBXBuildFile; fileRef = E4EB9BC91AB05C5D003FBC75 /* UIRefreshControl+AFNetworking.m */; };
 		E4EB9BDC1AB05C5D003FBC75 /* UIWebView+AFNetworking.m in Sources */ = {isa = PBXBuildFile; fileRef = E4EB9BCB1AB05C5D003FBC75 /* UIWebView+AFNetworking.m */; };
 		E4EC1AE01AB86F6A0088C96A /* UserinfoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E4EC1ADF1AB86F6A0088C96A /* UserinfoViewController.m */; };
+		E4EC71801ACABA120026433A /* XDKAirMenuController.m in Sources */ = {isa = PBXBuildFile; fileRef = E4EC717F1ACABA120026433A /* XDKAirMenuController.m */; };
+		E4EC71861ACABE6D0026433A /* MenuViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E4EC71851ACABE6D0026433A /* MenuViewController.m */; };
 		E4EC77A91AA855BF00414B8B /* MBProgressHUD+Add.m in Sources */ = {isa = PBXBuildFile; fileRef = E4EC77A61AA855BF00414B8B /* MBProgressHUD+Add.m */; };
 		E4EC77AA1AA855BF00414B8B /* MBProgressHUD.m in Sources */ = {isa = PBXBuildFile; fileRef = E4EC77A81AA855BF00414B8B /* MBProgressHUD.m */; };
 		E4EC77B81AA8582300414B8B /* NSDate+Category.m in Sources */ = {isa = PBXBuildFile; fileRef = E4EC77AD1AA8582300414B8B /* NSDate+Category.m */; };
@@ -131,7 +133,7 @@
 		E4EFAE751AB7228A0056A92C /* InfoToUpViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E4EFAE741AB7228A0056A92C /* InfoToUpViewController.m */; };
 		E4F02EEF1AA5C5ED00426A88 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = E4F02EEE1AA5C5ED00426A88 /* main.m */; };
 		E4F02EF21AA5C5ED00426A88 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = E4F02EF11AA5C5ED00426A88 /* AppDelegate.m */; };
-		E4F02EF51AA5C5ED00426A88 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E4F02EF41AA5C5ED00426A88 /* ViewController.m */; };
+		E4F02EF51AA5C5ED00426A88 /* LoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E4F02EF41AA5C5ED00426A88 /* LoginViewController.m */; };
 		E4F02EF81AA5C5ED00426A88 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E4F02EF61AA5C5ED00426A88 /* Main.storyboard */; };
 		E4F02EFA1AA5C5ED00426A88 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E4F02EF91AA5C5ED00426A88 /* Images.xcassets */; };
 		E4F02F091AA5C5ED00426A88 /* gamytTests.m in Sources */ = {isa = PBXBuildFile; fileRef = E4F02F081AA5C5ED00426A88 /* gamytTests.m */; };
@@ -369,6 +371,10 @@
 		E4EB9BCB1AB05C5D003FBC75 /* UIWebView+AFNetworking.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIWebView+AFNetworking.m"; sourceTree = "<group>"; };
 		E4EC1ADE1AB86F6A0088C96A /* UserinfoViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UserinfoViewController.h; sourceTree = "<group>"; };
 		E4EC1ADF1AB86F6A0088C96A /* UserinfoViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UserinfoViewController.m; sourceTree = "<group>"; };
+		E4EC717E1ACABA120026433A /* XDKAirMenuController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XDKAirMenuController.h; sourceTree = "<group>"; };
+		E4EC717F1ACABA120026433A /* XDKAirMenuController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XDKAirMenuController.m; sourceTree = "<group>"; };
+		E4EC71841ACABE6D0026433A /* MenuViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MenuViewController.h; sourceTree = "<group>"; };
+		E4EC71851ACABE6D0026433A /* MenuViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MenuViewController.m; sourceTree = "<group>"; };
 		E4EC77A51AA855BF00414B8B /* MBProgressHUD+Add.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "MBProgressHUD+Add.h"; sourceTree = "<group>"; };
 		E4EC77A61AA855BF00414B8B /* MBProgressHUD+Add.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "MBProgressHUD+Add.m"; sourceTree = "<group>"; };
 		E4EC77A71AA855BF00414B8B /* MBProgressHUD.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MBProgressHUD.h; sourceTree = "<group>"; };
@@ -407,8 +413,8 @@
 		E4F02EEE1AA5C5ED00426A88 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = main.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
 		E4F02EF01AA5C5ED00426A88 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		E4F02EF11AA5C5ED00426A88 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
-		E4F02EF31AA5C5ED00426A88 /* ViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
-		E4F02EF41AA5C5ED00426A88 /* ViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
+		E4F02EF31AA5C5ED00426A88 /* LoginViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LoginViewController.h; sourceTree = "<group>"; };
+		E4F02EF41AA5C5ED00426A88 /* LoginViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LoginViewController.m; sourceTree = "<group>"; };
 		E4F02EF71AA5C5ED00426A88 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		E4F02EF91AA5C5ED00426A88 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		E4F02EFC1AA5C5ED00426A88 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/LaunchScreen.xib; sourceTree = "<group>"; };
@@ -791,6 +797,15 @@
 			path = "UIKit+AFNetworking";
 			sourceTree = "<group>";
 		};
+		E4EC717D1ACABA120026433A /* XDKAirMenu */ = {
+			isa = PBXGroup;
+			children = (
+				E4EC717E1ACABA120026433A /* XDKAirMenuController.h */,
+				E4EC717F1ACABA120026433A /* XDKAirMenuController.m */,
+			);
+			path = XDKAirMenu;
+			sourceTree = "<group>";
+		};
 		E4EC77A41AA855BF00414B8B /* MBProgressHUD */ = {
 			isa = PBXGroup;
 			children = (
@@ -851,10 +866,13 @@
 		E4F02EEB1AA5C5ED00426A88 /* gamyt */ = {
 			isa = PBXGroup;
 			children = (
+				E4EC717D1ACABA120026433A /* XDKAirMenu */,
 				E4F02EF01AA5C5ED00426A88 /* AppDelegate.h */,
 				E4F02EF11AA5C5ED00426A88 /* AppDelegate.m */,
-				E4F02EF31AA5C5ED00426A88 /* ViewController.h */,
-				E4F02EF41AA5C5ED00426A88 /* ViewController.m */,
+				E4F02EF31AA5C5ED00426A88 /* LoginViewController.h */,
+				E4F02EF41AA5C5ED00426A88 /* LoginViewController.m */,
+				E4EC71841ACABE6D0026433A /* MenuViewController.h */,
+				E4EC71851ACABE6D0026433A /* MenuViewController.m */,
 				E412B40C1AA9F44C0015B7C1 /* Utils.h */,
 				E412B40D1AA9F44C0015B7C1 /* Utils.m */,
 				E4F02EF61AA5C5ED00426A88 /* Main.storyboard */,
@@ -1156,7 +1174,7 @@
 				E4D6FF391AB9D0AF00F1CAAA /* SDBrowserImageView.m in Sources */,
 				E4D6FEA01AB9C5F600F1CAAA /* IQUIWindow+Hierarchy.m in Sources */,
 				E4421BDA1AC9960800F4A83B /* QRcodeViewController.m in Sources */,
-				E4F02EF51AA5C5ED00426A88 /* ViewController.m in Sources */,
+				E4F02EF51AA5C5ED00426A88 /* LoginViewController.m in Sources */,
 				E412B40E1AA9F44C0015B7C1 /* Utils.m in Sources */,
 				E4F02EF21AA5C5ED00426A88 /* AppDelegate.m in Sources */,
 				E429103E1AB3242700B1B6E9 /* NSArray+MASAdditions.m in Sources */,
@@ -1181,6 +1199,7 @@
 				E4D6FEA11AB9C5F600F1CAAA /* IQKeyboardManager.m in Sources */,
 				E4EC78101AA8AE4C00414B8B /* InfoViewController.m in Sources */,
 				E4BF3BD11ABB318B00BD7004 /* ImageViewController.m in Sources */,
+				E4EC71861ACABE6D0026433A /* MenuViewController.m in Sources */,
 				E4D6FEA41AB9C5F600F1CAAA /* IQTextView.m in Sources */,
 				E4D6FF611AB9D0EB00F1CAAA /* SDWebImageCompat.m in Sources */,
 				E4F02EEF1AA5C5ED00426A88 /* main.m in Sources */,
@@ -1192,6 +1211,7 @@
 				E4D6FEA71AB9C5F600F1CAAA /* IQToolbar.m in Sources */,
 				E4DAB9501AA7742F00C58A8E /* SettingViewController.m in Sources */,
 				E430A21D1AA7443600CFBFC6 /* SlideNavigationContorllerAnimatorScaleAndFade.m in Sources */,
+				E4EC71801ACABA120026433A /* XDKAirMenuController.m in Sources */,
 				E4F3F6E41AC2CC0500B46D78 /* SignReportDetailViewController.m in Sources */,
 				E4ECC4921AADC16F00DADC94 /* InfoTableViewCell.m in Sources */,
 				E4EB9BDA1AB05C5D003FBC75 /* UIProgressView+AFNetworking.m in Sources */,

@@ -14,6 +14,9 @@
 #import "SlideNavigationController.h"
 #import "NoticeDetailViewController.h"
 #import "SignReportDetailViewController.h"
+#import "LoginViewController.h"
+#import "XDKAirMenuController.h"
+#import "MenuViewController.h"
 
 @interface AppDelegate ()<BPushDelegate>
 
@@ -30,6 +33,11 @@
     
 //    [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleLightContent];
     
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(loginStateChange:)
+                                                 name:KNOTIFICATION_LOGINCHANGE
+                                               object:nil];
+    
     application.applicationIconBadgeNumber = 0;
     [[UIApplication sharedApplication] cancelAllLocalNotifications];
     
@@ -37,31 +45,32 @@
         [[UINavigationBar appearance] setBarTintColor:[UIColor colorWithRed:36/255.0 green:102/255.0 blue:171/255.0 alpha:1]];
     }
     
-    UIStoryboard *mainStoryboard = [UIStoryboard storyboardWithName:@"Main"
-                                                             bundle: nil];
+//    UIStoryboard *mainStoryboard = [UIStoryboard storyboardWithName:@"Main"
+//                                                             bundle: nil];
+//    
+//    LeftMenuViewController *leftMenu = (LeftMenuViewController*)[mainStoryboard
+//                                                                 instantiateViewControllerWithIdentifier: @"LeftMenuViewController"];
+//    [SlideNavigationController sharedInstance].leftMenu = leftMenu;
+//    [SlideNavigationController sharedInstance].menuRevealAnimationDuration = .18;
+//    [SlideNavigationController sharedInstance].enableSwipeGesture = NO;
+//    [SlideNavigationController sharedInstance].portraitSlideOffset = [UIScreen mainScreen].bounds.size.width-200;
+//    [[NSNotificationCenter defaultCenter] addObserverForName:SlideNavigationControllerDidClose object:nil queue:nil usingBlock:^(NSNotification *note) {
+//        NSString *menu = note.userInfo[@"menu"];
+//        NSLog(@"Closed %@", menu);
+//    }];
+//    
+//    [[NSNotificationCenter defaultCenter] addObserverForName:SlideNavigationControllerDidOpen object:nil queue:nil usingBlock:^(NSNotification *note) {
+//        NSString *menu = note.userInfo[@"menu"];
+//        NSLog(@"Opened %@", menu);
+//    }];
+//    
+//    [[NSNotificationCenter defaultCenter] addObserverForName:SlideNavigationControllerDidReveal object:nil queue:nil usingBlock:^(NSNotification *note) {
+//        NSString *menu = note.userInfo[@"menu"];
+//        NSLog(@"Revealed %@", menu);
+//        [[NSNotificationCenter defaultCenter] postNotificationName:@"loadUnreadCount" object:self];
+//        
+//    }];
     
-    LeftMenuViewController *leftMenu = (LeftMenuViewController*)[mainStoryboard
-                                                                 instantiateViewControllerWithIdentifier: @"LeftMenuViewController"];
-    [SlideNavigationController sharedInstance].leftMenu = leftMenu;
-    [SlideNavigationController sharedInstance].menuRevealAnimationDuration = .18;
-    [SlideNavigationController sharedInstance].enableSwipeGesture = NO;
-    [SlideNavigationController sharedInstance].portraitSlideOffset = [UIScreen mainScreen].bounds.size.width-200;
-    [[NSNotificationCenter defaultCenter] addObserverForName:SlideNavigationControllerDidClose object:nil queue:nil usingBlock:^(NSNotification *note) {
-        NSString *menu = note.userInfo[@"menu"];
-        NSLog(@"Closed %@", menu);
-    }];
-    
-    [[NSNotificationCenter defaultCenter] addObserverForName:SlideNavigationControllerDidOpen object:nil queue:nil usingBlock:^(NSNotification *note) {
-        NSString *menu = note.userInfo[@"menu"];
-        NSLog(@"Opened %@", menu);
-    }];
-    
-    [[NSNotificationCenter defaultCenter] addObserverForName:SlideNavigationControllerDidReveal object:nil queue:nil usingBlock:^(NSNotification *note) {
-        NSString *menu = note.userInfo[@"menu"];
-        NSLog(@"Revealed %@", menu);
-        [[NSNotificationCenter defaultCenter] postNotificationName:@"loadUnreadCount" object:self];
-        
-    }];
     
     
     //推送
@@ -94,10 +103,25 @@
     if (userInfo) {
         NSLog(@"从消息启动:%@",userInfo);
         [BPush handleNotification:userInfo];
-        [self showAlert:userInfo];
+        
+        [self performSelector:@selector(showAlert:) withObject:userInfo afterDelay:0.5f];
+        
     }
 //    application.applicationIconBadgeNumber = 0;
 //    [[UIApplication sharedApplication] cancelAllLocalNotifications];
+    
+    
+    
+    
+    NSUserDefaults *ud = [NSUserDefaults standardUserDefaults];
+    NSNumber *isLogin = [ud objectForKey:@"isLogin"];
+    BOOL isLoggedIn = [isLogin boolValue];
+    NSString *storyboardId = isLoggedIn ? @"MenuViewController" : @"LoginIdentifier";
+    UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
+    UIViewController *initViewController = [storyboard instantiateViewControllerWithIdentifier:storyboardId];
+    self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
+    self.window.rootViewController = initViewController;
+    [self.window makeKeyAndVisible];
     
     return YES;
 }
@@ -407,8 +431,25 @@
             InfoDetailViewController *infoDetail = [[UIStoryboard storyboardWithName:@"Main"
                                                                               bundle: nil] instantiateViewControllerWithIdentifier:@"InfoDetailViewController"];
             infoDetail.reportid = infoId;
-            [[SlideNavigationController sharedInstance] pushViewController:infoDetail animated:YES];
-            
+            XDKAirMenuController *airmenu;
+            for (int i = 0; i < self.window.rootViewController.childViewControllers.count; i++) {
+                UIViewController *view = self.window.rootViewController.childViewControllers[i];
+                if ([view isKindOfClass:[XDKAirMenuController class]]) {
+                    airmenu = (XDKAirMenuController *)view;
+                    break;
+                }else if([view isKindOfClass:[MenuViewController class]]){
+                    NSLog(@"XDKAirMenuController");
+                    MenuViewController *menu = (MenuViewController *)view;
+                    airmenu = menu.airMenuController;
+                    NSLog(@"%@", menu.airMenuController);
+                    break;
+                }
+            }
+            NSLog(@"%@",self.window.rootViewController.childViewControllers);
+            NSLog(@"%@",airmenu.currentViewController);
+            UINavigationController *nav = (UINavigationController *)airmenu.currentViewController;
+            [nav popToRootViewControllerAnimated:NO];
+            [nav pushViewController:infoDetail animated:YES];
         }
             break;
         case NEW_NOTICE://新的公告
@@ -418,7 +459,25 @@
                                                                               bundle: nil] instantiateViewControllerWithIdentifier:@"NoticeDetailViewController"];
             infoDetail.noticeId = infoId;
             infoDetail.type = @"2";
-            [[SlideNavigationController sharedInstance] pushViewController:infoDetail animated:YES];
+            XDKAirMenuController *airmenu;
+            for (int i = 0; i < self.window.rootViewController.childViewControllers.count; i++) {
+                UIViewController *view = self.window.rootViewController.childViewControllers[i];
+                if ([view isKindOfClass:[XDKAirMenuController class]]) {
+                    airmenu = (XDKAirMenuController *)view;
+                    break;
+                }else if([view isKindOfClass:[MenuViewController class]]){
+                    NSLog(@"XDKAirMenuController");
+                    MenuViewController *menu = (MenuViewController *)view;
+                    airmenu = menu.airMenuController;
+                    NSLog(@"%@", menu.airMenuController);
+                    break;
+                }
+            }
+            NSLog(@"%@",self.window.rootViewController.childViewControllers);
+            NSLog(@"%@",airmenu.currentViewController);
+            UINavigationController *nav = (UINavigationController *)airmenu.currentViewController;
+            [nav popToRootViewControllerAnimated:NO];
+            [nav pushViewController:infoDetail animated:YES];
         }
             break;
         case NEW_TOREAD://新的审阅
@@ -429,7 +488,25 @@
                                                                                 bundle: nil] instantiateViewControllerWithIdentifier:@"SignReportDetailViewController"];
             infoDetail.reportid = infoId;
             infoDetail.type = @"1";
-            [[SlideNavigationController sharedInstance] pushViewController:infoDetail animated:YES];
+            XDKAirMenuController *airmenu;
+            for (int i = 0; i < self.window.rootViewController.childViewControllers.count; i++) {
+                UIViewController *view = self.window.rootViewController.childViewControllers[i];
+                if ([view isKindOfClass:[XDKAirMenuController class]]) {
+                    airmenu = (XDKAirMenuController *)view;
+                    break;
+                }else if([view isKindOfClass:[MenuViewController class]]){
+                    NSLog(@"XDKAirMenuController");
+                    MenuViewController *menu = (MenuViewController *)view;
+                    airmenu = menu.airMenuController;
+                    NSLog(@"%@", menu.airMenuController);
+                    break;
+                }
+            }
+            NSLog(@"%@",self.window.rootViewController.childViewControllers);
+            NSLog(@"%@",airmenu.currentViewController);
+            UINavigationController *nav = (UINavigationController *)airmenu.currentViewController;
+            [nav popToRootViewControllerAnimated:NO];
+            [nav pushViewController:infoDetail animated:YES];
         }
             break;
         case NEW_HIRE://已录用
@@ -452,26 +529,65 @@
 }
 
 - (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex{
-    if (buttonIndex == 1) {
-        switch (alertView.tag) {
-            case NEW_REPORT://新的上报
-                [self performSelector:@selector(toRemoteNotificationView:) withObject:tempUserInfo afterDelay:0.3f];
-                break;
-            case NEW_NOTICE://新的公告
-            {
-                [self performSelector:@selector(toRemoteNotificationView:) withObject:tempUserInfo afterDelay:0.3f];
+    if (alertView.tag == 999) {
+        
+        LoginViewController *login = [[UIStoryboard storyboardWithName:@"Main" bundle: nil] instantiateViewControllerWithIdentifier:@"LoginViewController"];
+        UINavigationController *vc = [[UINavigationController alloc] initWithRootViewController:login];
+        self.window.rootViewController = vc;
+    }else{
+        if (buttonIndex == 1) {
+            switch (alertView.tag) {
+                case NEW_REPORT://新的上报
+                    [self performSelector:@selector(toRemoteNotificationView:) withObject:tempUserInfo afterDelay:0.3f];
+                    break;
+                case NEW_NOTICE://新的公告
+                {
+                    [self performSelector:@selector(toRemoteNotificationView:) withObject:tempUserInfo afterDelay:0.3f];
+                }
+                    break;
+                case NEW_TOREAD://新的审阅
+                {
+                    [self performSelector:@selector(toRemoteNotificationView:) withObject:tempUserInfo afterDelay:0.3f];
+                }
+                    break;
+                default:
+                    break;
             }
-                break;
-            case NEW_TOREAD://新的审阅
-            {
-                [self performSelector:@selector(toRemoteNotificationView:) withObject:tempUserInfo afterDelay:0.3f];
-            }
-                break;
-            default:
-                break;
         }
     }
+    
     flag = NO;
+}
+
+-(void)loginStateChange:(NSNotification *)notification{
+    [XDKAirMenuController destroyDealloc];
+    [BPush unbindChannel];
+    NSUserDefaults *ud = [NSUserDefaults standardUserDefaults];
+    [ud removeObjectForKey:@"isLogin"];
+    
+    if (floor(NSFoundationVersionNumber) > NSFoundationVersionNumber_iOS_7_1){
+        LoginViewController *login = [[UIStoryboard storyboardWithName:@"Main" bundle: nil] instantiateViewControllerWithIdentifier:@"LoginViewController"];
+        UINavigationController *vc = [[UINavigationController alloc] initWithRootViewController:login];
+        self.window.rootViewController = vc;
+        if (!flag) {
+            flag = YES;
+            UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"用户状态出现错误,可能原因如下:" message:@"1.登录状态过期.\n2.账号用其他手机登陆." preferredStyle:UIAlertControllerStyleAlert];
+            [alert addAction:[UIAlertAction actionWithTitle:@"确定"
+                                                      style:UIAlertActionStyleDestructive
+                                                    handler:^(UIAlertAction *action) {
+                                                        flag = NO;
+                                                    }]];
+            [self.window.rootViewController presentViewController:alert animated:YES completion:nil];
+        }
+    }else{
+        if (!flag) {
+            flag = YES;
+            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"用户状态出现错误,可能原因如下:" message:@"1.登录状态过期.\n2.账号用其他手机登陆." delegate:self cancelButtonTitle:nil otherButtonTitles:@"确定", nil];
+            alert.tag = 999;
+            [alert show];
+        }
+        
+    }
 }
 
 - (void)applicationWillResignActive:(UIApplication *)application {

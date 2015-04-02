@@ -7,10 +7,10 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "SlideNavigationController.h"
+//#import "SlideNavigationController.h"
 #import "UIScrollView+PullLoad.h"
 
-@interface MyReportViewController : UIViewController<SlideNavigationControllerDelegate,UITableViewDelegate,UITableViewDataSource,PullDelegate>
+@interface MyReportViewController : UIViewController<UITableViewDelegate,UITableViewDataSource,PullDelegate>
 
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
 @property (nonatomic, strong) NSMutableArray *dataSource;

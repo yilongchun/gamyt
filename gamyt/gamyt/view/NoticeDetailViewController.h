@@ -24,5 +24,6 @@
 @property (weak, nonatomic) IBOutlet UIImageView *img;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *heightLayoutConstraint;
 @property (nonatomic, strong) NSString *type;
+@property (nonatomic, strong) NSNumber *readed;
 
 @end

@@ -8,6 +8,7 @@
 
 #import "MyReportViewController.h"
 #import "MyReportTableViewCell.h"
+#import "XDKAirMenuController.h"
 
 @implementation MyReportViewController{
     NSNumber *count;
@@ -18,6 +19,10 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
+    
+    UIImage *image = [UIImage imageNamed:@"menuchange_normal"];
+    UIBarButtonItem *leftItem = [[UIBarButtonItem alloc] initWithImage:image style:UIBarButtonItemStylePlain target:self action:@selector(menuButtonPressed:)];
+    self.navigationItem.leftBarButtonItem = leftItem;
     
     if (floor(NSFoundationVersionNumber) > NSFoundationVersionNumber_iOS_6_1){
         self.automaticallyAdjustsScrollViewInsets = NO;
@@ -257,18 +262,27 @@
     NSLog(@"PullUpLoadEnd");
 }
 
-
-#pragma mark - SlideNavigationController Methods -
-
-- (BOOL)slideNavigationControllerShouldDisplayLeftMenu
+- (IBAction)menuButtonPressed:(id)sender
 {
-    return YES;
+    XDKAirMenuController *menu = [XDKAirMenuController sharedInstance];
+    [[NSNotificationCenter defaultCenter] postNotificationName:@"loadUnreadCount" object:self];
+    if (menu.isMenuOpened)
+        [menu closeMenuAnimated];
+    else
+        [menu openMenuAnimated];
 }
 
-- (BOOL)slideNavigationControllerShouldDisplayRightMenu
-{
-    return NO;
-}
+//#pragma mark - SlideNavigationController Methods -
+//
+//- (BOOL)slideNavigationControllerShouldDisplayLeftMenu
+//{
+//    return YES;
+//}
+//
+//- (BOOL)slideNavigationControllerShouldDisplayRightMenu
+//{
+//    return NO;
+//}
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
