@@ -399,20 +399,20 @@
             InfoDetailViewController *infoDetail = [[UIStoryboard storyboardWithName:@"Main"
                                                                               bundle: nil] instantiateViewControllerWithIdentifier:@"InfoDetailViewController"];
             infoDetail.reportid = infoId;
-            XDKAirMenuController *airmenu;
-            for (int i = 0; i < self.window.rootViewController.childViewControllers.count; i++) {
-                UIViewController *view = self.window.rootViewController.childViewControllers[i];
-                if ([view isKindOfClass:[XDKAirMenuController class]]) {
-                    airmenu = (XDKAirMenuController *)view;
-                    break;
-                }else if([view isKindOfClass:[MenuViewController class]]){
-//                    NSLog(@"XDKAirMenuController");
-                    MenuViewController *menu = (MenuViewController *)view;
-                    airmenu = menu.airMenuController;
-//                    NSLog(@"%@", menu.airMenuController);
-                    break;
-                }
-            }
+            XDKAirMenuController *airmenu = [XDKAirMenuController sharedInstance];
+//            for (int i = 0; i < self.window.rootViewController.childViewControllers.count; i++) {
+//                UIViewController *view = self.window.rootViewController.childViewControllers[i];
+//                if ([view isKindOfClass:[XDKAirMenuController class]]) {
+//                    airmenu = (XDKAirMenuController *)view;
+//                    break;
+//                }else if([view isKindOfClass:[MenuViewController class]]){
+////                    NSLog(@"XDKAirMenuController");
+//                    MenuViewController *menu = (MenuViewController *)view;
+//                    airmenu = menu.airMenuController;
+////                    NSLog(@"%@", menu.airMenuController);
+//                    break;
+//                }
+//            }
 //            NSLog(@"%@",self.window.rootViewController.childViewControllers);
 //            NSLog(@"%@",airmenu.currentViewController);
             UINavigationController *nav = (UINavigationController *)airmenu.currentViewController;
@@ -427,20 +427,20 @@
                                                                               bundle: nil] instantiateViewControllerWithIdentifier:@"NoticeDetailViewController"];
             infoDetail.noticeId = infoId;
             infoDetail.type = @"2";
-            XDKAirMenuController *airmenu;
-            for (int i = 0; i < self.window.rootViewController.childViewControllers.count; i++) {
-                UIViewController *view = self.window.rootViewController.childViewControllers[i];
-                if ([view isKindOfClass:[XDKAirMenuController class]]) {
-                    airmenu = (XDKAirMenuController *)view;
-                    break;
-                }else if([view isKindOfClass:[MenuViewController class]]){
-//                    NSLog(@"XDKAirMenuController");
-                    MenuViewController *menu = (MenuViewController *)view;
-                    airmenu = menu.airMenuController;
-//                    NSLog(@"%@", menu.airMenuController);
-                    break;
-                }
-            }
+            XDKAirMenuController *airmenu = [XDKAirMenuController sharedInstance];
+//            for (int i = 0; i < self.window.rootViewController.childViewControllers.count; i++) {
+//                UIViewController *view = self.window.rootViewController.childViewControllers[i];
+//                if ([view isKindOfClass:[XDKAirMenuController class]]) {
+//                    airmenu = (XDKAirMenuController *)view;
+//                    break;
+//                }else if([view isKindOfClass:[MenuViewController class]]){
+////                    NSLog(@"XDKAirMenuController");
+//                    MenuViewController *menu = (MenuViewController *)view;
+//                    airmenu = menu.airMenuController;
+////                    NSLog(@"%@", menu.airMenuController);
+//                    break;
+//                }
+//            }
 //            NSLog(@"%@",self.window.rootViewController.childViewControllers);
 //            NSLog(@"%@",airmenu.currentViewController);
             UINavigationController *nav = (UINavigationController *)airmenu.currentViewController;
@@ -456,20 +456,22 @@
                                                                                 bundle: nil] instantiateViewControllerWithIdentifier:@"SignReportDetailViewController"];
             infoDetail.reportid = infoId;
             infoDetail.type = @"1";
-            XDKAirMenuController *airmenu;
-            for (int i = 0; i < self.window.rootViewController.childViewControllers.count; i++) {
-                UIViewController *view = self.window.rootViewController.childViewControllers[i];
-                if ([view isKindOfClass:[XDKAirMenuController class]]) {
-                    airmenu = (XDKAirMenuController *)view;
-                    break;
-                }else if([view isKindOfClass:[MenuViewController class]]){
-//                    NSLog(@"XDKAirMenuController");
-                    MenuViewController *menu = (MenuViewController *)view;
-                    airmenu = menu.airMenuController;
-//                    NSLog(@"%@", menu.airMenuController);
-                    break;
-                }
-            }
+            XDKAirMenuController *airmenu = [XDKAirMenuController sharedInstance];
+            NSLog(@"%@",self.window.rootViewController.childViewControllers);
+//            for (int i = 0; i < self.window.rootViewController.childViewControllers.count; i++) {
+//                
+//                UIViewController *view = self.window.rootViewController.childViewControllers[i];
+//                if ([view isKindOfClass:[XDKAirMenuController class]]) {
+//                    airmenu = (XDKAirMenuController *)view;
+//                    break;
+//                }else if([view isKindOfClass:[MenuViewController class]]){
+////                    NSLog(@"XDKAirMenuController");
+//                    MenuViewController *menu = (MenuViewController *)view;
+//                    airmenu = menu.airMenuController;
+////                    NSLog(@"%@", menu.airMenuController);
+//                    break;
+//                }
+//            }
 //            NSLog(@"%@",self.window.rootViewController.childViewControllers);
 //            NSLog(@"%@",airmenu.currentViewController);
             UINavigationController *nav = (UINavigationController *)airmenu.currentViewController;
