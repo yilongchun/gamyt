@@ -56,7 +56,7 @@
 #warning 上线 AppStore 时需要修改 pushMode
     // 在 App 启动时注册百度云推送服务，需要提供 Apikey
     //正式
-//    [BPush registerChannel:launchOptions apiKey:@"ZUbGFfu96LviK68lNRR1GxPr" BPushModeProduction isDebug:NO];
+//    [BPush registerChannel:launchOptions apiKey:@"ZUbGFfu96LviK68lNRR1GxPr" pushMode:BPushModeProduction isDebug:NO];
     
     //测试
     [BPush registerChannel:launchOptions apiKey:@"XoW4d6oBCmduBq1ISjDclNcl" pushMode:BPushModeDevelopment isDebug:YES];

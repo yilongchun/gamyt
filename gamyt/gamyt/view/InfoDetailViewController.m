@@ -20,6 +20,11 @@
     NSMutableArray *selectedArr;
     
     UITableView *alertTableView;
+    
+    UIButton *btn1;
+    UIButton *btn2;
+    UIButton *btn3;
+    UIButton *btn4;
 }
 
 - (void)viewDidLoad{
@@ -232,60 +237,60 @@
 }
 //设置按钮
 -(void)initButtons{
-    [self.btn1 removeFromSuperview];
-    [self.btn2 removeFromSuperview];
-    [self.btn3 removeFromSuperview];
-    [self.btn4 removeFromSuperview];
+    [btn1 removeFromSuperview];
+    [btn2 removeFromSuperview];
+    [btn3 removeFromSuperview];
+    [btn4 removeFromSuperview];
     
-    self.btn1 = [UIButton buttonWithType:UIButtonTypeCustom];
-    self.btn2 = [UIButton buttonWithType:UIButtonTypeCustom];
-    self.btn3 = [UIButton buttonWithType:UIButtonTypeCustom];
-    self.btn4 = [UIButton buttonWithType:UIButtonTypeCustom];
-    [self.btn1 addTarget:self action:@selector(action1) forControlEvents:UIControlEventTouchUpInside];
-    [self.btn2 addTarget:self action:@selector(action2) forControlEvents:UIControlEventTouchUpInside];
-    [self.btn3 addTarget:self action:@selector(action3) forControlEvents:UIControlEventTouchUpInside];
-    [self.btn4 addTarget:self action:@selector(action4) forControlEvents:UIControlEventTouchUpInside];
-    self.btn1.translatesAutoresizingMaskIntoConstraints = NO;
-    self.btn2.translatesAutoresizingMaskIntoConstraints = NO;
-    self.btn3.translatesAutoresizingMaskIntoConstraints = NO;
-    self.btn4.translatesAutoresizingMaskIntoConstraints = NO;
+    btn1 = [UIButton buttonWithType:UIButtonTypeCustom];
+    btn2 = [UIButton buttonWithType:UIButtonTypeCustom];
+    btn3 = [UIButton buttonWithType:UIButtonTypeCustom];
+    btn4 = [UIButton buttonWithType:UIButtonTypeCustom];
+    [btn1 addTarget:self action:@selector(action1) forControlEvents:UIControlEventTouchUpInside];
+    [btn2 addTarget:self action:@selector(action2) forControlEvents:UIControlEventTouchUpInside];
+    [btn3 addTarget:self action:@selector(action3) forControlEvents:UIControlEventTouchUpInside];
+    [btn4 addTarget:self action:@selector(action4) forControlEvents:UIControlEventTouchUpInside];
+    btn1.translatesAutoresizingMaskIntoConstraints = NO;
+    btn2.translatesAutoresizingMaskIntoConstraints = NO;
+    btn3.translatesAutoresizingMaskIntoConstraints = NO;
+    btn4.translatesAutoresizingMaskIntoConstraints = NO;
     
     UIImage *img1 = [[UIImage imageNamed:@"base_blue_btn_normal"] resizableImageWithCapInsets:UIEdgeInsetsMake(1, 1, 1, 1)];
-    [self.btn1 setBackgroundImage:img1 forState:UIControlStateNormal];
-    [self.btn2 setBackgroundImage:img1 forState:UIControlStateNormal];
-    [self.btn3 setBackgroundImage:img1 forState:UIControlStateNormal];
-    [self.btn4 setBackgroundImage:img1 forState:UIControlStateNormal];
+    [btn1 setBackgroundImage:img1 forState:UIControlStateNormal];
+    [btn2 setBackgroundImage:img1 forState:UIControlStateNormal];
+    [btn3 setBackgroundImage:img1 forState:UIControlStateNormal];
+    [btn4 setBackgroundImage:img1 forState:UIControlStateNormal];
     
     UIImage *img2 = [[UIImage imageNamed:@"base_blue_btn_pressed"] resizableImageWithCapInsets:UIEdgeInsetsMake(1, 1, 1, 1)];
-    [self.btn1 setBackgroundImage:img2 forState:UIControlStateHighlighted];
-    [self.btn2 setBackgroundImage:img2 forState:UIControlStateHighlighted];
-    [self.btn3 setBackgroundImage:img2 forState:UIControlStateHighlighted];
-    [self.btn4 setBackgroundImage:img2 forState:UIControlStateHighlighted];
+    [btn1 setBackgroundImage:img2 forState:UIControlStateHighlighted];
+    [btn2 setBackgroundImage:img2 forState:UIControlStateHighlighted];
+    [btn3 setBackgroundImage:img2 forState:UIControlStateHighlighted];
+    [btn4 setBackgroundImage:img2 forState:UIControlStateHighlighted];
     
     UIImage *imgArrow = [UIImage imageNamed:@"detail_adopt_icon"];
-    [self.btn1 setImage:imgArrow withTitle:@"录用" forState:UIControlStateNormal];
-    [self.btn1 setImage:imgArrow withTitle:@"录用" forState:UIControlStateHighlighted];
+    [btn1 setImage:imgArrow withTitle:@"录用" forState:UIControlStateNormal];
+    [btn1 setImage:imgArrow withTitle:@"录用" forState:UIControlStateHighlighted];
     
     UIImage *imgArrow2 = [UIImage imageNamed:@"detail_toreport_icon"];
-    [self.btn2 setImage:imgArrow2 withTitle:@"上报" forState:UIControlStateNormal];
-    [self.btn2 setImage:imgArrow2 withTitle:@"上报" forState:UIControlStateHighlighted];
+    [btn2 setImage:imgArrow2 withTitle:@"上报" forState:UIControlStateNormal];
+    [btn2 setImage:imgArrow2 withTitle:@"上报" forState:UIControlStateHighlighted];
     
     UIImage *imgArrow3 = [UIImage imageNamed:@"detail_save_icon"];
-    [self.btn3 setImage:imgArrow3 withTitle:@"归档" forState:UIControlStateNormal];
-    [self.btn3 setImage:imgArrow3 withTitle:@"归档" forState:UIControlStateHighlighted];
+    [btn3 setImage:imgArrow3 withTitle:@"归档" forState:UIControlStateNormal];
+    [btn3 setImage:imgArrow3 withTitle:@"归档" forState:UIControlStateHighlighted];
     
     UIImage *imgArrow4 = [UIImage imageNamed:@"detail_toread_icon"];
-    [self.btn4 setImage:imgArrow4 withTitle:@"报审" forState:UIControlStateNormal];
-    [self.btn4 setImage:imgArrow4 withTitle:@"报审" forState:UIControlStateHighlighted];
+    [btn4 setImage:imgArrow4 withTitle:@"报审" forState:UIControlStateNormal];
+    [btn4 setImage:imgArrow4 withTitle:@"报审" forState:UIControlStateHighlighted];
     
-    self.btn1.layer.masksToBounds = YES;
-    self.btn1.layer.cornerRadius = 5.0;
-    self.btn2.layer.masksToBounds = YES;
-    self.btn2.layer.cornerRadius = 5.0;
-    self.btn3.layer.masksToBounds = YES;
-    self.btn3.layer.cornerRadius = 5.0;
-    self.btn4.layer.masksToBounds = YES;
-    self.btn4.layer.cornerRadius = 5.0;
+    btn1.layer.masksToBounds = YES;
+    btn1.layer.cornerRadius = 5.0;
+    btn2.layer.masksToBounds = YES;
+    btn2.layer.cornerRadius = 5.0;
+    btn3.layer.masksToBounds = YES;
+    btn3.layer.cornerRadius = 5.0;
+    btn4.layer.masksToBounds = YES;
+    btn4.layer.cornerRadius = 5.0;
     
     btns = [NSMutableArray array];
     
@@ -301,18 +306,18 @@
             //上报
             NSNumber *reported = [self.info objectForKey:@"reported"];
             if (![reported boolValue]) {
-                [btns addObject:self.btn2];
-                [self.myscrollview addSubview:self.btn2];
+                [btns addObject:btn2];
+                [self.myscrollview addSubview:btn2];
             }
             //归档
             NSNumber *archived = [self.info objectForKey:@"archived"];
             if (![archived boolValue]) {
-                [btns addObject:self.btn3];
-                [self.myscrollview addSubview:self.btn3];
+                [btns addObject:btn3];
+                [self.myscrollview addSubview:btn3];
             }
             //报审
-            [btns addObject:self.btn4];
-            [self.myscrollview addSubview:self.btn4];
+            [btns addObject:btn4];
+            [self.myscrollview addSubview:btn4];
         }
             break;
         case COUNTY_MANAGER://省管理员
@@ -322,24 +327,24 @@
                 //录用
             NSNumber *hireed = [self.info objectForKey:@"hireed"];
             if (![hireed boolValue]) {
-                [btns addObject:self.btn1];
-                [self.myscrollview addSubview:self.btn1];
+                [btns addObject:btn1];
+                [self.myscrollview addSubview:btn1];
             }
             //上报
             NSNumber *reported = [self.info objectForKey:@"reported"];
             if (![reported boolValue]) {
-                [btns addObject:self.btn2];
-                [self.myscrollview addSubview:self.btn2];
+                [btns addObject:btn2];
+                [self.myscrollview addSubview:btn2];
             }
             //归档
             NSNumber *archived = [self.info objectForKey:@"archived"];
             if (![archived boolValue]) {
-                [btns addObject:self.btn3];
-                [self.myscrollview addSubview:self.btn3];
+                [btns addObject:btn3];
+                [self.myscrollview addSubview:btn3];
             }
             //报审
-            [btns addObject:self.btn4];
-            [self.myscrollview addSubview:self.btn4];
+            [btns addObject:btn4];
+            [self.myscrollview addSubview:btn4];
         }
             break;
         case SMANAGER:
@@ -347,8 +352,8 @@
             //归档
             NSNumber *archived = [self.info objectForKey:@"archived"];
             if (![archived boolValue]) {
-                [btns addObject:self.btn3];
-                [self.myscrollview addSubview:self.btn3];
+                [btns addObject:btn3];
+                [self.myscrollview addSubview:btn3];
             }
         }
             break;
