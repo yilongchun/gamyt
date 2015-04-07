@@ -25,7 +25,7 @@
 + (NSString *)getHostname{
     NSString *plistPath = [[NSBundle mainBundle] pathForResource:@"Info" ofType:@"plist"];
     NSMutableDictionary *infolist = [[NSMutableDictionary alloc] initWithContentsOfFile:plistPath];
-    NSString *hostname = [infolist objectForKey:@"httpurl"];
+    NSString *hostname = [infolist objectForKey:@"httpurl3"];
     return hostname;
 }
 
