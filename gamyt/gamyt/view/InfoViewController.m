@@ -191,7 +191,7 @@
         paragraphStyle.lineBreakMode = NSLineBreakByWordWrapping;
         NSDictionary *attributes = @{NSFontAttributeName:font, NSParagraphStyleAttributeName:paragraphStyle.copy};
         NSStringDrawingOptions options = NSStringDrawingUsesLineFragmentOrigin;
-        textSize = [content boundingRectWithSize:CGSizeMake(contentWidth-28, MAXFLOAT)
+        textSize = [content boundingRectWithSize:CGSizeMake(contentWidth-22, MAXFLOAT)
                                              options:options
                                           attributes:attributes
                                              context:nil].size;
@@ -199,7 +199,7 @@
 #pragma clang diagnostic push
 #pragma clang diagnostic ignored "-Wdeprecated-declarations"
         textSize = [content sizeWithFont:font
-                           constrainedToSize:CGSizeMake(contentWidth-28, MAXFLOAT)
+                           constrainedToSize:CGSizeMake(contentWidth-22, MAXFLOAT)
                                lineBreakMode:NSLineBreakByWordWrapping];
 #pragma clang diagnostic pop
 
@@ -212,13 +212,19 @@
     InfoTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"infocell"];
 
     //设置layer
-    CALayer *layer=[cell.background layer];
-    //是否设置边框以及是否可见
-    [layer setMasksToBounds:YES];
-    //设置边框线的宽
-    [layer setBorderWidth:1];
-    //设置边框线的颜色
-    [layer setBorderColor:[[UIColor colorWithRed:200/255.0 green:200/255.0 blue:200/255.0 alpha:1] CGColor]];
+//    CALayer *layer=[cell.background layer];
+//    //是否设置边框以及是否可见
+//    [layer setMasksToBounds:YES];
+//    //设置边框线的宽
+//    [layer setBorderWidth:0.1f];
+//    //设置边框线的颜色
+//    [layer setBorderColor:[[UIColor colorWithRed:200/255.0 green:200/255.0 blue:200/255.0 alpha:1] CGColor]];
+    
+//    layer.shadowColor = [UIColor lightGrayColor].CGColor;//shadowColor阴影颜色
+//    layer.shadowOffset = CGSizeMake(0,1);//shadowOffset阴影偏移,x向右偏移4，y向下偏移4，默认(0, -3),这个跟shadowRadius配合使用
+//    layer.shadowOpacity = 0.2;//阴影透明度，默认0
+//    layer.shadowRadius = 1;//阴影半径，默认3
+    
     
     
     NSDictionary *info = [self.dataSource objectAtIndex:indexPath.row];
@@ -227,7 +233,9 @@
     NSString *addtime = [info objectForKey:@"addtime"];
     NSNumber *opttype = [info objectForKey:@"opttype"];
     NSString *content = [info objectForKey:@"content"];
-    
+    NSString *sendpic = [info objectForKey:@"sendpic"];//照片
+    NSString *imagePath = [NSString stringWithFormat:@"%@%@%@",[Utils getHostname],IMAGE_PATH,sendpic];
+    [cell.userimage setImageWithURL:[NSURL URLWithString:imagePath] placeholderImage:[UIImage imageNamed:@"defalut_photo"]];
     if ([opttype intValue] == -1) {
         cell.opttypename.textColor = [UIColor colorWithRed:56/255.0 green:143/255.0 blue:219/255.0 alpha:1];
     }else{
@@ -263,7 +271,7 @@
         paragraphStyle.lineBreakMode = NSLineBreakByWordWrapping;
         NSDictionary *attributes = @{NSFontAttributeName:font, NSParagraphStyleAttributeName:paragraphStyle.copy};
         NSStringDrawingOptions options = NSStringDrawingUsesLineFragmentOrigin;
-        textSize = [content boundingRectWithSize:CGSizeMake(contentWidth-28, MAXFLOAT)
+        textSize = [content boundingRectWithSize:CGSizeMake(contentWidth-22, MAXFLOAT)
                                          options:options
                                       attributes:attributes
                                          context:nil].size;
@@ -271,7 +279,7 @@
 #pragma clang diagnostic push
 #pragma clang diagnostic ignored "-Wdeprecated-declarations"
         textSize = [content sizeWithFont:font
-                       constrainedToSize:CGSizeMake(contentWidth-28, MAXFLOAT)
+                       constrainedToSize:CGSizeMake(contentWidth-22, MAXFLOAT)
                            lineBreakMode:NSLineBreakByWordWrapping];
 #pragma clang diagnostic pop
         
@@ -281,6 +289,8 @@
     UIView *view_bg = [[UIView alloc]initWithFrame:cell.content.frame];
     view_bg.backgroundColor = [UIColor clearColor];
     cell.selectedBackgroundView = view_bg;
+    
+    
     
     return cell;
 }

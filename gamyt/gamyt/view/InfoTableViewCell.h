@@ -16,5 +16,6 @@
 @property (weak, nonatomic) IBOutlet UILabel *opttypename;
 @property (weak, nonatomic) IBOutlet UILabel *content;
 @property (weak, nonatomic) IBOutlet UIImageView *haveimg;
+@property (weak, nonatomic) IBOutlet UIImageView *userimage;
 
 @end

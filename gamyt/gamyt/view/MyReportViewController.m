@@ -191,7 +191,7 @@
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
-    return 64;
+    return 60;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -199,14 +199,17 @@
     MyReportTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"myreportcell"];
     
     //设置layer
-    CALayer *layer=[cell.background layer];
-    //是否设置边框以及是否可见
-    [layer setMasksToBounds:YES];
-    //设置边框线的宽
-    [layer setBorderWidth:1];
-    //设置边框线的颜色
-    [layer setBorderColor:[[UIColor colorWithRed:200/255.0 green:200/255.0 blue:200/255.0 alpha:1] CGColor]];
-    
+//    CALayer *layer=[cell.background layer];
+//    //是否设置边框以及是否可见
+//    [layer setMasksToBounds:YES];
+//    //设置边框线的宽
+//    [layer setBorderWidth:0.3f];
+//    //设置边框线的颜色
+//    [layer setBorderColor:[[UIColor colorWithRed:200/255.0 green:200/255.0 blue:200/255.0 alpha:1] CGColor]];
+//    layer.shadowColor = [UIColor lightGrayColor].CGColor;//shadowColor阴影颜色
+//    layer.shadowOffset = CGSizeMake(0,1);//shadowOffset阴影偏移,x向右偏移4，y向下偏移4，默认(0, -3),这个跟shadowRadius配合使用
+//    layer.shadowOpacity = 0.2;//阴影透明度，默认0
+//    layer.shadowRadius = 1;//阴影半径，默认3
     
     NSDictionary *info = [self.dataSource objectAtIndex:indexPath.row];
     info = [NSDictionary cleanNullForDic:info];
