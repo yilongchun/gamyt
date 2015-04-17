@@ -15,5 +15,6 @@
 @property (weak, nonatomic) IBOutlet UILabel *content;
 @property (weak, nonatomic) IBOutlet UIView *backview;
 @property (weak, nonatomic) IBOutlet UIImageView *unreadStatus;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *unreadStatusWidth;
 @property (weak, nonatomic) IBOutlet UIImageView *haveimg;
 @end

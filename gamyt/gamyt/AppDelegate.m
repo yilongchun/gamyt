@@ -55,11 +55,18 @@
     
 #warning 上线 AppStore 时需要修改 pushMode
     // 在 App 启动时注册百度云推送服务，需要提供 Apikey
-    //正式
-//    [BPush registerChannel:launchOptions apiKey:@"ZUbGFfu96LviK68lNRR1GxPr" pushMode:BPushModeProduction isDebug:NO];
     
-    //测试
-    [BPush registerChannel:launchOptions apiKey:@"XoW4d6oBCmduBq1ISjDclNcl" pushMode:BPushModeDevelopment isDebug:YES];
+    //	宜昌公安正式版
+    //[BPush registerChannel:launchOptions apiKey:@"ZUbGFfu96LviK68lNRR1GxPr" pushMode:BPushModeProduction isDebug:NO];
+    
+    //	宜昌公安测试版
+    //[BPush registerChannel:launchOptions apiKey:@"XoW4d6oBCmduBq1ISjDclNcl" pushMode:BPushModeDevelopment isDebug:YES];
+    
+    //	湖北公安正式版
+    //[BPush registerChannel:launchOptions apiKey:@"FWjKrSGtsbTF5PDrzdP1L9mt" pushMode:BPushModeProduction isDebug:NO];
+    
+    //  湖北公安测试版
+    [BPush registerChannel:launchOptions apiKey:@"wiPEQc8HdGflvhs6KuTPamen" pushMode:BPushModeDevelopment isDebug:YES];
     
     //    [BPush setupChannel:launchOptions];
     

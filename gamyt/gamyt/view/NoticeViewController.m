@@ -240,6 +240,7 @@
         [df setDateFormat:@"yyyy-MM-dd HH:mm:ss"];
         NSString *date = [df stringFromDate:confromTimesp];
         cell.date.text = [NSString stringWithFormat:@"%@",date];
+//        cell.unreadStatusWidth = 0;
     }else if ([self.type isEqualToString:@"2"]) {
         NSNumber *readed = [info objectForKey:@"readed"];
         [cell.unreadStatus setHidden:[readed boolValue]];

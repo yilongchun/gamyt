@@ -23,10 +23,10 @@
 }
 
 + (NSString *)getHostname{
-    NSString *plistPath = [[NSBundle mainBundle] pathForResource:@"Info" ofType:@"plist"];
-    NSMutableDictionary *infolist = [[NSMutableDictionary alloc] initWithContentsOfFile:plistPath];
-    NSString *hostname = [infolist objectForKey:@"httpurl3"];
-    return hostname;
+//    NSString *plistPath = [[NSBundle mainBundle] pathForResource:@"Info" ofType:@"plist"];
+//    NSMutableDictionary *infolist = [[NSMutableDictionary alloc] initWithContentsOfFile:plistPath];
+//    NSString *hostname = [infolist objectForKey:@"httpurl"];
+    return HOST_NAME;
 }
 
 + (NSString *)getOptTypeName:(NSNumber *)opttype{
