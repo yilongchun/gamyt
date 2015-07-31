@@ -41,7 +41,7 @@
 
 - (void)textViewDidChange:(UITextView *)textView{
     if (textView.text.length <= 200) {
-        NSString *s = [NSString stringWithFormat:@"最多能输入%lu个字符",200 - textView.text.length];
+        NSString *s = [NSString stringWithFormat:@"最多能输入%d个字符",(int)(200 - textView.text.length)];
         self.textnumberLabel.text = s;
     }
     
@@ -110,8 +110,6 @@
             [self hideHud];
             [self showHint:@"新增成功"];
             [self performSelector:@selector(back) withObject:self afterDelay:1.0f];
-            
-            
         }
     }failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         NSLog(@"发生错误！%@",error);

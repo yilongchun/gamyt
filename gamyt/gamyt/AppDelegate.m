@@ -17,7 +17,7 @@
 #import "XDKAirMenuController.h"
 #import "MenuViewController.h"
 
-@interface AppDelegate ()<BPushDelegate>
+@interface AppDelegate ()
 
 @end
 
@@ -57,21 +57,19 @@
     // 在 App 启动时注册百度云推送服务，需要提供 Apikey
     
     //	宜昌公安正式版
-    //[BPush registerChannel:launchOptions apiKey:@"ZUbGFfu96LviK68lNRR1GxPr" pushMode:BPushModeProduction isDebug:NO];
+//    [BPush registerChannel:launchOptions apiKey:BAIDU_APIKEY pushMode:BPushModeProduction isDebug:NO];
     
     //	宜昌公安测试版
-    //[BPush registerChannel:launchOptions apiKey:@"XoW4d6oBCmduBq1ISjDclNcl" pushMode:BPushModeDevelopment isDebug:YES];
+//    [BPush registerChannel:launchOptions apiKey:@"XoW4d6oBCmduBq1ISjDclNcl" pushMode:BPushModeDevelopment isDebug:YES];
     
     //	湖北公安正式版
-    //[BPush registerChannel:launchOptions apiKey:@"FWjKrSGtsbTF5PDrzdP1L9mt" pushMode:BPushModeProduction isDebug:NO];
+//    [BPush registerChannel:launchOptions apiKey:@"FWjKrSGtsbTF5PDrzdP1L9mt" pushMode:BPushModeProduction isDebug:NO];
     
     //  湖北公安测试版
-    [BPush registerChannel:launchOptions apiKey:@"wiPEQc8HdGflvhs6KuTPamen" pushMode:BPushModeDevelopment isDebug:YES];
+//    [BPush registerChannel:launchOptions apiKey:@"wiPEQc8HdGflvhs6KuTPamen" pushMode:BPushModeDevelopment isDebug:YES];
     
-    //    [BPush setupChannel:launchOptions];
-    
-    // 设置 BPush 的回调
-    [BPush setDelegate:self];
+    //中软
+    [BPush registerChannel:launchOptions apiKey:BAIDU_APIKEY pushMode:BPushModeProduction withFirstAction:nil withSecondAction:nil withCategory:nil isDebug:NO];
     
     // App 是用户点击推送消息启动
     NSDictionary *userInfo = [launchOptions objectForKey:UIApplicationLaunchOptionsRemoteNotificationKey];
@@ -111,7 +109,9 @@
 //    NSString *deviceId = [[NSString alloc] initWithData:deviceToken encoding:NSUTF8StringEncoding];
     
     [BPush registerDeviceToken:deviceToken];
-    [BPush bindChannel];
+    [BPush bindChannelWithCompleteHandler:^(id result, NSError *error) {
+        
+    }];
 }
 
 // 当 DeviceToken 获取失败时，系统会回调此方法
@@ -540,7 +540,9 @@
 -(void)loginStateChange:(NSNotification *)notification{
     //遇到账号在其他设备登录 先销毁左侧菜单 再解绑推送 去掉登录信息
     [XDKAirMenuController destroyDealloc];
-    [BPush unbindChannel];
+    [BPush unbindChannelWithCompleteHandler:^(id result, NSError *error) {
+        
+    }];
     NSUserDefaults *ud = [NSUserDefaults standardUserDefaults];
     [ud removeObjectForKey:@"isLogin"];
     

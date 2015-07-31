@@ -104,7 +104,9 @@
 
 -(void)logout{
     [XDKAirMenuController destroyDealloc];
-    [BPush unbindChannel];
+    [BPush unbindChannelWithCompleteHandler:^(id result, NSError *error) {
+        
+    }];
     NSUserDefaults *ud = [NSUserDefaults standardUserDefaults];
     [ud removeObjectForKey:@"isLogin"];
     NSArray *views = self.view.window.rootViewController.childViewControllers;

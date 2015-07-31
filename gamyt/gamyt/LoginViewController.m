@@ -173,7 +173,9 @@
 
 -(void)bindChannel{
     if (!SIMULATOR) {
-        [BPush bindChannel];
+        [BPush bindChannelWithCompleteHandler:^(id result, NSError *error) {
+            
+        }];
         
         NSString *str = [NSString stringWithFormat:@"%@%@",[Utils getHostname],@"/mobile/user/updatePushInfo"];
         NSURL *url = [NSURL URLWithString:[str stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding]];
