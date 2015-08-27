@@ -68,7 +68,9 @@
     //  湖北公安测试版
 //    [BPush registerChannel:launchOptions apiKey:@"wiPEQc8HdGflvhs6KuTPamen" pushMode:BPushModeDevelopment isDebug:YES];
     
-    //中软
+    //测试
+//    [BPush registerChannel:launchOptions apiKey:BAIDU_APIKEY pushMode:BPushModeDevelopment withFirstAction:nil withSecondAction:nil withCategory:nil isDebug:YES];
+    //正式
     [BPush registerChannel:launchOptions apiKey:BAIDU_APIKEY pushMode:BPushModeProduction withFirstAction:nil withSecondAction:nil withCategory:nil isDebug:NO];
     
     // App 是用户点击推送消息启动

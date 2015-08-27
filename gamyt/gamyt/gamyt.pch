@@ -28,8 +28,15 @@
 //中软 修改登录界面底部的文字 对应 修改推送apikey
 //com.hmzl.inhouse.hbgamyt
 //#define HOST_NAME @"http://zrmyt.tunnel.mobi/myt"
-#define HOST_NAME @"http://hb.minyitong.cn:81/"
-#define BAIDU_APIKEY @"erCOp57IQgoowVnCIKEwSrcK"
+//#define HOST_NAME @"http://hb.minyitong.cn:81/"
+//#define BAIDU_APIKEY @"erCOp57IQgoowVnCIKEwSrcK"
+
+//咸宁
+//com.hmzl.xnmyt
+#define HOST_NAME @"http://hbxn.minyitong.cn:81/"//正式地址
+//#define HOST_NAME @"http://xnmyt.tunnel.mobi/xn_myt"//测试地址
+#define BAIDU_APIKEY @"nIHhpKLhbfgaRB6eXb6TEsGu"//百度云推送API_KEY
+
 
 #define IS_IPHONE_5 ( fabs( ( double )[ [ UIScreen mainScreen ] bounds ].size.height - ( double )568 ) < DBL_EPSILON )
 #import "AFNetworking.h"
