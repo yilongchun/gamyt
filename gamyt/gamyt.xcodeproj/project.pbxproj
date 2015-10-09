@@ -1321,7 +1321,7 @@
 					"$(PROJECT_DIR)/gamyt/LibBPush",
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "d91c5de8-174c-49d9-8b40-7d283b486a0d";
+				PROVISIONING_PROFILE = "5c035ad5-0899-4316-ad8b-fb9db06df859";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 			};
 			name = Debug;
@@ -1342,7 +1342,7 @@
 					"$(PROJECT_DIR)/gamyt/LibBPush",
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "d91c5de8-174c-49d9-8b40-7d283b486a0d";
+				PROVISIONING_PROFILE = "5c035ad5-0899-4316-ad8b-fb9db06df859";
 			};
 			name = Release;
 		};
